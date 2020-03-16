@@ -1,5 +1,5 @@
 {
-  "name": "vue-20-hello-world",
+  "name": "groupomania",
   "version": "1.0.0",
   "description": "The easiest way to try out Vue.js, edit this Hello World example",
   "main": "index.html",
@@ -10,5 +10,18 @@
   "license": "MIT",
   "devDependencies": {
     "serve": "^11.2.0"
-  }
+  },
+  "dependencies": {
+    "9gag": "^2.0.1",
+    "reddit": "^1.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Coolbiker61/Projet7.git"
+  },
+  "author": "Coolbiker61",
+  "bugs": {
+    "url": "https://github.com/Coolbiker61/Projet7/issues"
+  },
+  "homepage": "https://github.com/Coolbiker61/Projet7#readme"
 }
