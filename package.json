@@ -1,19 +1,20 @@
 {
   "name": "groupomania",
   "version": "1.0.0",
-  "description": "The easiest way to try out Vue.js, edit this Hello World example",
-  "main": "index.html",
-  "scripts": {
-    "start": "serve"
-  },
+  "description": "Réseau social interne de l'entreprise Groupomania.",
+  "main": "server.js",
   "keywords": [],
   "license": "MIT",
   "devDependencies": {
     "serve": "^11.2.0"
   },
   "dependencies": {
-    "9gag": "^2.0.1",
-    "reddit": "^1.0.3"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.1.0",
+    "path": "^0.12.7",
+    "sequelize": "^5.21.5"
   },
   "repository": {
     "type": "git",
