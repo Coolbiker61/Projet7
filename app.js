@@ -32,7 +32,7 @@ const sequelize = new Sequelize('groupomania', 'donneurdebase', 'ebT0MbXzNavzqP6
     idle: 10000
   }
 });
-
+/* https://www.youtube.com/watch?v=hggvCij14F0*/
 sequelize.authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');
