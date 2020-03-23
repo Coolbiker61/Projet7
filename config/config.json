@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "Quelalumieresoit61",
-    "database": "database_development",
+    "database": "database_dev",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false
@@ -16,9 +16,9 @@
     "operatorsAliases": false
   },
   "production": {
-    "username": "root",
-    "password": "Quelalumieresoit61",
-    "database": "database_production",
+    "username": "donneurdebase",
+    "password": "ebT0MbXzNavzqP6o",
+    "database": "groupomania",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false
