@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const jwtUtils = require('../utils/jwt');
 
 const models = require('../models');
 
@@ -76,11 +76,7 @@ exports.login = (req, res, then) => {
                         }
                         res.status(200).json({
                             userId: user._id,
-                            token: jwt.sign(
-                                { userId: user._id },
-                                'c19cf0ee354dee5163bf6b19f0a52cca1892ee15aa5acddd4df33d6a48d62075',
-                                { expiresIn: '24h' }
-                            )
+                            token: jwtUtils.generateToken(user)
                         });
                     })
                     .catch(error => res.status(500).json({ error }));
@@ -91,3 +87,8 @@ exports.login = (req, res, then) => {
         res.status(401).json({ message: 'Action non autorisée !'});
     }
 };
+
+exports.getUserProfile = (req, res) => {
+    var headerAuth = req.headers['Authorization'];
+    var userId = jwtUtils.getUserId(headerAuth);
+}
