@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 
 const models = require('../models');
 
+const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 /* inscrit l'utilisateur si son email n'est pas déjà utilisé */
 exports.signup = (req, res, then) => {
     let email = req.body.email;
@@ -16,11 +18,10 @@ exports.signup = (req, res, then) => {
     if (username.length >= 25 || username.length <= 4) {
         return res.status(400).json({ 'error': 'wrong username length' });
     }
-    if (!/^[a-zA-Z]\w{3,14}$/.test(password)) {
+    if (!/^[a-zA-Z]\w{4,25}$/.test(password)) {
         return res.status(400).json({ 'error': 'wrong password' });
     }
 
-    var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (regex.test(String(email).toLowerCase())) {
         models.User.findOne({ attributes: ['email'], where: { email: email } })
         .then(user => {
@@ -62,7 +63,6 @@ exports.login = (req, res, then) => {
         return res.status(400).json({ 'error': 'missing parameters'});
     }
     
-    var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (regex.test(String(email).toLowerCase())) {
         models.User.findOne({ where: { email: email } })
         .then(user => {
