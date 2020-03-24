@@ -5,9 +5,10 @@ const jwt_secret = 'c19cf0ee354dee5163bf6b19f0a52cca1892ee15aa5acddd4df33d6a48d6
 exports.generateToken = (user) => {
     //genere un token
     return jwt.sign(
-        { userId: user._id },
+        { userId: user.id, 
+            isAdmin: user.isAdmin },
         jwt_secret,
-        { expiresIn: '24h' }
+        { expiresIn: '8h' }
     );
 }
 
@@ -28,5 +29,6 @@ exports.getUserId = (authorization) => {
             //
         }
     }
+    return userId;
 }
 

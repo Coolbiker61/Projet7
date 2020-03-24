@@ -88,7 +88,25 @@ exports.login = (req, res, then) => {
     }
 };
 
-exports.getUserProfile = (req, res) => {
-    var headerAuth = req.headers['Authorization'];
+exports.getUserProfile = (req, res, then) => {
+    var headerAuth = req.headers['authorization'];
     var userId = jwtUtils.getUserId(headerAuth);
+
+    if (userId < 0) {
+        return res.status(401).json({ 'error': 'Action non autorisée !'});
+    }
+    models.User.findOne({
+        attributes: [ 'id', 'email', 'username', 'isAdmin'],
+        where: { id: userId }
+    })
+        .then(user => {
+            if (user) {
+                res.status(200).json(user);
+            } else {
+                res.status(404).json({ 'error': 'user not found'});
+            }
+        })
+        .catch(error => {
+            res.status(500).json({ 'error': error });
+        })
 }

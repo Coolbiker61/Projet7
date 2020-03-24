@@ -1,10 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const Sequelize = require('sequelize');
+
 
 const path = require('path');
-const userRoutes = require('./routes/users')
-
+const userRoutes = require('./routes/users');
+const messageRoutes = require('./routes/message');
 
 const app = express();
 
@@ -29,7 +29,7 @@ app.get('/', function (req, res) {
 
 /* définition du chemin vers les fichiers contenant les routes */
 app.use('/api/v1/auth', userRoutes);
-
+app.use('/api/v1/message', messageRoutes);
 
 
 module.exports = app;
