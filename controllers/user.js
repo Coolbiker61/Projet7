@@ -110,3 +110,7 @@ exports.getUserProfile = (req, res, then) => {
             res.status(500).json({ 'error': error });
         })
 }
+
+exports.deleteUser = (req, res, then) => {
+    //
+}

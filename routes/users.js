@@ -9,5 +9,7 @@ router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);
 /* route pour afficher le profil */
 router.get('/profil', userCtrl.getUserProfile);
+/* route pour supprimer un compte */
+router.delete('/', userCtrl.deleteUser);
 
 module.exports = router;
