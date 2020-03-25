@@ -40,7 +40,6 @@ exports.getAllMessages = (req, res, then ) => {
         return res.status(401).json({ 'error': 'Action non autorisée !'});
     }
 
-
     var fields = req.query.fields;
     var limit = parseInt(req.query.limit);
     var offset = parseInt(req.query.offset);
@@ -57,7 +56,7 @@ exports.getAllMessages = (req, res, then ) => {
         }]
     })
     .then(message => {
-        if (message) {
+        if (message.length) {
             res.status(200).json(message);
         } else {
             res.status(404).json({ 'error': 'nothing found'});

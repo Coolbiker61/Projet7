@@ -4,5 +4,8 @@ nav {
     right: 0;
     left: 0;
     z-index: 5;
-    
+    background-color: white;
+}
+body {
+    background-color: #dae0e6;
 }

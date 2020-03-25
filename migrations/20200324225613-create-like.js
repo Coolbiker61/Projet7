@@ -25,6 +25,7 @@ module.exports = {
         }
       },
       likeType: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       createdAt: {

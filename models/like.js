@@ -7,13 +7,14 @@ module.exports = (sequelize, DataTypes) => {
         model: 'Message',
         key: 'id'
       }
-    }
+    },
     userId: {
       type: DataTypes.INTEGER,
       references: {
         model: 'User',
         key: 'id'
       }
+    },
     likeType: DataTypes.INTEGER
   }, {});
   Like.associate = function(models) {

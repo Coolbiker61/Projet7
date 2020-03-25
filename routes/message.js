@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const messagectrl = require('../controllers/message');
+const likectrl = require('../controllers/like');
 
 //create message
 router.post('/', messagectrl.createMessage);
@@ -13,5 +14,8 @@ router.get('/:id', messagectrl.getOneMessages);
 router.delete('/:id', messagectrl.deleteMessage);
 //update message
 router.put('/:id', messagectrl.updateMessage);
+
+// like message
+router.post('/:id/like/:likeType', likectrl.likeMessage);
 
 module.exports = router;
