@@ -17,5 +17,6 @@ router.put('/:id', messagectrl.updateMessage);
 
 // like message
 router.post('/:id/like/:likeType', likectrl.likeMessage);
+router.get('/:id/like/', likectrl.getLike);
 
 module.exports = router;
