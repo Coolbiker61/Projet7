@@ -366,36 +366,57 @@ nav {
 body {
     background-color: #dae0e6;
 }
-.menu{
+.menu {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-.offset-top{
+.offset-top {
     margin-top: 80px;
 }
-.message{
+.message {
     background-color: white;
-    border: 2px solid #222;
+    border: 2px solid #BDBDBD;
     width: 500px;
-    margin: auto;
+    margin: 20px auto;
     display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .col_likes {
     display: flex;
     flex-direction: column;
-    width: 55px;
+    width: 35px;
+    background-color: #EEEEEE;
 }
-.like-up-not, .like-down-not{
+.like-up-not, .like-down-not {
     font-size: 30px;
     text-align: center;
 }
-.like-up-select, .like-up-not:hover{
+.like-up-select, .like-up-not:hover {
     color: lime;
-}
-.like-down-not {
-    /**/
 }
 .like-down-select, .like-down-not:hover {
     color: red;
+}
+.nb-likes {
+    color: black;
+    width: 35px;
+    text-align: center;
+}
+.corp {
+    margin: 0 5px;
+}
+.author {
+    /**/
+    color: gray;
+    margin-bottom: 10px;
+}
+.title-article {
+    /**/
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+.content-article {
+    /***/
 }
