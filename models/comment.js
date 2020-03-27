@@ -1,6 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Comment = sequelize.define('Comment', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     userId: {
       type: DataTypes.INTEGER,
       references: {
@@ -15,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id'
       }
     },
-    content: DataTypes.STRING
+    content: DataTypes.STRING,
+    parent: DataTypes.INTEGER
   }, {});
   Comment.associate = function(models) {
     // associations can be defined here
