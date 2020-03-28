@@ -2,17 +2,19 @@
 const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 /* inscrit l'utilisateur si son email n'est pas déjà utilisé */
-exports.signup = (req, res, then) => {
-    let htmlTop = "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\">";
-    htmlTop += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
-    htmlTop += "<link rel=\"stylesheet\" href=\"../style.css\" />";
-    htmlTop += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
-    htmlTop += "<title>Groupomania</title></head>";
-    htmlTop += "<body><nav><ul class=\"menu\"><li>Groupomania</li><li>Social Network</li>";
-    htmlTop += "<li>profile</li></ul></nav><div class=\"offset-top\"></div>";
+exports.register = (req, res, then) => {
+    let html = "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\">";
+    html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
+    html += "<link rel=\"stylesheet\" href=\"../style.css\" />";
+    html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
+    html += "<title>Groupomania</title></head>";
+    html += "<body><nav><ul class=\"menu\"><li>Groupomania</li><li>Social Network</li>";
+    html += "<li>profile</li></ul></nav><div class=\"offset-top\"></div>";
     
+
+    html += "</body></html>"
     res.writeHeader(200 ,{'Content-Type': 'text/html'});
-    res.write(htmlTop);
+    res.write(html);
     res.end();
 };
 

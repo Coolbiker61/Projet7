@@ -19,6 +19,8 @@ app.use(bodyParser.json());
 
 // pour le css
 app.use(express.static('styles'));
+//our les images
+app.use(express.static('images'));
 
 /* définition du chemin vers les fichiers contenant les routes */
 app.use('/auth', userRoutes);
