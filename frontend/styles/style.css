@@ -371,11 +371,17 @@ body {
     flex-direction: row;
     justify-content: space-between;
 }
+.logo-entreprise {
+    height: 20px;
+}
+
 .form-register {
     display: flex;
     flex-direction: column;
     margin: auto;
     width: 255px;
+    align-content: center;
+    margin-top: 50px;
 }
 #email, #username, #password {
     width: 250px;
@@ -386,7 +392,9 @@ label {
     text-align: center;
     font-size: 20px;
 }
-
+#connexion, #inscription {
+    margin-top: 20px;
+}
 
 
 .offset-top {

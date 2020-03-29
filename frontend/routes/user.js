@@ -6,7 +6,7 @@ const userCtrl = require('../controllers/user');
 /* route inscription */
 router.get('/register', userCtrl.register);
 /* route connexion */
-//router.post('/login', userCtrl.login);
+router.get('/login', userCtrl.login);
 /* route pour afficher le profil */
 //router.get('/profil', userCtrl.getUserProfile);
 

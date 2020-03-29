@@ -18,9 +18,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // pour le css
-app.use(express.static('styles'));
-//our les images
-app.use(express.static('images'));
+app.use('/styles', express.static(path.join(__dirname, 'styles')));
+// pour les images
+app.use('/images', express.static(path.join(__dirname, 'images')));
+// pour le javascript spécifique aux pages
+app.use('/js', express.static(path.join(__dirname, 'js')));
 
 /* définition du chemin vers les fichiers contenant les routes */
 app.use('/auth', userRoutes);

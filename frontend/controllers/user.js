@@ -5,18 +5,57 @@ const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\
 exports.register = (req, res, then) => {
     let html = "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\">";
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
-    html += "<link rel=\"stylesheet\" href=\"../style.css\" />";
+    html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
-    html += "<title>Groupomania</title></head>";
-    html += "<body><nav><ul class=\"menu\"><li>Groupomania</li><li>Social Network</li>";
-    html += "<li>profile</li></ul></nav><div class=\"offset-top\"></div>";
-    
+    html += "<script src=\"/js/register.js\" defer ></script>";
+    html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
+    html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
+    html += "</li><li>Social Network</li>";
+    html += "<li><a href=\"/auth/login\">Connexion</a></li><li><a href=\"/auth/register\"> Inscription</a></li></ul></nav>";
+    html += "<div class=\"offset-top\"></div>";
+    html += "<section><form class=\"form-register\">";
+    html += "<label for=\"email\">Adresse mail</label>";
+    html += "<input type=\"email\" id=\"email\" name=\"email\" required />";
+    html += "<label for=\"username\">Pseudo</label>";
+    html += "<input type=\"text\" name=\"username\" id=\"username\" required/>";
+    html += "<label for=\"password\">Mot de passe</label>";
+    html += "<input type=\"password\" name=\"password\" id=\"password\" required />";
+    html += "<input id=\"inscription\" type=\"submit\" value=\"S'inscrire\" />";
+    html += "</form></section>";
 
     html += "</body></html>"
     res.writeHeader(200 ,{'Content-Type': 'text/html'});
     res.write(html);
     res.end();
 };
+
+exports.login = (req, res, then) => {
+    let html = "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\">";
+    html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
+    html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
+    html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
+    html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
+    html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
+    html += "</li><li>Social Network</li>";
+    html += "<li><a href=\"/auth/login\">Connexion</a></li><li><a href=\"/auth/register\"> Inscription</a></li></ul></nav>";
+    html += "<div class=\"offset-top\"></div>";
+    html += "<section><form class=\"form-register\">";
+    html += "<label for=\"email\">Adresse mail</label>";
+    html += "<input type=\"email\" id=\"email\" name=\"email\" required />";
+    html += "<label for=\"password\">Mot de passe</label>";
+    html += "<input type=\"password\" name=\"password\" id=\"password\" required />";
+    html += "<input id=\"connexion\" type=\"submit\" value=\"Connexion\" />";
+    html += "</form></section>";
+
+    html += "</body></html>"
+    res.writeHeader(200 ,{'Content-Type': 'text/html'});
+    res.write(html);
+    res.end();
+};
+
+
+
+
 
 exports.getProfile = (req, res, then) => {
     var requete = new XMLHttpRequest();
