@@ -7,22 +7,22 @@ exports.register = (req, res, then) => {
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
-    html += "<script src=\"/js/register.js\" defer ></script>";
     html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</li><li>Social Network</li>";
     html += "<li><a href=\"/auth/login\">Connexion</a></li><li><a href=\"/auth/register\"> Inscription</a></li></ul></nav>";
     html += "<div class=\"offset-top\"></div>";
-    html += "<section><form class=\"form-register\">";
+    html += "<section class=\"back-inscription\"><form class=\"form-register\">";
     html += "<label for=\"email\">Adresse mail</label>";
-    html += "<input type=\"email\" id=\"email\" name=\"email\" required />";
+    html += "<input type=\"email\" id=\"email\" name=\"email\" />";
     html += "<label for=\"username\">Pseudo</label>";
-    html += "<input type=\"text\" name=\"username\" id=\"username\" required/>";
+    html += "<input type=\"text\" name=\"username\" id=\"username\"/>";
     html += "<label for=\"password\">Mot de passe</label>";
-    html += "<input type=\"password\" name=\"password\" id=\"password\" required />";
+    html += "<input type=\"password\" name=\"password\" id=\"password\"/>";
     html += "<input id=\"inscription\" type=\"submit\" value=\"S'inscrire\" />";
     html += "</form></section>";
 
+    html += "<script src=\"/js/register.js\"></script>";
     html += "</body></html>"
     res.writeHeader(200 ,{'Content-Type': 'text/html'});
     res.write(html);
@@ -39,7 +39,7 @@ exports.login = (req, res, then) => {
     html += "</li><li>Social Network</li>";
     html += "<li><a href=\"/auth/login\">Connexion</a></li><li><a href=\"/auth/register\"> Inscription</a></li></ul></nav>";
     html += "<div class=\"offset-top\"></div>";
-    html += "<section><form class=\"form-register\">";
+    html += "<section class=\"back-login\"><form class=\"form-register\">";
     html += "<label for=\"email\">Adresse mail</label>";
     html += "<input type=\"email\" id=\"email\" name=\"email\" required />";
     html += "<label for=\"password\">Mot de passe</label>";

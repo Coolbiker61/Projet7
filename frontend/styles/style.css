@@ -374,14 +374,23 @@ body {
 .logo-entreprise {
     height: 20px;
 }
-
+.back-inscription, .back-login {
+    background-image: url('../images/icon.svg');
+    background-repeat:no-repeat;
+    margin: 100px auto; 
+    height: 450px; 
+    width: 450px; 
+    padding-top: 75px;
+}
+.back-login {
+    padding-top: 110px;
+}
 .form-register {
     display: flex;
     flex-direction: column;
     margin: auto;
     width: 255px;
     align-content: center;
-    margin-top: 50px;
 }
 #email, #username, #password {
     width: 250px;
@@ -446,7 +455,7 @@ label {
     margin-bottom: 5px;
 }
 .content-article {
-    /***/
+    font-size: 20px;
 }
 .bloc-commentaire{
     width: 100%;
