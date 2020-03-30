@@ -1,5 +1,6 @@
 
-const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const REGEX_EMAIL = "/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
+const REGEX_USERNAME = "[a-zA-Z\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{3,}";
 
 /* inscrit l'utilisateur si son email n'est pas déjà utilisé */
 exports.register = (req, res, then) => {
@@ -12,17 +13,17 @@ exports.register = (req, res, then) => {
     html += "</li><li>Social Network</li>";
     html += "<li><a href=\"/auth/login\">Connexion</a></li><li><a href=\"/auth/register\"> Inscription</a></li></ul></nav>";
     html += "<div class=\"offset-top\"></div>";
-    html += "<section class=\"back-inscription\"><form class=\"form-register\">";
+    html += "<section id=\"back-inscription\" class=\"back-inscription\"><div class=\"form-register\">";
     html += "<label for=\"email\">Adresse mail</label>";
-    html += "<input type=\"email\" id=\"email\" name=\"email\" />";
+    html += "<input type=\"email\" id=\"email\" name=\"email\" required patern=\""+REGEX_EMAIL+"\"/>";
     html += "<label for=\"username\">Pseudo</label>";
-    html += "<input type=\"text\" name=\"username\" id=\"username\"/>";
+    html += "<input type=\"text\" name=\"username\" id=\"username\" required patern=\""+REGEX_USERNAME+"\" />";
     html += "<label for=\"password\">Mot de passe</label>";
-    html += "<input type=\"password\" name=\"password\" id=\"password\"/>";
-    html += "<input id=\"inscription\" type=\"submit\" value=\"S'inscrire\" />";
-    html += "</form></section>";
+    html += "<input type=\"password\" name=\"password\" id=\"password\" required />";
+    html += "<div id=\"inscription\">S'inscrire </div>";
+    html += "</div></section>";
 
-    html += "<script src=\"/js/register.js\"></script>";
+    html += "<script src=\"/js/register.js\" async></script>";
     html += "</body></html>"
     res.writeHeader(200 ,{'Content-Type': 'text/html'});
     res.write(html);
@@ -39,13 +40,13 @@ exports.login = (req, res, then) => {
     html += "</li><li>Social Network</li>";
     html += "<li><a href=\"/auth/login\">Connexion</a></li><li><a href=\"/auth/register\"> Inscription</a></li></ul></nav>";
     html += "<div class=\"offset-top\"></div>";
-    html += "<section class=\"back-login\"><form class=\"form-register\">";
+    html += "<section class=\"back-login\"><div class=\"form-register\">";
     html += "<label for=\"email\">Adresse mail</label>";
     html += "<input type=\"email\" id=\"email\" name=\"email\" required />";
     html += "<label for=\"password\">Mot de passe</label>";
     html += "<input type=\"password\" name=\"password\" id=\"password\" required />";
     html += "<input id=\"connexion\" type=\"submit\" value=\"Connexion\" />";
-    html += "</form></section>";
+    html += "</div></section>";
 
     html += "</body></html>"
     res.writeHeader(200 ,{'Content-Type': 'text/html'});

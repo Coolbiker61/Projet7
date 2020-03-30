@@ -403,8 +403,20 @@ label {
 }
 #connexion, #inscription {
     margin-top: 20px;
+    border-radius: 20px;
+    border: 2px solid rgb(114, 114, 114);
+    text-align: center;
+    background-color: rgb(172, 172, 172);
+    padding: 5px;
 }
-
+.confirm-inscription {
+    text-align: center;
+    margin-top: 115px;
+    font-size: 30px;
+}
+.invalide {
+    border-color: red;
+}
 
 .offset-top {
     margin-top: 80px;
