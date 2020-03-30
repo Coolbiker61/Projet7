@@ -385,7 +385,7 @@ body {
 .back-login {
     padding-top: 110px;
 }
-.form-register {
+.form-register, .form-login {
     display: flex;
     flex-direction: column;
     margin: auto;

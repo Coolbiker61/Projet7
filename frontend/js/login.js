@@ -1,24 +1,17 @@
-// ecoute du clic sur le bouton
-// verification formulaire
-// affichage message d'erreur
-
 //regex de l'email
 const REGEX_MAIL = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-// regex du pseudo de l'utilisateur
-const REGEX_USERNAME = /[a-zA-Z\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{3,}/;
+
+
 
 // action effectué lors du click sur s'inscrire
 const actionClick = (event) => {
 	event.stopPropagation();
 	if (document.getElementById("email").value !== "" && document.getElementById("email").validity.valid &&
-	document.getElementById("username").value !== "" && document.getElementById("username").validity.valid &&
 	document.getElementById("password").value !== "" && document.getElementById("password").validity.valid ) {
 		// si tout les champs sont valide
-		if ( REGEX_MAIL.test(document.getElementById("email").value) && 
-		REGEX_USERNAME.test(document.getElementById("username").value) ) {
+		if ( REGEX_MAIL.test(document.getElementById("email").value)) {
 			var data = {
 				email: document.getElementById("email").value,
-				username: document.getElementById("username").value,
 				password: document.getElementById("password").value
 			}
 			data = JSON.stringify(data);
@@ -30,10 +23,9 @@ const actionClick = (event) => {
                 if (this.readyState == XMLHttpRequest.DONE) {
 					switch (this.status) {
 						case 201:
-							//quand il a fini la requête avec le code http 201
-							let codeHtml = "<div class=\"confirm-inscription\"> Votre inscription a bien été éfféctué. <br>";
-							codeHtml += "Vous pouvez maintenant vous connecter.</div>";
-							document.getElementById("back-inscription").innerHTML = codeHtml;
+                            //quand il a fini la requête avec le code http 201
+                            
+							sessionStorage.setItem('toctoc', 'valeur');
 							break;
 						case 400:
 							//400 test des champs
@@ -56,7 +48,7 @@ const actionClick = (event) => {
 					return;
 				}
             };
-            requete.open("POST", "http://localhost:3000/api/v1/auth/register");
+            requete.open("POST", "http://localhost:3000/api/v1/auth/login");
             requete.setRequestHeader("Content-Type", "application/json");
             requete.responseType = 'text';
             requete.send(data); 
@@ -68,7 +60,7 @@ const actionClick = (event) => {
 };
 
 
-document.getElementById('inscription').addEventListener("click", function (event)  {
+document.getElementById('connexion').addEventListener("click", function (event)  {
 	actionClick(event);
 });
 
@@ -86,13 +78,9 @@ const verifieValide = (elementForm) => {
 	}
 }
 /* surveille la modification des champs du formulaire et déclenche la fonction verifieValide() */
-document.getElementById("username").addEventListener('input', function (event) {
-	verifieValide(event.target);
-});
 document.getElementById("password").addEventListener('input', function (event) {
 	verifieValide(event.target);
 });
 document.getElementById("email").addEventListener('input', function (event) {
 	verifieValide(event.target);
 });
-

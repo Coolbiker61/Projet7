@@ -1,6 +1,7 @@
 
 const REGEX_EMAIL = "/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
 const REGEX_USERNAME = "[a-zA-Z\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{3,}";
+const REGEX_PASSWORD = "^[a-zA-Z]\w{4,25}$";
 
 /* inscrit l'utilisateur si son email n'est pas déjà utilisé */
 exports.register = (req, res, then) => {
@@ -8,6 +9,7 @@ exports.register = (req, res, then) => {
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
+    html += "<script src=\"/js/register.js\" async></script>";
     html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</li><li>Social Network</li>";
@@ -19,11 +21,10 @@ exports.register = (req, res, then) => {
     html += "<label for=\"username\">Pseudo</label>";
     html += "<input type=\"text\" name=\"username\" id=\"username\" required patern=\""+REGEX_USERNAME+"\" />";
     html += "<label for=\"password\">Mot de passe</label>";
-    html += "<input type=\"password\" name=\"password\" id=\"password\" required />";
+    html += "<input type=\"password\" name=\"password\" id=\"password\" required patern=\""+REGEX_PASSWORD+"\"/>";
     html += "<div id=\"inscription\">S'inscrire </div>";
-    html += "</div></section>";
+    html += "</div><div id=\"erreur\"></div></section>";
 
-    html += "<script src=\"/js/register.js\" async></script>";
     html += "</body></html>"
     res.writeHeader(200 ,{'Content-Type': 'text/html'});
     res.write(html);
@@ -35,16 +36,17 @@ exports.login = (req, res, then) => {
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
+    html += "<script src=\"/js/login.js\" async></script>";
     html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</li><li>Social Network</li>";
     html += "<li><a href=\"/auth/login\">Connexion</a></li><li><a href=\"/auth/register\"> Inscription</a></li></ul></nav>";
     html += "<div class=\"offset-top\"></div>";
-    html += "<section class=\"back-login\"><div class=\"form-register\">";
+    html += "<section class=\"back-login\"><div class=\"form-login\">";
     html += "<label for=\"email\">Adresse mail</label>";
-    html += "<input type=\"email\" id=\"email\" name=\"email\" required />";
+    html += "<input type=\"email\" id=\"email\" name=\"email\" required partern=\""+REGEX_EMAIL+"\" />";
     html += "<label for=\"password\">Mot de passe</label>";
-    html += "<input type=\"password\" name=\"password\" id=\"password\" required />";
+    html += "<input type=\"password\" name=\"password\" id=\"password\" required partern=\""+REGEX_PASSWORD+"\"/>";
     html += "<input id=\"connexion\" type=\"submit\" value=\"Connexion\" />";
     html += "</div></section>";
 

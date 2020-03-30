@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 
 
 const path = require('path');
+const indexRoutes = require('./routes/index');
 const userRoutes = require('./routes/user');
 
 const app = express();
@@ -26,6 +27,8 @@ app.use('/js', express.static(path.join(__dirname, 'js')));
 
 /* définition du chemin vers les fichiers contenant les routes */
 app.use('/auth', userRoutes);
+// route de l'index
+app.use('/', indexRoutes);
 
 
 module.exports = app;
