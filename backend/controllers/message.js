@@ -6,7 +6,7 @@ exports.createMessage = (req, res, then) => {
     var userId = jwtUtils.getUserId(headerAuth);
 
     if (userId < 0) {
-        return res.status(401).json({ 'error': 'Action non autorisée !'});
+        return res.status(401).json({ 'error': 'Action not allow !'});
     }
 
     var title = req.body.title;
@@ -20,7 +20,7 @@ exports.createMessage = (req, res, then) => {
     models.User.findOne({ where: { id: userId } })
         .then(user => {
             if(!user) {
-                return res.status(401).json({ error: 'Utilisateur non trouvé !'});
+                return res.status(401).json({ error: 'User not found !'});
             } else {
                 models.Message.create({ title: title, content: content, likes: 0, UserId: user.id })
                     .then(message => {
@@ -39,52 +39,60 @@ exports.getAllMessages = (req, res, then ) => {
     if (userId < 0) {
         return res.status(401).json({ 'error': 'Action non autorisée !'});
     }
-
-    var fields = req.query.fields;
+    
     var limit = parseInt(req.query.limit);
     var offset = parseInt(req.query.offset);
     var order = req.query.order;
-
-    models.Message.findAll({
-        order: [(order != null) ? order.split(':') : ['id', 'ASC']],
-        attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
-        limit: (!isNaN(limit)) ? limit : null,
-        offset: (!isNaN(offset)) ? offset : null,
-        include: [{
-            model: models.User,
-            attributes: ['username']
-        }]
-    })
-    .then(message => {
-        if (message.length) {
-            res.status(200).json(message);
+    models.User.findOne({ where: { id: userId } })
+    .then(user => {
+        if(!user) {
+            return res.status(401).json({ error: 'User not found !'});
         } else {
-            res.status(404).json({ 'error': 'nothing found'});
+            models.Message.findAll({
+                order: [(order != null) ? order.split(':') : ['id', 'ASC']],
+                limit: (!isNaN(limit)) ? limit : null,
+                offset: (!isNaN(offset)) ? offset : null,
+                include: [{
+                    model: models.User,
+                    attributes: ['username']
+                }]
+            })
+            .then(message => {
+                if (message.length) {
+                    res.status(200).json(message);
+                } else {
+                    res.status(404).json({ 'error': 'nothing found'});
+                }
+            })
+            .catch(error => {
+                res.status(500).json({ error });
+            })
         }
     })
-    .catch(error => {
-        res.status(500).json({ error });
-    })
+    .catch(error => res.status(500).json({ error }));
 }
 
 exports.getOneMessages = (req, res, then ) => {
-    //retourne le message dont l'id a été passé
+    //retourne le message dont l'id a été passé en paramètre
     var headerAuth = req.headers['authorization'];
     var userId = jwtUtils.getUserId(headerAuth);
 
     if (userId < 0) {
-        return res.status(401).json({ 'error': 'Action non autorisée !'});
+        return res.status(401).json({ 'error': 'Action not allow !'});
     }
 
     
     var id = parseInt(req.params.id);
-    if (id != null) {
-        models.Message.findOne({ where: { id: id } })
+    if (id != null && !isNaN(id)) {
+        models.Message.findOne({ where: { id: id },include: [{
+            model: models.User,
+            attributes: ['username']
+        }] })
         .then(message => {
             if (message) {
                 res.status(200).json(message);
             } else {
-                res.status(404).json({ 'error': 'nothing found'});
+                res.status(404).json({ 'error': 'Nothing found'});
             }
         })
         .catch(error => {

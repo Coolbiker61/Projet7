@@ -13,13 +13,13 @@ exports.signup = (req, res, then) => {
     let isAdmin = 0;
 
     if (email == null || username == null || password == null) {
-        return res.status(400).json({ 'error': 'missing parameters' });
+        return res.status(400).json({ 'error': 'Missing parameters' });
     }
     if (username.length >= 25 || username.length <= 4) {
-        return res.status(400).json({ 'error': 'wrong username length' });
+        return res.status(400).json({ 'error': 'Wrong username length' });
     }
     if (!/^[a-zA-Z]\w{4,25}$/.test(password)) {
-        return res.status(400).json({ 'error': 'wrong password' });
+        return res.status(400).json({ 'error': 'Wrong password content' });
     }
 
     if (regex.test(String(email).toLowerCase())) {
@@ -29,14 +29,14 @@ exports.signup = (req, res, then) => {
                 bcrypt.hash(password, 10)
                 .then(hash => {
 
-                    var newUser = models.User.create({
+                    models.User.create({
                         email: email,
                         username: username,
                         password: hash,
                         isAdmin: isAdmin
                     })
                     .then((newUser) => {
-                        res.status(201).json({ message: 'Utilisateur créé : '+newUser.id})
+                        res.status(201).json({ message: 'User created : '+newUser.id})
                     })
                     .catch(error => {
                         res.status(500).json({ error });
@@ -50,7 +50,7 @@ exports.signup = (req, res, then) => {
         })
         .catch(error => res.status(500).json({ error }));
     } else {
-        res.status(401).json({ message: 'Action non autorisée !'});
+        res.status(400).json({ message: 'Wrong email format !'});
     }
 };
 
@@ -67,15 +67,15 @@ exports.login = (req, res, then) => {
         models.User.findOne({ where: { email: email } })
         .then(user => {
             if(!user) {
-                return res.status(401).json({ error: 'Utilisateur non trouvé !'});
+                return res.status(401).json({ error: 'User not found !'});
             } else {
                 bcrypt.compare(password, user.password)
                     .then(valid => {
                         if (!valid) {
-                            return res.status(401).json({ error: 'Mot de passe incorrect !'});
+                            return res.status(401).json({ error: 'Wrong password !'});
                         }
                         res.status(200).json({
-                            userId: user._id,
+                            userId: user.id,
                             token: jwtUtils.generateToken(user)
                         });
                     })
@@ -84,7 +84,7 @@ exports.login = (req, res, then) => {
         })
         .catch(error => res.status(500).json({ error }));
     } else {
-        res.status(401).json({ message: 'Action non autorisée !'});
+        res.status(401).json({ message: 'Action not allow !'});
     }
 };
 
@@ -93,7 +93,7 @@ exports.getUserProfile = (req, res, then) => {
     var userId = jwtUtils.getUserId(headerAuth);
 
     if (userId < 0) {
-        return res.status(401).json({ 'error': 'Action non autorisée !'});
+        return res.status(401).json({ 'error': 'Action not allow !'});
     }
     models.User.findOne({
         attributes: [ 'id', 'email', 'username', 'isAdmin'],
@@ -103,14 +103,35 @@ exports.getUserProfile = (req, res, then) => {
             if (user) {
                 res.status(200).json(user);
             } else {
-                res.status(404).json({ 'error': 'user not found'});
+                res.status(404).json({ 'error': 'User not found'});
             }
         })
         .catch(error => {
-            res.status(500).json({ 'error': error });
+            res.status(500).json({ error });
         })
 }
 
 exports.deleteUser = (req, res, then) => {
-    //
+    var headerAuth = req.headers['authorization'];
+    var userId = jwtUtils.getUserId(headerAuth);
+
+    if (userId < 0) {
+        return res.status(401).json({ 'error': 'Action not allow !'});
+    }
+    models.User.findOne({
+        attributes: [ 'id', 'email', 'username', 'isAdmin'],
+        where: { id: userId }
+    })
+        .then(user => {
+            if (user) {
+                
+                
+                res.status(200).json(user);
+            } else {
+                res.status(404).json({ 'error': 'User not found'});
+            }
+        })
+        .catch(error => {
+            res.status(500).json({ error });
+        })
 }
