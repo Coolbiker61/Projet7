@@ -18,11 +18,16 @@ exports.createMessage = (req, res, then) => {
         return res.status(400).json({ 'error': 'bad request'});
     }
     models.User.findOne({ where: { id: userId } })
-        .then(user => {
-            if(!user) {
+        .then(userFound => {
+            if(!userFound) {
                 return res.status(401).json({ error: 'User not found !'});
             } else {
-                models.Message.create({ title: title, content: content, likes: 0, UserId: user.id })
+                models.Message.create({ 
+                    title: title,
+                    content: content, 
+                    likes: 0, 
+                    UserId: userFound.id 
+                })
                     .then(message => {
                         res.status(201).json(message);
                     })
