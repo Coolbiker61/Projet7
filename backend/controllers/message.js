@@ -17,17 +17,13 @@ exports.createMessage = (req, res, then) => {
     if (title.length <= 2 || content.length <= 4) {
         return res.status(400).json({ 'error': 'bad request'});
     }
-    models.User.findOne({ where: { id: userId } })
+    models.User.findOne({attributes: [ 'id', 'email', 'username', 'isAdmin']},{ where: { id: userId } })
         .then(userFound => {
             if(!userFound) {
                 return res.status(401).json({ error: 'User not found !'});
             } else {
-                models.Message.create({ 
-                    title: title,
-                    content: content, 
-                    likes: 0, 
-                    UserId: userFound.id 
-                })
+                models.Message.create({ title: title, UserId: userFound.id, content: content, likes: 0},
+                    { fields: ['title', 'UserId', 'content', 'likes']})
                     .then(message => {
                         res.status(201).json(message);
                     })
@@ -48,7 +44,7 @@ exports.getAllMessages = (req, res, then ) => {
     var limit = parseInt(req.query.limit);
     var offset = parseInt(req.query.offset);
     var order = req.query.order;
-    models.User.findOne({ where: { id: userId } })
+    models.User.findOne({attributes: [ 'id', 'username', 'isAdmin']},{ where: { id: userId } })
     .then(user => {
         if(!user) {
             return res.status(401).json({ error: 'User not found !'});
@@ -59,8 +55,9 @@ exports.getAllMessages = (req, res, then ) => {
                 offset: (!isNaN(offset)) ? offset : null,
                 include: [{
                     model: models.User,
-                    attributes: ['username']
+                    attributes: ['id', 'username']
                 }]
+                
             })
             .then(message => {
                 if (message.length) {
@@ -85,17 +82,17 @@ exports.getOneMessages = (req, res, then ) => {
     if (userId < 0) {
         return res.status(401).json({ 'error': 'Action not allow !'});
     }
-
-    
+ 
     var id = parseInt(req.params.id);
     if (id != null && !isNaN(id)) {
-        models.Message.findOne({ where: { id: id },include: [{
-            model: models.User,
-            attributes: ['username']
-        }] })
+        models.Message.findOne({ where: { id: id } })
         .then(message => {
             if (message) {
-                res.status(200).json(message);
+                message.getUser({attributes: ['id', 'username']})
+                    .then( author => {
+                        res.status(200).json([message,author]);
+                    })
+                    .catch(error => { console.log(error)})
             } else {
                 res.status(404).json({ 'error': 'Nothing found'});
             }
