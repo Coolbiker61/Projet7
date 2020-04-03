@@ -1,3 +1,5 @@
+const axios = require('axios').default;
+
 exports.getPageWall = (req, res, then) => {
     let html = "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\">";
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
@@ -11,29 +13,24 @@ exports.getPageWall = (req, res, then) => {
     html += "<section class=\"back-login\">";
 //ajoute des messages https://www.npmjs.com/package/axios
     var listMessage = "error";
-    var requete = new XMLHttpRequest();
-    requete.onreadystatechange = function () {
-        if (this.readyState == XMLHttpRequest.DONE && this.status == 200 ) {
-            
-        
-        
-        
-        } else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
-            console.error("erreur d'importation des messages");
-        }
-    }
-    requete.open("GET", "http://localhost:3000/api/v1/message/");
-    requete.send();
 
+    axios.get("http://localhost:3000/api/v1/message/")
+    .then(response => {
+        console.log(response);
+    })
+    .catch(error => {
+        console.log(error);
+    })
 
+    //Dépot GitHub pour le Projet 6 de la formation Développeur web
 
     html += "<div class=\"message\"><div class=\"col_likes\"><i class=\"fas fa-arrow-up like-up-not\"></i>";
     html += "<div class=\"nb-likes\">00 k</div>";
     html += "<i class=\"fas fa-arrow-down like-down-not\"></i></div>";
     html += "<section class=\"corp\"><header class=\"author\">";
-                    posted by moi le 21/21/21 a 12h12
+                    //posted by moi le 21/21/21 a 12h12
     html += "</header><article><header><h3 class=\"title-article\">";
-                    tittre article
+                    //tittre article
     html += "</h3></header><p class=\"content-article\">";
             
     html += "</p></article></section></div>";
