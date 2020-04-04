@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const indexRoutes = require('./routes/index');
 const userRoutes = require('./routes/user');
+const snRoutes = require('./routes/socialNetwork');
 
 const app = express();
 
@@ -29,6 +30,8 @@ app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use('/auth', userRoutes);
 // route de l'index
 app.use('/', indexRoutes);
+// route du reseau social
+app.use('/socialNetwork', snRoutes);
 
 
 module.exports = app;
