@@ -54,6 +54,26 @@ const actionClick = (event) => {
 							break;
 						case 400:
 							//400 test des champs
+							switch (JSON.parse(this.responseText).error) {
+								case "Missing parameters":
+									errorMessage = "Veuillez remplir toutes les cases du formulaire.";
+									break;
+							
+								case "Wrong username length":
+									errorMessage = "Le pseudo doit avoir une longueur comprise entre 4 et 25 caractères.";
+									break;
+							
+								case "Wrong password content":
+									errorMessage = "Le mot de passe doit avoir une longueur comprise entre 4 et 25 caractères et ne doit contenir que des lettres (majuscule et/ou minuscule) et des chiffres.";
+									break;
+							
+								case "Wrong email format":
+									errorMessage = "Veuillez indiquer une adresse mail correct.";
+								break;
+								default:
+									errorMessage = "Une erreur est survenue, nous sommes désolé pour la géne occasionné.";
+									break;
+							}
 							errorMessage = "Veuillez remplir correctement tous les champs.";
 							document.getElementById("erreur").innerHTML = errorMessage;
 							break;

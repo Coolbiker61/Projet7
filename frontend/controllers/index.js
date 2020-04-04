@@ -6,6 +6,7 @@ exports.getPageRoot = (req, res, then) => {
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
+    html += "<script src=\"/js/index.js\" async></script>";
     html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</li><li>Social Network</li>";
@@ -13,9 +14,9 @@ exports.getPageRoot = (req, res, then) => {
     html += "<div class=\"offset-top\"></div>";
     
     html += "<section class=\"back-login\">";
-    html += "Bienvenue";
-    html += "Sur le réseau social interne de l'entreprise.";
-    html += "</section>";
+    html += "<div class=\"accueil\"> <img class=\"accueil_logo\" src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\">";
+    html += "<h1>Bienvenue sur le réseau social interne de l'entreprise.</h1>";
+    html += "</div></section>";
 
     html += "</body></html>"
     res.writeHeader(200 ,{'Content-Type': 'text/html'});

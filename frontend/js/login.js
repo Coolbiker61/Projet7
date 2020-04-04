@@ -9,10 +9,8 @@ const charge =  () => {
 		requete.onreadystatechange = function () {
 			if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
 				console.log(this.responseText);
-				window.location.href = '/';
-				/*window.setTimeout(() => {
-					window.location.reload(true);
-				}, 200);*/
+				window.setTimeout(() => { window.location.href = '/';}, 200);
+				
 			}
 		};
 		requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
@@ -45,7 +43,7 @@ const actionClick = (event) => {
 						case 200:
                             //quand il a fini la requête avec le code http 200 on copie le token dans le sessionStorage
 							sessionStorage.setItem('token', JSON.parse(this.responseText).token);
-							
+							window.setTimeout(() => { window.location.href = '/';}, 200);
 							break;
 						case 400:
 							//400 test des champs
@@ -53,8 +51,18 @@ const actionClick = (event) => {
 							document.getElementById("error").innerHTML = errorMessage;
 							break;
 						case 401:
-							//401 dejà enregistré ou mail non conforme au regex
-							errorMessage = "Cet adresse mail à déjà été utilisé.";
+							//401 utilisateur non trouvé ou mail non conforme au regex
+							switch (JSON.parse(this.responseText).error) {
+								case "User not found !":
+									errorMessage = "Aucun compte n'existe pour cet adresse mail.";
+									break;
+								case "Action not allow !":
+									errorMessage = "Veuillez indiquer une adresse mail correct.";
+									break;
+								default:
+									errorMessage = "Action non autorisé !";
+									break;
+							}
 							document.getElementById("error").innerHTML = errorMessage;
 							break;
 						case 500:
