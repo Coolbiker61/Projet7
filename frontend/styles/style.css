@@ -423,6 +423,13 @@ label {
     height: 60px;
 }
 
+/* Loading */
+#loading {
+    text-align: center;
+    margin-top: 150px;
+}
+
+
 /* page d'accueil */
 .accueil {
     display: flex;
@@ -430,7 +437,7 @@ label {
     flex-direction: column;
 }
 .accueil_logo {
-    width: 60vw;
+    width: 95vh;
 }
 h1 {
     font-size: 40px;

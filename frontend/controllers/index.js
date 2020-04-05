@@ -9,8 +9,9 @@ exports.getPageRoot = (req, res, then) => {
     html += "<script src=\"/js/index.js\" async></script>";
     html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
-    html += "</li><li>Social Network</li>";
-    html += "<li><a href=\"/auth/login\">Connexion</a></li><li><a href=\"/auth/register\"> Inscription</a></li></ul></nav>";
+    html += "</li><li id=\"user_nav\"><a href=\"/socialNetwork\">Social Network</a></li>";
+    html += "<li><a href=\"/auth/profil\">Profil</a></li>";
+    html += "</ul></nav>";
     html += "<div class=\"offset-top\"></div>";
     
     html += "<section class=\"back-login\">";

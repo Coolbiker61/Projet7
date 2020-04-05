@@ -1,26 +1,32 @@
 //regex de l'email
 const REGEX_MAIL = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+   
 // au chargement de la page
-const charge =  () => {
-	// verifie si un token est present dans le sessionStorage
-	if (sessionStorage.getItem('token')) {
-		var requete = new XMLHttpRequest();
-		requete.onreadystatechange = function () {
-			if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-				console.log(this.responseText);
-				window.setTimeout(() => { window.location.href = '/';}, 200);
-				
-			}
-		};
-		requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
-		requete.setRequestHeader("Content-Type", "application/json");
-		requete.setRequestHeader("Authorization", "Bearer "+this.sessionStorage.getItem('token'));
-		requete.send();
-		
-	}
+document.onreadystatechange = function () {
+    if (document.readyState == 'complete') { 
+		// verifie si un token est present dans le sessionStorage
+		if (sessionStorage.getItem('token')) {
+			var requete = new XMLHttpRequest();
+			requete.onreadystatechange = function () {
+				if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+					console.log(this.responseText);
+					window.setTimeout(() => { window.location.href = '/';}, 200);
+				}
+			};
+			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
+			requete.setRequestHeader("Content-Type", "application/json");
+			requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
+			requete.send();
+			
+		} else {
+			document.getElementById("loading").hidden = true;
+			document.getElementById("back-login").hidden = false;
+		}
+	};
 };
-if (document.readyState == 'loading') { charge() }
+
+
 // action effectué lors du click sur s'inscrire
 const actionClick = (event) => {
 	event.stopPropagation();
