@@ -64,12 +64,12 @@ exports.getProfile = (req, res, then) => {
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/profil.js\"></script>";
-    html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
+    html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
-    html += "</li><li><a href=\"/socialNetwork\">Social Network</a></li>";
+    html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
     html += "<li><a href=\"/auth/profil\">Profil</a></li>";
     html += "</ul></nav><div class=\"offset-top\"></div>";
-
+// ajouter cadre et bouton delete user
     html += "<section  id=\"back\" class=\"back\"><div class=\"profile\">";
     html += "<div>Email : <span id=\"email\"></span></div>";
     html += "<div>Pseudo : <span id=\"username\"></span></div>";

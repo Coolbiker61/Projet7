@@ -374,7 +374,7 @@ body {
 .logo-entreprise {
     height: 20px;
 }
-.back-inscription, .back-login {
+.back-inscription, .back-login , .back {
     background-image: url('../images/icon.svg');
     background-repeat:no-repeat;
     margin: 0 auto; 
@@ -447,8 +447,11 @@ h1 {
 /* profile  ----------------------------------------------------------------------------------------*/
 
 .profile {
-    margin-top: 100px;
+    margin: 100px auto;
     text-align: center;
+    border: 2px solid #222;
+    width: 300px;
+    padding: 20px;
 }
 
 
