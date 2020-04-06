@@ -8,6 +8,6 @@ router.get('/register', userCtrl.register);
 /* route connexion */
 router.get('/login', userCtrl.login);
 /* route pour afficher le profil */
-//router.get('/profil', userCtrl.getUserProfile);
+router.get('/profil', userCtrl.getProfile);
 
 module.exports = router;

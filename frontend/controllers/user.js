@@ -58,42 +58,29 @@ exports.login = (req, res, then) => {
 };
 
 
-
-
-
 exports.getProfile = (req, res, then) => {
     let html = "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\">";
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
-    html += "<script src=\"/js/login.js\"></script>";
+    html += "<script src=\"/js/profil.js\"></script>";
     html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</li><li><a href=\"/socialNetwork\">Social Network</a></li>";
-    html += "<li><a href=\"/auth/login\">Connexion</a></li><li><a href=\"/auth/register\"> Inscription</a></li></ul></nav>";
-    html += "<div class=\"offset-top\"></div>";
-    html += "<section class=\"back-login\"><div class=\"form-login\">";
-    html += "<label for=\"email\">Adresse mail</label>";
-    html += "<input type=\"email\" id=\"email\" name=\"email\" required partern=\""+REGEX_EMAIL+"\" />";
-    html += "<label for=\"password\">Mot de passe</label>";
-    html += "<input type=\"password\" name=\"password\" id=\"password\" required partern=\""+REGEX_PASSWORD+"\"/>";
-    html += "<input id=\"connexion\" type=\"submit\" value=\"Connexion\" />";
+    html += "<li><a href=\"/auth/profil\">Profil</a></li>";
+    html += "</ul></nav><div class=\"offset-top\"></div>";
+
+    html += "<section  id=\"back\" class=\"back\"><div class=\"profile\">";
+    html += "<div>Email : <span id=\"email\"></span></div>";
+    html += "<div>Pseudo : <span id=\"username\"></span></div>";
+    
+    
     html += "<div id=\"error\" class=\"error\"></div></div></section>";
 
     html += "</body></html>"
     res.writeHeader(200 ,{'Content-Type': 'text/html'});
     res.write(html);
-    res.end(); var requete = new XMLHttpRequest();
-		requete.onreadystatechange = function () {
-			if (this.readyState == XMLHttpRequest.DONE && this.status == 200 ) {
-				localStorage.setItem("cameras", this.responseText);
-				affichage();
-			} else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
-				console.error("erreur d'importation du produit cameras vintages");
-			}
-		}
-		requete.open("GET", "http://localhost:3000/api/cameras");
-		requete.send();
+    res.end();
 }
 
 

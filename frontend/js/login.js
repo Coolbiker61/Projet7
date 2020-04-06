@@ -10,8 +10,10 @@ document.onreadystatechange = function () {
 			var requete = new XMLHttpRequest();
 			requete.onreadystatechange = function () {
 				if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-					console.log(this.responseText);
 					window.setTimeout(() => { window.location.href = '/';}, 200);
+				} else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
+					document.getElementById("loading").hidden = true;
+					document.getElementById("back-login").hidden = false;
 				}
 			};
 			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
