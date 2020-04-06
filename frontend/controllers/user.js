@@ -42,6 +42,7 @@ exports.login = (req, res, then) => {
     html += "</li><li><a href=\"/socialNetwork\">Social Network</a></li>";
     html += "<li><a href=\"/auth/login\">Connexion</a></li><li><a href=\"/auth/register\"> Inscription</a></li></ul></nav>";
     html += "<div class=\"offset-top\"></div>";
+    // le logo animé qui reste affiché le temps du chargement
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
     html += "<section hidden id=\"back-login\" class=\"back-login\"><div class=\"form-login\">";
     html += "<label for=\"email\">Adresse mail</label>";
@@ -69,7 +70,7 @@ exports.getProfile = (req, res, then) => {
     html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
     html += "<li><a href=\"/auth/profil\">Profil</a></li>";
     html += "</ul></nav><div class=\"offset-top\"></div>";
-// ajouter cadre et bouton delete user
+// /!\ ajouter cadre et bouton delete user
     html += "<section  id=\"back\" class=\"back\"><div class=\"profile\">";
     html += "<div>Email : <span id=\"email\"></span></div>";
     html += "<div>Pseudo : <span id=\"username\"></span></div>";
@@ -82,25 +83,56 @@ exports.getProfile = (req, res, then) => {
     res.write(html);
     res.end();
 }
+exports.getProfileSettings = (req, res, then) => {
+    let html = "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\">";
+    html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
+    html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
+    html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
+    html += "<script src=\"/js/profilSettings.js\"></script>";
+    html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
+    html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
+    html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
+    html += "<li><a href=\"/auth/profil\">Profil</a></li>";
+    html += "</ul></nav><div class=\"offset-top\"></div>";
 
+    html += "<section  id=\"back\" class=\"back\"><div class=\"profile_details\">";
+    html += "<div>Email : <span id=\"email\"></span></div>";
+    html += "<div>Pseudo : <span id=\"username\"></span></div>";
+    html += "<div><input type=\"checkbox\" id=\"supprimer\" name=\"supprimer\">";
+    html += "<div id=\"delete\" class=\"btn_delete\" >Supprimer le compte</div></div>";
+    
+    html += "</div></section>";
 
-exports.deleteAccount = (req, res, then) => {
+    html += "</body></html>"
+    res.writeHeader(200 ,{'Content-Type': 'text/html'});
+    res.write(html);
+    res.end();
+}
+
+exports.deleteAccountConfirm = (req, res, then) => {
+    let html = "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\">";
+    html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
+    html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
+    html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
+    html += "<script src=\"/js/profil.js\"></script>";
+    html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
+    html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
+    html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
+    html += "<li><a href=\"/auth/profil\">Profil</a></li>";
+    html += "</ul></nav><div class=\"offset-top\"></div>";
+
+    html += "<section  id=\"back\" class=\"back\"><div class=\"confirm_delete\">";
+    html += "<p>Cette action est irréversible, êtes vous sur de vouloir supprimer votre compte ?</p>";
+    html += "<p>Ceci supprimera également tous les messages et commentaires.</p>";
+    html += "<div class=\"choice\"><div id=\"btn_oui\">Oui</div><div id=\"btn_non\">Non</div></div>";
     
     
-    var requete = new XMLHttpRequest();
-        /* écoute des changement d'état de l'envoie */
-        requete.onreadystatechange = function () {
-            if (this.readyState == XMLHttpRequest.DONE && this.status == 201 ) {
-                localStorage.setItem("retourCommande", this.responseText);
-                /* redirige l'utilisateur vers la page confirm.html */
-                window.location.href = "confirm.html";
-            } else if (this.readyState == XMLHttpRequest.DONE && this.status != 201) {
-                console.error("erreur d’envois du panier");
-                return;
-            }
-        };
-        requete.open("POST", "http://localhost:3000/api/cameras/order");
-        requete.setRequestHeader("Content-Type", "application/json");
-        requete.responseType = 'text';
-        requete.send(data);
+    html += "<div id=\"error\" class=\"error\"></div></div></section>";
+
+    html += "</body></html>"
+    res.writeHeader(200 ,{'Content-Type': 'text/html'});
+    res.write(html);
+    res.end();
+    
+    
 }

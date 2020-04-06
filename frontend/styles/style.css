@@ -374,13 +374,24 @@ body {
 .logo-entreprise {
     height: 20px;
 }
-.back-inscription, .back-login , .back {
+.back-inscription, .back-login {
     background-image: url('../images/icon.svg');
     background-repeat:no-repeat;
     margin: 0 auto; 
     height: 100vh; 
     width: 100vh; 
     padding-top: 235px;
+    position: relative;
+}
+.back {
+    background-image: url('../images/icon.svg');
+    background-repeat:no-repeat;
+    background-position: top;
+    background-attachment: fixed;
+    margin: 0 auto; 
+    height: 100vh; 
+    width: 100vh; 
+    padding-top: 5px;
     position: relative;
 }
 .back-login {
@@ -446,14 +457,25 @@ h1 {
 
 /* profile  ----------------------------------------------------------------------------------------*/
 
-.profile {
-    margin: 100px auto;
-    text-align: center;
+.profile_details {
     border: 2px solid #222;
     width: 300px;
     padding: 20px;
+    margin: 35vh auto 0;
+    background-color: #dae0e6;
+    border-radius: 10px;
 }
-
+.profile_details div {
+    margin: 10px;
+}
+.btn_delete {
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid rgba(245, 245, 245, 0.685);
+    width: 50px;
+    text-align: center;
+    margin: auto;
+}
 
 /* pour les messages ----------------------------------------------------------------------------------- */
 .message {
@@ -532,4 +554,42 @@ h1 {
     display: block;
     height: 100%;
     width: 50%;
+}
+
+/* confirm delete account ------------------------------------------------------------------*/
+.confirm_delete {
+    width: 520px;
+    margin: 35vh auto 0;
+    justify-content: center;
+    background-color: #dae0e6;
+    padding: 10px;
+    border: 2px solid #222;
+    border-radius: 10px;
+}
+
+.choice {
+    display: flex;
+    margin-top: 20px;
+}
+#btn_oui, #btn_non {
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid rgba(245, 245, 245, 0.685);
+    width: 50px;
+    text-align: center;
+    margin: auto;
+}
+#btn_oui {
+    background-color: forestgreen;
+}
+#btn_oui:hover {
+    background-color: rgb(0, 201, 0);
+    box-shadow: 7px 7px 5px rgb(83, 81, 81);
+}
+#btn_non {
+    background-color: rgb(163, 1, 33);
+}
+#btn_non:hover {
+    background-color: rgb(238, 4, 4);
+    box-shadow: 7px 7px 5px rgb(83, 81, 81);
 }

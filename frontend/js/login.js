@@ -17,7 +17,7 @@ document.onreadystatechange = function () {
 				}
 			};
 			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
-			requete.setRequestHeader("Content-Type", "application/json");
+			requete.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
 			requete.send();
 			
@@ -85,7 +85,7 @@ const actionClick = (event) => {
 				}
             };
             requete.open("POST", "http://localhost:3000/api/v1/auth/login");
-            requete.setRequestHeader("Content-Type", "application/json");
+            requete.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             requete.responseType = 'text';
             requete.send(data); 
 		}

@@ -7,13 +7,12 @@ document.onreadystatechange = function () {
             var requete = new XMLHttpRequest();
 			requete.onreadystatechange = function () {
 				if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
-                    console.log(this.responseText);
-    // /!\ ajouter un message avant redirection
+                    alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
 					window.setTimeout(() => { window.location.href = '/auth/login';}, 2000);
 				}
 			};
 			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
-			requete.setRequestHeader("Content-Type", "application/json");
+			requete.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
 			requete.send();
 			

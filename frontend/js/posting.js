@@ -1,6 +1,3 @@
-
-
-// au chargement de la page
 document.onreadystatechange = function () {
     if (document.readyState == 'complete') { 
         // verifie si un token est present dans le sessionStorage
@@ -8,13 +5,12 @@ document.onreadystatechange = function () {
             var requete = new XMLHttpRequest();
 			requete.onreadystatechange = function () {
 				if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
-
-    alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
+                    alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
 					window.setTimeout(() => { window.location.href = '/auth/login';}, 2000);
 				} else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                    var reponse = JSON.parse(this.responseText);
-                    document.getElementById("email").innerHTML = reponse.email;
-                    document.getElementById("username").innerHTML = reponse.username;
+                    // si la requête n'a pas retourné d'erreur
+                    document.getElementById("loading").hidden = true;
+                    document.getElementById("back").hidden = false;
                 }
 			};
 			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
