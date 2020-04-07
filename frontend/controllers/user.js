@@ -71,14 +71,13 @@ exports.getProfile = (req, res, then) => {
     html += "<li><a href=\"/auth/profil\">Profil</a></li>";
     html += "</ul></nav><div class=\"offset-top\"></div>";
 // /!\ ajouter cadre et bouton delete user
-    html += "<section  id=\"back\" class=\"back\"><div class=\"profile\">";
-    html += "<div>Email : <span id=\"email\"></span></div>";
-    html += "<div>Pseudo : <span id=\"username\"></span></div>";
-    
-    
-    html += "<div id=\"error\" class=\"error\"></div></div></section>";
-
-    html += "</body></html>"
+    html += "<div id=\"profile\"><section  id=\"liste_message\" class=\"liste_message\">";
+    html += "lipsum lipsum lipsum lipsum lipsum lipsum lipsum lipsum lipsum lipsum ";
+    html += "<div id=\"error\" class=\"error\"></div></section>";
+    html += "<section id=\"quick_profile\">";
+    html += "<div id=\"username\">username</div>";
+    html += "</section>";
+    html += "</div></body></html>"
     res.writeHeader(200 ,{'Content-Type': 'text/html'});
     res.write(html);
     res.end();
@@ -122,6 +121,7 @@ exports.deleteAccountConfirm = (req, res, then) => {
     html += "</ul></nav><div class=\"offset-top\"></div>";
 
     html += "<section  id=\"back\" class=\"back\"><div class=\"confirm_delete\">";
+    html += "<p>Dernière chance.</p>";
     html += "<p>Cette action est irréversible, êtes vous sur de vouloir supprimer votre compte ?</p>";
     html += "<p>Ceci supprimera également tous les messages et commentaires.</p>";
     html += "<div class=\"choice\"><div id=\"btn_oui\">Oui</div><div id=\"btn_non\">Non</div></div>";

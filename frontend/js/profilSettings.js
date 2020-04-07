@@ -18,7 +18,7 @@ document.onreadystatechange = function () {
                 }
 			};
 			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
-			requete.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			requete.setRequestHeader("Content-Type", "application/json");
 			requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
 			requete.send();
 			

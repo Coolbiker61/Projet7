@@ -11,7 +11,7 @@ const charge =  () => {
 			}
 		};
 		requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
-		requete.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		requete.setRequestHeader("Content-Type", "application/json");
 		requete.setRequestHeader("Authorization", "Bearer "+this.sessionStorage.getItem('token'));
 		requete.send();
 		

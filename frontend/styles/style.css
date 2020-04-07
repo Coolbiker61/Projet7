@@ -456,7 +456,17 @@ h1 {
 }
 
 /* profile  ----------------------------------------------------------------------------------------*/
+#profile {
+    display: flex;
+}
+.liste_message {
+    margin: 10px;
+}
+#quick_profile {
+    width: 20vw;
+}
 
+/* profile detaillé -------------------------------------------------------------------------------------*/
 .profile_details {
     border: 2px solid #222;
     width: 300px;
