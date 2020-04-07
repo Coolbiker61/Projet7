@@ -8,6 +8,8 @@ const likectrl = require('../controllers/like');
 router.post('/', messagectrl.createMessage);
 // get all message
 router.get('/', messagectrl.getAllMessages);
+// get all message of a user
+router.get('/user/:idUser', messagectrl.getAllMessagesUser);
 // get all message
 router.get('/:id', messagectrl.getOneMessages);
 //delete message

@@ -65,17 +65,22 @@ exports.getProfile = (req, res, then) => {
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/profil.js\"></script>";
+    html += "<script src=\"/js/menu.js\" async></script>";
     html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
-    html += "<li><a href=\"/auth/profil\">Profil</a></li>";
+    html += "<li id=\"link_profil\"><span id=\"username\"></span><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "<div class=\"menu_profil_ligne\"><a href=\"/auth/profil\">Profil</a></div>";
+    html += "<div id=\"logout\" class=\"menu_profil_ligne\"><a href=\"/auth/login\">Déconnexion</a></div>";
+    html += "</div></li>";
     html += "</ul></nav><div class=\"offset-top\"></div>";
-// /!\ ajouter cadre et bouton delete user
+
     html += "<div id=\"profile\"><section  id=\"liste_message\" class=\"liste_message\">";
-    html += "lipsum lipsum lipsum lipsum lipsum lipsum lipsum lipsum lipsum lipsum ";
+    html += "Vos cinq dernier messages :";
     html += "<div id=\"error\" class=\"error\"></div></section>";
     html += "<section id=\"quick_profile\">";
-    html += "<div id=\"username\">username</div>";
+    html += "<div id=\"mini_username\">username</div>";
+    html +="<a href=\"/auth/profil/settings\" ><i id=\"profil_settings\" class=\"fas fa-cog icon_settings\"></i></a>";
     html += "</section>";
     html += "</div></body></html>"
     res.writeHeader(200 ,{'Content-Type': 'text/html'});
@@ -88,17 +93,23 @@ exports.getProfileSettings = (req, res, then) => {
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/profilSettings.js\"></script>";
+    html += "<script src=\"/js/menu.js\" async></script>";
     html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
-    html += "<li><a href=\"/auth/profil\">Profil</a></li>";
+    html += "<li id=\"link_profil\"><span id=\"username\"></span><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "<div class=\"menu_profil_ligne\"><a href=\"/auth/profil\">Profil</a></div>";
+    html += "<div id=\"logout\" class=\"menu_profil_ligne\"><a href=\"/auth/login\">Déconnexion</a></div>";
+    html += "</div></li>";
     html += "</ul></nav><div class=\"offset-top\"></div>";
 
     html += "<section  id=\"back\" class=\"back\"><div class=\"profile_details\">";
     html += "<div>Email : <span id=\"email\"></span></div>";
-    html += "<div>Pseudo : <span id=\"username\"></span></div>";
-    html += "<div><input type=\"checkbox\" id=\"supprimer\" name=\"supprimer\">";
-    html += "<div id=\"delete\" class=\"btn_delete\" >Supprimer le compte</div></div>";
+    html += "<div>Pseudo : <span id=\"username_detail\"></span></div>";
+    html += "<div class=\"delete_box\"><div class=\"verif_del\">";
+    html += "<label for=\"supprimer\">Voulez vous supprimer votre compte ? ";
+    html += "<input type=\"checkbox\" id=\"supprimer\" name=\"supprimer\">";
+    html += "</div><div id=\"delete\" class=\"btn_delete\" >Supprimer le compte</div></div>";
     
     html += "</div></section>";
 
@@ -114,10 +125,14 @@ exports.deleteAccountConfirm = (req, res, then) => {
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/profil.js\"></script>";
+    html += "<script src=\"/js/menu.js\" async></script>";
     html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
-    html += "<li><a href=\"/auth/profil\">Profil</a></li>";
+    html += "<li id=\"link_profil\"><span id=\"username\"></span><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "<div class=\"menu_profil_ligne\"><a href=\"/auth/profil\">Profil</a></div>";
+    html += "<div id=\"logout\" class=\"menu_profil_ligne\"><a href=\"/auth/login\">Déconnexion</a></div>";
+    html += "</div></li>";
     html += "</ul></nav><div class=\"offset-top\"></div>";
 
     html += "<section  id=\"back\" class=\"back\"><div class=\"confirm_delete\">";

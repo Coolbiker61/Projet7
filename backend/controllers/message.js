@@ -50,7 +50,7 @@ exports.getAllMessages = (req, res, then ) => {
             return res.status(401).json({ error: 'User not found !'});
         } else {
             models.Message.findAll({
-                order: [(order != null) ? order.split(':') : ['id', 'ASC']],
+                order: [(order != null) ? order.split(':') : ['id', 'DESC']],
                 limit: (!isNaN(limit)) ? limit : null,
                 offset: (!isNaN(offset)) ? offset : null,
                 include: [{
@@ -58,6 +58,54 @@ exports.getAllMessages = (req, res, then ) => {
                     attributes: ['id', 'username']
                 }]
                 
+            })
+            .then(message => {
+                if (message.length) {
+                    res.status(200).json(message);
+                } else {
+                    res.status(404).json({ 'error': 'nothing found'});
+                }
+            })
+            .catch(error => {
+                res.status(500).json({ error });
+            })
+        }
+    })
+    .catch(error => res.status(500).json({ error }));
+}
+
+exports.getAllMessagesUser = (req, res, then ) => {
+    var headerAuth = req.headers['authorization'];
+    var userId = jwtUtils.getUserId(headerAuth);
+    var idOfUser = parseInt(req.params.idUser);
+
+    if (isNaN(idOfUser) || idOfUser < 0 ) {
+        return res.status(400).json({ 'error': 'Bad parameter !'})
+    }
+
+    if (userId < 0) {
+        return res.status(401).json({ 'error': 'Action non autorisée !'});
+    }
+    
+    var limit = parseInt(req.query.limit);
+    var offset = parseInt(req.query.offset);
+    var order = req.query.order;
+    models.User.findOne({attributes: [ 'id', 'username', 'isAdmin']},{ where: { id: userId } })
+    .then(user => {
+        if(!user) {
+            return res.status(401).json({ error: 'User not found !'});
+        } else {
+            models.Message.findAll({
+                order: [(order != null) ? order.split(':') : ['id', 'DESC']],
+                limit: (!isNaN(limit)) ? limit : null,
+                offset: (!isNaN(offset)) ? offset : null,
+                include: [{
+                    model: models.User,
+                    attributes: ['id', 'username']
+                }],
+                where: {
+                    UserId: user.id
+                }
             })
             .then(message => {
                 if (message.length) {

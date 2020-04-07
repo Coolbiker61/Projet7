@@ -13,6 +13,7 @@ document.onreadystatechange = function () {
                     // si la requête du profil n'a pas retourné d'erreur
                     document.getElementById("loading").hidden = true;
                     document.getElementById("back").hidden = false;
+                    document.getElementById("username").innerHTML = JSON.parse(this.responseText).username;
                     importMessage();
                 }
 			};
@@ -62,16 +63,5 @@ const addMessage = (message) => {
     html += "</h3></header><p class=\"content-article\">"+message.content;
     html += "</p></article></section></div>";
 
-    document.getElementById("container").insertAdjacentHTML('afterbegin', html);
+    document.getElementById("container").insertAdjacentHTML('beforeend', html);
 }
-/*
-html += "<div class=\"message\"><div class=\"col_likes\"><i class=\"fas fa-arrow-up like-up-not\"></i>";
-    html += "<div class=\"nb-likes\">00 k</div>";
-    html += "<i class=\"fas fa-arrow-down like-down-not\"></i></div>";
-    html += "<section class=\"corp\"><header class=\"author\">";
-                    //posted by moi le 21/21/21 a 12h12
-    html += "</header><article><header><h3 class=\"title-article\">";
-                    //tittre article
-    html += "</h3></header><p class=\"content-article\">";
-            
-    html += "</p></article></section></div>";*/

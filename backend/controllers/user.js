@@ -124,9 +124,20 @@ exports.deleteUser = (req, res, then) => {
     })
         .then(user => {
             if (user) {
-                
-                
-                res.status(200).json(user);
+                models.Message.destroy({ where: { UserId: userId } })
+                .then(message => {
+                    models.User.destroy({ where: { id: userId } })
+                    .then(oldUser => {
+                        if (oldUser) {
+                            res.status(200).json({ message: 'user delete !'});
+                        } else {
+                            res.status(404).json({ 'error': 'user not found !'});
+                        }
+                    })
+                    .catch(error => { res.status(500).json({ error }); })
+                })
+                .catch(error => { res.status(500).json({ error }); })
+                    
             } else {
                 res.status(404).json({ 'error': 'User not found'});
             }

@@ -7,10 +7,14 @@ exports.getPageRoot = (req, res, then) => {
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/index.js\" async></script>";
+    html += "<script src=\"/js/menu.js\" async></script>";
     html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</li><li id=\"user_nav\"><a href=\"/socialNetwork\">Social Network</a></li>";
-    html += "<li><a href=\"/auth/profil\">Profil</a></li>";
+    html += "<li id=\"link_profil\"><span id=\"username\"></span><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "<div class=\"menu_profil_ligne\"><a href=\"/auth/profil\">Profil</a></div>";
+    html += "<div id=\"logout\" class=\"menu_profil_ligne\"><a href=\"/auth/login\">Déconnexion</a></div>";
+    html += "</div></li>";
     html += "</ul></nav>";
     html += "<div class=\"offset-top\"></div>";
     

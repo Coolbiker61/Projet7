@@ -15,6 +15,7 @@ document.onreadystatechange = function () {
                     var reponse = JSON.parse(this.responseText);
                     document.getElementById("email").innerHTML = reponse.email;
                     document.getElementById("username").innerHTML = reponse.username;
+                    document.getElementById("username_detail").innerHTML = reponse.username;
                 }
 			};
 			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
@@ -27,3 +28,5 @@ document.onreadystatechange = function () {
         }
     };
 };
+
+// delete http://localhost:3000/api/v1/auth/

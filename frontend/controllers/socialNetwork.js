@@ -5,11 +5,15 @@ exports.getPageWall = (req, res, then) => {
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/wall.js\"></script>";
+    html += "<script src=\"/js/menu.js\" async></script>";
     html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
-    html += "<li><a href=\"/auth/profil\">Profil</a></li></ul></nav>";
-    html += "<div class=\"offset-top\"></div>";
+    html += "<li id=\"link_profil\"><span id=\"username\"></span><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "<div class=\"menu_profil_ligne\"><a href=\"/auth/profil\">Profil</a></div>";
+    html += "<div id=\"logout\" class=\"menu_profil_ligne\"><a href=\"/auth/login\">Déconnexion</a></div>";
+    html += "</div></li>";
+    html += "</ul></nav><div class=\"offset-top\"></div>";
     // le logo animé qui reste affiché le temps du chargement
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
     html += "<section hidden id=\"back\" class=\"back\">";
@@ -32,11 +36,15 @@ exports.createMessage = (req, res ,then) => {
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/posting.js\"></script>";
+    html += "<script src=\"/js/menu.js\" async></script>";
     html += "<title>Groupomania - poster un nouveau message</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
-    html += "<li><a href=\"/auth/profil\">Profil</a></li></ul></nav>";
-    html += "<div class=\"offset-top\"></div>";
+    html += "<li id=\"link_profil\"><span id=\"username\"></span><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "<div class=\"menu_profil_ligne\"><a href=\"/auth/profil\">Profil</a></div>";
+    html += "<div id=\"logout\" class=\"menu_profil_ligne\"><a href=\"/auth/login\">Déconnexion</a></div>";
+    html += "</div></li>";
+    html += "</ul></nav><div class=\"offset-top\"></div>";
     // le logo animé qui reste affiché le temps du chargement
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
     html += "<section hidden id=\"back\" class=\"back\">";
@@ -59,11 +67,15 @@ exports.deleteMessage = (req, res ,then) => {
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/deposting.js\"></script>";
+    html += "<script src=\"/js/menu.js\" async></script>";
     html += "<title>Groupomania - suppression de message</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
-    html += "<li><a href=\"/auth/profil\">Profil</a></li></ul></nav>";
-    html += "<div class=\"offset-top\"></div>";
+    html += "<li id=\"link_profil\"><span id=\"username\"></span><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "<div class=\"menu_profil_ligne\"><a href=\"/auth/profil\">Profil</a></div>";
+    html += "<div id=\"logout\" class=\"menu_profil_ligne\"><a href=\"/auth/login\">Déconnexion</a></div>";
+    html += "</div></li>";
+    html += "</ul></nav><div class=\"offset-top\"></div>";
     // le logo animé qui reste affiché le temps du chargement
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
     html += "<section hidden id=\"back\" class=\"back\">";
