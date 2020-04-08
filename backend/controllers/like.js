@@ -7,13 +7,13 @@ exports.likeMessage = (req, res, then ) => {
     var userId = jwtUtils.getUserId(headerAuth);
 
     if (userId < 0) {
-        return res.status(401).json({ 'error': 'Action non autorisée !'});
+        return res.status(401).json({ 'error': 'Action not allow !'});
     }
 
     var messageId = parseInt(req.params.id);
     var likeValue = parseInt(req.params.likeType);
-    if (messageId <= 0 || likeValue < -1 || likeValue > 1) {
-        return res.status(400).json({ 'error': ' Invalid request !' });
+    if (isNaN(messageId) || messageId == null || messageId <= 0 || isNaN(likeValue) || likeValue < -1 || likeValue > 1) {
+        return res.status(400).json({ 'error': 'Invalid request !' });
     }
     // vérifie l'existence du message
     models.Message.findOne({ where: { id: messageId } })
@@ -171,10 +171,10 @@ exports.getLike = (req, res, then) => {
     var messageId = parseInt(req.params.id);
 
     if (userId < 0) {
-        return res.status(401).json({ 'error': 'Action non autorisée !'});
+        return res.status(401).json({ 'error': 'Action not allow !'});
     }
-    if (messageId <= 0) {
-        return res.status(400).json({ 'error': ' Invalid request !' });
+    if (messageId <= 0 || isNaN(messageId) || messageId == null) {
+        return res.status(400).json({ 'error': 'Invalid request !' });
     }
     // vérifie l'existence du message
     models.Message.findOne({ where: { id: messageId } })
@@ -195,18 +195,18 @@ exports.getLike = (req, res, then) => {
                         if (like) {
                             return res.status(200).json(like);
                         } else {
-                            return res.status(404).json({ 'error': 'Not found !' });
+                            return res.status(404).json({ 'error': 'Like not found !' });
                         }
 
                     })
                     .catch(error => { return res.status(500).json({ error })});
                 } else {
-                    return res.status(401).json({ 'error': 'Action non autorisée !'});
+                    return res.status(401).json({ 'error': 'Action not allow !'});
                 }
             })
             .catch(error => { return res.status(500).json({ error })});
         } else {
-            return res.status(404).json({ 'error': 'Not found !'});
+            return res.status(404).json({ 'error': 'Message not found !'});
         }
     })
     .catch(error => { return res.status(500).json({ error })});

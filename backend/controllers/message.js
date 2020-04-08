@@ -38,7 +38,7 @@ exports.getAllMessages = (req, res, then ) => {
     var userId = jwtUtils.getUserId(headerAuth);
 
     if (userId < 0) {
-        return res.status(401).json({ 'error': 'Action non autorisée !'});
+        return res.status(401).json({ 'error': 'Action not allow !'});
     }
     
     var limit = parseInt(req.query.limit);
@@ -84,7 +84,7 @@ exports.getAllMessagesUser = (req, res, then ) => {
     }
 
     if (userId < 0) {
-        return res.status(401).json({ 'error': 'Action non autorisée !'});
+        return res.status(401).json({ 'error': 'Action not allow !'});
     }
     
     var limit = parseInt(req.query.limit);
@@ -159,15 +159,15 @@ exports.deleteMessage = (req, res, then) => {
     var userId = jwtUtils.getUserId(headerAuth);
 
     if (userId < 0) {
-        return res.status(401).json({ 'error': 'Action non autorisée !'});
+        return res.status(401).json({ 'error': 'Action not allow !'});
     }
     
     var id = parseInt(req.params.id);
-    if (id != null) {
+    if (id != null && !isNaN(id) && id > 0) {
         models.Message.destroy({ where: { id: id, UserId: userId } })
         .then(message => {
             if (message) {
-                res.status(200).json({ message: 'message delete !'});
+                res.status(200).json({ message: 'message deleted !'});
             } else {
                 res.status(404).json({ 'error': 'nothing found !'});
             }
@@ -186,7 +186,7 @@ exports.updateMessage = (req, res, then) => {
     var userId = jwtUtils.getUserId(headerAuth);
 
     if (userId < 0) {
-        return res.status(401).json({ 'error': 'Action non autorisée !'});
+        return res.status(401).json({ 'error': 'Action not allow !'});
     }
 
     var title = req.body.title;
@@ -199,7 +199,7 @@ exports.updateMessage = (req, res, then) => {
     }
     
     var id = parseInt(req.params.id);
-    if (!isNaN(id)) {
+    if (id != null && !isNaN(id) && id > 0) {
         models.Message.findOne({ where: { id: id, UserId: userId } })
         .then(message => {
             if (message) {

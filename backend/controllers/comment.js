@@ -24,7 +24,7 @@ exports.addComment = (req, res, then) => {
         models.User.findOne({ where: { id: userId } })
         .then(user => {
             if(!user) {
-                return res.status(401).json({ error: 'Utilisateur non trouvé !'});
+                return res.status(401).json({ error: 'User not found !'});
             } else {
                 models.Message.findOne({ where: { id: idMessage, userId: userId } })
                 .then(message => {
@@ -71,7 +71,7 @@ exports.getComment = (req, res, then) => {
         models.User.findOne({ where: { id: userId } })
         .then(user => {
             if(!user) {
-                return res.status(401).json({ error: 'Utilisateur non trouvé !'});
+                return res.status(401).json({ error: 'User not found !'});
             } else {
                 models.Message.findOne({ where: { id: idMessage, userId: userId } })
                 .then(message => {
@@ -117,7 +117,7 @@ exports.getOneComment = (req, res, then) => {
         models.User.findOne({ where: { id: userId } })
         .then(user => {
             if(!user) {
-                return res.status(401).json({ error: 'Utilisateur non trouvé !'});
+                return res.status(401).json({ error: 'User not found !'});
             } else {
                 models.Message.findOne({ where: { id: idMessage, userId: userId } })
                 .then(message => {
@@ -158,7 +158,7 @@ exports.deleteComment = (req, res, then) => {
         models.User.findOne({ where: { id: userId } })
         .then(user => {
             if(!user) {
-                return res.status(401).json({ error: 'Utilisateur non trouvé !'});
+                return res.status(401).json({ error: 'User not found !'});
             } else {
                 models.Comment.findOne({ where: { id: idComment }})
                 .then(comment => {
