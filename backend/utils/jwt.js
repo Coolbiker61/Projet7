@@ -8,7 +8,7 @@ exports.generateToken = (user) => {
         { userId: user.id, 
             isAdmin: user.isAdmin },
         jwt_secret,
-        { expiresIn: '8h' }
+        { expiresIn: '20m' }
     );
 }
 

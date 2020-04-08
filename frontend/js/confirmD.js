@@ -13,9 +13,7 @@ document.onreadystatechange = function () {
 					window.setTimeout(() => { window.location.href = '/auth/login';}, 2000);
 				} else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                     var reponse = JSON.parse(this.responseText);
-                    document.getElementById("email").innerHTML = reponse.email;
                     document.getElementById("username").innerHTML = reponse.username;
-                    document.getElementById("username_detail").innerHTML = reponse.username;
                     ecoute();
                 }
 			};
@@ -31,18 +29,24 @@ document.onreadystatechange = function () {
 };
 
 const ecoute = () => {
-    document.getElementById("supprimer").addEventListener("click", function (event) {
-        if (document.getElementById("supprimer").checked) {
-            document.getElementById("delete").classList.add("btn_delete_active");
-        } else if (!document.getElementById("supprimer").checked) {
-            document.getElementById("delete").classList.remove("btn_delete_active");
-        }
+    document.getElementById("btn_oui").addEventListener("click", function (event) {
+        
+        document.getElementById("loading").hidden = false;
+        document.getElementById("back").hidden = true;
+        var requete = new XMLHttpRequest();
+        requete.onreadystatechange = function () {
+            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                window.setTimeout(() => { window.location.href = '/auth/signup';}, 2000);
+            } 
+        };
+        requete.open("DELETE", "http://localhost:3000/api/v1/auth/");
+        requete.setRequestHeader("Content-Type", "application/json");
+        requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
+        requete.send();
         
     });
-    document.getElementById("delete").addEventListener("click", function (event){
-        if (document.getElementById("supprimer").checked) {
-            window.location.href = '/auth/delete/confirm';
-        }
+    document.getElementById("btn_non").addEventListener("click", function (event){
+            window.location.href = '/auth/profil/settings';
     })
 }
 

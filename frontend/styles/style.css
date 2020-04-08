@@ -529,10 +529,22 @@ h1 {
     text-align: center;
     margin: auto;
 }
+.btn_delete_active {
+    border: 2px solid rgba(143, 143, 143, 0.993);
+    background-color: royalblue;
+    box-shadow: 7px 7px 5px rgb(83, 81, 81);
+    color: white;
+}
+
 .delete_box {
 
     border: 2px solid red;
     border-radius: 10px;
+}
+#supprimer {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
 }
 .verif_del {
     display: flex;

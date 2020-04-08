@@ -10,7 +10,7 @@ document.onreadystatechange = function () {
 			var requete = new XMLHttpRequest();
 			requete.onreadystatechange = function () {
 				if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-					window.setTimeout(() => { window.location.href = '/';}, 200);
+					window.setTimeout(() => { window.location.href = '/';}, 2000);
 				} else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
 					document.getElementById("loading").hidden = true;
 					document.getElementById("back-login").hidden = false;

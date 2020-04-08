@@ -75,7 +75,8 @@ exports.getProfile = (req, res, then) => {
     html += "</div></li>";
     html += "</ul></nav><div class=\"offset-top\"></div>";
 
-    html += "<div id=\"profile\"><section  id=\"liste_message\" class=\"liste_message\">";
+    html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
+    html += "<div hidden  id=\"profile\"><section  id=\"liste_message\" class=\"liste_message\">";
     html += "Vos cinq dernier messages :";
     html += "<div id=\"error\" class=\"error\"></div></section>";
     html += "<section id=\"quick_profile\">";
@@ -124,7 +125,7 @@ exports.deleteAccountConfirm = (req, res, then) => {
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
-    html += "<script src=\"/js/profil.js\"></script>";
+    html += "<script src=\"/js/confirmD.js\"></script>";
     html += "<script src=\"/js/menu.js\" async></script>";
     html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
@@ -135,6 +136,7 @@ exports.deleteAccountConfirm = (req, res, then) => {
     html += "</div></li>";
     html += "</ul></nav><div class=\"offset-top\"></div>";
 
+    html += "<div hidden id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
     html += "<section  id=\"back\" class=\"back\"><div class=\"confirm_delete\">";
     html += "<p>Dernière chance.</p>";
     html += "<p>Cette action est irréversible, êtes vous sur de vouloir supprimer votre compte ?</p>";
