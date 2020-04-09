@@ -12,7 +12,7 @@ const importeMessage = (id) => {
                 addMessage(message);
             }
             document.getElementById("loading").hidden = true;
-            document.getElementById("profil").hidden = false;
+            document.getElementById("profile").style.visibility = "visible";
         }
     };
     requete.open("GET", "http://localhost:3000/api/v1/message/user/"+id+"?limit=5");
