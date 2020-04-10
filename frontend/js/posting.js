@@ -23,3 +23,15 @@ document.onreadystatechange = function () {
         }
     };
 };
+
+// editor
+tinymce.init({
+    selector: 'textarea#default',
+    plugins: ' autolink lists media table link image emoticons',
+    toolbar: 'alignleft aligncenter alignright | bold italic underline fontsizeselect forecolor backcolor | emoticons image link spellchecker',
+    menubar: '',
+    width: '50vw',
+    elementpath: false,
+    language: 'FR',
+    
+  });

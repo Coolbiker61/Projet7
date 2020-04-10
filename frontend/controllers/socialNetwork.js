@@ -18,8 +18,9 @@ exports.getPageWall = (req, res, then) => {
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
     html += "<section hidden id=\"back\" class=\"back\">";
 
-    html += "Bienvenue";
-    html += "Sur le réseau social interne de l'entreprise.";
+    html += "<header><h1>Bienvenue sur le réseau social interne de l'entreprise.</h1>";
+    html += "<div id=\"btn_new_post\">Nouveau Message</div></header>";
+    
     // container a messages
     html += "<div id=\"container\" > </div>";
 
@@ -35,6 +36,7 @@ exports.createMessage = (req, res ,then) => {
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
+    html += "<script src=\"https://cdn.tiny.cloud/1/vjax5i6wra9mztw82qywx797zkifcqfemwbzfxjdzjockixy/tinymce/5/tinymce.min.js\" referrerpolicy=\"origin\"></script>";
     html += "<script src=\"/js/posting.js\"></script>";
     html += "<script src=\"/js/menu.js\" async></script>";
     html += "<title>Groupomania - poster un nouveau message</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
@@ -49,8 +51,8 @@ exports.createMessage = (req, res ,then) => {
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
     html += "<section hidden id=\"back\" class=\"back\">";
 
-    html += "Bienvenue";
-    html += "Sur le réseau social interne de l'entreprise.";
+    html += "";
+    html += "<textarea id=\"default\"></textarea>";
     // container a messages
     html += "<div id=\"container\" > </div>";
 

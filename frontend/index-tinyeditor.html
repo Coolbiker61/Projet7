@@ -5,15 +5,18 @@
 </head>
 <body>
   <textarea id="default">
-    Welcome to TinyMCE!
+    Welcome to TinyMCE! 😍😍😍😍😍
   </textarea>
   <script>
     tinymce.init({
       selector: 'textarea#default',
-      plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinymcespellchecker link image',
-      toolbar: 'alignleft aligncenter alignright alignnone blockquote backcolor bold copy cut paste fontselect fontsizeselect forecolor italic underline checklist emoticons image link spellchecker visualblocks',
+      plugins: ' autolink lists media table link image emoticons',
+      toolbar: 'alignleft aligncenter alignright | bold italic underline fontsizeselect forecolor backcolor | emoticons image link spellchecker',
       menubar: '',
-      max_width: 500
+      width: '50vw',
+      elementpath: false,
+      language: 'FR',
+      
     });
   </script>
 </body>

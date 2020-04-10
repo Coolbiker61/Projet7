@@ -628,6 +628,13 @@ h1 {
     height: 100%;
     width: 50%;
 }
+#btn_new_post {
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid rgba(55, 118, 255, 0.836);
+    text-align: center;
+    margin: auto;
+}
 
 /* confirm delete account ------------------------------------------------------------------*/
 .confirm_delete {
