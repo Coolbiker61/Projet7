@@ -39,6 +39,7 @@ const importMessage = () => {
             var arrayMessage = JSON.parse(this.responseText);
             for (const message of arrayMessage) {
                 addMessage(message);
+                listener(message);
             }
             
         }
@@ -62,6 +63,29 @@ const addMessage = (message) => {
     html += message.title;
     html += "</h3></header><p class=\"content-article\">"+message.content;
     html += "</p></article></section></div>";
-
+    //ajoute le html à la page
     document.getElementById("container").insertAdjacentHTML('beforeend', html);
+    
+}
+
+document.getElementById("btn_new_post").addEventListener("click", function (event) {
+    window.location.href = "/socialNetwork/new";
+})
+// ajoute un surveillance des boutons like et de l'article
+const listener = (message) => {
+    console.log(document.getElementById(message.id))
+    var doc = document.getElementById(message.id);
+    doc.querySelector('.like-up-not').addEventListener("click", function (event) {
+        event.stopPropagation();
+        console.log('like'+event.target.parentElement.parentElement.getAttribute('id'));
+    });
+    doc.querySelector('.like-down-not').addEventListener("click", function (event) {
+        event.stopPropagation();
+        console.log("dislike"+event.target.parentElement.parentElement.getAttribute('id'));
+    });
+    document.getElementById(message.id).addEventListener("click", function (event) {
+        event.stopPropagation();
+        console.log(event.target.getAttribute('id'));
+        //window.location.href = "/socialNetwork/message:"+event.target.getAttribute('id');
+    });
 }

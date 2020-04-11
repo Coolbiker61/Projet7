@@ -632,6 +632,17 @@ h1 {
     padding: 10px;
     border-radius: 20px;
     border: 2px solid rgba(55, 118, 255, 0.836);
+    box-shadow: 7px 7px 5px rgb(83, 81, 81);
+    background-color: white;
+    text-align: center;
+    margin: auto;
+}
+#btn_new_post:hover {
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid rgba(55, 118, 255, 0.836);
+    background-color: blue;
+    color: white;
     text-align: center;
     margin: auto;
 }

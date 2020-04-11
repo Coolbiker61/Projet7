@@ -32,6 +32,6 @@ tinymce.init({
     menubar: '',
     width: '50vw',
     elementpath: false,
-    language: 'FR',
+    language: 'fr',
     
   });
