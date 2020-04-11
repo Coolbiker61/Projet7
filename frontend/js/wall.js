@@ -73,7 +73,6 @@ document.getElementById("btn_new_post").addEventListener("click", function (even
 })
 // ajoute un surveillance des boutons like et de l'article
 const listener = (message) => {
-    console.log(document.getElementById(message.id))
     var doc = document.getElementById(message.id);
     doc.querySelector('.like-up-not').addEventListener("click", function (event) {
         event.stopPropagation();
@@ -85,7 +84,19 @@ const listener = (message) => {
     });
     document.getElementById(message.id).addEventListener("click", function (event) {
         event.stopPropagation();
-        console.log(event.target.getAttribute('id'));
-        //window.location.href = "/socialNetwork/message:"+event.target.getAttribute('id');
+        let idMessage = 0;
+        if (event.target.getAttribute('id')) {
+            idMessage = event.target.getAttribute('id');
+        } else if (event.target.parentElement.getAttribute('id')) {
+            idMessage = event.target.parentElement.getAttribute('id');
+        } else if (event.target.parentElement.parentElement.getAttribute('id')) {
+            idMessage = event.target.parentElement.parentElement.getAttribute('id');
+        } else if (event.target.parentElement.parentElement.parentElement.getAttribute('id')) {
+            idMessage = event.target.parentElement.parentElement.parentElement.getAttribute('id');
+        } else if (event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('id')) {
+            idMessage = event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('id');
+        }
+        console.log(idMessage);
+        //window.location.href = "/socialNetwork/message:"+idMessage;
     });
 }
