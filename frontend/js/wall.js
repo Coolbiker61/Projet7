@@ -31,15 +31,13 @@ document.onreadystatechange = function () {
 const importMessage = () => {
     var requete = new XMLHttpRequest();
     requete.onreadystatechange = function () {
-        if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
-            alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
-            window.setTimeout(() => { window.location.href = '/auth/login';}, 2000);
-        } else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             // si la requête des messages n'a pas retourné d'erreur
             var arrayMessage = JSON.parse(this.responseText);
             for (const message of arrayMessage) {
                 addMessage(message);
                 listener(message);
+                importLike(message);
             }
             
         }
@@ -51,8 +49,8 @@ const importMessage = () => {
 }
 
 const addMessage = (message) => {
-
-    var html = "<div class=\"message\" id=\""+message.id+"\"><div class=\"col_likes\"><i class=\"fas fa-arrow-up like-up-not\"></i>";
+    var html = "<div class=\"message\" id=\""+message.id+"\"><div class=\"col_likes\">";
+    html += "<i class=\"fas fa-arrow-up like-up-not\"></i>";
     html += "<div class=\"nb-likes\">"+message.likes+"</div>";
     html += "<i class=\"fas fa-arrow-down like-down-not\"></i></div>";
     html += "<section class=\"corp\"><header class=\"author\">";
@@ -64,8 +62,7 @@ const addMessage = (message) => {
     html += "</h3></header><p class=\"content-article\">"+message.content;
     html += "</p></article></section></div>";
     //ajoute le html à la page
-    document.getElementById("container").insertAdjacentHTML('beforeend', html);
-    
+    document.getElementById("container").insertAdjacentHTML('beforeend', html); 
 }
 
 document.getElementById("btn_new_post").addEventListener("click", function (event) {
@@ -74,13 +71,84 @@ document.getElementById("btn_new_post").addEventListener("click", function (even
 // ajoute un surveillance des boutons like et de l'article
 const listener = (message) => {
     var doc = document.getElementById(message.id);
+    //event like 
     doc.querySelector('.like-up-not').addEventListener("click", function (event) {
-        event.stopPropagation();
-        console.log('like'+event.target.parentElement.parentElement.getAttribute('id'));
+        event.stopPropagation();      
+        if (doc.querySelector('.like-up-not').classList.contains("like-up-select")) {
+            //envoie la requête et modifie l'affichage en conséquence
+            var requete = new XMLHttpRequest();
+            // écoute des changement d'état de l'envoie 
+            requete.onreadystatechange = function () {
+                if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
+                    doc.querySelector('.like-up-not').classList.remove("like-up-select");
+                    doc.querySelector('.nb-likes').innerHTML--;
+                }
+            };
+            requete.open("POST", "http://localhost:3000/api/v1/message/"+message.id+"/like/0");
+            requete.setRequestHeader("Content-Type", "application/json");
+            requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
+            requete.responseType = 'text';
+            requete.send();
+            return;
+        }
+        
+        //envoie la requête et modifie l'affichage en conséquence
+        var requete = new XMLHttpRequest();
+        // écoute des changement d'état de l'envoie 
+        requete.onreadystatechange = function () {
+            if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
+                doc.querySelector('.like-up-not').classList.add("like-up-select");
+                if (doc.querySelector('.like-down-not').classList.contains("like-down-select")) {
+                    doc.querySelector('.like-down-not').classList.remove("like-down-select");
+                }
+                doc.querySelector('.nb-likes').innerHTML = JSON.parse(this.responseText).likes;
+            }
+        };
+        requete.open("POST", "http://localhost:3000/api/v1/message/"+message.id+"/like/1");
+        requete.setRequestHeader("Content-Type", "application/json");
+        requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
+        requete.responseType = 'text';
+        requete.send();
     });
+    // event dislike
     doc.querySelector('.like-down-not').addEventListener("click", function (event) {
         event.stopPropagation();
-        console.log("dislike"+event.target.parentElement.parentElement.getAttribute('id'));
+        // si il a deja été dislike
+        if (doc.querySelector('.like-down-not').classList.contains("like-down-select")) {
+            var requete = new XMLHttpRequest();
+            // écoute des changement d'état de l'envoie *
+            requete.onreadystatechange = function () {
+                if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
+                    //quand il a fini la requête avec le code http 201
+                    doc.querySelector('.like-down-not').classList.remove("like-down-select");
+                    doc.querySelector('.nb-likes').innerHTML++;
+                }
+            };
+            requete.open("POST", "http://localhost:3000/api/v1/message/"+message.id+"/like/0");
+            requete.setRequestHeader("Content-Type", "application/json");
+            requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
+            requete.responseType = 'text';
+            requete.send();
+            return;
+        }
+        //envoie la requête et modifie l'affichage en conséquence
+        var requete = new XMLHttpRequest();
+        // écoute des changement d'état de l'envoie *
+        requete.onreadystatechange = function () {
+            if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
+                //quand il a fini la requête avec le code http 201
+                doc.querySelector('.like-down-not').classList.add("like-down-select");
+                if (doc.querySelector('.like-up-not').classList.contains("like-up-select")) {
+                    doc.querySelector('.like-up-not').classList.remove("like-up-select");
+                }
+                doc.querySelector('.nb-likes').innerHTML = JSON.parse(this.responseText).likes;
+            }
+        };
+        requete.open("POST", "http://localhost:3000/api/v1/message/"+message.id+"/like/-1");
+        requete.setRequestHeader("Content-Type", "application/json");
+        requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
+        requete.responseType = 'text';
+        requete.send();
     });
     document.getElementById(message.id).addEventListener("click", function (event) {
         event.stopPropagation();
@@ -99,4 +167,25 @@ const listener = (message) => {
         console.log(idMessage);
         //window.location.href = "/socialNetwork/message:"+idMessage;
     });
+}
+
+const importLike = (message) => {
+    var requete = new XMLHttpRequest();
+    requete.onreadystatechange = function () {
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+            // si la requête des messages n'a pas retourné d'erreur
+            var like = JSON.parse(this.responseText);
+            var doc = document.getElementById(message.id);
+            if (like.likeType == -1) {
+                doc.querySelector('.like-down-not').classList.add("like-down-select");
+            } else if (like.likeType == 1) {
+                doc.querySelector('.like-up-not').classList.add("like-up-select");
+            }
+            
+        }
+    };
+    requete.open("GET", "http://localhost:3000/api/v1/message/"+message.id+"/like/");
+    requete.setRequestHeader("Content-Type", "application/json");
+    requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
+    requete.send();
 }
