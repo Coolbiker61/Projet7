@@ -47,7 +47,7 @@ const importMessage = () => {
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.send();
 }
-
+// ajoute un message à la fin de ceux present
 const addMessage = (message) => {
     var html = "<div class=\"message\" id=\""+message.id+"\"><div class=\"col_likes\">";
     html += "<i class=\"fas fa-arrow-up like-up-not\"></i>";
@@ -65,10 +65,7 @@ const addMessage = (message) => {
     document.getElementById("container").insertAdjacentHTML('beforeend', html); 
 }
 
-document.getElementById("btn_new_post").addEventListener("click", function (event) {
-    window.location.href = "/socialNetwork/new";
-})
-// ajoute un surveillance des boutons like et de l'article
+// ajoute un surveillance des boutons like et de chaque l'article
 const listener = (message) => {
     var doc = document.getElementById(message.id);
     //event like 
@@ -189,3 +186,10 @@ const importLike = (message) => {
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.send();
 }
+
+
+
+// ecoute le bouton nouveau message
+document.getElementById("btn_new_post").addEventListener("click", function (event) {
+    window.location.href = "/socialNetwork/new";
+})

@@ -48,3 +48,66 @@ const importMessage = () => {
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.send();
 }
+
+const addMessage = (message) => {
+    var html = "<div class=\"message\" id=\""+message.id+"\"><div class=\"col_likes\">";
+    html += "<i class=\"fas fa-arrow-up like-up-not\"></i>";
+    html += "<div class=\"nb-likes\">"+message.likes+"</div>";
+    html += "<i class=\"fas fa-arrow-down like-down-not\"></i></div>";
+    html += "<section class=\"corp\"><header class=\"author\">";
+    html += "Posted by "+message.User.username+" le : ";
+    var date = message.createdAt.split('T');
+    html += date[0]+" à "+date[1]; 
+    html += "</header><article><header><h3 class=\"title-article\">";
+    html += message.title;
+    html += "</h3></header><p class=\"content-article\">"+message.content;
+    html += "</p></article></section></div>";
+    //ajoute le html à la page
+    document.getElementById("container").insertAdjacentHTML('afterbegin', html); 
+}
+
+const addComment = (message) => {
+    
+    var html = "<div class=\"bloc-commentaire\">";
+        /*<div class="commentaire">
+            <div class="com-likes">
+                <i class="fas fa-arrow-up like-up-not like-com"></i>
+                <i class="fas fa-arrow-down like-down-not like-com"></i>
+                <div class="trait"></div>
+            </div>
+            <div class="com-main-0">
+                <div>author nblike - date</div>
+                <div class="com-content">content du comm comm comm comm comm comm comm
+                    comm comm comm comm comm comm
+                    comm comm comm comm comm comm
+                </div>
+            </div>
+        </div>
+        <div class="commentaire">
+            <div class="com-likes">
+                <i class="fas fa-arrow-up like-up-not like-com"></i>
+                <i class="fas fa-arrow-down like-down-not like-com"></i>
+                <div class="trait"></div>
+            </div>
+            <div class="com-main-0">
+                <div>author nblike - date</div>
+                <div class="com-content">content du comm comm comm comm comm comm comm
+                    comm comm comm comm comm comm
+                    comm comm comm comm comm comm
+                </div>
+                <div class="commentaire">
+                    <div class="com-likes">
+                        <i class="fas fa-arrow-up like-up-not like-com"></i>
+                        <i class="fas fa-arrow-down like-down-not like-com"></i>
+                        <div class="trait"></div>
+                    </div>
+                    <div class="com-main-1">
+                        <div>author nblike - date</div>
+                        <div class="com-content">content du comm comm comm comm comm comm comm
+                            comm comm comm comm comm comm
+                            comm comm comm comm comm comm
+                        </div>
+                    </div>
+                </div>
+            </div></div></div>*/
+}

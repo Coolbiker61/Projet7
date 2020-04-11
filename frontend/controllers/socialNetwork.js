@@ -51,9 +51,6 @@ exports.getPageMessage = (req, res, then) => {
     // le logo animé qui reste affiché le temps du chargement
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
     html += "<section hidden id=\"back\" class=\"back\">";
-
-    html += "<header><h1>Bienvenue sur le réseau social interne de l'entreprise.</h1>";
-    html += "</header>";
     
     // container a messages
     html += "<div id=\"container\" > </div>";
