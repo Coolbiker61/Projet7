@@ -33,5 +33,5 @@ tinymce.init({
     width: '50vw',
     elementpath: false,
     language: 'fr',
-    
+    placeholder: 'Tapez votre message ici'
   });
