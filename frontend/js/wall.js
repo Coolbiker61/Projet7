@@ -161,8 +161,7 @@ const listener = (message) => {
         } else if (event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('id')) {
             idMessage = event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('id');
         }
-        console.log(idMessage);
-        //window.location.href = "/socialNetwork/message:"+idMessage;
+        window.location.href = "/socialNetwork/message/"+idMessage;
     });
 }
 

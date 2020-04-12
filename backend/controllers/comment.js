@@ -66,6 +66,10 @@ exports.getComment = (req, res, then) => {
         return res.status(401).json({ 'error': 'Action not allow !'});
     }
     var idMessage = parseInt(req.params.idMessage);
+    var limit = parseInt(req.query.limit);
+    var offset = parseInt(req.query.offset);
+    var order = req.query.order;
+
 
     if (!isNaN(idMessage)) {
         models.User.findOne({ where: { id: userId } })
@@ -76,7 +80,17 @@ exports.getComment = (req, res, then) => {
                 models.Message.findOne({ where: { id: idMessage, userId: userId } })
                 .then(message => {
                     if (message) {
-                        models.Comment.findAll({ where: { messageId: idMessage }})
+                        models.Comment.findAll({ 
+                            where: { messageId: idMessage },
+                            order: [(order != null) ? order.split(':') : ['id', 'DESC']],
+                            limit: (!isNaN(limit)) ? limit : null,
+                            offset: (!isNaN(offset)) ? offset : null,
+                            include: [{
+                                model: models.User,
+                                as: 'user',
+                                attributes: ['id', 'username']
+                            }],
+                        })
                         .then(result => {
                             return res.status(200).json(result);
                         })

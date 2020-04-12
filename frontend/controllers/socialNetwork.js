@@ -53,7 +53,7 @@ exports.getPageMessage = (req, res, then) => {
     html += "<section hidden id=\"back\" class=\"back\">";
     
     // container a messages
-    html += "<div id=\"container\" > </div>";
+    html += "<div id=\"container\" ></div>";
 
     html += "</section>";
     html += "</body></html>"
