@@ -647,6 +647,17 @@ h1 {
     margin: auto;
 }
 
+.title_line {
+    display: flex;
+    justify-content: center;
+}
+#editor {
+    margin: 15px auto;
+}
+#length-title {
+    margin-left: 10px;
+}
+
 /* confirm delete account ------------------------------------------------------------------*/
 .confirm_delete {
     width: 520px;

@@ -82,10 +82,10 @@ exports.createMessage = (req, res ,then) => {
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
     html += "<section hidden id=\"back\" class=\"back\">";
 
-    html += "";
-    html += "<textarea id=\"default\"></textarea>";
-    // container a messages
-    html += "<div id=\"container\" > </div>";
+    html += "<div class=\"title_line\"><input type=\"text\" id=\"title\" ><div><span id=\"length-title\">0</span>/250</div></div>";
+    html += "<div id=\"editor\" ><textarea id=\"default\"></textarea><form><button name=\"submitbtn\">Publier</button></form>";
+    //
+    html += " </div>";
 
     html += "</section>";
     html += "</body></html>"

@@ -27,11 +27,14 @@ document.onreadystatechange = function () {
 // editor
 tinymce.init({
     selector: 'textarea#default',
-    plugins: ' autolink lists media table link image emoticons',
-    toolbar: 'alignleft aligncenter alignright | bold italic underline fontsizeselect forecolor backcolor | emoticons image link spellchecker',
+    plugins: ' autolink lists media table link image emoticons autoresize wordcount save',
+    toolbar: 'alignleft aligncenter alignright | bold italic underline fontsizeselect forecolor backcolor | emoticons image link spellchecker ',
     menubar: '',
     width: '50vw',
-    elementpath: false,
-    language: 'fr',
-    placeholder: 'Tapez votre message ici'
+    margin: 'auto',
+    language: 'fr_FR',
+    placeholder: 'Tapez votre message ici',
+    autoresize: true,
+    save_enablewhendirty: true,
+    save_onsavecallback: function () { console.log('Saved'); },
   });
