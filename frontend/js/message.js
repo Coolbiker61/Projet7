@@ -1,3 +1,32 @@
+const editTime = (param) => {
+    // format de la base 2020-04-02T22:19:43.000Z
+    const date = Date.parse(param);
+    const dateNow = Date.now();
+    var difference = dateNow - date;
+    difference /= 1000;
+    difference = Math.trunc(difference);
+    let seconde = difference % 60;
+    difference -= seconde; 
+    difference /= 60;
+    let minute = difference % 60;
+    difference -= minute;
+    difference /= 60;
+    let heure = difference % 24;
+    difference -= heure;
+    difference /= 24;
+    let day = difference;
+
+    if (day) {
+        return day+" jours";
+    } else if (heure) {
+        return heure+" heures";
+    } else if (minute) {
+        return minute+" minutes";
+    } else {
+        return seconde+" secondes";
+    }
+}
+
 // au chargement de la page
 document.onreadystatechange = function () {
     if (document.readyState == 'complete') { 
@@ -55,9 +84,8 @@ const addMessage = (message) => {
     html += "<div class=\"nb-likes\">"+message[0].likes+"</div>";
     html += "<i class=\"fas fa-arrow-down like-down-not\"></i></div>";
     html += "<section class=\"corp\"><header class=\"author\">";
-    html += "Posted by "+message[1].username+" le : ";
-    var date = message[0].createdAt.split('T');
-    html += date[0]+" à "+date[1]; 
+    html += "Posted by "+message[1].username+" il y a ";
+    html += editTime(message[0].createdAt); 
     html += "</header><article><header><h3 class=\"title-article\">";
     html += message[0].title;
     html += "</h3></header><p class=\"content-article\">"+message[0].content;
@@ -204,7 +232,7 @@ const addComment = (comments) => {
             if (comment.parent == 0) {
                 var html = "<div class=\"commentaire\" id=\""+comment.id+"\"><div class=\"com-likes\">";
                 html += "<div class=\"trait\"></div></div><div class=\"com-main-0\"><div>";
-                html += "crée par "+comment.user.username+" il y a "+comment.createdAt;//author nblike - date
+                html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);//author nblike - date
                 html += "</div><div class=\"com-content\">";
                 html += comment.content;
                 html += "</div></div></div>";
@@ -214,7 +242,7 @@ const addComment = (comments) => {
             if (comment.parent !=0) {
                 var html = "<div class=\"commentaire\" id=\""+comment.id+"\"><div class=\"com-likes\">";
                 html += "<div class=\"trait\"></div></div><div class=\"com-main-0\"><div>";
-                html += "crée par "+comment.user.username+" il y a "+comment.createdAt;//author nblike - date
+                html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);//author nblike - date
                 html += "</div><div class=\"com-content\">";
                 html += comment.content;
                 html += "</div></div></div>";
@@ -234,27 +262,5 @@ const addComment = (comments) => {
     
 
     
-        /*<div class="commentaire"><div class="com-likes"><div class="trait"></div></div>
-            <div class="com-main-0">
-                <div>author nblike - date</div>
-                <div class="com-content">content du comm
-                </div>
-            </div>
-        </div>
-        <div class="commentaire">
-            <div class="com-likes"><div class="trait"></div></div>
-            <div class="com-main-0">
-                <div>author nblike - date</div>
-                <div class="com-content">content du comm</div>
-                <div class="commentaire">
-                    <div class="com-likes"><div class="trait"></div></div>
-                    <div class="com-main-1">
-                        <div>author nblike - date</div>
-                        <div class="com-content">content du comm
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*/
+        
 }
