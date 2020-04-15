@@ -35,6 +35,45 @@ tinymce.init({
     language: 'fr_FR',
     placeholder: 'Tapez votre message ici',
     autoresize: true,
+
     save_enablewhendirty: true,
     save_onsavecallback: function () { console.log('Saved'); },
-  });
+    //appeler quand une image est upload
+    images_upload_handler: function (blobInfo, success, failure) {
+        var xhr, formData;
+    
+        xhr = new XMLHttpRequest();
+        xhr.withCredentials = false;
+        xhr.open('POST', 'postAcceptor.php');
+    
+        xhr.onload = function() {
+          var json;
+    
+          if (xhr.status != 200) {
+            failure('HTTP Error: ' + xhr.status);
+            return;
+          }
+    
+          json = JSON.parse(xhr.responseText);
+    
+          if (!json || typeof json.location != 'string') {
+            failure('Invalid JSON: ' + xhr.responseText);
+            return;
+          }
+    
+          success(json.location);
+        };
+    
+        formData = new FormData();
+        formData.append('file', blobInfo.blob(), blobInfo.filename());
+    
+        xhr.send(formData);
+      }
+});
+
+tinymce.activeEditor.uploadImages(function(success) {
+    document.forms[0].submit();
+});
+
+  // { location : '/uploaded/image/path/image.png' } retourner par uploadImages
+
