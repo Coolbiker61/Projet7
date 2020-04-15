@@ -41,10 +41,9 @@ tinymce.init({
     //appeler quand une image est upload
     images_upload_handler: function (blobInfo, success, failure) {
         var xhr, formData;
-    
         xhr = new XMLHttpRequest();
         xhr.withCredentials = false;
-        xhr.open('POST', 'postAcceptor.php');
+        xhr.open('POST', 'http://localhost:3000/api/v1/message/upload');
     
         xhr.onload = function() {
           var json;
@@ -65,15 +64,15 @@ tinymce.init({
         };
     
         formData = new FormData();
-        formData.append('file', blobInfo.blob(), blobInfo.filename());
-    
+        console.log(blobInfo.blob()+ " - " + blobInfo.filename());
+        formData.append('image', blobInfo.blob(), blobInfo.filename());
         xhr.send(formData);
       }
 });
-
+/*
 tinymce.activeEditor.uploadImages(function(success) {
     document.forms[0].submit();
 });
-
+*/
   // { location : '/uploaded/image/path/image.png' } retourner par uploadImages
 

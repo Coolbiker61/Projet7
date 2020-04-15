@@ -26,7 +26,7 @@ app.get('/', function (req, res) {
 });
 
 /* autorise l'accès aux fichier du dossier images */
-//app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/userImg', express.static(path.join(__dirname, 'userImg')));
 
 
 /* définition du chemin vers les fichiers contenant les routes */
