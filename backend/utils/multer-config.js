@@ -13,7 +13,6 @@ const storage = multer.diskStorage({
         callback(null, 'userImg');
     },
     filename: (req, file, callback) => {
-        console.log(file);
         var name = file.originalname.split(' ').join('_');
         if (name.includes('.jpg') || name.includes('.png')) {
             name = name.slice(0,-4);
@@ -25,4 +24,4 @@ const storage = multer.diskStorage({
     }
 });
 
-module.exports = multer({ storage }).single('image');
+module.exports = multer({ storage }).single('file');

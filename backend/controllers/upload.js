@@ -1,6 +1,5 @@
 
 exports.uploadImage = (req, res ,then) => {
-    console.log(req.file.filename);
     var image = `${req.protocol}://${req.get('host')}/userImg/${req.file.filename}`;
 
     return res.status(200).json({location: image})
