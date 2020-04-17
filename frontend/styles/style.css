@@ -650,6 +650,10 @@ h1 {
 .title_line {
     display: flex;
     justify-content: center;
+    align-items: baseline;
+}
+.title_line label{
+    margin-right: 10px;
 }
 #editor {
     margin: 15px auto;
@@ -657,6 +661,11 @@ h1 {
 #length-title {
     margin-left: 10px;
 }
+#submitbtn {
+    background-color: salmon;
+    padding: 5px;
+}
+
 
 /* confirm delete account ------------------------------------------------------------------*/
 .confirm_delete {

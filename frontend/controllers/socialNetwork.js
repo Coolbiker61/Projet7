@@ -68,7 +68,7 @@ exports.createMessage = (req, res ,then) => {
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"https://cdn.tiny.cloud/1/vjax5i6wra9mztw82qywx797zkifcqfemwbzfxjdzjockixy/tinymce/5/tinymce.min.js\" referrerpolicy=\"origin\"></script>";
-    html += "<script src=\"/js/posting.js\"></script>";
+    html += "<script src=\"/js/posting.js\" async></script>";
     html += "<script src=\"/js/menu.js\" async></script>";
     html += "<title>Groupomania - poster un nouveau message</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
@@ -80,10 +80,11 @@ exports.createMessage = (req, res ,then) => {
     html += "</ul></nav><div class=\"offset-top\"></div>";
     // le logo animé qui reste affiché le temps du chargement
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
-    html += "<section hidden id=\"back\" class=\"back\">";
-
-    html += "<div class=\"title_line\"><input type=\"text\" id=\"title\" ><div><span id=\"length-title\">0</span>/250</div></div>";
-    html += "<div id=\"editor\" ><textarea id=\"default\"></textarea><form><button name=\"submitbtn\">Publier</button></form>";
+    html += "<section hidden id=\"back\" class=\"back\"><form>";
+    html += "<div class=\"title_line\"><label for=\"title\">Titre du message </label>";
+    html += "<input type=\"text\" id=\"title\" maxlength=\"50\" ><div><span id=\"length-title\">0</span>/50</div></div>";
+    html += "<div id=\"editor\" ><textarea id=\"default\"></textarea>";
+    html += "<button name=\"submitbtn\" id=\"submitbtn\">Publier</button></form>";
     //
     html += " </div>";
 

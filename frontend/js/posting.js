@@ -30,7 +30,6 @@ tinymce.init({
     plugins: ' autolink lists media table link image emoticons autoresize wordcount save',
     toolbar: 'alignleft aligncenter alignright | bold italic underline fontsizeselect forecolor backcolor | emoticons image link spellchecker ',
     menubar: '',
-    width: '50vw',
     margin: 'auto',
     language: 'fr_FR',
     placeholder: 'Tapez votre message ici',
@@ -41,7 +40,8 @@ tinymce.init({
     //appeler quand une image est upload
     images_upload_url: 'http://localhost:3000/api/v1/message/upload',
     automatic_uploads: false,
-
+    elementpath: false,
+    a11y_advanced_options: true,
 });
 /*
 tinymce.activeEditor.uploadImages(function(success) {
@@ -50,3 +50,6 @@ tinymce.activeEditor.uploadImages(function(success) {
 */
   
 
+document.getElementById('title').addEventListener('input', function () {
+    document.getElementById('length-title').innerHTML = document.getElementById('title').value.length;
+})
