@@ -26,7 +26,7 @@ document.onreadystatechange = function () {
 
 // editor
 tinymce.init({
-    selector: 'textarea#default',
+    selector: '#message_editor',
     plugins: ' autolink lists media table link image emoticons autoresize wordcount save',
     toolbar: 'alignleft aligncenter alignright | bold italic underline fontsizeselect forecolor backcolor | emoticons image link spellchecker ',
     menubar: '',
@@ -39,16 +39,26 @@ tinymce.init({
     save_onsavecallback: function () { console.log('Saved'); },
     //appeler quand une image est upload
     images_upload_url: 'http://localhost:3000/api/v1/message/upload',
+    images_reuse_filename: true,
     automatic_uploads: false,
     elementpath: false,
     a11y_advanced_options: true,
 });
-/*
-tinymce.activeEditor.uploadImages(function(success) {
-    document.forms[0].submit();
-});
-*/
-  
+
+
+
+document.getElementById('create_form').addEventListener('submit', function (event) {
+    event.stopPropagation();
+    event.preventDefault();
+    tinymce.activeEditor.uploadImages(function(success) {
+        console.log('img upload');
+    })
+    .then( url => {
+        console.log(url);
+        console.log(document.getElementById("message_editor").value);
+    })
+    
+})
 
 document.getElementById('title').addEventListener('input', function () {
     document.getElementById('length-title').innerHTML = document.getElementById('title').value.length;

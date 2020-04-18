@@ -80,10 +80,10 @@ exports.createMessage = (req, res ,then) => {
     html += "</ul></nav><div class=\"offset-top\"></div>";
     // le logo animé qui reste affiché le temps du chargement
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
-    html += "<section hidden id=\"back\" class=\"back\"><form>";
+    html += "<section hidden id=\"back\" class=\"back\"><form id=\"create_form\">";
     html += "<div class=\"title_line\"><label for=\"title\">Titre du message </label>";
     html += "<input type=\"text\" id=\"title\" maxlength=\"50\" ><div><span id=\"length-title\">0</span>/50</div></div>";
-    html += "<div id=\"editor\" ><textarea id=\"default\"></textarea>";
+    html += "<div id=\"editor\" ><textarea id=\"message_editor\"></textarea>";
     html += "<button name=\"submitbtn\" id=\"submitbtn\">Publier</button></form>";
     //
     html += " </div>";
