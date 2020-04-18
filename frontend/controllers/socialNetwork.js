@@ -88,6 +88,7 @@ exports.createMessage = (req, res ,then) => {
     //
     html += " </div>";
 
+    html += "<div id=\"error\" class=\"error\"></div></div></section>";
     html += "</section>";
     html += "</body></html>"
     res.writeHeader(200 ,{'Content-Type': 'text/html'});
