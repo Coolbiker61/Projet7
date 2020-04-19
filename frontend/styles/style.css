@@ -667,6 +667,15 @@ h1 {
 }
 
 
+#comment_noParent {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+
+
 /* confirm delete account ------------------------------------------------------------------*/
 .confirm_delete {
     width: 520px;

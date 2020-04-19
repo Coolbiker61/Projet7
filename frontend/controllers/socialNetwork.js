@@ -6,7 +6,7 @@ exports.getPageWall = (req, res, then) => {
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/wall.js\" async></script>";
     html += "<script src=\"/js/menu.js\" async></script>";
-    html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
+    html += "<title>Groupomania - Social Network</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
     html += "<li><div id=\"btn_new_post\">Nouveau Message</div></li>";
@@ -37,9 +37,10 @@ exports.getPageMessage = (req, res, then) => {
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
+    html += "<script src=\"https://cdn.tiny.cloud/1/vjax5i6wra9mztw82qywx797zkifcqfemwbzfxjdzjockixy/tinymce/5/tinymce.min.js\" referrerpolicy=\"origin\"></script>";
     html += "<script src=\"/js/message.js\" async></script>";
     html += "<script src=\"/js/menu.js\" async></script>";
-    html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
+    html += "<title>Groupomania - Social Network</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
     html += "<li><div id=\"btn_new_post\">Nouveau Message</div></li>";
@@ -84,7 +85,7 @@ exports.createMessage = (req, res ,then) => {
     html += "<div class=\"title_line\"><label for=\"title\">Titre du message </label>";
     html += "<input type=\"text\" id=\"title\" maxlength=\"50\" ><div><span id=\"length-title\">0</span>/50</div></div>";
     html += "<div id=\"editor\" ><textarea id=\"message_editor\"></textarea>";
-    html += "<button name=\"submitbtn\" id=\"submitbtn\">Publier</button></form>";
+    html += "<button name=\"submitbtn\" id=\"submitbtn\">Publier</button></div></form>";
     //
     html += " </div>";
 

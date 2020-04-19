@@ -1,3 +1,5 @@
+const PLACEHOLDERVALUE = 'Tapez votre commentaire ici'; 
+
 const editTime = (param) => {
     // format de la base 2020-04-02T22:19:43.000Z
     const date = Date.parse(param);
@@ -67,9 +69,11 @@ const importMessage = () => {
             // si la requête des messages n'a pas retourné d'erreur
             var arrayresponse = JSON.parse(this.responseText);
             addMessage(arrayresponse);
-            listener(arrayresponse[0]);
+            listenerLike(arrayresponse[0]);
             importLike(arrayresponse[0]);
             importComment(arrayresponse[0]);
+            initEditorComment();
+            //listenerComment();
         }
     };
     requete.open("GET", "http://localhost:3000/api/v1/message/"+idMessage); 
@@ -89,12 +93,18 @@ const addMessage = (message) => {
     html += "</header><article><header><h3 class=\"title-article\">";
     html += message[0].title;
     html += "</h3></header><p class=\"content-article\">"+message[0].content;
-    html += "</p></article></section><div class=\"bloc-commentaire\"></div></div>";
+    html += "</p></article></section>";
+
+    html += "<form id=\"comment_noParent\"><div id=\"editor\" >";
+    html += "<textarea id=\"no_parent\"></textarea>";
+    html += "<button name=\"submitbtn\" id=\"submitbtn\">Publier</button></div></form>";
+
+    html += "<div class=\"bloc-commentaire\"></div></div>";
     //ajoute le html à la page
     document.getElementById("container").insertAdjacentHTML('afterbegin', html); 
 }
 // ajoute un surveillance des boutons like et de chaque l'article
-const listener = (message) => {
+const listenerLike = (message) => {
     var doc = document.getElementById(message.id);
     //event like 
     doc.querySelector('.like-up-not').addEventListener("click", function (event) {
@@ -176,7 +186,7 @@ const listener = (message) => {
         requete.send();
     });
 }
-
+// import les likes
 const importLike = (message) => {
     var requete = new XMLHttpRequest();
     requete.onreadystatechange = function () {
@@ -198,7 +208,7 @@ const importLike = (message) => {
     requete.send();
 }
 
-
+// importe les commentaire
 const importComment = (message) => {
     var requete = new XMLHttpRequest();
     requete.onreadystatechange = function () {
@@ -214,7 +224,7 @@ const importComment = (message) => {
     requete.send();
 }
 
-
+// Ajoute les commentaires a la page
 const addComment = (comments) => {
     if (comments.length == 0 ) {
         var html = "Aucun commentaire n'à encore été fait, soyez le premier à réagir à ce message.";
@@ -235,7 +245,7 @@ const addComment = (comments) => {
                 html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);//author nblike - date
                 html += "</div><div class=\"com-content\">";
                 html += comment.content;
-                html += "</div></div></div>";
+                html += "</div><span id=\"response"+comment.id+"\">Répondre</span></div></div>";
                 document.querySelector('.bloc-commentaire').insertAdjacentHTML('beforeend', html);
                 position.unshift(index);
             }
@@ -245,7 +255,7 @@ const addComment = (comments) => {
                 html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);//author nblike - date
                 html += "</div><div class=\"com-content\">";
                 html += comment.content;
-                html += "</div></div></div>";
+                html += "</div><span id=\"response"+comment.id+"\">Répondre</span></div></div>";
                 if (document.getElementById(comment.parent)){
                     if (document.getElementById(comment.parent).querySelector('.com-content')) {
                         document.getElementById(comment.parent).querySelector('.com-content').insertAdjacentHTML('afterend', html); 
@@ -259,8 +269,36 @@ const addComment = (comments) => {
         }
         
     }
-    
+};
 
-    
+//editeur comment sans parent
+const initEditorComment = () => {
+    tinymce.init({
+        selector: '#no_parent',
+        plugins: ' autolink link emoticons autoresize wordcount',
+        toolbar: 'alignleft aligncenter alignright | bold italic underline fontsizeselect | emoticons link spellchecker ',
+        menubar: '',
+        margin: 'auto',
+        language: 'fr_FR',
+        placeholder: PLACEHOLDERVALUE,
+        autoresize: true,
+
+        max_height: 500,
+        max_width: 500,
+        min_height: 100,
+        min_width: 400,
+        statusbar: false,
+
+        save_enablewhendirty: true,
+        automatic_uploads: false,
+        elementpath: false,
+        a11y_advanced_options: true,
         
+    });
+
 }
+
+const listenerComment = () => {
+
+}
+  
