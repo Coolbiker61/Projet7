@@ -114,7 +114,8 @@ tinymce.init({
 document.getElementById('create_form').addEventListener('submit', function (event) {
     event.stopPropagation();
     event.preventDefault();
-    
+
+    var titleMessage = document.getElementById("title").value;
     let imgStart = document.getElementById("message_editor").value.indexOf('<img');
     var messageValue = "";
     if (imgStart != -1) {
@@ -125,14 +126,19 @@ document.getElementById('create_form').addEventListener('submit', function (even
             messageValue = document.getElementById("message_editor").value.slice(0, imgStart);
             messageValue += url[0].element.outerHTML;
             messageValue += document.getElementById("message_editor").value.slice(imgStop);
+            if (messageValue.length >= 11 && titleMessage.length >= 2) {
+                
+                sendMessage(messageValue, titleMessage);
+            }
         })
+        .catch(error => { console.log(error) });
     } else {
         messageValue = document.getElementById("message_editor").value;
-    }
-    var titleMessage = document.getElementById("title").value;
-    if (messageValue.length >= 11 && titleMessage.length >= 2) {
-        sendMessage(messageValue, titleMessage);
-    }
+        if (messageValue.length >= 11 && titleMessage.length >= 2) {
+            
+            sendMessage(messageValue, titleMessage);
+        }
+    }    
     
 })
 const listenerEvent = () => {
