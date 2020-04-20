@@ -74,7 +74,6 @@ const actionClick = (event) => {
 									errorMessage = "Une erreur est survenue, nous sommes désolé pour la géne occasionné.";
 									break;
 							}
-							errorMessage = "Veuillez remplir correctement tous les champs.";
 							document.getElementById("erreur").innerHTML = errorMessage;
 							break;
 						case 401:
@@ -94,9 +93,9 @@ const actionClick = (event) => {
 				}
             };
             requete.open("POST", "http://localhost:3000/api/v1/auth/register");
-            requete.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            requete.setRequestHeader("Content-Type", "application/json");
             requete.responseType = 'text';
-            requete.send(data); 
+			requete.send(data); 
 		}
 	} else {
 		return;

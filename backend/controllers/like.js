@@ -20,7 +20,7 @@ exports.likeMessage = (req, res, then ) => {
     .then(message => {
         if (message) {
             //vérifie l'existence de l'utilisateur
-            models.User.findOne({ where: {id: userId }})
+            models.User.findOne({ attributes: [ 'id', 'email', 'username', 'isAdmin'], where: {id: userId }})
             .then(user => {
                 if (user) {
                     //vérifie si l'utilisateur a déjà like
@@ -181,7 +181,7 @@ exports.getLike = (req, res, then) => {
     .then(message => {
         if (message) {
             //vérifie l'existence de l'utilisateur
-            models.User.findOne({ where: {id: userId }})
+            models.User.findOne({ attributes: [ 'id', 'email', 'username', 'isAdmin'], where: {id: userId }})
             .then(user => {
                 if (user) {
                     //vérifie si l'utilisateur a déjà like

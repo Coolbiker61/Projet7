@@ -21,7 +21,7 @@ exports.addComment = (req, res, then) => {
         return res.status(400).json({ 'error': 'bad request'});
     }
     if (!isNaN(idMessage)) {
-        models.User.findOne({ where: { id: userId } })
+        models.User.findOne({ attributes: [ 'id', 'email', 'username', 'isAdmin'], where: { id: userId } })
         .then(user => {
             if(!user) {
                 return res.status(401).json({ error: 'User not found !'});
@@ -72,7 +72,7 @@ exports.getComment = (req, res, then) => {
 
 
     if (!isNaN(idMessage)) {
-        models.User.findOne({ where: { id: userId } })
+        models.User.findOne({ attributes: [ 'id', 'email', 'username', 'isAdmin'], where: { id: userId } })
         .then(user => {
             if(!user) {
                 return res.status(401).json({ error: 'User not found !'});
@@ -128,7 +128,7 @@ exports.getOneComment = (req, res, then) => {
     }
 
     if (!isNaN(idMessage)) {
-        models.User.findOne({ where: { id: userId } })
+        models.User.findOne({ attributes: [ 'id', 'email', 'username', 'isAdmin'], where: { id: userId } })
         .then(user => {
             if(!user) {
                 return res.status(401).json({ error: 'User not found !'});
@@ -169,7 +169,7 @@ exports.deleteComment = (req, res, then) => {
     }
     var idComment = parseInt(req.params.idComment);
     if (!isNaN(idComment)) {
-        models.User.findOne({ where: { id: userId } })
+        models.User.findOne({ attributes: [ 'id', 'email', 'username', 'isAdmin'], where: { id: userId } })
         .then(user => {
             if(!user) {
                 return res.status(401).json({ error: 'User not found !'});

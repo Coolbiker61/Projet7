@@ -72,14 +72,13 @@ const importMessage = () => {
             addMessage(arrayresponse);
             listenerLike(arrayresponse[0]);
             importLike(arrayresponse[0]);
-            importComment(arrayresponse[0]);
+            importComment(arrayresponse[0].id);
             initEditorComment('#no_parent');
             document.getElementById("comment_noParent").addEventListener("submit", function (event) {
                 event.stopPropagation();
                 event.preventDefault();
             
                 var content = document.getElementById("no_parent").value;
-                    console.log(content);
                     sendcomment(idMessage, content, 0);
                 
             })
@@ -218,7 +217,7 @@ const importLike = (message) => {
 }
 
 // importe les commentaire
-const importComment = (message) => {
+const importComment = (messageid) => {
     var requete = new XMLHttpRequest();
     requete.onreadystatechange = function () {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
@@ -227,7 +226,7 @@ const importComment = (message) => {
             addComment(comments);            
         }
     };
-    requete.open("GET", "http://localhost:3000/api/v1/comment/"+message.id);
+    requete.open("GET", "http://localhost:3000/api/v1/comment/"+messageid);
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.send();
@@ -254,7 +253,7 @@ const addComment = (comments) => {
                 html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);//author nblike - date
                 html += "</div><div class=\"com-content\">";
                 html += comment.content;
-                html += "</div><span id=\"response"+comment.id+"\">Répondre</span></div></div>";
+                html += "</div><div class=\"response_text\"  id=\"response"+comment.id+"\">Répondre</div></div></div>";
                 document.querySelector('.bloc-commentaire').insertAdjacentHTML('beforeend', html);
                 position.unshift(index);
             }
@@ -264,7 +263,7 @@ const addComment = (comments) => {
                 html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);//author nblike - date
                 html += "</div><div class=\"com-content\">";
                 html += comment.content;
-                html += "</div><span id=\"response"+comment.id+"\">Répondre</span></div></div>";
+                html += "</div><div class=\"response_text\" id=\"response"+comment.id+"\">Répondre</div></div></div>";
                 if (document.getElementById(comment.parent)){
                     if (document.getElementById(comment.parent).querySelector('.com-content')) {
                         document.getElementById(comment.parent).querySelector('.com-content').insertAdjacentHTML('afterend', html); 
@@ -310,8 +309,14 @@ const initEditorComment = (place) => {
 
 const listenerComment = (responseId) => {
     document.getElementById(responseId).addEventListener("click", function (event) {
-        console.log("bouton click");
-    })
+        console.log(event.target.id.split('response'));
+        let id = event.target.id.split('response')[1];
+        var html = "<form id=\"comment_parent"+id+"\"><div id=\"editor\" >";
+        html += "<textarea id=\"parent"+id+"\"></textarea>";
+        html += "<button name=\"submitbtn\" id=\"submitNew"+id+"\">Publier</button></div></form>";
+        event.target.innerHTML = html;
+        initEditorComment("parent"+id);
+    }, {once: true})
 }
 
 
@@ -329,10 +334,10 @@ const sendcomment = (messageId, commentContent, parent) => {
         if (this.readyState == XMLHttpRequest.DONE) {
             switch (this.status) {
                 case 201:
-                    //quand il a fini la requête avec le code http 200 on copie le token dans le sessionStorage
-                    console.log(this.responseText);
-                    addComment([JSON.parse(this.responseText)]);
-                    //window.setTimeout(() => { window.location.href = '/socialNetwork/';}, 200);
+                    document.querySelector('.bloc-commentaire').innerHTML = "";
+                    console.log(messageId);
+                    importComment(messageId);
+                    tinymce.activeEditor.setContent('');
                     break;
                 
                 case 401:
