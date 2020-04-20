@@ -1,3 +1,4 @@
+
 const PLACEHOLDERVALUE = 'Tapez votre commentaire ici'; 
 
 const editTime = (param) => {
@@ -72,8 +73,16 @@ const importMessage = () => {
             listenerLike(arrayresponse[0]);
             importLike(arrayresponse[0]);
             importComment(arrayresponse[0]);
-            initEditorComment();
-            //listenerComment();
+            initEditorComment('#no_parent');
+            document.getElementById("comment_noParent").addEventListener("submit", function (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            
+                var content = document.getElementById("no_parent").value;
+                    console.log(content);
+                    sendcomment(idMessage, content, 0);
+                
+            })
         }
     };
     requete.open("GET", "http://localhost:3000/api/v1/message/"+idMessage); 
@@ -97,7 +106,7 @@ const addMessage = (message) => {
 
     html += "<form id=\"comment_noParent\"><div id=\"editor\" >";
     html += "<textarea id=\"no_parent\"></textarea>";
-    html += "<button name=\"submitbtn\" id=\"submitbtn\">Publier</button></div></form>";
+    html += "<button name=\"submitbtn\" id=\"submitNew\">Publier</button></div></form>";
 
     html += "<div class=\"bloc-commentaire\"></div></div>";
     //ajoute le html à la page
@@ -263,6 +272,7 @@ const addComment = (comments) => {
                     }
                 }
             }
+            listenerComment("response"+comment.id);
         }
         for (const index of position) {
             listeComment.splice(index,1);
@@ -272,9 +282,9 @@ const addComment = (comments) => {
 };
 
 //editeur comment sans parent
-const initEditorComment = () => {
+const initEditorComment = (place) => {
     tinymce.init({
-        selector: '#no_parent',
+        selector: place,
         plugins: ' autolink link emoticons autoresize wordcount',
         toolbar: 'alignleft aligncenter alignright | bold italic underline fontsizeselect | emoticons link spellchecker ',
         menubar: '',
@@ -295,10 +305,66 @@ const initEditorComment = () => {
         a11y_advanced_options: true,
         
     });
-
+    
 }
 
-const listenerComment = () => {
-
+const listenerComment = (responseId) => {
+    document.getElementById(responseId).addEventListener("click", function (event) {
+        console.log("bouton click");
+    })
 }
-  
+
+
+const sendcomment = (messageId, commentContent, parent) => {
+    var data = {
+        parent: parent,
+        content: commentContent
+    }
+    data = JSON.stringify(data);
+    //envoie la requête et modifie l'affichage en conséquence
+    var requete = new XMLHttpRequest();
+    var errorMessage = "";
+    /* écoute des changement d'état de l'envoie */
+    requete.onreadystatechange = function () {
+        if (this.readyState == XMLHttpRequest.DONE) {
+            switch (this.status) {
+                case 201:
+                    //quand il a fini la requête avec le code http 200 on copie le token dans le sessionStorage
+                    console.log(this.responseText);
+                    addComment([JSON.parse(this.responseText)]);
+                    //window.setTimeout(() => { window.location.href = '/socialNetwork/';}, 200);
+                    break;
+                
+                case 401:
+                    //401 utilisateur non trouvé ou mail non conforme au regex
+                    switch (JSON.parse(this.responseText).error) {
+                        case "User not found !":
+                            errorMessage = "Aucun compte n'existe pour cet adresse mail.";
+                            break;
+                        case "Action not allow !":
+                            alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
+					        window.setTimeout(() => { window.location.href = '/auth/login';}, 200);
+                            break;
+                        default:
+                            errorMessage = "Action non autorisé !";
+                            break;
+                    }
+                    document.getElementById("error").innerHTML = errorMessage;
+                    break;
+                case 500:
+                    // 500 erreur serveur
+                    errorMessage = "Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.";
+                    document.getElementById("error").innerHTML = errorMessage;
+                    break;
+                default:
+                    break;
+            }
+            return;
+        }
+    };
+    requete.open("POST", "http://localhost:3000/api/v1/comment/"+messageId);
+    requete.setRequestHeader("Content-Type", "application/json");
+    requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
+    requete.responseType = 'text';
+    requete.send(data);
+}
