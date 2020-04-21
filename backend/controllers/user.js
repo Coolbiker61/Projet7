@@ -145,4 +145,38 @@ exports.deleteUser = (req, res, then) => {
         .catch(error => {
             res.status(500).json({ error });
         })
+};
+
+
+exports.getUserListe = (req, res, then) => {
+    var headerAuth = req.headers['authorization'];
+    var userId = jwtUtils.getUserId(headerAuth);
+
+    if (userId < 0) {
+        return res.status(401).json({ 'error': 'Action not allow !'});
+    }
+    models.User.findOne({
+        attributes: [ 'id', 'email', 'username', 'isAdmin'],
+        where: { id: userId }
+    })
+        .then(user => {
+            if (user) {
+                if (user.isAdmin) {
+                    models.User.findAll({attributes: [ 'id', 'email', 'username', 'isAdmin']})
+                    .then(users => {
+                        res.status(200).json(users);
+                    })
+                    .catch(error => { res.status(500).json({ error})});
+                } else {
+                    res.status(401).json({'error': 'User is not an admin !'});
+                }
+                
+            } else {
+                res.status(404).json({ 'error': 'User not found'});
+            }
+        })
+        .catch(error => {
+            res.status(500).json({ error });
+        })
 }
+

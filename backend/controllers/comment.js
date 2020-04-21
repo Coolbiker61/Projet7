@@ -26,7 +26,7 @@ exports.addComment = (req, res, then) => {
             if(!user) {
                 return res.status(401).json({ error: 'User not found !'});
             } else {
-                models.Message.findOne({ where: { id: idMessage, userId: userId } })
+                models.Message.findOne({ where: { id: idMessage} })
                 .then(message => {
                     if (message) {
                         models.Comment.create({
@@ -77,7 +77,7 @@ exports.getComment = (req, res, then) => {
             if(!user) {
                 return res.status(401).json({ error: 'User not found !'});
             } else {
-                models.Message.findOne({ where: { id: idMessage, userId: userId } })
+                models.Message.findOne({ where: { id: idMessage} })
                 .then(message => {
                     if (message) {
                         models.Comment.findAll({ 
@@ -133,7 +133,7 @@ exports.getOneComment = (req, res, then) => {
             if(!user) {
                 return res.status(401).json({ error: 'User not found !'});
             } else {
-                models.Message.findOne({ where: { id: idMessage, userId: userId } })
+                models.Message.findOne({ where: { id: idMessage } })
                 .then(message => {
                     if (message) {
                         models.Comment.findOne({ where: { messageId: idMessage, id: idComment }})

@@ -256,22 +256,23 @@ const addComment = (comments) => {
                 html += "</div><div class=\"response_text\"  id=\"response"+comment.id+"\">Répondre</div></div></div>";
                 document.querySelector('.bloc-commentaire').insertAdjacentHTML('beforeend', html);
                 position.unshift(index);
+                listenerComment("response"+comment.id);
             }
-            if (comment.parent !=0) {
+            if (comment.parent !=0 && document.getElementById(comment.parent)) {
                 var html = "<div class=\"commentaire\" id=\""+comment.id+"\"><div class=\"com-likes\">";
-                html += "<div class=\"trait\"></div></div><div class=\"com-main-0\"><div>";
+                html += "<div class=\"trait\"></div></div><div class=\"com-main-1\"><div>";
                 html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);//author nblike - date
                 html += "</div><div class=\"com-content\">";
                 html += comment.content;
                 html += "</div><div class=\"response_text\" id=\"response"+comment.id+"\">Répondre</div></div></div>";
                 if (document.getElementById(comment.parent)){
-                    if (document.getElementById(comment.parent).querySelector('.com-content')) {
-                        document.getElementById(comment.parent).querySelector('.com-content').insertAdjacentHTML('afterend', html); 
+                    if (document.getElementById(comment.parent).querySelector("#response"+comment.parent)) {
+                        document.getElementById(comment.parent).querySelector("#response"+comment.parent).insertAdjacentHTML('afterend', html); 
                         position.unshift(index);
                     }
                 }
+                listenerComment("response"+comment.id);
             }
-            listenerComment("response"+comment.id);
         }
         for (const index of position) {
             listeComment.splice(index,1);
@@ -327,8 +328,7 @@ const listenerComment = (responseId) => {
             event.preventDefault();
             event.stopPropagation();
             var idMessage = window.location.href.split('/message/')[1];
-            var content = document.getElementById('parent'+id).value; // probleme
-            console.log(idMessage+" - "+content);
+            var content = tinymce.get('parent'+id).getBody().innerHTML; // probleme
             sendcomment(idMessage, content, id);
         }, {once: true})
     }, {once: true});
@@ -350,7 +350,6 @@ const sendcomment = (messageId, commentContent, parent) => {
             switch (this.status) {
                 case 201:
                     document.querySelector('.bloc-commentaire').innerHTML = "";
-                    console.log(messageId);
                     importComment(messageId);
                     tinymce.activeEditor.setContent('');
                     break;
@@ -388,3 +387,9 @@ const sendcomment = (messageId, commentContent, parent) => {
     requete.responseType = 'text';
     requete.send(data);
 }
+
+
+// ecoute le bouton nouveau message
+document.getElementById("btn_new_post").addEventListener("click", function (event) {
+    window.location.href = "/socialNetwork/new";
+})

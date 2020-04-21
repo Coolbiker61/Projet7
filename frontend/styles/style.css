@@ -618,12 +618,13 @@ h1 {
 }
 .com-main-0 {
     width: 455px;
+    padding-left: 10px;
 }
 .com-main-1 {
     width: 420px;
 }
 .com-content {
-    margin: 10px auto;
+    margin: 10px 10px;
 }
 .trait {
     border-right: 2px solid #edeff1;

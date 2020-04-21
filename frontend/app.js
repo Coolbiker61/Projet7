@@ -6,6 +6,7 @@ const path = require('path');
 const indexRoutes = require('./routes/index');
 const userRoutes = require('./routes/user');
 const snRoutes = require('./routes/socialNetwork');
+const adminRoutes = require('./routes/admin');
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use('/auth', userRoutes);
 app.use('/', indexRoutes);
 // route du reseau social
 app.use('/socialNetwork', snRoutes);
-
+// route d'administration
+app.use('/admin', adminRoutes);
 
 module.exports = app;
