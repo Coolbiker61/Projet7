@@ -309,14 +309,29 @@ const initEditorComment = (place) => {
 
 const listenerComment = (responseId) => {
     document.getElementById(responseId).addEventListener("click", function (event) {
-        console.log(event.target.id.split('response'));
         let id = event.target.id.split('response')[1];
         var html = "<form id=\"comment_parent"+id+"\"><div id=\"editor\" >";
         html += "<textarea id=\"parent"+id+"\"></textarea>";
-        html += "<button name=\"submitbtn\" id=\"submitNew"+id+"\">Publier</button></div></form>";
+        html += "<button name=\"submitbtn\" id=\"submitNew"+id+"\">Publier</button>";
+        html += "<button name=\"cancelbtn\" id=\"cancelNew"+id+"\">Annuler</button></div></form>";
         event.target.innerHTML = html;
-        initEditorComment("parent"+id);
-    }, {once: true})
+        initEditorComment("#parent"+id);
+        document.getElementById("cancelNew"+id).addEventListener('click', function (event) {
+            tinymce.remove('#parent'+id);
+            document.getElementById(responseId).innerHTML = "Répondre";
+            event.preventDefault();
+            event.stopPropagation();
+            listenerComment(responseId);
+        }, {once: true});
+        document.getElementById("submitNew"+id).addEventListener("click", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var idMessage = window.location.href.split('/message/')[1];
+            var content = document.getElementById('parent'+id).value; // probleme
+            console.log(idMessage+" - "+content);
+            sendcomment(idMessage, content, id);
+        }, {once: true})
+    }, {once: true});
 }
 
 
