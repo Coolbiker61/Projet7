@@ -392,7 +392,6 @@ body {
     background-position: top;
     background-attachment: fixed;
     margin: 0 auto; 
-    height: 100vh; 
     width: 100vh; 
     padding-top: 5px;
     position: relative;
@@ -456,6 +455,7 @@ label {
 h1 {
     font-size: 40px;
     margin-top: 50px;
+    text-align: center;
 }
 
 /* menu dynamique ----------------------------------------------------------------*/
@@ -479,6 +479,7 @@ h1 {
     padding: 10px;
     text-align: center;
     width: 110px;
+    cursor:pointer;
 
 }
 /* profile  ----------------------------------------------------------------------------------------*/
@@ -525,7 +526,7 @@ h1 {
     padding: 10px;
     border-radius: 20px;
     border: 2px solid rgba(245, 245, 245, 0.685);
-
+    cursor:pointer;
     text-align: center;
     margin: auto;
 }
@@ -545,6 +546,7 @@ h1 {
     width: 30px;
     height: 30px;
     vertical-align: middle;
+    cursor:pointer;
 }
 .verif_del {
     display: flex;
@@ -573,9 +575,11 @@ h1 {
 }
 .like-up-select, .like-up-not:hover {
     color: lime;
+    cursor:pointer;
 }
 .like-down-select, .like-down-not:hover {
     color: red;
+    cursor:pointer;
 }
 .nb-likes {
     color: black;
@@ -598,6 +602,7 @@ h1 {
 }
 .content-article {
     font-size: 20px;
+    cursor:pointer;
 }
 .bloc-commentaire{
     width: 100%;
@@ -727,19 +732,65 @@ h1 {
 /* - admin ----*/
 .bloc-users-liste {
     justify-content: center;
-    width: 150px;
     margin-left: 50px;
+    display: flex;
 }
 .users-liste {
-    margin: 20px auto;
+    margin: 10px auto;
+    background-color: #26853e;
+    border: 5px solid #26853e;
+    border-radius: 20px;
+    align-self: flex-start;
 }
 .li-users-liste {
     padding:  15px;
-    background-color: teal;
-    color: white;
+    background-color: rgb(13, 228, 77);
+    border-radius: 10px;
+    color: black;
     text-align: center;
-    width: 100px;
+    list-style: none;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    margin: 10px;
+    font-size: 18px;
 }
-#container {
+.li-users-liste:hover {
+    background-color: rgb(2, 36, 46);
+    color: white;
+    font-weight: 600;
+    cursor:pointer;
+}
+#bloc-users-profile {
+    margin: 15px;
+}
+.users-main {
     display: flex;
+    margin-top: 25px;
 }
+.users-details {
+    font-size: 18px;
+    background-color: lightskyblue;
+    margin: 20px;
+    padding: 20px;
+}
+.users-messages {
+    margin: 20px;
+    padding: 20px;
+    font-size: 18px;
+    background-color: lightskyblue;
+}
+.users-comments {
+    margin: 20px;
+    padding: 20px;
+    font-size: 18px;
+    background-color: lightskyblue;
+}
+.users-article, .users-reply {
+    padding: 10px;
+    background-color: rgb(130, 238, 184);
+    margin-top: 15px;
+}
+
+

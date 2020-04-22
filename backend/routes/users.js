@@ -14,5 +14,7 @@ router.delete('/', userCtrl.deleteUser);
 
 // route admin liste user
 router.get('/users/', userCtrl.getUserListe);
+//route profile utilisateur
+router.get('/users/:id', userCtrl.adminGetUserProfile);
 
 module.exports = router;

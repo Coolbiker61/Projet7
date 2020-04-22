@@ -42,10 +42,15 @@ document.onreadystatechange = function () {
 					window.setTimeout(() => { window.location.href = '/auth/login';}, 2000);
 				} else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                     // si la requête du profil n'a pas retourné d'erreur
+                    var response = JSON.parse(this.responseText);
+                    document.getElementById("username").innerHTML = response.username;
+                    if (response.isAdmin) {
+                        var html = "<div class=\"menu_profil_ligne\"><a href=\"/admin/users\">Administration</a></div>";
+                        document.getElementById('logout').insertAdjacentHTML("beforebegin", html);
+                    }
+                    importMessage();
                     document.getElementById("loading").hidden = true;
                     document.getElementById("back").hidden = false;
-                    document.getElementById("username").innerHTML = JSON.parse(this.responseText).username;
-                    importMessage();
                 }
 			};
 			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");

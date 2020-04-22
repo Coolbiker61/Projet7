@@ -50,10 +50,14 @@ document.onreadystatechange = function () {
     alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
 					window.setTimeout(() => { window.location.href = '/auth/login';}, 2000);
 				} else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                    var reponse = JSON.parse(this.responseText);
-                    document.getElementById("username").innerHTML = reponse.username;
-                    document.getElementById("mini_username").innerHTML = reponse.username;
-                    importeMessage(reponse.id);
+                    var response = JSON.parse(this.responseText);
+                    document.getElementById("username").innerHTML = response.username;
+                    if (response.isAdmin) {
+                        var html = "<div class=\"menu_profil_ligne\"><a href=\"/admin/users\">Administration</a></div>";
+                        document.getElementById('logout').insertAdjacentHTML("beforebegin", html);
+                    }
+                    document.getElementById("mini_username").innerHTML = response.username;
+                    importeMessage(response.id);
                 }
 			};
 			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");

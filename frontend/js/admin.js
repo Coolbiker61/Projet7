@@ -1,3 +1,30 @@
+const editTime = (param) => {
+    const date = Date.parse(param);
+    const dateNow = Date.now();
+    var difference = dateNow - date;
+    difference /= 1000;
+    difference = Math.trunc(difference);
+    let seconde = difference % 60;
+    difference -= seconde; 
+    difference /= 60;
+    let minute = difference % 60;
+    difference -= minute;
+    difference /= 60;
+    let heure = difference % 24;
+    difference -= heure;
+    difference /= 24;
+    let day = difference;
+
+    if (day) {
+        return day+" jours";
+    } else if (heure) {
+        return heure+" heures";
+    } else if (minute) {
+        return minute+" minutes";
+    } else {
+        return seconde+" secondes";
+    }
+}
 // au chargement de la page
 document.onreadystatechange = function () {
     if (document.readyState == 'complete') { 
@@ -10,10 +37,15 @@ document.onreadystatechange = function () {
 					window.setTimeout(() => { window.location.href = '/auth/login';}, 2000);
 				} else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                     // si la requête du profil n'a pas retourné d'erreur
-                    document.getElementById("username").innerHTML = JSON.parse(this.responseText).username;
+                    var response = JSON.parse(this.responseText);
+                    document.getElementById("username").innerHTML = response.username;
+                    if (response.isAdmin) {
+                        var html = "<div class=\"menu_profil_ligne\"><a href=\"/admin/users\">Administration</a></div>";
+                        document.getElementById('logout').insertAdjacentHTML("beforebegin", html);
+                    }                    
+                    importUsers();
                     document.getElementById("loading").hidden = true;
                     document.getElementById("container").hidden = false;
-                    importUsers();
                 }
 			};
 			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
@@ -27,10 +59,45 @@ document.onreadystatechange = function () {
     };
 };
 
-const addProfileUser = (id) => {
-    var html = "";
-    html += id;
+const addProfileUser = (response) => {
+    var html = "<div class=\"users-details\" ><h2>Détails du compte</h2> ";
+    html += "<ul><li>Pseudo : "+response.username+"</li><li>Email : "+response.email+"</li>";
+    html += "<li>Inscrit le : "+response.createdAt+"</li><li>Rôle : ";
+    if (response.isAdmin) {
+        html += "Administrateur";
+    } else {
+        html += "Utilisateur";
+    }
+    html += "</li></ul></div>";
+    html += "";
+    html += "<div class=\"users-messages\" ><h2>Les 5 derniers messages de cet utilisateur</h2>";
+    if (response.Messages.length == 0) {
+        html += "Cet utilisateur n'as poster aucun message.";
+    } else {
+        for (let i = 0; i < response.Messages.length; i++) {
+            var message = response.Messages[i];
+            html += "<div class=\"users-article\" ><div>Titre : "+message.title;
+            html += " | Il y a "+editTime(message.createdAt);
+            html += "</div><div>"+message.content;
+            html += "</div></div>";
+        }
+    }
+    html += "</div>";
+    html += "<div class=\"users-comments\" ><h2>Les 5 derniers commentaires de cette utilisateur</h2>"
+    if (response.Comments.length == 0) {
+        html += "Cet utilisateur n'as poster aucun commentaire.";
+    } else {
+        for (let i = 0; i < response.Comments.length; i++) {
+            var comment = response.Comments[i];
+            html += "<div class=\"users-reply\" ><div>";
+            html += "Il y a "+editTime(comment.createdAt);
+            html += "</div><div>"+comment.content;
+            html += "</div></div>";
+        }
+    }
+    html += "</div>";
     document.getElementById("bloc-users-profile").innerHTML = html;
+
 }
 
 const addUserListe = (usersListe) => {
@@ -40,9 +107,9 @@ const addUserListe = (usersListe) => {
             var html = "<li class=\"li-users-liste\" id=\""+usersListe[i].id+"\">";
             html += usersListe[i].username;
             html += "</li>";
-            document.querySelector(".bloc-users-liste").insertAdjacentHTML('beforeend', html);
+            document.querySelector(".users-liste").insertAdjacentHTML('beforeend', html);
             document.getElementById(usersListe[i].id).addEventListener('click', function (event) {
-                addProfileUser(event.target.id);
+                importUsersDetail(event.target.id);
             })
         }
     }
@@ -59,6 +126,23 @@ const importUsers = () => {
         }
     };
     requete.open("GET", "http://localhost:3000/api/v1/auth/users"); 
+    requete.setRequestHeader("Content-Type", "application/json");
+    requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
+    requete.send();
+}
+
+const importUsersDetail = (id) => {
+    var requete = new XMLHttpRequest();
+    requete.onreadystatechange = function () {
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+            // si la requête des messages n'a pas retourné d'erreur
+            var response = JSON.parse(this.responseText);
+            addProfileUser(response);
+        } else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
+            console.log(this.responseText);
+        }
+    };
+    requete.open("GET", "http://localhost:3000/api/v1/auth/users/"+id); 
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.send();
