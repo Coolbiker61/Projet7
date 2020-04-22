@@ -365,6 +365,7 @@ nav {
 }
 body {
     background-color: #dae0e6;
+    height: 100vh;
 }
 .menu {
     display: flex;
@@ -389,8 +390,9 @@ body {
 .back {
     background-image: url('../images/icon.svg');
     background-repeat:no-repeat;
-    background-position: top;
+    background-position: center top;
     background-attachment: fixed;
+    background-size: contain;
     margin: 0 auto; 
     width: 100vh; 
     padding-top: 5px;
