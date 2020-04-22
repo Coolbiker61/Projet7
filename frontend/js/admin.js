@@ -27,20 +27,25 @@ document.onreadystatechange = function () {
     };
 };
 
+const addProfileUser = (id) => {
+    var html = "";
+    html += id;
+    document.getElementById("bloc-users-profile").innerHTML = html;
+}
+
 const addUserListe = (usersListe) => {
-    var html = ""; 
-    html += "<div class=\"users-liste\">";
-    if (usersListe.length != 0) {
-        html += "<ul>";
-        for (const user in usersListe) {
-            html += "<li>";
-            html += user.username+" - "+user.email+ "-----"+user;
+    
+    if (usersListe.length >= 1) {
+        for (let i = 0; i < usersListe.length; i++) {
+            var html = "<li class=\"li-users-liste\" id=\""+usersListe[i].id+"\">";
+            html += usersListe[i].username;
             html += "</li>";
+            document.querySelector(".bloc-users-liste").insertAdjacentHTML('beforeend', html);
+            document.getElementById(usersListe[i].id).addEventListener('click', function (event) {
+                addProfileUser(event.target.id);
+            })
         }
-        html += "</ul>";
     }
-    html += "</div>";
-    document.getElementById("container").innerHTML = html;
 };
 
 
@@ -51,7 +56,6 @@ const importUsers = () => {
             // si la requête des messages n'a pas retourné d'erreur
             var arrayresponse = JSON.parse(this.responseText);
             addUserListe(arrayresponse);
-            console.log(arrayresponse);
         }
     };
     requete.open("GET", "http://localhost:3000/api/v1/auth/users"); 

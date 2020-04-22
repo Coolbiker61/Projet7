@@ -723,3 +723,23 @@ h1 {
     background-color: rgb(238, 4, 4);
     box-shadow: 7px 7px 5px rgb(83, 81, 81);
 }
+
+/* - admin ----*/
+.bloc-users-liste {
+    justify-content: center;
+    width: 150px;
+    margin-left: 50px;
+}
+.users-liste {
+    margin: 20px auto;
+}
+.li-users-liste {
+    padding:  15px;
+    background-color: teal;
+    color: white;
+    text-align: center;
+    width: 100px;
+}
+#container {
+    display: flex;
+}

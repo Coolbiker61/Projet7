@@ -46,7 +46,10 @@ exports.getUserListe = (req, res ,then) => {
     // le logo animé qui reste affiché le temps du chargement
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
     html += "<section id=\"container\" hidden >";
-
+    
+    html += "<div class=\"bloc-users-liste\"><ul class=\"users-liste\">";
+    html += "</ul></div><div id=\"bloc-users-profile\"></div>";
+    
     html += "</section><div id=\"error\" class=\"error\"></div>";
     html += "</body></html>"
     res.writeHeader(200 ,{'Content-Type': 'text/html'});
