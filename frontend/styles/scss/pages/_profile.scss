@@ -1,4 +1,5 @@
 
+
 /* profile  ----------------------------------------------------------------------------------------*/
 #profile {
     display: flex;
@@ -9,7 +10,7 @@
 }
 #quick_profile {
     width: 20vw;
-    background-color: white;
+    background-color: $quick_profile-bg-color;
     height: 5vw;
     margin-top: 50px;
     padding: 10px;
@@ -21,19 +22,19 @@
     text-align: left;
 }
 .icon_settings {
-    color: deepskyblue;
+    color: $icon_settings-text-color;
 }
 .icon_settings:hover {
-    color: red;
+    color: $icon_settings-hover-text-color;
 }
 
 /* profile detaillé -------------------------------------------------------------------------------------*/
 .profile_details {
-    border: 2px solid #222;
+    border: 2px solid $profile_details-border-color;
     width: 300px;
     padding: 20px;
     margin: 35vh auto 0;
-    background-color: #dae0e6;
+    background-color: $profile_details-bg-color;
     border-radius: 10px;
 }
 .profile_details div {
@@ -42,21 +43,21 @@
 .btn_delete {
     padding: 10px;
     border-radius: 20px;
-    border: 2px solid rgba(245, 245, 245, 0.685);
+    border: 2px solid $btn_delete-border;
     cursor:pointer;
     text-align: center;
     margin: auto;
 }
 .btn_delete_active {
-    border: 2px solid rgba(143, 143, 143, 0.993);
-    background-color: royalblue;
-    box-shadow: 7px 7px 5px rgb(83, 81, 81);
-    color: white;
+    border: 2px solid $btn_delete_active-border;
+    background-color: $btn_delete_active-bg-color;
+    box-shadow: 7px 7px 5px $btn_delete_active-box-shadow;
+    color: $btn_delete_active-text-color;
 }
 
 .delete_box {
 
-    border: 2px solid red;
+    border: 2px solid $delete_box-border;
     border-radius: 10px;
 }
 #supprimer {
@@ -76,9 +77,9 @@
     width: 520px;
     margin: 35vh auto 0;
     justify-content: center;
-    background-color: #dae0e6;
+    background-color: $confirm_delete-bg-color;
     padding: 10px;
-    border: 2px solid #222;
+    border: 2px solid $confirm_delete-border-color;
     border-radius: 10px;
 }
 
@@ -89,24 +90,24 @@
 #btn_oui, #btn_non {
     padding: 10px;
     border-radius: 20px;
-    border: 2px solid rgba(245, 245, 245, 0.685);
+    border: 2px solid $btn_oui-btn_non-border;
     width: 50px;
     text-align: center;
     margin: auto;
 }
 #btn_oui {
-    background-color: forestgreen;
+    background-color: $btn_oui-bg-color;
 }
 #btn_oui:hover {
-    background-color: rgb(0, 201, 0);
-    box-shadow: 7px 7px 5px rgb(83, 81, 81);
+    background-color: $btn_oui-hover-bg-color;
+    box-shadow: 7px 7px 5px $btn_oui-hover-box-shadow;
 }
 #btn_non {
-    background-color: rgb(163, 1, 33);
+    background-color: $btn_non-bg-color;
 }
 #btn_non:hover {
-    background-color: rgb(238, 4, 4);
-    box-shadow: 7px 7px 5px rgb(83, 81, 81);
+    background-color: $btn_non-hover-bg-color;
+    box-shadow: 7px 7px 5px $btn_non-hover-box-shadow;
 }
 
 

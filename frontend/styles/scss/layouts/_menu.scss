@@ -1,11 +1,12 @@
 
+
 nav {
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
     z-index: 5;
-    background-color: white;
+    background-color: $background_menu;
     padding: 10px;
 }
 
@@ -27,14 +28,14 @@ nav {
     flex-direction: column;
     z-index: 6;
     float: right;
-    background-color: #BDBDBD;
+    background-color: $menu_profil-bg-color;
     top: 45px;
     right: 20px;
     position: absolute;
 }
 .menu_profil_ligne {
     padding: 10px;
-    border: 1px solid  cornflowerblue;
+    border: 1px solid  $menu_profil_ligne-border;
     text-align: center;
     width: 110px;
 }
@@ -49,18 +50,18 @@ nav {
 #btn_new_post {
     padding: 10px;
     border-radius: 20px;
-    border: 2px solid rgba(55, 118, 255, 0.836);
-    box-shadow: 7px 7px 5px rgb(83, 81, 81);
-    background-color: white;
+    border: 2px solid $btn_new_post-border;
+    box-shadow: 7px 7px 5px $btn_new_post-box-shadow;
+    background-color: $btn_new_post-bg-color;
     text-align: center;
     margin: auto;
 }
 #btn_new_post:hover {
     padding: 10px;
     border-radius: 20px;
-    border: 2px solid rgba(55, 118, 255, 0.836);
-    background-color: blue;
-    color: white;
+    border: 2px solid $btn_new_post-hover-border;
+    background-color: $btn_new_post-hover-bg-color;
+    color: $btn_new_post-hover-text-color;
     text-align: center;
     margin: auto;
 }

@@ -22,7 +22,7 @@ exports.createMessage = (req, res, then) => {
             if(!userFound) {
                 return res.status(401).json({ error: 'User not found !'});
             } else {
-                models.Message.create({ title: title, UserId: userFound.id, content: content, likes: 0},
+                models.Message.create({ title: title, UserId: userId, content: content, likes: 0},
                     { fields: ['title', 'UserId', 'content', 'likes']})
                     .then(message => {
                         res.status(201).json(message);
