@@ -562,14 +562,14 @@ h1 {
     margin: 20px auto;
     display: flex;
     flex-wrap: wrap;
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 .col_likes {
     display: flex;
     flex-direction: column;
     width: 35px;
     background-color: #EEEEEE;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .like-up-not, .like-down-not {
     font-size: 30px;
@@ -590,7 +590,9 @@ h1 {
 }
 .corp {
     margin: 0 5px;
-    width: 455px;
+    max-width: 455px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .author {
     /**/
@@ -612,8 +614,7 @@ h1 {
 .commentaire {
     display: flex;
     flex-direction: row;
-    margin-top: 10px;
-    margin-bottom: 25px;
+    margin-top: 25px;
 }
 .like-com {
     font-size: 15px;
@@ -623,13 +624,7 @@ h1 {
     flex-direction: column;
     width: 20px;
 }
-.com-main-0 {
-    width: 455px;
-    padding-left: 10px;
-}
-.com-main-1 {
-    width: 420px;
-}
+
 .com-content {
     margin: 10px 10px;
 }

@@ -254,7 +254,7 @@ const addComment = (comments) => {
             const comment = listeComment[index];
             if (comment.parent == 0) {
                 var html = "<div class=\"commentaire\" id=\""+comment.id+"\"><div class=\"com-likes\">";
-                html += "<div class=\"trait\"></div></div><div class=\"com-main-0\"><div>";
+                html += "<div class=\"trait\"></div></div><div><div>";
                 html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);//author nblike - date
                 html += "</div><div class=\"com-content\">";
                 html += comment.content;
@@ -265,7 +265,7 @@ const addComment = (comments) => {
             }
             if (comment.parent !=0 && document.getElementById(comment.parent)) {
                 var html = "<div class=\"commentaire\" id=\""+comment.id+"\"><div class=\"com-likes\">";
-                html += "<div class=\"trait\"></div></div><div class=\"com-main-1\"><div>";
+                html += "<div class=\"trait\"></div></div><div><div>";
                 html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);//author nblike - date
                 html += "</div><div class=\"com-content\">";
                 html += comment.content;
@@ -274,9 +274,9 @@ const addComment = (comments) => {
                     if (document.getElementById(comment.parent).querySelector("#response"+comment.parent)) {
                         document.getElementById(comment.parent).querySelector("#response"+comment.parent).insertAdjacentHTML('afterend', html); 
                         position.unshift(index);
+                        listenerComment("response"+comment.id);
                     }
                 }
-                listenerComment("response"+comment.id);
             }
         }
         for (const index of position) {
