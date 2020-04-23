@@ -96,7 +96,7 @@ const importMessage = () => {
 }
 
 const addMessage = (message) => {
-    var html = "<div class=\"message\" id=\""+message[0].id+"\"><div class=\"col_likes\">";
+    var html = "<div class=\"message-solo\"><div class=\"message\" id=\""+message[0].id+"\"><div class=\"col_likes\">";
     html += "<i class=\"fas fa-arrow-up like-up-not\"></i>";
     html += "<div class=\"nb-likes\">"+message[0].likes+"</div>";
     html += "<i class=\"fas fa-arrow-down like-down-not\"></i></div>";
@@ -106,7 +106,7 @@ const addMessage = (message) => {
     html += "</header><article><header><h3 class=\"title-article\">";
     html += message[0].title;
     html += "</h3></header><p class=\"content-article\">"+message[0].content;
-    html += "</p></article></section>";
+    html += "</p></article></section></div>";
 
     html += "<form id=\"comment_noParent\"><div id=\"editor\" >";
     html += "<textarea id=\"no_parent\"></textarea>";
@@ -254,7 +254,7 @@ const addComment = (comments) => {
             const comment = listeComment[index];
             if (comment.parent == 0) {
                 var html = "<div class=\"commentaire\" id=\""+comment.id+"\"><div class=\"com-likes\">";
-                html += "<div class=\"trait\"></div></div><div><div>";
+                html += "<div class=\"trait\"></div></div><div><div class=\"author\" >";
                 html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);//author nblike - date
                 html += "</div><div class=\"com-content\">";
                 html += comment.content;
@@ -265,7 +265,7 @@ const addComment = (comments) => {
             }
             if (comment.parent !=0 && document.getElementById(comment.parent)) {
                 var html = "<div class=\"commentaire\" id=\""+comment.id+"\"><div class=\"com-likes\">";
-                html += "<div class=\"trait\"></div></div><div><div>";
+                html += "<div class=\"trait\"></div></div><div><div class=\"author\">";
                 html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);//author nblike - date
                 html += "</div><div class=\"com-content\">";
                 html += comment.content;

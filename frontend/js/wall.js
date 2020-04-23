@@ -92,8 +92,8 @@ const addMessage = (message) => {
     html += editTime(message.createdAt); 
     html += "</header><article><header><h3 class=\"title-article\">";
     html += message.title;
-    html += "</h3></header><p class=\"content-article\">"+message.content;
-    html += "</p></article></section></div>";
+    html += "</h3></header><div class=\"content-article\">"+message.content;
+    html += "</div></article></section></div>";
     //ajoute le html à la page
     document.getElementById("container").insertAdjacentHTML('beforeend', html); 
 }
@@ -193,6 +193,10 @@ const listener = (message) => {
             idMessage = event.target.parentElement.parentElement.parentElement.getAttribute('id');
         } else if (event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('id')) {
             idMessage = event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('id');
+        } else if (event.target.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute('id')) {
+            idMessage = event.target.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute('id');
+        } else if (event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute('id')) {
+            idMessage = event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute('id');
         }
         window.location.href = "/socialNetwork/message/"+idMessage;
     });

@@ -1,13 +1,21 @@
+$width-message: 500px;
+
 
 
 /* pour les messages ----------------------------------------------------------------------------------- */
 .message {
     background-color: $message-bg-color;
     border: 2px solid $message-border-color;
-    width: 500px;
+    width: $width-message;
     margin: 20px auto;
     display: flex;
-    flex-wrap: wrap;
+}
+.message-solo {
+    display: flex;
+    flex-direction: column;
+    .message {
+        margin: 20px auto 0 auto;
+    }
 }
 .col_likes {
     display: flex;
@@ -35,14 +43,21 @@
     text-align: center;
 }
 .corp {
-    margin: 0 5px;
-    max-width: 455px;
     padding-top: 10px;
     padding-bottom: 10px;
+    width: inherit;
+    article {
+        padding-left: 5px;
+    }
 }
+
 .author {
     color: $author-text-color;
-    margin-bottom: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    font-weight: 600;
+
+    border-bottom: 1px solid $menu_profil_ligne-border;
 }
 .title-article {
     font-size: 25px;
@@ -51,14 +66,21 @@
 .content-article {
     font-size: 20px;
     cursor:pointer;
+    overflow: hidden;
 }
 .bloc-commentaire{
-    width: 100%;
+    width: $width-message;
+    background-color: $message-bg-color;
+    margin: auto;
 }
 .commentaire {
     display: flex;
     flex-direction: row;
     margin-top: 25px;
+    .author {
+        border-top: 1px solid;
+        padding-top: 5px;
+    }
 }
 .like-com {
     font-size: 15px;
@@ -77,6 +99,27 @@
     display: block;
     height: 100%;
     width: 50%;
+}
+
+#comment_noParent {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 15px;
+    background-color: $message-bg-color;
+    width: $width-message;
+    #submitNew {
+        background-color: $menu_profil-bg-color;
+        border: 2px solid $menu_profil_ligne-border;
+        padding: 10px;
+        font-size: 18px;
+        margin-top: 15px;
+        border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -ms-border-radius: 20px;
+        -o-border-radius: 20px;
+}
 }
 
 
@@ -104,13 +147,6 @@
 }
 .response_text:hover {
     cursor:pointer;
-}
-
-#comment_noParent {
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
 }
 
 
