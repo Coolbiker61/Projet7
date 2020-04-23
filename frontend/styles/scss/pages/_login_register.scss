@@ -1,0 +1,48 @@
+
+.back-inscription, .back-login {
+    background-image: url('../images/icon.svg');
+    background-repeat:no-repeat;
+    margin: 0 auto; 
+    height: 100vh; 
+    width: 100vh; 
+    padding-top: 235px;
+    position: relative;
+}
+.back {
+    background-image: url('../images/icon.svg');
+    background-repeat:no-repeat;
+    background-position: center top;
+    background-attachment: fixed;
+    background-size: contain;
+    margin: 0 auto; 
+    width: 100vh; 
+    padding-top: 5px;
+    position: relative;
+}
+.back-login {
+    padding-top: 260px;
+}
+.form-register, .form-login {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 255px;
+    align-content: center;
+}
+#email, #username, #password {
+    width: 250px;
+}
+
+#connexion, #inscription {
+    margin-top: 20px;
+    border-radius: 20px;
+    border: 2px solid rgb(114, 114, 114);
+    text-align: center;
+    background-color: rgb(172, 172, 172);
+    padding: 5px;
+}
+.confirm-inscription {
+    text-align: center;
+    margin-top: 115px;
+    font-size: 30px;
+}

@@ -1,0 +1,64 @@
+/* - admin ----*/
+.bloc-users-liste {
+    justify-content: center;
+    margin-left: 50px;
+    display: flex;
+}
+.users-liste {
+    margin: 10px auto;
+    background-color: #26853e;
+    border: 5px solid #26853e;
+    border-radius: 20px;
+    align-self: flex-start;
+}
+.li-users-liste {
+    padding:  15px;
+    background-color: rgb(13, 228, 77);
+    border-radius: 10px;
+    color: black;
+    text-align: center;
+    list-style: none;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    margin: 10px;
+    font-size: 18px;
+}
+.li-users-liste:hover {
+    background-color: rgb(2, 36, 46);
+    color: white;
+    font-weight: 600;
+    cursor:pointer;
+}
+#bloc-users-profile {
+    margin: 15px;
+}
+.users-main {
+    display: flex;
+    margin-top: 25px;
+}
+.users-details {
+    font-size: 18px;
+    background-color: lightskyblue;
+    margin: 20px;
+    padding: 20px;
+}
+.users-messages {
+    margin: 20px;
+    padding: 20px;
+    font-size: 18px;
+    background-color: lightskyblue;
+}
+.users-comments {
+    margin: 20px;
+    padding: 20px;
+    font-size: 18px;
+    background-color: lightskyblue;
+}
+.users-article, .users-reply {
+    padding: 10px;
+    background-color: rgb(130, 238, 184);
+    margin-top: 15px;
+}
+

@@ -1,0 +1,71 @@
+
+nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 5;
+    background-color: white;
+    padding: 10px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.menu li {
+    padding: 10px;
+}
+.logo-entreprise {
+    height: 20px;
+}
+
+/* menu dynamique ----------------------------------------------------------------*/
+#menu_profil {
+    display: flex;
+    flex-direction: column;
+    z-index: 6;
+    float: right;
+    background-color: #BDBDBD;
+    top: 45px;
+    right: 20px;
+    position: absolute;
+}
+.menu_profil_ligne {
+    padding: 10px;
+    border: 1px solid  cornflowerblue;
+    text-align: center;
+    width: 110px;
+}
+#link_profil {
+    padding: 10px;
+    text-align: center;
+    width: 110px;
+    cursor:pointer;
+
+}
+
+#btn_new_post {
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid rgba(55, 118, 255, 0.836);
+    box-shadow: 7px 7px 5px rgb(83, 81, 81);
+    background-color: white;
+    text-align: center;
+    margin: auto;
+}
+#btn_new_post:hover {
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid rgba(55, 118, 255, 0.836);
+    background-color: blue;
+    color: white;
+    text-align: center;
+    margin: auto;
+}
+
+
+
+
+
