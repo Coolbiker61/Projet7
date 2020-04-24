@@ -1,15 +1,6 @@
 
 
-.back-inscription, .back-login {
-    background-image: url('../images/icon.svg');
-    background-repeat:no-repeat;
-    margin: 0 auto; 
-    height: 100vh; 
-    width: 100vh; 
-    padding-top: 235px;
-    position: relative;
-}
-.back {
+.back-inscription, .back-login, .back {
     background-image: url('../images/icon.svg');
     background-repeat:no-repeat;
     background-position: center top;
@@ -17,11 +8,14 @@
     background-size: contain;
     margin: 0 auto; 
     width: 100vh; 
-    padding-top: 5px;
+    padding-top: 175px;
     position: relative;
 }
+.back {
+    padding-top: 5px;
+}
 .back-login {
-    padding-top: 260px;
+    padding-top: 200px;
 }
 .form-register, .form-login {
     display: flex;
@@ -42,10 +36,13 @@
     background-color: $btn_bg_color;
     padding: 5px;
     box-shadow: 7px 7px 5px $btn_box_shadow;
+    font-size: $font_size_normal;
+    font-weight: 600;
     &:hover {
         background-color: $btn_hover_bg_color;
         border-color: $btn_hover_border;
         color: $btn_hover_text_color;
+        cursor:pointer;
     }
 }
 .confirm-inscription {
