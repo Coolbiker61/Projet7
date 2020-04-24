@@ -8,14 +8,15 @@
     background-size: contain;
     margin: 0 auto; 
     width: 100vh; 
-    padding-top: 175px;
+    /*padding-top: 175px;*/
     position: relative;
 }
 .back {
     padding-top: 5px;
 }
 .back-login {
-    padding-top: 200px;
+    height: 90%;
+    display: flex;    
 }
 .form-register, .form-login {
     display: flex;
