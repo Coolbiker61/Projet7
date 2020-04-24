@@ -3,17 +3,17 @@ $background_main: #dae0e6;
 $background_menu: white;
 $menu_profil-bg-color: #BDBDBD;
 $menu_profil_ligne-border: cornflowerblue;
-$btn_new_post-border: rgba(55, 118, 255, 0.836);
-$btn_new_post-box-shadow: rgb(83, 81, 81);
-$btn_new_post-bg-color: white;
-$btn_new_post-hover-border: rgba(55, 118, 255, 0.836);
-$btn_new_post-hover-bg-color: blue;
-$btn_new_post-hover-text-color: white;
+$btn_border: rgba(55, 118, 255, 0.836);
+$btn_box_shadow: rgb(83, 81, 81);
+$btn_bg_color: white;
+$btn_hover_border: $btn_border;
+$btn_hover_bg_color: blue;
+$btn_hover_text_color: white;
 
 $connexion-inscription-border: rgb(114, 114, 114);
 $connexion-inscription-bg-color: rgb(172, 172, 172);
 
-$message-bg-color: white;
+$message-bg-color: $background_menu;
 $message-border-color: #BDBDBD;
 $col_likes-bg-color: rgb(212, 212, 212);
 $like-up-select-like-up-not-hover-text-color: lime;
@@ -24,7 +24,7 @@ $trait-border-right-color: #f38b8b;
 $submitbtn-bg-color: salmon;
 $response_text-text-color: slateblue;
 
-$quick_profile-bg-color: white;
+$quick_profile-bg-color: $background_menu;
 $icon_settings-text-color: deepskyblue;
 $icon_settings-hover-text-color: red;
 $profile_details-border-color: #222;

@@ -37,10 +37,16 @@
 #connexion, #inscription {
     margin-top: 20px;
     border-radius: 20px;
-    border: 2px solid $connexion-inscription-border;
+    border: 2px solid $btn_border;
     text-align: center;
-    background-color: $connexion-inscription-bg-color;
+    background-color: $btn_bg_color;
     padding: 5px;
+    box-shadow: 7px 7px 5px $btn_box_shadow;
+    &:hover {
+        background-color: $btn_hover_bg_color;
+        border-color: $btn_hover_border;
+        color: $btn_hover_text_color;
+    }
 }
 .confirm-inscription {
     text-align: center;

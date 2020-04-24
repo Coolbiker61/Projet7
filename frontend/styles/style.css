@@ -497,10 +497,17 @@ nav {
 #connexion, #inscription {
   margin-top: 20px;
   border-radius: 20px;
-  border: 2px solid #727272;
+  border: 2px solid rgba(55, 118, 255, 0.836);
   text-align: center;
-  background-color: #acacac;
+  background-color: white;
   padding: 5px;
+  box-shadow: 7px 7px 5px #535151;
+}
+
+#connexion:hover, #inscription:hover {
+  background-color: blue;
+  border-color: rgba(55, 118, 255, 0.836);
+  color: white;
 }
 
 .confirm-inscription {
