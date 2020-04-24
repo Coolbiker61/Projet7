@@ -473,7 +473,7 @@ nav {
   padding-top: 5px;
 }
 
-.back-login {
+.back-login, .back-inscription {
   height: 90%;
   display: flex;
 }
@@ -481,9 +481,9 @@ nav {
 .form-register, .form-login {
   display: flex;
   flex-direction: column;
+  align-content: center;
   margin: auto;
   width: 255px;
-  align-content: center;
 }
 
 #email, #username, #password {
