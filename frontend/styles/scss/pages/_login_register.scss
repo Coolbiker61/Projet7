@@ -7,15 +7,15 @@
     background-attachment: fixed;
     background-size: contain;
     margin: 0 auto; 
-    width: 100vh; 
-    padding-top: 175px;
+    width: 100vh;
+    height: calc(100% - #{$menu_height});
     position: relative;
 }
 .back {
     padding-top: 5px;
 }
 .back-login {
-    padding-top: 200px;
+    display: flex;
 }
 .form-register, .form-login {
     display: flex;

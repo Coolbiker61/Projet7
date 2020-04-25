@@ -1,12 +1,9 @@
-$width-message: 500px;
-
-
 
 /* pour les messages ----------------------------------------------------------------------------------- */
 .message {
-    background-color: $message-bg-color;
-    border: 2px solid $message-border-color;
-    width: $width-message;
+    background-color: $message_bg_color;
+    border: 2px solid $message_border_color;
+    width: $width_message;
     margin: 20px auto;
     display: flex;
 }
@@ -21,7 +18,7 @@ $width-message: 500px;
     display: flex;
     flex-direction: column;
     width: 35px;
-    background-color: $col_likes-bg-color;
+    background-color: $col_likes_bg_color;
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -30,15 +27,15 @@ $width-message: 500px;
     text-align: center;
 }
 .like-up-select, .like-up-not:hover {
-    color: $like-up-select-like-up-not-hover-text-color;
+    color: $like_up_select_like_up_not_hover_text_color;
     cursor:pointer;
 }
 .like-down-select, .like-down-not:hover {
-    color: $like-down-select-like-down-not-hover-text-color;
+    color: $like_down_select_like_down_not_hover_text_color;
     cursor:pointer;
 }
 .nb-likes {
-    color: $nb-likes-text-color;
+    color: $nb_likes_text_color;
     width: 35px;
     text-align: center;
 }
@@ -52,12 +49,12 @@ $width-message: 500px;
 }
 
 .author {
-    color: $author-text-color;
+    color: $author_text_color;
     padding-bottom: 10px;
     padding-left: 5px;
     font-weight: 600;
 
-    border-bottom: 1px solid $menu_profil_ligne-border;
+    border-bottom: 1px solid $menu_profil_ligne_border;
 }
 .title-article {
     font-size: 25px;
@@ -69,8 +66,8 @@ $width-message: 500px;
     overflow: hidden;
 }
 .bloc-commentaire{
-    width: $width-message;
-    background-color: $message-bg-color;
+    width: $width_message;
+    background-color: $message_bg_color;
     margin: auto;
 }
 .commentaire {
@@ -95,7 +92,7 @@ $width-message: 500px;
     margin: 10px 10px;
 }
 .trait {
-    border-right: 2px solid $trait-border-right-color;
+    border-right: 2px solid $trait_border_right_color;
     display: block;
     height: 100%;
     width: 50%;
@@ -106,11 +103,11 @@ $width-message: 500px;
     display: flex;
     flex-direction: column;
     padding-bottom: 15px;
-    background-color: $message-bg-color;
-    width: $width-message;
+    background-color: $message_bg_color;
+    width: $width_message;
     #submitNew {
-        background-color: $menu_profil-bg-color;
-        border: 2px solid $menu_profil_ligne-border;
+        background-color: $menu_profil_bg_color;
+        border: 2px solid $menu_profil_ligne_border;
         padding: 10px;
         font-size: 18px;
         margin-top: 15px;
@@ -138,11 +135,11 @@ $width-message: 500px;
     margin-left: 10px;
 }
 #submitbtn {
-    background-color: $submitbtn-bg-color;
+    background-color: $submitbtn_bg_color;
     padding: 5px;
 }
 .response_text {
-    color: $response_text-text-color;
+    color: $response_text_text_color;
     font-weight: 600;
 }
 .response_text:hover {
