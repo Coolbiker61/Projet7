@@ -116,7 +116,7 @@
         -moz-border-radius: 20px;
         -ms-border-radius: 20px;
         -o-border-radius: 20px;
-}
+    }
 }
 
 
@@ -130,13 +130,24 @@
 }
 #editor {
     margin: 15px auto;
+    text-align: center;
 }
 #length-title {
     margin-left: 10px;
 }
 #submitbtn {
-    background-color: $submitbtn_bg_color;
-    padding: 5px;
+    background-color: $menu_profil_bg_color;
+        border: 2px solid $menu_profil_ligne_border;
+        padding: 10px;
+        font-size: 18px;
+        margin-top: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -ms-border-radius: 20px;
+        -o-border-radius: 20px;
 }
 .response_text {
     color: $response_text_text_color;

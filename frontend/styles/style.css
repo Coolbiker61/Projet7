@@ -675,6 +675,7 @@ nav {
 
 #editor {
   margin: 15px auto;
+  text-align: center;
 }
 
 #length-title {
@@ -682,8 +683,18 @@ nav {
 }
 
 #submitbtn {
-  background-color: slateblue;
-  padding: 5px;
+  background-color: #BDBDBD;
+  border: 2px solid cornflowerblue;
+  padding: 10px;
+  font-size: 18px;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
 }
 
 .response_text {
