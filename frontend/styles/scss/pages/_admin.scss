@@ -7,16 +7,16 @@
 }
 .users-liste {
     margin: 10px auto;
-    background-color: $users-liste-bg-color;
-    border: 5px solid $users-liste-bg-color;
+    background-color: $users_liste_bg_color;
+    border: 5px solid $users_liste_bg_color;
     border-radius: 20px;
     align-self: flex-start;
 }
 .li-users-liste {
     padding:  15px;
-    background-color: $li-users-liste-bg-color;
+    background-color: $li_users_liste_bg_color;
     border-radius: 10px;
-    color: $li-users-liste-text-color;
+    color: $li_users_liste_text_color;
     text-align: center;
     list-style: none;
     -webkit-border-radius: 10px;
@@ -27,8 +27,8 @@
     font-size: 18px;
 }
 .li-users-liste:hover {
-    background-color: $li-users-liste-hover-bg-color;
-    color: $li-users-liste-hover-text-color;
+    background-color: $li_users_liste_hover_bg_color;
+    color: $li_users_liste_hover_text_color;
     font-weight: 600;
     cursor:pointer;
 }
@@ -41,7 +41,7 @@
 }
 .users-details {
     font-size: 18px;
-    background-color: $users-details-bg-color;
+    background-color: $users_details_bg_color;
     margin: 20px;
     padding: 20px;
 }
@@ -49,17 +49,17 @@
     margin: 20px;
     padding: 20px;
     font-size: 18px;
-    background-color: $users-details-bg-color;
+    background-color: $users_details_bg_color;
 }
 .users-comments {
     margin: 20px;
     padding: 20px;
     font-size: 18px;
-    background-color: $users-details-bg-color;
+    background-color: $users_details_bg_color;
 }
 .users-article, .users-reply {
     padding: 10px;
-    background-color: $users-article-users-reply-bg-color;
+    background-color: $users_article_users_reply_bg_color;
     margin-top: 15px;
 }
 

@@ -390,6 +390,7 @@ nav {
   right: 0;
   left: 0;
   z-index: 5;
+  height: 60px;
   background-color: white;
   padding: 10px;
   border-bottom: 1px solid cornflowerblue;
@@ -450,7 +451,7 @@ nav {
   padding: 10px;
   border-radius: 20px;
   border: 2px solid rgba(55, 118, 255, 0.836);
-  background-color: #726EFF;
+  background-color: slateblue;
   color: white;
   text-align: center;
   margin: auto;
@@ -465,7 +466,7 @@ nav {
   background-size: contain;
   margin: 0 auto;
   width: 100vh;
-  /*padding-top: 175px;*/
+  height: calc(100% - 80px);
   position: relative;
 }
 
@@ -473,17 +474,16 @@ nav {
   padding-top: 5px;
 }
 
-.back-login, .back-inscription {
-  height: 90%;
+.back-login {
   display: flex;
 }
 
 .form-register, .form-login {
   display: flex;
   flex-direction: column;
-  align-content: center;
   margin: auto;
   width: 255px;
+  align-content: center;
 }
 
 #email, #username, #password {
@@ -503,7 +503,7 @@ nav {
 }
 
 #connexion:hover, #inscription:hover {
-  background-color: #726EFF;
+  background-color: slateblue;
   border-color: rgba(55, 118, 255, 0.836);
   color: white;
   cursor: pointer;
@@ -585,7 +585,7 @@ nav {
 }
 
 .author {
-  color: #726EFF;
+  color: slateblue;
   padding-bottom: 10px;
   padding-left: 5px;
   font-weight: 600;
@@ -682,7 +682,7 @@ nav {
 }
 
 #submitbtn {
-  background-color: salmon;
+  background-color: slateblue;
   padding: 5px;
 }
 

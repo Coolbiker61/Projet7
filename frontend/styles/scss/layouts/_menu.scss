@@ -6,9 +6,10 @@ nav {
     right: 0;
     left: 0;
     z-index: 5;
+    height: $menu_height - 20px;
     background-color: $background_menu;
     padding: 10px;
-    border-bottom: 1px solid $menu_profil_ligne-border;
+    border-bottom: 1px solid $menu_profil_ligne_border;
 }
 
 .menu {
@@ -30,14 +31,14 @@ nav {
     flex-direction: column;
     z-index: 6;
     float: right;
-    background-color: $menu_profil-bg-color;
+    background-color: $menu_profil_bg_color;
     top: 60px;
     right: 10px;
     position: absolute;
 }
 .menu_profil_ligne {
     padding: 10px;
-    border: 1px solid  $menu_profil_ligne-border;
+    border: 1px solid  $menu_profil_ligne_border;
     text-align: center;
     width: 110px;
 }
