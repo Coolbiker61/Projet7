@@ -10,6 +10,8 @@
     width: 100vh;
     height: calc(100% - #{$menu_height});
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 .back {
     padding-top: 5px;
@@ -22,6 +24,7 @@
     flex-direction: column;
     align-content: center;
     margin: auto;
+    margin-top: calc(50% - #{$menu_height} - 100px);
     width: 255px;
 }
 #email, #username, #password {
@@ -38,7 +41,7 @@
     box-shadow: 7px 7px 5px $btn_box_shadow;
     font-size: $font_size_normal;
     font-weight: 600;
-    &:hover {
+    &:hover, &:focus {
         background-color: $btn_hover_bg_color;
         border-color: $btn_hover_border;
         color: $btn_hover_text_color;

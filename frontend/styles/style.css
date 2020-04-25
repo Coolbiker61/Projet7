@@ -468,6 +468,8 @@ nav {
   width: 100vh;
   height: calc(100% - 80px);
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .back {
@@ -481,9 +483,10 @@ nav {
 .form-register, .form-login {
   display: flex;
   flex-direction: column;
-  margin: auto;
-  width: 255px;
   align-content: center;
+  margin: auto;
+  margin-top: calc(50% - 80px - 100px);
+  width: 255px;
 }
 
 #email, #username, #password {
@@ -502,7 +505,7 @@ nav {
   font-weight: 600;
 }
 
-#connexion:hover, #inscription:hover {
+#connexion:hover, #connexion:focus, #inscription:hover, #inscription:focus {
   background-color: slateblue;
   border-color: rgba(55, 118, 255, 0.836);
   color: white;

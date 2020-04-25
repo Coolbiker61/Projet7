@@ -10,12 +10,13 @@ exports.register = (req, res, then) => {
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/register.js\" async></script>";
-    html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
+    html += "<title>Inscription - Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</li><li>Social Network</li>";
     html += "<li><a href=\"/auth/login\">Connexion</a></li><li><a href=\"/auth/register\"> Inscription</a></li></ul></nav>";
     html += "<div class=\"offset-top\"></div>";
-    html += "<section id=\"back-inscription\" class=\"back-inscription\"><div class=\"form-register\">";
+    html += "<section id=\"back-inscription\" class=\"back-inscription\"><h1>Inscription</h1>";
+    html += "<div class=\"form-register\">";
     html += "<label for=\"email\">Adresse mail</label>";
     html += "<input type=\"email\" id=\"email\" name=\"email\" required patern=\""+REGEX_EMAIL+"\"/>";
     html += "<label for=\"username\">Pseudo</label>";
@@ -37,19 +38,20 @@ exports.login = (req, res, then) => {
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/login.js\" defer></script>";
-    html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
-    html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
+    html += "<title>Connexion - Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
+    html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" role=\"banner\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</li><li><a href=\"/socialNetwork\">Social Network</a></li>";
     html += "<li><a href=\"/auth/login\">Connexion</a></li><li><a href=\"/auth/register\"> Inscription</a></li></ul></nav>";
     html += "<div class=\"offset-top\"></div>";
     // le logo animé qui reste affiché le temps du chargement
-    html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
-    html += "<section hidden id=\"back-login\" class=\"back-login\"><div class=\"form-login\">";
+    html += "<div role=\"banner\" id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
+    html += "<section hidden id=\"back-login\" class=\"back-login\">";
+    html += "<h1>Connexion</h1><div class=\"form-login\">";
     html += "<label for=\"email\">Adresse mail</label>";
     html += "<input type=\"email\" id=\"email\" name=\"email\" required partern=\""+REGEX_EMAIL+"\" />";
     html += "<label for=\"password\">Mot de passe</label>";
     html += "<input type=\"password\" name=\"password\" id=\"password\" required partern=\""+REGEX_PASSWORD+"\"/>";
-    html += "<input id=\"connexion\" type=\"submit\" value=\"Connexion\" />";
+    html += "<input tabindex=\"0\" id=\"connexion\" type=\"submit\" value=\"Connexion\" />";
     html += "<div id=\"error\" class=\"error\"></div></div></section>";
 
     html += "</body></html>"
@@ -66,7 +68,7 @@ exports.getProfile = (req, res, then) => {
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/profil.js\" async></script>";
     html += "<script src=\"/js/menu.js\" async></script>";
-    html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
+    html += "<title>Votre profile - Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
     html += "<li id=\"link_profil\"><span id=\"username\"></span><div style=\"visibility: hidden;\" id=\"menu_profil\">";
@@ -76,7 +78,8 @@ exports.getProfile = (req, res, then) => {
     html += "</ul></nav><div class=\"offset-top\"></div>";
 
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
-    html += "<div style=\"visibility: hidden;\" id=\"profile\"><section  id=\"liste_message\" class=\"liste_message\">";
+    html += "<div style=\"visibility: hidden;\" id=\"profile\"><h1>Votre profile</h1>";
+    html += "<section  id=\"liste_message\" class=\"liste_message\">";
     html += "Vos cinq dernier messages :";
     html += "<div id=\"error\" class=\"error\"></div></section>";
     html += "<section id=\"quick_profile\">";
@@ -95,7 +98,7 @@ exports.getProfileSettings = (req, res, then) => {
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/profilSettings.js\" async></script>";
     html += "<script src=\"/js/menu.js\" async></script>";
-    html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
+    html += "<title>Paramètre de votre profile - Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
     html += "<li id=\"link_profil\"><span id=\"username\"></span><div style=\"visibility: hidden;\" id=\"menu_profil\">";
@@ -127,7 +130,7 @@ exports.deleteAccountConfirm = (req, res, then) => {
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/confirmD.js\" async></script>";
     html += "<script src=\"/js/menu.js\" async></script>";
-    html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
+    html += "<title>Comfirmation de suppression -Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
     html += "<li id=\"link_profil\"><span id=\"username\"></span><div style=\"visibility: hidden;\" id=\"menu_profil\">";
@@ -137,7 +140,7 @@ exports.deleteAccountConfirm = (req, res, then) => {
     html += "</ul></nav><div class=\"offset-top\"></div>";
 
     html += "<div hidden id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
-    html += "<section  id=\"back\" class=\"back\"><div class=\"confirm_delete\">";
+    html += "<section  id=\"back\" class=\"back\"><h1>Comfirmation de suppression du compte</h1><div class=\"confirm_delete\">";
     html += "<p>Dernière chance.</p>";
     html += "<p>Cette action est irréversible, êtes vous sur de vouloir supprimer votre compte ?</p>";
     html += "<p>Ceci supprimera également tous les messages et commentaires.</p>";
