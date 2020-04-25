@@ -20,9 +20,9 @@
 .form-register, .form-login {
     display: flex;
     flex-direction: column;
+    align-content: center;
     margin: auto;
     width: 255px;
-    align-content: center;
 }
 #email, #username, #password {
     width: 250px;
