@@ -308,7 +308,6 @@ const initEditorComment = (place) => {
         automatic_uploads: false,
         elementpath: false,
         a11y_advanced_options: true,
-        body_class: 'editors',
         
     });
     

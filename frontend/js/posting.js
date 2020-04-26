@@ -1,3 +1,5 @@
+const PLACEHOLDERVALUE = 'Tapez votre message ici';
+
 document.onreadystatechange = function () {
     if (document.readyState == 'complete') { 
         // verifie si un token est present dans le sessionStorage
@@ -17,7 +19,7 @@ document.onreadystatechange = function () {
                     }
                     listenerEvent();
                     document.getElementById("loading").hidden = true;
-                    document.getElementById("back").hidden = false;
+                    document.getElementById("create_form").hidden = false;
                 }
 			};
 			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
@@ -88,10 +90,6 @@ const sendMessage = (message, title) => {
     requete.send(data);
 }
 
-
-
-
-
 // editor
 tinymce.init({
     selector: '#message_editor',
@@ -100,8 +98,11 @@ tinymce.init({
     menubar: '',
     margin: 'auto',
     language: 'fr_FR',
-    placeholder: 'Tapez votre message ici',
+    placeholder: PLACEHOLDERVALUE,
     autoresize: true,
+    min_height: 100,
+    min_width: 400,
+    statusbar: false,
 
     save_enablewhendirty: true,
     save_onsavecallback: function () { console.log('Saved'); },
@@ -110,7 +111,18 @@ tinymce.init({
     images_reuse_filename: true,
     automatic_uploads: false,
     elementpath: false,
-    a11y_advanced_options: true,
+    image_description: false,
+    //écoute les changement de contenu
+    setup: function(editor) {
+        editor.on('input', function(e) {
+            console.log('change');
+            if (tinymce.get('message_editor').getBody().innerHTML.length >= 11 && document.getElementById("title").value.length >= 2) {
+                document.getElementById('submitbtn').removeAttribute('disabled');
+            } else {
+                document.getElementById('submitbtn').setAttribute('disabled', true);
+            }
+        });
+      }
 });
 
 
@@ -126,7 +138,6 @@ document.getElementById('create_form').addEventListener('submit', function (even
     if (imgStart != -1) {
         tinymce.activeEditor.uploadImages()
         .then( url => {
-            
             let imgStop = document.getElementById("message_editor").value.indexOf(' />') + 3;
             messageValue = document.getElementById("message_editor").value.slice(0, imgStart);
             messageValue += url[0].element.outerHTML;
@@ -140,26 +151,22 @@ document.getElementById('create_form').addEventListener('submit', function (even
     } else {
         messageValue = document.getElementById("message_editor").value;
         if (messageValue.length >= 11 && titleMessage.length >= 2) {
-            
             sendMessage(messageValue, titleMessage);
         }
     }    
     
 })
+
 const listenerEvent = () => {
     // met a jour la longueur du titre sur la page
     document.getElementById('title').addEventListener('input', function () {
         document.getElementById('length-title').innerHTML = document.getElementById('title').value.length;
-        if (document.getElementById("title").value.length < 2) {
-            //class invalide
-        } else if (tinymce.get('message_editor').getBody().innerHTML.length >= 11 && document.getElementById("title").value.length >= 2) {
-            console.log("conforme "+tinymce.get('message_editor').getBody().innerHTML.length);
+        if (tinymce.get('message_editor').getBody().innerHTML.length >= 11 && document.getElementById("title").value.length >= 2) {
+            if (tinymce.get('message_editor').getBody().innerHTML != '<p><br data-mce-bogus="1"></p>') {
+                document.getElementById('submitbtn').removeAttribute('disabled');
+            }
+        } else {
+            document.getElementById('submitbtn').setAttribute('disabled', true);
         }
     });
-
-    tinymce.get('message_editor').getBody().addEventListener('change', function () {
-        if (tinymce.get('message_editor').getBody().innerHTML.length >= 11 && document.getElementById("title").value.length >= 2) {
-            console.log("conforme");
-        }
-    })
 }

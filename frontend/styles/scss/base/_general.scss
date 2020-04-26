@@ -31,4 +31,27 @@ h1 {
 }
 
 
-
+#btn_new_post, .btn {
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid $btn_border;
+    box-shadow: 7px 7px 5px $btn_box_shadow;
+    background-color: $btn_bg_color;
+    text-align: center;
+    margin: auto;
+    &:hover, &:focus {
+        padding: 10px;
+        border-radius: 20px;
+        border: 2px solid $btn_hover_border;
+        background-color: $btn_hover_bg_color;
+        color: $btn_hover_text_color;
+        text-align: center;
+        margin: auto;
+        cursor:pointer;
+    }
+    &:disabled {
+        &:hover {
+            background-color: red;
+        }
+    }
+}

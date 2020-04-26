@@ -384,6 +384,31 @@ h1 {
   text-align: center;
 }
 
+#btn_new_post, .btn {
+  padding: 10px;
+  border-radius: 20px;
+  border: 2px solid rgba(55, 118, 255, 0.836);
+  box-shadow: 7px 7px 5px #535151;
+  background-color: white;
+  text-align: center;
+  margin: auto;
+}
+
+#btn_new_post:hover, #btn_new_post:focus, .btn:hover, .btn:focus {
+  padding: 10px;
+  border-radius: 20px;
+  border: 2px solid rgba(55, 118, 255, 0.836);
+  background-color: slateblue;
+  color: white;
+  text-align: center;
+  margin: auto;
+  cursor: pointer;
+}
+
+#btn_new_post:disabled:hover, .btn:disabled:hover {
+  background-color: red;
+}
+
 nav {
   position: fixed;
   top: 0;
@@ -433,27 +458,6 @@ nav {
 #link_profil {
   padding: 10px;
   text-align: center;
-  cursor: pointer;
-}
-
-#btn_new_post, .btn {
-  padding: 10px;
-  border-radius: 20px;
-  border: 2px solid rgba(55, 118, 255, 0.836);
-  box-shadow: 7px 7px 5px #535151;
-  background-color: white;
-  text-align: center;
-  margin: auto;
-}
-
-#btn_new_post:hover, #btn_new_post:focus, .btn:hover, .btn:focus {
-  padding: 10px;
-  border-radius: 20px;
-  border: 2px solid rgba(55, 118, 255, 0.836);
-  background-color: slateblue;
-  color: white;
-  text-align: center;
-  margin: auto;
   cursor: pointer;
 }
 
@@ -671,35 +675,21 @@ nav {
   width: 500px;
 }
 
-/* surcharge des couleurs de l'éditeur */
-.tox-tinymce {
-  border: 2px solid rgba(55, 118, 255, 0.836) !important;
-  /*box-shadow: 7px 7px 5px $btn_box_shadow!important;*/
-  border-radius: 20px !important;
-  -webkit-border-radius: 20px !important;
-  -moz-border-radius: 20px !important;
-  -ms-border-radius: 20px !important;
-  -o-border-radius: 20px !important;
+#create_form {
+  margin: auto;
+  width: 550px;
+}
+
+#create_form #title {
+  border-radius: 20px;
+  border: 2px solid rgba(55, 118, 255, 0.836);
   padding: 5px;
-  background-color: white;
 }
 
-.tox-tinymce .tox-tbtn:hover {
-  background-color: slateblue !important;
-  color: white !important;
-}
-
-.tox-tinymce .tox-tbtn:hover svg {
-  fill: white !important;
-}
-
-.tox .tox-collection__item--active {
-  background-color: slateblue !important;
-  color: white !important;
-}
-
-.tox .tox-tbtn__select-label {
-  width: 3em !important;
+#create_form #title:focus {
+  background-color: slateblue;
+  border-color: rgba(55, 118, 255, 0.836);
+  color: white;
 }
 
 .title_line {
@@ -729,20 +719,6 @@ nav {
   margin-left: 10px;
 }
 
-/*#submitbtn {
-    background-color: $menu_profil_bg_color;
-        border: 2px solid $menu_profil_ligne_border;
-        padding: 10px;
-        font-size: 18px;
-        margin-top: 15px;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: 20px;
-        -webkit-border-radius: 20px;
-        -moz-border-radius: 20px;
-        -ms-border-radius: 20px;
-        -o-border-radius: 20px;
-}*/
 .response_text {
   color: slateblue;
   font-weight: 600;
@@ -750,6 +726,37 @@ nav {
 
 .response_text:hover {
   cursor: pointer;
+}
+
+/* surcharge des couleurs de l'éditeur */
+.tox-tinymce {
+  border: 2px solid rgba(55, 118, 255, 0.836) !important;
+  /*box-shadow: 7px 7px 5px $btn_box_shadow!important;*/
+  border-radius: 20px !important;
+  -webkit-border-radius: 20px !important;
+  -moz-border-radius: 20px !important;
+  -ms-border-radius: 20px !important;
+  -o-border-radius: 20px !important;
+  padding: 5px;
+  background-color: white;
+}
+
+.tox-tinymce .tox-tbtn:hover {
+  background-color: slateblue !important;
+  color: white !important;
+}
+
+.tox-tinymce .tox-tbtn:hover svg {
+  fill: white !important;
+}
+
+.tox .tox-collection__item--active {
+  background-color: slateblue !important;
+  color: white !important;
+}
+
+.tox .tox-tbtn__select-label {
+  width: 3em !important;
 }
 
 /* profile  ----------------------------------------------------------------------------------------*/
