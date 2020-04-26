@@ -73,6 +73,7 @@
     width: $width_message;
     background-color: $message_bg_color;
     margin: auto;
+    padding-bottom: 50px;
 }
 .commentaire {
     display: flex;
@@ -109,19 +110,39 @@
     padding-bottom: 15px;
     background-color: $message_bg_color;
     width: $width_message;
-    #submitNew {
-        background-color: $menu_profil_bg_color;
-        border: 2px solid $menu_profil_ligne_border;
-        padding: 10px;
-        font-size: 18px;
-        margin-top: 15px;
-        border-radius: 20px;
-        -webkit-border-radius: 20px;
-        -moz-border-radius: 20px;
-        -ms-border-radius: 20px;
-        -o-border-radius: 20px;
+}
+/* surcharge des couleurs de l'éditeur */
+.tox-tinymce {
+    border: 2px solid $btn_border!important;
+    /*box-shadow: 7px 7px 5px $btn_box_shadow!important;*/
+    border-radius: 20px!important;
+    -webkit-border-radius: 20px!important;
+    -moz-border-radius: 20px!important;
+    -ms-border-radius: 20px!important;
+    -o-border-radius: 20px!important;
+    padding: 5px;
+    background-color: white;
+    .tox-tbtn {
+        &:hover {
+            background-color: $btn_hover_bg_color!important;
+            color: $btn_hover_text_color!important;
+            svg{
+                fill: $btn_hover_text_color!important;
+            }
+        }
     }
 }
+.tox {
+    .tox-collection__item--active {
+        background-color: $btn_hover_bg_color!important;
+        color: $btn_hover_text_color!important;
+    }
+    .tox-tbtn__select-label {
+        width: 3em!important;
+    }
+}
+
+
 
 
 .title_line {
@@ -135,11 +156,17 @@
 #editor {
     margin: 15px auto;
     text-align: center;
+    .btn {
+        margin-top: 10px;
+    }
+    [id^="cancelNew"] {
+        margin-left: 15px;
+    }
 }
 #length-title {
     margin-left: 10px;
 }
-#submitbtn {
+/*#submitbtn {
     background-color: $menu_profil_bg_color;
         border: 2px solid $menu_profil_ligne_border;
         padding: 10px;
@@ -152,7 +179,7 @@
         -moz-border-radius: 20px;
         -ms-border-radius: 20px;
         -o-border-radius: 20px;
-}
+}*/
 .response_text {
     color: $response_text_text_color;
     font-weight: 600;

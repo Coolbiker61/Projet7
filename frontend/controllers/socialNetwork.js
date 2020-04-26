@@ -73,8 +73,8 @@ exports.createMessage = (req, res ,then) => {
     html += "<script src=\"/js/menu.js\" async></script>";
     html += "<title>Groupomania - poster un nouveau message</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
-    html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
-    html += "<li id=\"link_profil\"><span id=\"username\"></span><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "</a></li><li><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
+    html += "<li id=\"link_profil\"><div class=\"btn\"><span id=\"username\"></span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";
     html += "<div class=\"menu_profil_ligne\"><a href=\"/auth/profil\">Profil</a></div>";
     html += "<div id=\"logout\" class=\"menu_profil_ligne\"><a href=\"/auth/login\">Déconnexion</a></div>";
     html += "</div></li>";
@@ -85,7 +85,7 @@ exports.createMessage = (req, res ,then) => {
     html += "<div class=\"title_line\"><label for=\"title\">Titre du message </label>";
     html += "<input type=\"text\" id=\"title\" maxlength=\"50\" ><div><span id=\"length-title\">0</span>/50</div></div>";
     html += "<div id=\"editor\" ><textarea id=\"message_editor\"></textarea>";
-    html += "<button name=\"submitbtn\" id=\"submitbtn\">Publier</button></div></form>";
+    html += "<button class=\"btn\" name=\"submitbtn\" id=\"submitbtn\">Publier</button></div></form>";
     //
     html += " </div>";
 

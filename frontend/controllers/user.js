@@ -132,7 +132,7 @@ exports.deleteAccountConfirm = (req, res, then) => {
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/confirmD.js\" async></script>";
     html += "<script src=\"/js/menu.js\" async></script>";
-    html += "<title>Comfirmation de suppression -Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
+    html += "<title>Confirmation de suppression -Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
     html += "<li id=\"link_profil\"><div class=\"btn\"><span id=\"username\"></span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";
@@ -142,7 +142,7 @@ exports.deleteAccountConfirm = (req, res, then) => {
     html += "</ul></nav><div class=\"offset-top\"></div>";
 
     html += "<div hidden id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
-    html += "<section  id=\"back\" class=\"back\"><h1>Comfirmation de suppression du compte</h1><div class=\"confirm_delete\">";
+    html += "<section  id=\"back\" class=\"back\"><h1>Confirmation de suppression du compte</h1><div class=\"confirm_delete\">";
     html += "<p>Dernière chance.</p>";
     html += "<p>Cette action est irréversible, êtes vous sur de vouloir supprimer votre compte ?</p>";
     html += "<p>Ceci supprimera également tous les messages et commentaires.</p>";

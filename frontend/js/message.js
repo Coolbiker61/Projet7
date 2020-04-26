@@ -33,7 +33,7 @@ const editTime = (param) => {
 // au chargement de la page
 document.onreadystatechange = function () {
     if (document.readyState == 'complete') { 
-        // verifie si un token est present dans le sessionStorage
+        // vérifie si un token est présent dans le sessionStorage
         if (sessionStorage.getItem('token')) {
             var requete = new XMLHttpRequest();
 			requete.onreadystatechange = function () {
@@ -101,7 +101,7 @@ const addMessage = (message) => {
     html += "<div class=\"nb-likes\">"+message[0].likes+"</div>";
     html += "<i class=\"fas fa-arrow-down like-down-not\"></i></div>";
     html += "<section class=\"corp\"><header class=\"author\">";
-    html += "Posted by "+message[1].username+" il y a ";
+    html += "Envoyé par "+message[1].username+" il y a ";
     html += editTime(message[0].createdAt); 
     html += "</header><article><header><h3 class=\"title-article\">";
     html += message[0].title;
@@ -110,7 +110,7 @@ const addMessage = (message) => {
 
     html += "<form id=\"comment_noParent\"><div id=\"editor\" >";
     html += "<textarea id=\"no_parent\"></textarea>";
-    html += "<button name=\"submitbtn\" id=\"submitNew\">Publier</button></div></form>";
+    html += "<button class=\"btn\" name=\"submitbtn\" id=\"submitNew\">Publier</button></div></form>";
 
     html += "<div class=\"bloc-commentaire\"></div></div>";
     //ajoute le html à la page
@@ -161,7 +161,7 @@ const listenerLike = (message) => {
     // event dislike
     doc.querySelector('.like-down-not').addEventListener("click", function (event) {
         event.stopPropagation();
-        // si il a deja été dislike
+        // si il a déjà été dislike
         if (doc.querySelector('.like-down-not').classList.contains("like-down-select")) {
             var requete = new XMLHttpRequest();
             // écoute des changement d'état de l'envoie *
@@ -286,7 +286,7 @@ const addComment = (comments) => {
     }
 };
 
-//editeur comment sans parent
+//éditeur comment sans parent
 const initEditorComment = (place) => {
     tinymce.init({
         selector: place,
@@ -308,6 +308,7 @@ const initEditorComment = (place) => {
         automatic_uploads: false,
         elementpath: false,
         a11y_advanced_options: true,
+        body_class: 'editors',
         
     });
     
@@ -318,8 +319,8 @@ const listenerComment = (responseId) => {
         let id = event.target.id.split('response')[1];
         var html = "<form id=\"comment_parent"+id+"\"><div id=\"editor\" >";
         html += "<textarea id=\"parent"+id+"\"></textarea>";
-        html += "<button name=\"submitbtn\" id=\"submitNew"+id+"\">Publier</button>";
-        html += "<button name=\"cancelbtn\" id=\"cancelNew"+id+"\">Annuler</button></div></form>";
+        html += "<button class=\"btn\" name=\"submitbtn\" id=\"submitNew"+id+"\">Publier</button>";
+        html += "<button class=\"btn\" name=\"cancelbtn\" id=\"cancelNew"+id+"\">Annuler</button></div></form>";
         event.target.innerHTML = html;
         initEditorComment("#parent"+id);
         document.getElementById("cancelNew"+id).addEventListener('click', function (event) {
@@ -333,7 +334,7 @@ const listenerComment = (responseId) => {
             event.preventDefault();
             event.stopPropagation();
             var idMessage = window.location.href.split('/message/')[1];
-            var content = tinymce.get('parent'+id).getBody().innerHTML; // probleme
+            var content = tinymce.get('parent'+id).getBody().innerHTML;
             sendcomment(idMessage, content, id);
         }, {once: true})
     }, {once: true});
@@ -394,7 +395,7 @@ const sendcomment = (messageId, commentContent, parent) => {
 }
 
 
-// ecoute le bouton nouveau message
+// écoute le bouton nouveau message
 document.getElementById("btn_new_post").addEventListener("click", function (event) {
     window.location.href = "/socialNetwork/new";
 })
