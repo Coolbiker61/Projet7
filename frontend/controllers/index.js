@@ -9,9 +9,9 @@ exports.getPageRoot = (req, res, then) => {
     html += "<script src=\"/js/index.js\" async></script>";
     html += "<script src=\"/js/menu.js\" async></script>";
     html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
-    html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
-    html += "</li><li id=\"user_nav\"><a href=\"/socialNetwork\">Social Network</a></li>";
-    html += "<li id=\"link_profil\"><span id=\"username\"></span><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" role=\"banner\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
+    html += "</li><li id=\"user_nav\"><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
+    html += "<li id=\"link_profil\"><div class=\"btn\"><span id=\"username\"></span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";
     html += "<div class=\"menu_profil_ligne\"><a href=\"/auth/profil\">Profil</a></div>";
     html += "<div id=\"logout\" class=\"menu_profil_ligne\"><a href=\"/auth/login\">Déconnexion</a></div>";
     html += "</div></li>";

@@ -50,7 +50,7 @@ nav {
 
 }
 
-#btn_new_post {
+#btn_new_post, .btn {
     padding: 10px;
     border-radius: 20px;
     border: 2px solid $btn_border;
@@ -58,7 +58,7 @@ nav {
     background-color: $btn_bg_color;
     text-align: center;
     margin: auto;
-    &:hover {
+    &:hover, &:focus {
         padding: 10px;
         border-radius: 20px;
         border: 2px solid $btn_hover_border;

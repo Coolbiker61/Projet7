@@ -24,8 +24,18 @@
     flex-direction: column;
     align-content: center;
     margin: auto;
-    margin-top: calc(50% - #{$menu_height} - 100px);
+    margin-top: 100px;
     width: 255px;
+    input {
+        border-radius: 20px;
+        border: 2px solid $btn_border;
+        padding: 5px;
+        &:focus {
+            background-color: $btn_hover_bg_color;
+            border-color: $btn_hover_border;
+            color: $btn_hover_text_color;
+        }
+    }
 }
 #email, #username, #password {
     width: 250px;

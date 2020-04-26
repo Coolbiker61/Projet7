@@ -437,7 +437,7 @@ nav {
   cursor: pointer;
 }
 
-#btn_new_post {
+#btn_new_post, .btn {
   padding: 10px;
   border-radius: 20px;
   border: 2px solid rgba(55, 118, 255, 0.836);
@@ -447,7 +447,7 @@ nav {
   margin: auto;
 }
 
-#btn_new_post:hover {
+#btn_new_post:hover, #btn_new_post:focus, .btn:hover, .btn:focus {
   padding: 10px;
   border-radius: 20px;
   border: 2px solid rgba(55, 118, 255, 0.836);
@@ -485,8 +485,20 @@ nav {
   flex-direction: column;
   align-content: center;
   margin: auto;
-  margin-top: calc(50% - 80px - 100px);
+  margin-top: 100px;
   width: 255px;
+}
+
+.form-register input, .form-login input {
+  border-radius: 20px;
+  border: 2px solid rgba(55, 118, 255, 0.836);
+  padding: 5px;
+}
+
+.form-register input:focus, .form-login input:focus {
+  background-color: slateblue;
+  border-color: rgba(55, 118, 255, 0.836);
+  color: white;
 }
 
 #email, #username, #password {
@@ -523,6 +535,7 @@ nav {
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding-top: 150px;
 }
 
 .accueil_logo {
@@ -585,6 +598,11 @@ nav {
 
 .corp article {
   padding-left: 5px;
+}
+
+.corp h3 {
+  margin-top: 5px;
+  margin-bottom: 15px;
 }
 
 .author {

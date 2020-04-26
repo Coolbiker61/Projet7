@@ -13,7 +13,8 @@ exports.register = (req, res, then) => {
     html += "<title>Inscription - Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</li><li>Social Network</li>";
-    html += "<li><a href=\"/auth/login\">Connexion</a></li><li><a href=\"/auth/register\"> Inscription</a></li></ul></nav>";
+    html += "<li><a href=\"/auth/login\"><div class=\"btn\">Connexion</div></a></li>";
+    html += "<li><a href=\"/auth/register\"><div class=\"btn\">Inscription</div></a></li></ul></nav>";
     html += "<div class=\"offset-top\"></div>";
     html += "<section id=\"back-inscription\" class=\"back-inscription\"><h1>Inscription</h1>";
     html += "<div class=\"form-register\">";
@@ -40,8 +41,9 @@ exports.login = (req, res, then) => {
     html += "<script src=\"/js/login.js\" defer></script>";
     html += "<title>Connexion - Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" role=\"banner\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
-    html += "</li><li><a href=\"/socialNetwork\">Social Network</a></li>";
-    html += "<li><a href=\"/auth/login\">Connexion</a></li><li><a href=\"/auth/register\"> Inscription</a></li></ul></nav>";
+    html += "</li><li><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
+    html += "<li><a href=\"/auth/login\"><div class=\"btn\">Connexion</div></a></li>";
+    html += "<li><a href=\"/auth/register\"><div class=\"btn\">Inscription</div></a></li></ul></nav>";
     html += "<div class=\"offset-top\"></div>";
     // le logo animé qui reste affiché le temps du chargement
     html += "<div role=\"banner\" id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
@@ -70,8 +72,8 @@ exports.getProfile = (req, res, then) => {
     html += "<script src=\"/js/menu.js\" async></script>";
     html += "<title>Votre profile - Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
-    html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
-    html += "<li id=\"link_profil\"><span id=\"username\"></span><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "</a></li><li><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
+    html += "<li id=\"link_profil\"><div class=\"btn\"><span id=\"username\"></span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";
     html += "<div class=\"menu_profil_ligne\"><a href=\"/auth/profil\">Profil</a></div>";
     html += "<div id=\"logout\" class=\"menu_profil_ligne\"><a href=\"/auth/login\">Déconnexion</a></div>";
     html += "</div></li>";
@@ -100,8 +102,8 @@ exports.getProfileSettings = (req, res, then) => {
     html += "<script src=\"/js/menu.js\" async></script>";
     html += "<title>Paramètre de votre profile - Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
-    html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
-    html += "<li id=\"link_profil\"><span id=\"username\"></span><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "</a></li><li><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
+    html += "<li id=\"link_profil\"><div class=\"btn\"><span id=\"username\"></span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";
     html += "<div class=\"menu_profil_ligne\"><a href=\"/auth/profil\">Profil</a></div>";
     html += "<div id=\"logout\" class=\"menu_profil_ligne\"><a href=\"/auth/login\">Déconnexion</a></div>";
     html += "</div></li>";
@@ -132,8 +134,8 @@ exports.deleteAccountConfirm = (req, res, then) => {
     html += "<script src=\"/js/menu.js\" async></script>";
     html += "<title>Comfirmation de suppression -Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
-    html += "</a></li><li><a href=\"/socialNetwork\">Social Network</a></li>";
-    html += "<li id=\"link_profil\"><span id=\"username\"></span><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "</a></li><li><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
+    html += "<li id=\"link_profil\"><div class=\"btn\"><span id=\"username\"></span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";
     html += "<div class=\"menu_profil_ligne\"><a href=\"/auth/profil\">Profil</a></div>";
     html += "<div id=\"logout\" class=\"menu_profil_ligne\"><a href=\"/auth/login\">Déconnexion</a></div>";
     html += "</div></li>";
