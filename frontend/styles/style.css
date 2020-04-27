@@ -455,6 +455,19 @@ nav {
   width: 110px;
 }
 
+.menu_profil_ligne:hover {
+  background-color: slateblue;
+  color: white;
+}
+
+.menu_profil_ligne a:visited {
+  color: black;
+}
+
+.menu_profil_ligne a:visited:hover {
+  color: white;
+}
+
 #link_profil {
   padding: 10px;
   text-align: center;

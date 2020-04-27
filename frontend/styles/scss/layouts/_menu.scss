@@ -41,6 +41,16 @@ nav {
     border: 1px solid  $menu_profil_ligne_border;
     text-align: center;
     width: 110px;
+    &:hover {
+        background-color: $btn_hover_bg_color;
+        color: $btn_hover_text_color;
+    }
+    a:visited {
+        color: $btn_font_color;
+        &:hover {
+            color: $btn_hover_text_color;
+        }
+    }
 }
 #link_profil {
     padding: 10px;
