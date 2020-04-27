@@ -286,8 +286,46 @@ const addComment = (comments) => {
     }
 };
 
+// action changement contenu editeur
+const contentChangeAction = (e) => {    
+    if (e.target.id && e.target.id.includes('parent')) {
+        if (e.target.id == 'no_parent') {
+            if (tinymce.get('no_parent').getBody().innerHTML != '<p><br data-mce-bogus="1"></p>' && tinymce.get('no_parent').getBody().innerHTML != '<p><br></p>') {
+                document.getElementById('submitNew').removeAttribute('disabled');
+            } else {
+                document.getElementById('submitNew').setAttribute('disabled', true);
+            }
+        } else {
+            var id = e.target.id.split('parent')[1];
+            if (tinymce.get('parent'+id).getBody().innerHTML != '<p><br data-mce-bogus="1"></p>' && tinymce.get('parent'+id).getBody().innerHTML != '<p><br></p>') {
+                document.getElementById('submitNew'+id).removeAttribute('disabled');
+            } else {
+                document.getElementById('submitNew'+id).setAttribute('disabled', true);
+            }
+        }
+    } else if (e.currentTarget.dataset.id) {
+        if (e.currentTarget.dataset.id == 'no_parent') {
+            if (tinymce.get('no_parent').getBody().innerHTML != '<p><br data-mce-bogus="1"></p>' && tinymce.get('no_parent').getBody().innerHTML != '<p><br></p>') {
+                document.getElementById('submitNew').removeAttribute('disabled');
+            } else {
+                document.getElementById('submitNew').setAttribute('disabled', true);
+            }
+        } else {
+            var id = e.currentTarget.dataset.id.split('parent')[1];
+            if (tinymce.get('parent'+id).getBody().innerHTML != '<p><br data-mce-bogus="1"></p>' && tinymce.get('parent'+id).getBody().innerHTML != '<p><br></p>') {
+                document.getElementById('submitNew'+id).removeAttribute('disabled');
+            } else {
+                document.getElementById('submitNew'+id).setAttribute('disabled', true);
+            }
+        }
+    }
+}
+
+
+
 //éditeur comment sans parent
-const initEditorComment = (place) => {
+const initEditorComment = (place, content) => {
+    var content = content || null;
     tinymce.init({
         selector: place,
         plugins: ' autolink link emoticons autoresize wordcount',
@@ -308,7 +346,21 @@ const initEditorComment = (place) => {
         automatic_uploads: false,
         elementpath: false,
         a11y_advanced_options: true,
-        
+        //écoute les changement de contenu
+        setup: function(editor) {
+            editor.on('NodeChange', function(e){
+                contentChangeAction(e);
+            });
+            editor.on('KeyUp', function(e){
+                contentChangeAction(e);
+            })
+            /*editor.on('SelectionChange', function(e){
+                contentChangeAction(e);
+            });*/
+            editor.on('init', function(e){
+                console.log('init detect '+e+ '  '+content);
+            });
+        }
     });
     
 }

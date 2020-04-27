@@ -90,6 +90,23 @@ const sendMessage = (message, title) => {
     requete.send(data);
 }
 
+
+// action changement contenu editeur
+const contentChangeAction = (e) => {    
+    if (e.element) {
+        if(e.element.tagName === "IMG"){          
+            e.element.setAttribute("alt", "Posted image");
+        }
+    }
+
+    if (tinymce.get('message_editor').getBody().innerHTML != '<p><br data-mce-bogus="1"></p>' && tinymce.get('message_editor').getBody().innerHTML != '<p><br></p>' && document.getElementById("title").value.length >= 2) {
+        document.getElementById('submitbtn').removeAttribute('disabled');
+    } else {
+        document.getElementById('submitbtn').setAttribute('disabled', true);
+    }
+}
+
+
 // editor
 tinymce.init({
     selector: '#message_editor',
@@ -112,17 +129,16 @@ tinymce.init({
     automatic_uploads: false,
     elementpath: false,
     image_description: false,
+    content_style: 'img {max-width: 100%;}',
     //écoute les changement de contenu
     setup: function(editor) {
-        editor.on('input', function(e) {
-            console.log('change');
-            if (tinymce.get('message_editor').getBody().innerHTML.length >= 11 && document.getElementById("title").value.length >= 2) {
-                document.getElementById('submitbtn').removeAttribute('disabled');
-            } else {
-                document.getElementById('submitbtn').setAttribute('disabled', true);
-            }
+        editor.on('NodeChange', function(e){
+            contentChangeAction(e);
         });
-      }
+        editor.on('KeyUp', function(e){
+            contentChangeAction(e);
+        })
+    }
 });
 
 
