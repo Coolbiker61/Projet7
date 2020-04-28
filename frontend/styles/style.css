@@ -352,6 +352,7 @@ textarea {
   padding: 0.2em 0;
 }
 
+/* Toutes les couleurs de tous les éléments du site peuvent être personnalisé ici */
 body {
   background-color: #dae0e6;
   height: 100vh;
@@ -408,6 +409,7 @@ h1 {
   background-color: white;
   text-align: center;
   margin: auto;
+  color: black;
 }
 
 #btn_new_post:hover, #btn_new_post:focus, .btn:hover, .btn:focus {
@@ -423,6 +425,10 @@ h1 {
 
 #btn_new_post:disabled:hover, .btn:disabled:hover {
   background-color: red;
+}
+
+.bold {
+  font-weight: 600;
 }
 
 nav {
@@ -509,9 +515,6 @@ nav {
   position: relative;
   display: flex;
   flex-direction: column;
-}
-
-.back-login {
   visibility: hidden;
 }
 
@@ -548,7 +551,7 @@ nav {
   background-color: white;
   padding: 5px;
   box-shadow: 7px 7px 5px #535151;
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 600;
 }
 
@@ -923,17 +926,18 @@ nav {
 
 .users-liste {
   margin: 10px auto;
-  background-color: #26853e;
-  border: 5px solid #26853e;
+  background-color: white;
+  border: 2px solid rgba(55, 118, 255, 0.836);
   border-radius: 20px;
   align-self: flex-start;
 }
 
 .li-users-liste {
   padding: 15px;
-  background-color: #0de44d;
+  background-color: white;
   border-radius: 10px;
   color: black;
+  border: 2px solid rgba(55, 118, 255, 0.836);
   text-align: center;
   list-style: none;
   -webkit-border-radius: 10px;
@@ -942,11 +946,13 @@ nav {
   -o-border-radius: 10px;
   margin: 10px;
   font-size: 18px;
+  font-weight: 600;
 }
 
 .li-users-liste:hover {
-  background-color: #02242e;
+  background-color: slateblue;
   color: white;
+  box-shadow: 7px 7px 5px #535151;
   font-weight: 600;
   cursor: pointer;
 }
@@ -961,28 +967,35 @@ nav {
 }
 
 .users-details {
+  background-color: white;
+  border: 2px solid rgba(55, 118, 255, 0.836);
+  border-radius: 20px;
   font-size: 18px;
-  background-color: lightskyblue;
   margin: 20px;
   padding: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
 }
 
-.users-messages {
-  margin: 20px;
-  padding: 20px;
-  font-size: 18px;
-  background-color: lightskyblue;
+.users-details h2 {
+  font-size: 21px;
+  margin-bottom: 10px;
+  font-weight: 600;
 }
 
-.users-comments {
-  margin: 20px;
-  padding: 20px;
-  font-size: 18px;
-  background-color: lightskyblue;
+.users-details li {
+  margin: 5px;
 }
 
 .users-article, .users-reply {
-  padding: 10px;
-  background-color: #82eeb8;
+  padding: 10px 0;
+  background-color: white;
+  border: 2px solid rgba(55, 118, 255, 0.836);
   margin-top: 15px;
+}
+
+.users-article .content-article, .users-reply .content-article {
+  margin: 10px;
 }

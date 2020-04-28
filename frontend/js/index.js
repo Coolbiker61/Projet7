@@ -13,9 +13,11 @@ document.onreadystatechange = function () {
                     var response = JSON.parse(this.responseText);
                     document.getElementById("username").innerHTML = response.username;
                     if (response.isAdmin) {
-                        var html = "<div class=\"menu_profil_ligne\"><a href=\"/admin/users\">Administration</a></div>";
+                        var html = "<div class=\"menu_profil_ligne\" tabindex=\"0\" ><a href=\"/admin/users\">Administration</a></div>";
                         document.getElementById('logout').insertAdjacentHTML("beforebegin", html);
                     }
+
+					document.getElementById("loading").hidden = true;
                     document.querySelector(".back-login").style.setProperty('visibility', 'visible') ;
                 }
 			};

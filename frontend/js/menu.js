@@ -4,6 +4,13 @@ document.getElementById("link_profil").addEventListener("mouseover", function( e
 document.getElementById("link_profil").addEventListener("mouseleave", function( event ) {
     document.getElementById("menu_profil").style.visibility = "hidden";
 });
+document.getElementById("link_profil").addEventListener("focusin", function( event ) {
+    document.getElementById("menu_profil").style.visibility = "visible";
+});
+document.getElementById("link_profil").addEventListener("focusout", function( event ) {
+    document.getElementById("menu_profil").style.visibility = "hidden";
+});
+
 document.getElementById("logout").addEventListener("click", function(event) {
     event.preventDefault();
     event.stopPropagation();

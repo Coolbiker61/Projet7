@@ -1,13 +1,14 @@
 // au chargement de la page
-const charge =  () => {
-	// verifie si un token est present dans le sessionStorage
-	if (sessionStorage.getItem('token')) {
+document.onreadystatechange = function () {
+	if (document.readyState == 'loading') { 
+		// verifie si un token est present dans le sessionStorage
+		if (sessionStorage.getItem('token')) {
 		var requete = new XMLHttpRequest();
 		requete.onreadystatechange = function () {
+	// verifie si un token est present dans le sessionStorage
 			if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
 				console.log(this.responseText);
 				window.location.href = '/';
-				/*window.setTimeout(() => { window.location.reload(true);}, 200);*/
 			}
 		};
 		requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
@@ -15,9 +16,12 @@ const charge =  () => {
 		requete.setRequestHeader("Authorization", "Bearer "+this.sessionStorage.getItem('token'));
 		requete.send();
 		
+	} }
+    if (document.readyState == 'complete') { 
+		document.getElementById("loading").hidden = true;
+		document.getElementById("back-inscription").style.setProperty('visibility', 'visible') ;
 	}
-};
-if (document.readyState == 'loading') { charge() }
+}
 
 //regex de l'email
 const REGEX_MAIL = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

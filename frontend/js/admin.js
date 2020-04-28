@@ -61,8 +61,10 @@ document.onreadystatechange = function () {
 
 const addProfileUser = (response) => {
     var html = "<div class=\"users-details\" ><h2>Détails du compte</h2> ";
-    html += "<ul><li>Pseudo : "+response.username+"</li><li>Email : "+response.email+"</li>";
-    html += "<li>Inscrit le : "+response.createdAt+"</li><li>Rôle : ";
+    html += "<ul><li><span class=\"bold\">Pseudo : </span>"+response.username+"</li>";
+    html += "<li><span class=\"bold\">Email : </span>"+response.email+"</li>";
+    html += "<li><span class=\"bold\">Inscrit le : </span>"+response.createdAt+"</li>";
+    html += "<li><span class=\"bold\">Rôle : </span>";
     if (response.isAdmin) {
         html += "Administrateur";
     } else {
@@ -70,28 +72,28 @@ const addProfileUser = (response) => {
     }
     html += "</li></ul></div>";
     html += "";
-    html += "<div class=\"users-messages\" ><h2>Les 5 derniers messages de cet utilisateur</h2>";
+    html += "<div class=\"users-details\" ><h2>Les 5 derniers messages de cet utilisateur</h2>";
     if (response.Messages.length == 0) {
         html += "Cet utilisateur n'as poster aucun message.";
     } else {
         for (let i = 0; i < response.Messages.length; i++) {
             var message = response.Messages[i];
-            html += "<div class=\"users-article\" ><div>Titre : "+message.title;
+            html += "<div class=\"users-article\" ><div class=\"author\"><span class=\"bold\">Titre :</span> "+message.title;
             html += " | Il y a "+editTime(message.createdAt);
-            html += "</div><div>"+message.content;
+            html += "</div><div class=\"content-article\">"+message.content;
             html += "</div></div>";
         }
     }
     html += "</div>";
-    html += "<div class=\"users-comments\" ><h2>Les 5 derniers commentaires de cette utilisateur</h2>"
+    html += "<div class=\"users-details\" ><h2>Les 5 derniers commentaires de cette utilisateur</h2>"
     if (response.Comments.length == 0) {
         html += "Cet utilisateur n'as poster aucun commentaire.";
     } else {
         for (let i = 0; i < response.Comments.length; i++) {
             var comment = response.Comments[i];
-            html += "<div class=\"users-reply\" ><div>";
+            html += "<div class=\"users-reply\" ><div class=\"author\">";
             html += "Il y a "+editTime(comment.createdAt);
-            html += "</div><div>"+comment.content;
+            html += "</div><div class=\"content-article\">"+comment.content;
             html += "</div></div>";
         }
     }

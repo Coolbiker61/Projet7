@@ -54,6 +54,7 @@ h1 {
     background-color: $btn_bg_color;
     text-align: center;
     margin: auto;
+    color: $btn_font_color;
     &:hover, &:focus {
         padding: 10px;
         border-radius: 20px;
@@ -63,10 +64,15 @@ h1 {
         text-align: center;
         margin: auto;
         cursor:pointer;
+        
     }
     &:disabled {
         &:hover {
             background-color: red;
         }
     }
+}
+
+.bold {
+    font-weight: 600;
 }

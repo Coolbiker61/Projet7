@@ -12,10 +12,11 @@ exports.register = (req, res, then) => {
     html += "<script src=\"/js/register.js\" async></script>";
     html += "<title>Inscription - Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
-    html += "</li><li>Social Network</li>";
-    html += "<li><a href=\"/auth/login\"><div class=\"btn\">Connexion</div></a></li>";
-    html += "<li><a href=\"/auth/register\"><div class=\"btn\">Inscription</div></a></li></ul></nav>";
+    html += "</li>";
+    html += "<li><a href=\"/auth/login\"><div class=\"btn\" tabindex=\"0\">Connexion</div></a></li>";
+    html += "<li><a href=\"/auth/register\"><div class=\"btn\" tabindex=\"0\">Inscription</div></a></li></ul></nav>";
     html += "<div class=\"offset-top\"></div>";
+    html += "<div role=\"banner\" id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
     html += "<section id=\"back-inscription\" class=\"back-inscription\"><h1>Inscription</h1>";
     html += "<div class=\"form-register\">";
     html += "<label for=\"email\">Adresse mail</label>";
@@ -24,7 +25,7 @@ exports.register = (req, res, then) => {
     html += "<input type=\"text\" name=\"username\" id=\"username\" required patern=\""+REGEX_USERNAME+"\" />";
     html += "<label for=\"password\">Mot de passe</label>";
     html += "<input type=\"password\" name=\"password\" id=\"password\" required patern=\""+REGEX_PASSWORD+"\"/>";
-    html += "<div id=\"inscription\">S'inscrire </div>";
+    html += "<div id=\"inscription\" tabindex=\"0\">S'inscrire </div>";
     html += "</div><div id=\"erreur\"></div></section>";
 
     html += "</body></html>"
@@ -41,13 +42,13 @@ exports.login = (req, res, then) => {
     html += "<script src=\"/js/login.js\" defer></script>";
     html += "<title>Connexion - Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" role=\"banner\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
-    html += "</li><li><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
-    html += "<li><a href=\"/auth/login\"><div class=\"btn\">Connexion</div></a></li>";
-    html += "<li><a href=\"/auth/register\"><div class=\"btn\">Inscription</div></a></li></ul></nav>";
+    html += "</li><li><a href=\"/socialNetwork\"><div class=\"btn\" tabindex=\"0\">Social Network</div></a></li>";
+    html += "<li><a href=\"/auth/login\"><div class=\"btn\" tabindex=\"0\">Connexion</div></a></li>";
+    html += "<li><a href=\"/auth/register\"><div class=\"btn\" tabindex=\"0\">Inscription</div></a></li></ul></nav>";
     html += "<div class=\"offset-top\"></div>";
     // le logo animé qui reste affiché le temps du chargement
     html += "<div role=\"banner\" id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
-    html += "<section hidden id=\"back-login\" class=\"back-login\">";
+    html += "<section id=\"back-login\" class=\"back-login\">";
     html += "<h1>Connexion</h1><div class=\"form-login\">";
     html += "<label for=\"email\">Adresse mail</label>";
     html += "<input type=\"email\" id=\"email\" name=\"email\" required partern=\""+REGEX_EMAIL+"\" />";
@@ -141,7 +142,7 @@ exports.deleteAccountConfirm = (req, res, then) => {
     html += "</div></li>";
     html += "</ul></nav><div class=\"offset-top\"></div>";
 
-    html += "<div hidden id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
+    html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
     html += "<section  id=\"back\" class=\"back\"><h1>Confirmation de suppression du compte</h1><div class=\"confirm_delete\">";
     html += "<p>Dernière chance.</p>";
     html += "<p>Cette action est irréversible, êtes vous sur de vouloir supprimer votre compte ?</p>";

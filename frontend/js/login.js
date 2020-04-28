@@ -23,7 +23,7 @@ document.onreadystatechange = function () {
 			
 		} else {
 			document.getElementById("loading").hidden = true;
-			document.getElementById("back-login").hidden = false;
+			document.getElementById("back-login").style.setProperty('visibility', 'visible') ;
 		}
 	};
 };

@@ -8,7 +8,7 @@
 .users-liste {
     margin: 10px auto;
     background-color: $users_liste_bg_color;
-    border: 5px solid $users_liste_bg_color;
+    border: 2px solid $users_liste_border_color;
     border-radius: 20px;
     align-self: flex-start;
 }
@@ -17,6 +17,7 @@
     background-color: $li_users_liste_bg_color;
     border-radius: 10px;
     color: $li_users_liste_text_color;
+    border: 2px solid $li_users_liste_border_color;
     text-align: center;
     list-style: none;
     -webkit-border-radius: 10px;
@@ -25,12 +26,14 @@
     -o-border-radius: 10px;
     margin: 10px;
     font-size: 18px;
-}
-.li-users-liste:hover {
-    background-color: $li_users_liste_hover_bg_color;
-    color: $li_users_liste_hover_text_color;
     font-weight: 600;
-    cursor:pointer;
+    &:hover {
+        background-color: $li_users_liste_hover_bg_color;
+        color: $li_users_liste_hover_text_color;
+        box-shadow: 7px 7px 5px $li_users_liste_shadow;
+        font-weight: 600;
+        cursor:pointer;
+    }
 }
 #bloc-users-profile {
     margin: 15px;
@@ -39,27 +42,35 @@
     display: flex;
     margin-top: 25px;
 }
-.users-details {
-    font-size: 18px;
+.users-details{
     background-color: $users_details_bg_color;
+    border: 2px solid $users_liste_border_color;
+    border-radius: 20px;
+    font-size: 18px;
     margin: 20px;
     padding: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    h2 {
+        font-size: 21px;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+    li {
+        margin: 5px;
+    }
+    
 }
-.users-messages {
-    margin: 20px;
-    padding: 20px;
-    font-size: 18px;
-    background-color: $users_details_bg_color;
-}
-.users-comments {
-    margin: 20px;
-    padding: 20px;
-    font-size: 18px;
-    background-color: $users_details_bg_color;
-}
+
 .users-article, .users-reply {
-    padding: 10px;
+    padding: 10px 0;
     background-color: $users_article_users_reply_bg_color;
+    border: 2px solid $users_liste_border_color;
     margin-top: 15px;
+    .content-article {
+        margin: 10px;
+    }
 }
 

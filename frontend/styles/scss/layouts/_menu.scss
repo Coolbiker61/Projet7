@@ -16,10 +16,10 @@ nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-.menu li {
-    padding: 10px;
-    align-self: center;
+    li {
+        padding: 10px;
+        align-self: center;
+    }
 }
 .logo-entreprise {
     height: 20px;
