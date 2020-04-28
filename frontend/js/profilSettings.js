@@ -20,6 +20,7 @@ document.onreadystatechange = function () {
                     }
                     document.getElementById("email").innerHTML = response.email;
                     document.getElementById("username_detail").innerHTML = response.username;
+                    document.getElementById("back").style.setProperty('visibility', 'visible') ;
                     ecoute();
                 }
 			};

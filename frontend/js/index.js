@@ -16,6 +16,7 @@ document.onreadystatechange = function () {
                         var html = "<div class=\"menu_profil_ligne\"><a href=\"/admin/users\">Administration</a></div>";
                         document.getElementById('logout').insertAdjacentHTML("beforebegin", html);
                     }
+                    document.querySelector(".back-login").style.setProperty('visibility', 'visible') ;
                 }
 			};
 			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");

@@ -20,6 +20,7 @@ document.onreadystatechange = function () {
                     listenerEvent();
                     document.getElementById("loading").hidden = true;
                     document.getElementById("create_form").hidden = false;
+                    document.getElementById("back").style.setProperty('visibility', 'visible') ;
                 }
 			};
 			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");

@@ -30,6 +30,21 @@ h1 {
     text-align: center;
 }
 
+.back {
+    background-image: url('../images/icon.svg');
+    background-repeat:no-repeat;
+    background-position: center top;
+    background-attachment: fixed;
+    background-size: contain;
+    margin: 0 auto; 
+    padding-top: 5px;
+    width: 100vh;
+    min-height: calc(100% - #{$menu_height});
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+}
 
 #btn_new_post, .btn {
     padding: 10px;

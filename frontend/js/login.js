@@ -13,7 +13,7 @@ document.onreadystatechange = function () {
 					window.setTimeout(() => { window.location.href = '/';}, 2000);
 				} else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
 					document.getElementById("loading").hidden = true;
-					document.getElementById("back-login").hidden = false;
+					document.getElementById("back-login").style.setProperty('visibility', 'visible') ;
 				}
 			};
 			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");

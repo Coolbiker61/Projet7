@@ -32,24 +32,31 @@ nav {
     z-index: 6;
     float: right;
     background-color: $menu_profil_bg_color;
+    border: 2px solid  $menu_profil_ligne_border;
+    border-radius: 20px;
+    box-shadow: 7px 7px 5px $btn_box_shadow;
     top: 60px;
     right: 10px;
     position: absolute;
+    padding: 5px;
 }
 .menu_profil_ligne {
     padding: 10px;
-    border: 1px solid  $menu_profil_ligne_border;
+    border: 2px solid  $menu_profil_ligne_border;
+    box-shadow: 7px 7px 5px $btn_box_shadow;
     text-align: center;
+    margin: 5px 0;
     width: 110px;
+    border-radius: 20px;
     &:hover {
         background-color: $btn_hover_bg_color;
         color: $btn_hover_text_color;
+        a:visited {
+            color: $btn_hover_text_color;
+        }
     }
     a:visited {
         color: $btn_font_color;
-        &:hover {
-            color: $btn_hover_text_color;
-        }
     }
 }
 #link_profil {
