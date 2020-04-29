@@ -28,8 +28,9 @@ $menu_profil_bg_color:$btn_bg_color;
 $menu_profil_ligne_border: $btn_border;
 
 $quick_profile_bg_color: $background_menu;
-$icon_settings_text_color: deepskyblue;
-$icon_settings_hover_text_color: red;
+$quick_profile_border: $btn_border;
+$icon_settings_text_color: $btn_border;
+$icon_settings_hover_text_color: $author_text_color;
 $profile_details_border_color: #222;
 $profile_details_bg_color: #dae0e6;
 $btn_delete_border: rgba(245, 245, 245, 0.685);

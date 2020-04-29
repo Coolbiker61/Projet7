@@ -11,7 +11,9 @@
 #quick_profile {
     width: 20vw;
     background-color: $quick_profile_bg_color;
-    height: 5vw;
+    border: 2px solid $quick_profile_border;
+    border-radius: 20px;
+    height: fit-content;
     margin-top: 50px;
     padding: 10px;
     display: flex;
@@ -23,9 +25,11 @@
 }
 .icon_settings {
     color: $icon_settings_text_color;
-}
-.icon_settings:hover {
-    color: $icon_settings_hover_text_color;
+    transition: transform 2s;
+    &:hover {
+        color: $icon_settings_hover_text_color;
+        transform: scale(1.75) rotate(180deg);
+    }
 }
 
 /* profile detaillé -------------------------------------------------------------------------------------*/

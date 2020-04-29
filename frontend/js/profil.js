@@ -1,3 +1,31 @@
+const editTime = (param) => {
+    // format de la base 2020-04-02T22:19:43.000Z
+    const date = Date.parse(param);
+    const dateNow = Date.now();
+    var difference = dateNow - date;
+    difference /= 1000;
+    difference = Math.trunc(difference);
+    let seconde = difference % 60;
+    difference -= seconde; 
+    difference /= 60;
+    let minute = difference % 60;
+    difference -= minute;
+    difference /= 60;
+    let heure = difference % 24;
+    difference -= heure;
+    difference /= 24;
+    let day = difference;
+
+    if (day) {
+        return day+" jours";
+    } else if (heure) {
+        return heure+" heures";
+    } else if (minute) {
+        return minute+" minutes";
+    } else {
+        return seconde+" secondes";
+    }
+}
 
 const importeMessage = (id) => {
     var requete = new XMLHttpRequest();
@@ -27,9 +55,8 @@ const addMessage = (message) => {
     html += "<div class=\"nb-likes\">"+message.likes+"</div>";
     html += "<i class=\"fas fa-arrow-down like-down-not\"></i></div>";
     html += "<section class=\"corp\"><header class=\"author\">";
-    html += "Posted by "+message.User.username+" le : ";
-    var date = message.createdAt.split('T');
-    html += date[0]+" à "+date[1]; 
+    html += "Il y a ";
+    html += editTime(message.createdAt); 
     html += "</header><article><header><h3 class=\"title-article\">";
     html += message.title;
     html += "</h3></header><p class=\"content-article\">"+message.content;

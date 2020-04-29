@@ -807,7 +807,9 @@ nav {
 #quick_profile {
   width: 20vw;
   background-color: white;
-  height: 5vw;
+  border: 2px solid rgba(55, 118, 255, 0.836);
+  border-radius: 20px;
+  height: fit-content;
   margin-top: 50px;
   padding: 10px;
   display: flex;
@@ -820,11 +822,13 @@ nav {
 }
 
 .icon_settings {
-  color: deepskyblue;
+  color: rgba(55, 118, 255, 0.836);
+  transition: transform 2s;
 }
 
 .icon_settings:hover {
-  color: red;
+  color: slateblue;
+  transform: scale(1.75) rotate(180deg);
 }
 
 /* profile detaillé -------------------------------------------------------------------------------------*/
