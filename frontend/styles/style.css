@@ -353,6 +353,12 @@ textarea {
 }
 
 /* Toutes les couleurs de tous les éléments du site peuvent être personnalisé ici */
+/* couleur de fond des pages */
+/* couleurs des éléments des messages */
+/* couleur des boutons */
+/* couleur de fond du menu utilisateur */
+/* couleur des pages du profil */
+/* couleurs des éléments de la page administration */
 body {
   background-color: #dae0e6;
   height: 100vh;
@@ -804,6 +810,10 @@ nav {
   margin: 10px;
 }
 
+.liste_message .corp {
+  cursor: pointer;
+}
+
 #quick_profile {
   width: 20vw;
   background-color: white;
@@ -813,8 +823,18 @@ nav {
   margin-top: 50px;
   padding: 10px;
   display: flex;
+  flex-direction: column;
   font-size: 25px;
-  justify-content: space-around;
+}
+
+#quick_profile a {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#quick_profile a:hover .icon_settings {
+  color: slateblue;
+  transform: scale(1.75) rotate(180deg);
 }
 
 #mini_username {
@@ -824,21 +844,18 @@ nav {
 .icon_settings {
   color: rgba(55, 118, 255, 0.836);
   transition: transform 2s;
-}
-
-.icon_settings:hover {
-  color: slateblue;
-  transform: scale(1.75) rotate(180deg);
+  margin-right: 10px;
 }
 
 /* profile detaillé -------------------------------------------------------------------------------------*/
 .profile_details {
-  border: 2px solid #222;
+  border: 2px solid rgba(55, 118, 255, 0.836);
   width: 300px;
   padding: 20px;
   margin: 35vh auto 0;
-  background-color: #dae0e6;
+  background-color: white;
   border-radius: 10px;
+  font-size: 19px;
 }
 
 .profile_details div {
@@ -848,17 +865,23 @@ nav {
 .btn_delete {
   padding: 10px;
   border-radius: 20px;
-  border: 2px solid rgba(245, 245, 245, 0.685);
-  cursor: pointer;
+  border: 2px solid red;
+  background-color: #d4d4d4;
   text-align: center;
   margin: auto;
 }
 
 .btn_delete_active {
-  border: 2px solid rgba(143, 143, 143, 0.993);
-  background-color: royalblue;
+  border: 2px solid rgba(55, 118, 255, 0.836);
+  background-color: white;
   box-shadow: 7px 7px 5px #535151;
+  color: black;
+  cursor: pointer;
+}
+
+.btn_delete_active:hover {
   color: white;
+  background-color: slateblue;
 }
 
 .delete_box {
@@ -881,12 +904,13 @@ nav {
 /* confirm delete account ------------------------------------------------------------------*/
 .confirm_delete {
   width: 520px;
-  margin: 35vh auto 0;
+  margin: auto;
   justify-content: center;
-  background-color: #dae0e6;
+  background-color: white;
   padding: 10px;
-  border: 2px solid #222;
+  border: 2px solid rgba(55, 118, 255, 0.836);
   border-radius: 10px;
+  font-size: 19px;
 }
 
 .choice {
@@ -897,28 +921,36 @@ nav {
 #btn_oui, #btn_non {
   padding: 10px;
   border-radius: 20px;
-  border: 2px solid rgba(245, 245, 245, 0.685);
+  border: 2px solid rgba(55, 118, 255, 0.836);
   width: 50px;
   text-align: center;
   margin: auto;
+  font-weight: 600;
+}
+
+#btn_oui:hover, #btn_non:hover {
+  box-shadow: 7px 7px 5px #535151;
+  cursor: pointer;
 }
 
 #btn_oui {
-  background-color: forestgreen;
+  background-color: #195e1a;
+  color: white;
 }
 
 #btn_oui:hover {
   background-color: #00c900;
-  box-shadow: 7px 7px 5px #535151;
+  color: black;
 }
 
 #btn_non {
   background-color: #a30121;
+  color: white;
 }
 
 #btn_non:hover {
   background-color: #ee0404;
-  box-shadow: 7px 7px 5px #535151;
+  color: white;
 }
 
 /* - admin ----*/

@@ -67,28 +67,31 @@ exports.login = (req, res, then) => {
 exports.getProfile = (req, res, then) => {
     let html = "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\">";
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
-    html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
+    html += "<link rel=\"icon\" href=\"/images/favicon.ico\" />";
+    html += "<link rel=\"stylesheet\" href=\"/styles/style.min.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/profil.js\" async></script>";
     html += "<script src=\"/js/menu.js\" async></script>";
     html += "<title>Votre profile - Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
-    html += "<li id=\"link_profil\"><div class=\"btn\"><span id=\"username\"></span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "<li id=\"link_profil\"><div class=\"btn\"><span id=\"username\"></span></div>";
+    html += "<div style=\"visibility: hidden;\" id=\"menu_profil\">";
     html += "<div class=\"menu_profil_ligne\"><a href=\"/auth/profil\">Profil</a></div>";
     html += "<div id=\"logout\" class=\"menu_profil_ligne\"><a href=\"/auth/login\">Déconnexion</a></div>";
     html += "</div></li>";
     html += "</ul></nav><div class=\"offset-top\"></div>";
 
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
-    html += "<div style=\"visibility: hidden;\" id=\"profile\"><h1>Votre profile</h1>";
-    html += "<section  id=\"liste_message\" class=\"liste_message\">";
+    html += "<div class=\"back\" style=\"visibility: hidden;\"><h1>Votre profile</h1>";
+    html += "<div  id=\"profile\"><section  id=\"liste_message\" class=\"liste_message\">";
     html += "Vos cinq dernier messages :";
     html += "<div id=\"error\" class=\"error\"></div></section>";
     html += "<section id=\"quick_profile\">";
     html += "<div id=\"mini_username\">username</div>";
-    html +="<a href=\"/auth/profil/settings\" ><i id=\"profil_settings\" class=\"fas fa-cog icon_settings\"></i></a>";
-    html += "</section>";
+    html +="<a href=\"/auth/profil/settings\" >";
+    html += "<i id=\"profil_settings\" class=\"fas fa-cog icon_settings\"></i>Options avancés</a>";
+    html += "</section></div>";
     html += "</div></body></html>"
     res.writeHeader(200 ,{'Content-Type': 'text/html'});
     res.write(html);

@@ -19,6 +19,8 @@ document.onreadystatechange = function () {
                         document.getElementById('logout').insertAdjacentHTML("beforebegin", html);
                     }                    
                     ecoute();
+                    document.getElementById("loading").hidden = true;
+                    document.getElementById("back").style.setProperty('visibility', 'visible') ;
                 }
 			};
 			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
@@ -53,5 +55,3 @@ const ecoute = () => {
             window.location.href = '/auth/profil/settings';
     })
 }
-
-// delete http://localhost:3000/api/v1/auth/

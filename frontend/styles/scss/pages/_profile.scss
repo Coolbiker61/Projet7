@@ -7,6 +7,9 @@
 }
 .liste_message {
     margin: 10px;
+    .corp {
+        cursor:pointer;
+    }
 }
 #quick_profile {
     width: 20vw;
@@ -17,8 +20,20 @@
     margin-top: 50px;
     padding: 10px;
     display: flex;
+    flex-direction: column;
     font-size: 25px;
-    justify-content: space-around;
+    a {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        &:hover {
+            .icon_settings {
+                color: $icon_settings_hover_text_color;
+                transform: scale(1.75) rotate(180deg);
+            }
+            
+        }
+    }
+    
 }
 #mini_username {
     text-align: left;
@@ -26,10 +41,7 @@
 .icon_settings {
     color: $icon_settings_text_color;
     transition: transform 2s;
-    &:hover {
-        color: $icon_settings_hover_text_color;
-        transform: scale(1.75) rotate(180deg);
-    }
+    margin-right: 10px;
 }
 
 /* profile detaillé -------------------------------------------------------------------------------------*/
@@ -40,6 +52,8 @@
     margin: 35vh auto 0;
     background-color: $profile_details_bg_color;
     border-radius: 10px;
+
+    font-size: $font_size_normal;
 }
 .profile_details div {
     margin: 10px;
@@ -48,15 +62,21 @@
     padding: 10px;
     border-radius: 20px;
     border: 2px solid $btn_delete_border;
-    cursor:pointer;
+    background-color: $btn_delete_bg_color;
     text-align: center;
     margin: auto;
-}
-.btn_delete_active {
-    border: 2px solid $btn_delete_active_border;
-    background-color: $btn_delete_active_bg_color;
-    box-shadow: 7px 7px 5px $btn_delete_active_box_shadow;
-    color: $btn_delete_active_text_color;
+    &_active {
+        border: 2px solid $btn_delete_active_border;
+        background-color: $btn_delete_active_bg_color;
+        box-shadow: 7px 7px 5px $btn_delete_active_box_shadow;
+        color: $btn_delete_active_text_color;
+        cursor:pointer;
+        &:hover {
+            color: $btn_delete_active_text_color_hover;
+            background-color: $btn_delete_active_bg_color_hover;
+        }
+    }
+    
 }
 
 .delete_box {
@@ -79,12 +99,13 @@
 /* confirm delete account ------------------------------------------------------------------*/
 .confirm_delete {
     width: 520px;
-    margin: 35vh auto 0;
+    margin: auto;
     justify-content: center;
     background-color: $confirm_delete_bg_color;
     padding: 10px;
     border: 2px solid $confirm_delete_border_color;
     border-radius: 10px;
+    font-size: $font_size_normal;
 }
 
 .choice {
@@ -98,20 +119,27 @@
     width: 50px;
     text-align: center;
     margin: auto;
+    font-weight: 600;
+    &:hover{
+        box-shadow: 7px 7px 5px $btn_non_hover_box_shadow;
+        cursor:pointer;
+    }
 }
 #btn_oui {
     background-color: $btn_oui_bg_color;
-}
-#btn_oui:hover {
-    background-color: $btn_oui_hover_bg_color;
-    box-shadow: 7px 7px 5px $btn_oui_hover_box_shadow;
+    color: $btn_oui_font_color;
+    &:hover {
+        background-color: $btn_oui_hover_bg_color;
+        color: $btn_oui_hover_font_color;
+    }
 }
 #btn_non {
     background-color: $btn_non_bg_color;
-}
-#btn_non:hover {
-    background-color: $btn_non_hover_bg_color;
-    box-shadow: 7px 7px 5px $btn_non_hover_box_shadow;
+    color: $btn_non_font_color;
+    &:hover {
+        background-color: $btn_non_hover_bg_color;
+        color: $btn_non_hover_font_color;
+    }
 }
 
 
