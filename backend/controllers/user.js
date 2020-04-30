@@ -278,7 +278,7 @@ exports.adminDeleteUserProfile = (req, res, then) => {
                     res.status(500).json({ error });
                 })
             }
-
+// destroy({ cascade: true });
             
         } else {
             res.status(404).json({ 'error': 'User not found'});
