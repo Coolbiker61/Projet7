@@ -124,20 +124,27 @@ exports.deleteUser = (req, res, then) => {
     })
         .then(user => {
             if (user) {
-                models.Message.destroy({ where: { UserId: userId } })
-                .then(message => {
-                    models.User.destroy({ where: { id: userId } })
-                    .then(oldUser => {
-                        if (oldUser) {
-                            res.status(200).json({ message: 'user delete !'});
-                        } else {
-                            res.status(404).json({ 'error': 'user not found !'});
-                        }
+                models.Comment.destroy({ wher: { UserId: userId } })
+                .then(() => {
+                    models.Like.destroy({ where: { UserId: userId } })
+                    .then(() => {
+                        models.Message.destroy({ where: { UserId: userId } })
+                        .then(() => {
+                            models.User.destroy({ where: { id: userId } })
+                            .then(oldUser => {
+                                if (oldUser) {
+                                    res.status(200).json({ message: 'user delete !'});
+                                } else {
+                                    res.status(404).json({ 'error': 'user not found !'});
+                                }
+                            })
+                            .catch(error => { res.status(500).json({ error }); })
+                        })
+                        .catch(error => { res.status(500).json({ error }); })
                     })
                     .catch(error => { res.status(500).json({ error }); })
                 })
-                .catch(error => { res.status(500).json({ error }); })
-                    
+                .catch(error => { res.status(500).json({ error }); }); 
             } else {
                 res.status(404).json({ 'error': 'User not found'});
             }
@@ -233,3 +240,51 @@ exports.adminGetUserProfile = (req, res, then) => {
     })
 }
 
+
+exports.adminDeleteUserProfile = (req, res, then) => {
+    var headerAuth = req.headers['authorization'];
+    var userId = jwtUtils.getUserId(headerAuth);
+    var userQuery = parseInt(req.params.id);
+
+    if (userId < 0) {
+        return res.status(401).json({ 'error': 'Action not allow !'});
+    }
+    if ( isNaN(userQuery) || userQuery < 0) {
+        return res.status(401).json({ 'error': 'Invalid argument !'});
+    }
+
+    models.User.findOne({ attributes: [ 'id', 'email', 'username', 'isAdmin'], where: { id: userId } })
+    .then(admin => {
+        if (admin) {
+            if (admin.isAdmin) {
+                models.User.findOne({ attributes: [ 'id', 'email', 'username', 'isAdmin', 'createdAt'], 
+                where: { id: userQuery },
+                include: [{
+                    model: models.Message,
+                    attributes: ['id', 'title', 'content', 'createdAt']
+                },
+                {
+                    model: models.Comment,
+                    attributes: ['messageId', 'content', 'createdAt']
+                }]})
+                .then(user => {
+                    if (user) {
+                        res.status(200).json(user);
+                    } else {
+                        res.status(404).json({ 'error': 'User not found'});
+                    }
+                })
+                .catch(error => {
+                    res.status(500).json({ error });
+                })
+            }
+
+            
+        } else {
+            res.status(404).json({ 'error': 'User not found'});
+        }
+    })
+    .catch(error => {
+        res.status(500).json({ error });
+    })
+}

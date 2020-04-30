@@ -7,6 +7,7 @@ const REGEX_PASSWORD = "^[a-zA-Z]\w{4,25}$";
 exports.register = (req, res, then) => {
     let html = "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\">";
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
+    html += "<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon.png\" />";
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/register.js\" async></script>";
@@ -37,6 +38,7 @@ exports.register = (req, res, then) => {
 exports.login = (req, res, then) => {
     let html = "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\">";
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
+    html += "<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon.png\" />";
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/login.js\" defer></script>";
@@ -100,6 +102,7 @@ exports.getProfile = (req, res, then) => {
 exports.getProfileSettings = (req, res, then) => {
     let html = "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\">";
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
+    html += "<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon.png\" />";
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/profilSettings.js\" async></script>";
@@ -132,6 +135,7 @@ exports.getProfileSettings = (req, res, then) => {
 exports.deleteAccountConfirm = (req, res, then) => {
     let html = "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\">";
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
+    html += "<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon.png\" />";
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"/js/confirmD.js\" async></script>";
