@@ -104,7 +104,7 @@ exports.getAllMessagesUser = (req, res, then ) => {
                     attributes: ['id', 'username']
                 }],
                 where: {
-                    UserId: user.id
+                    UserId: idOfUser
                 }
             })
             .then(message => {

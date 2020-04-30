@@ -99,16 +99,16 @@ exports.getUserProfile = (req, res, then) => {
         attributes: [ 'id', 'email', 'username', 'isAdmin'],
         where: { id: userId }
     })
-        .then(user => {
-            if (user) {
-                res.status(200).json(user);
-            } else {
-                res.status(404).json({ 'error': 'User not found'});
-            }
-        })
-        .catch(error => {
-            res.status(500).json({ error });
-        })
+    .then(user => {
+        if (user) {
+            res.status(200).json(user);
+        } else {
+            res.status(404).json({ 'error': 'User not found'});
+        }
+    })
+    .catch(error => {
+        res.status(500).json({ error });
+    })
 }
 
 exports.deleteUser = (req, res, then) => {
@@ -122,36 +122,27 @@ exports.deleteUser = (req, res, then) => {
         attributes: [ 'id', 'email', 'username', 'isAdmin'],
         where: { id: userId }
     })
-        .then(user => {
-            if (user) {
-                models.Comment.destroy({ wher: { UserId: userId } })
-                .then(() => {
-                    models.Like.destroy({ where: { UserId: userId } })
-                    .then(() => {
-                        models.Message.destroy({ where: { UserId: userId } })
-                        .then(() => {
-                            models.User.destroy({ where: { id: userId } })
-                            .then(oldUser => {
-                                if (oldUser) {
-                                    res.status(200).json({ message: 'user delete !'});
-                                } else {
-                                    res.status(404).json({ 'error': 'user not found !'});
-                                }
-                            })
-                            .catch(error => { res.status(500).json({ error }); })
-                        })
-                        .catch(error => { res.status(500).json({ error }); })
-                    })
-                    .catch(error => { res.status(500).json({ error }); })
-                })
-                .catch(error => { res.status(500).json({ error }); }); 
-            } else {
-                res.status(404).json({ 'error': 'User not found'});
-            }
-        })
-        .catch(error => {
-            res.status(500).json({ error });
-        })
+    .then(user => {
+        if (user) {
+
+            models.User.destroy({ where: { id: userId }})
+            .then(oldUser => {
+                if (oldUser) {
+                    res.status(200).json({ message: 'user delete !'});
+                } else {
+                    res.status(404).json({ 'error': 'user not found !'});
+                }
+            })
+            .catch(error => { 
+                console.log(error);
+                res.status(500).json({ error }); })
+        } else {
+            res.status(404).json({ 'error': 'User not found'});
+        }
+    })
+    .catch(error => {
+        res.status(500).json({ error });
+    })
 };
 
 

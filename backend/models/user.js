@@ -7,9 +7,9 @@ module.exports = (sequelize, DataTypes) => {
     isAdmin: DataTypes.BOOLEAN
   });
   User.associate = (models) => {
-    User.hasMany(models.Message),
-    User.hasMany(models.Like, { foreignKey: 'userId' }),
-    User.hasMany(models.Comment, { foreignKey: 'userId' })
+    User.hasMany(models.Message, {onDelete: 'CASCADE'}),
+    User.hasMany(models.Like, { foreignKey: 'userId', onDelete: 'CASCADE' }),
+    User.hasMany(models.Comment, { foreignKey: 'userId', onDelete: 'CASCADE' })
   };
   return User;
 };

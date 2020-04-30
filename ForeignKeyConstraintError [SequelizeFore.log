@@ -1,0 +1,63 @@
+ForeignKeyConstraintError [SequelizeForeignKeyConstraintError]: Cannot delete or update a parent row: a foreign key constraint fails (`database_dev`.`Comments`, CONSTRAINT `Comments_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `Users` (`id`))
+    at Query.formatError (/home/jackolantern/Bureau/Projet7/backend/node_modules/sequelize/lib/dialects/mysql/query.js:233:16)
+    at Query.handler [as onResult] (/home/jackolantern/Bureau/Projet7/backend/node_modules/sequelize/lib/dialects/mysql/query.js:51:23)
+    at Query.execute (/home/jackolantern/Bureau/Projet7/backend/node_modules/mysql2/lib/commands/command.js:30:14)
+    at Connection.handlePacket (/home/jackolantern/Bureau/Projet7/backend/node_modules/mysql2/lib/connection.js:417:32)
+    at PacketParser.onPacket (/home/jackolantern/Bureau/Projet7/backend/node_modules/mysql2/lib/connection.js:75:12)
+    at PacketParser.executeStart (/home/jackolantern/Bureau/Projet7/backend/node_modules/mysql2/lib/packet_parser.js:75:16)
+    at Socket.<anonymous> (/home/jackolantern/Bureau/Projet7/backend/node_modules/mysql2/lib/connection.js:82:25)
+    at Socket.emit (events.js:310:20)
+    at addChunk (_stream_readable.js:286:12)
+    at readableAddChunk (_stream_readable.js:268:9)
+    at Socket.Readable.push (_stream_readable.js:209:10)
+    at TCP.onStreamRead (internal/stream_base_commons.js:186:23) {
+  parent: Error: Cannot delete or update a parent row: a foreign key constraint fails (`database_dev`.`Comments`, CONSTRAINT `Comments_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `Users` (`id`))
+      at Packet.asError (/home/jackolantern/Bureau/Projet7/backend/node_modules/mysql2/lib/packets/packet.js:712:17)
+      at Query.execute (/home/jackolantern/Bureau/Projet7/backend/node_modules/mysql2/lib/commands/command.js:28:26)
+      at Connection.handlePacket (/home/jackolantern/Bureau/Projet7/backend/node_modules/mysql2/lib/connection.js:417:32)
+      at PacketParser.onPacket (/home/jackolantern/Bureau/Projet7/backend/node_modules/mysql2/lib/connection.js:75:12)
+      at PacketParser.executeStart (/home/jackolantern/Bureau/Projet7/backend/node_modules/mysql2/lib/packet_parser.js:75:16)
+      at Socket.<anonymous> (/home/jackolantern/Bureau/Projet7/backend/node_modules/mysql2/lib/connection.js:82:25)
+      at Socket.emit (events.js:310:20)
+      at addChunk (_stream_readable.js:286:12)
+      at readableAddChunk (_stream_readable.js:268:9)
+      at Socket.Readable.push (_stream_readable.js:209:10)
+      at TCP.onStreamRead (internal/stream_base_commons.js:186:23) {
+    code: 'ER_ROW_IS_REFERENCED_2',
+    errno: 1451,
+    sqlState: '23000',
+    sqlMessage: 'Cannot delete or update a parent row: a foreign key constraint fails (`database_dev`.`Comments`, CONSTRAINT `Comments_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `Users` (`id`))',
+    sql: 'DELETE FROM `Users` WHERE `id` = 3',
+    parameters: undefined
+  },
+  original: Error: Cannot delete or update a parent row: a foreign key constraint fails (`database_dev`.`Comments`, CONSTRAINT `Comments_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `Users` (`id`))
+      at Packet.asError (/home/jackolantern/Bureau/Projet7/backend/node_modules/mysql2/lib/packets/packet.js:712:17)
+      at Query.execute (/home/jackolantern/Bureau/Projet7/backend/node_modules/mysql2/lib/commands/command.js:28:26)
+      at Connection.handlePacket (/home/jackolantern/Bureau/Projet7/backend/node_modules/mysql2/lib/connection.js:417:32)
+      at PacketParser.onPacket (/home/jackolantern/Bureau/Projet7/backend/node_modules/mysql2/lib/connection.js:75:12)
+      at PacketParser.executeStart (/home/jackolantern/Bureau/Projet7/backend/node_modules/mysql2/lib/packet_parser.js:75:16)
+      at Socket.<anonymous> (/home/jackolantern/Bureau/Projet7/backend/node_modules/mysql2/lib/connection.js:82:25)
+      at Socket.emit (events.js:310:20)
+      at addChunk (_stream_readable.js:286:12)
+      at readableAddChunk (_stream_readable.js:268:9)
+      at Socket.Readable.push (_stream_readable.js:209:10)
+      at TCP.onStreamRead (internal/stream_base_commons.js:186:23) {
+    code: 'ER_ROW_IS_REFERENCED_2',
+    errno: 1451,
+    sqlState: '23000',
+    sqlMessage: 'Cannot delete or update a parent row: a foreign key constraint fails (`database_dev`.`Comments`, CONSTRAINT `Comments_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `Users` (`id`))',
+    sql: 'DELETE FROM `Users` WHERE `id` = 3',
+    parameters: undefined
+  },
+  sql: 'DELETE FROM `Users` WHERE `id` = 3',
+  parameters: undefined,
+  fields: [ 'userId' ],
+  table: 'Users',
+  value: undefined,
+  index: 'Comments_ibfk_1',
+  reltype: 'parent'
+}
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+(node:32356) [SEQUELIZE0004] DeprecationWarning: A boolean value was passed to options.operatorsAliases. This is a no-op with v5 and should be removed.
+Listening on port 3000
