@@ -124,38 +124,102 @@ exports.deleteUser = (req, res, then) => {
     })
     .then(user => {
         if (user) {
-
-            models.User.destroy({ where: { id: userId }})
-            .then(user => {
-                if (user) {
-                    models.Comment.destroy({ wher: { UserId: userId } })
-                    .then(() => {
-                        models.Like.destroy({ where: { UserId: userId } })
-                        .then(() => {
-                            models.Message.destroy({ where: { UserId: userId } })
-                            .then(() => {
-                                models.User.destroy({ where: { id: userId } })
-                                .then(oldUser => {
-                                    if (oldUser) {
-                                        res.status(200).json({ message: 'user delete !'});
-                                    } else {
-                                        res.status(404).json({ 'error': 'user not found !'});
+            //recherche tous les messages de l'utilisateur et supprime les likes et les comments 
+            //de ces messages
+            models.Message.findAll({ where: { UserId: userId }, attributes: ['id', 'UserId'] })
+            .then(messages => {
+                if (messages.length > 0) {
+                    for (let i = 0; i < messages.length; i++) {
+                        models.Like.destroy({ where: { messageId: messages[i].id }})
+                        .then(()=> {
+                            console.log("likes of message id="+messages[i].id+" destroyed")
+                        })
+                        .catch(error => { res.status(500).json({ error }); }); 
+                        models.Comment.destroy({ where: { messageId: messages[i].id }})
+                        .then(()=> {
+                            console.log("Comments of message id="+messages[i].id+" destroyed")
+                        })
+                        .catch(error => { res.status(500).json({ error }); }); 
+                    }
+                    //supprime tous les messages de l'utilisateur
+                    models.Message.destroy({ where: { UserId: userId }})
+                    .then(result => { console.log("message of user id="+userId+" destroyed !")})
+                    .catch(error => { res.status(500).json({ error }); });
+                }
+                var commentsListe = [];
+                let commentNeedDestroy= [];
+                // recherche les commentaire de l'utilisateur ainsi que les commentaires
+                // enfant de ces derniers et les supprimes
+                models.Comment.findAll({ where: { UserId: userId }, attributes: ['id', 'parent']})
+                .then(comments => {
+                    if (comments.length > 0) {
+                        while (comments.length > 0) {
+                            commentsListe = comments;
+                            for (const element in commentsListe ) {
+                                models.Comment.findAll({ where: { parentId: element.id }, attributes: ['id', 'parent']})
+                                .then(response => {
+                                    if (response.length > 0) {
+                                        comments = comments.concat(response);
                                     }
                                 })
-                                .catch(error => { res.status(500).json({ error }); })
-                            })
+                                .catch(error => { res.status(500).json({ error }); }); 
+                                commentNeedDestroy.push(element.id);
+                                comments.splice(comments.indexOf(element.id), 1);
+                            };
+                        }
+                        models.Comment.destroy({ where: { id: commentNeedDestroy } })
+                        .then(() => { console.log('comment destroyed');})
+                        .catch(error => { res.status(500).json({ error }); }); 
+                    }
+                    models.Like.findAll({ where: { UserId: userId }, attributes: ['id', 'messageId', 'likeType']})
+                    .then(likes => {
+                        if (likes.length > 0) {
+                            for (const like in likes) {
+                                if (like.likeType == -1) {
+                                    models.Message.findOne({ where: { id: like.messageId}})
+                                    .then(message => {
+                                        if (message) {
+                                            message.update({
+                                                likes: message.likes + 1
+                                            })
+                                            .then(()=> { })
+                                            .catch(error => { return res.status(500).json({ error })});
+                                        }
+                                    })
+                                } else if (like.likeType == 1) {
+                                    models.Message.findOne({ where: { id: like.messageId}})
+                                    .then(message => {
+                                        if (message) {
+                                            message.update({
+                                                likes: message.likes - 1
+                                            })
+                                            .then(()=> { })
+                                            .catch(error => { return res.status(500).json({ error })});
+                                        }
+                                    })
+                                }
+                            }
+                            models.Like.destroy({ where: { UserId: userId } })
+                            .then(() => {  })
                             .catch(error => { res.status(500).json({ error }); })
+                        }
+                        // supprime l'utilisateur
+                        models.User.destroy({ where: { id: userId } })
+                        .then(oldUser => {
+                            if (oldUser) {
+                                res.status(200).json({ message: 'user delete !'});
+                            } else {
+                                res.status(404).json({ 'error': 'user not found !'});
+                            }
                         })
                         .catch(error => { res.status(500).json({ error }); })
                     })
-                    .catch(error => { res.status(500).json({ error }); }); 
-                } else {
-                    res.status(404).json({ 'error': 'User not found'});
-                }
+                    .catch(error => { res.status(500).json({ error }); })
+                })
+                .catch(error => { res.status(500).json({ error }); });
             })
-            .catch(error => {
-                res.status(500).json({ error });
-            })
+            .catch(error => { res.status(500).json({ error }); });  
+            
         } else {
             res.status(404).json({ 'error': 'User not found'});
         }
