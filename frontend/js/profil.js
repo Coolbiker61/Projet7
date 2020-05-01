@@ -30,9 +30,11 @@ const editTime = (param) => {
 const importeMessage = (id) => {
     var requete = new XMLHttpRequest();
     requete.onreadystatechange = function () {
-        if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
-            alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
-            window.setTimeout(() => { window.location.href = '/auth/login';}, 2000);
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 404) {
+            var html = "Vous n'avez posté aucun message."
+            document.getElementById("liste_message").insertAdjacentHTML('beforeend', html);
+            document.getElementById("loading").hidden = true;
+            document.querySelector(".back").style.visibility = "visible";
         } else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             // si la requête des messages n'a pas retourné d'erreur
             var arrayMessage = JSON.parse(this.responseText);

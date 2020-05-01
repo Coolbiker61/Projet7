@@ -126,16 +126,36 @@ exports.deleteUser = (req, res, then) => {
         if (user) {
 
             models.User.destroy({ where: { id: userId }})
-            .then(oldUser => {
-                if (oldUser) {
-                    res.status(200).json({ message: 'user delete !'});
+            .then(user => {
+                if (user) {
+                    models.Comment.destroy({ wher: { UserId: userId } })
+                    .then(() => {
+                        models.Like.destroy({ where: { UserId: userId } })
+                        .then(() => {
+                            models.Message.destroy({ where: { UserId: userId } })
+                            .then(() => {
+                                models.User.destroy({ where: { id: userId } })
+                                .then(oldUser => {
+                                    if (oldUser) {
+                                        res.status(200).json({ message: 'user delete !'});
+                                    } else {
+                                        res.status(404).json({ 'error': 'user not found !'});
+                                    }
+                                })
+                                .catch(error => { res.status(500).json({ error }); })
+                            })
+                            .catch(error => { res.status(500).json({ error }); })
+                        })
+                        .catch(error => { res.status(500).json({ error }); })
+                    })
+                    .catch(error => { res.status(500).json({ error }); }); 
                 } else {
-                    res.status(404).json({ 'error': 'user not found !'});
+                    res.status(404).json({ 'error': 'User not found'});
                 }
             })
-            .catch(error => { 
-                console.log(error);
-                res.status(500).json({ error }); })
+            .catch(error => {
+                res.status(500).json({ error });
+            })
         } else {
             res.status(404).json({ 'error': 'User not found'});
         }
