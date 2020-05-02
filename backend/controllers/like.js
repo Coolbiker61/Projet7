@@ -195,7 +195,7 @@ exports.getLike = (req, res, then) => {
                         if (like) {
                             return res.status(200).json(like);
                         } else {
-                            return res.status(404).json({ 'error': 'Like not found !' });
+                            return res.status(200).json({ 'message': 'Like not found !' });
                         }
 
                     })

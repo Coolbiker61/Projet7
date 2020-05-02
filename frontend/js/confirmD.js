@@ -42,8 +42,10 @@ const ecoute = () => {
         var requete = new XMLHttpRequest();
         requete.onreadystatechange = function () {
             if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                window.setTimeout(() => { window.location.href = '/auth/signup';}, 2000);
-            } 
+                window.setTimeout(() => { window.location.href = '/auth/register';}, 2000);
+            } else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
+                console.log(this.responseText);
+            }
         };
         requete.open("DELETE", "http://localhost:3000/api/v1/auth/");
         requete.setRequestHeader("Content-Type", "application/json");
