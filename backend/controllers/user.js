@@ -129,41 +129,36 @@ exports.deleteUser = (req, res, then) => {
             models.Message.findAll({ where: { UserId: userId }, attributes: ['id', 'UserId'] })
             .then(messages => {
                 if (messages.length > 0) {
+                    console.log(messages);
                     for (let i = 0; i < messages.length; i++) {
                         models.Like.findAll({where: { messageId: messages[i].id }, attributes: ['id']})
                         .then(likes => {
-    console.log(likes+' like -------');
+                            console.log(likes);
                             if (likes.length > 0) {
                                 models.Like.destroy({ where: { messageId: messages[i].id }})
-                                .then(()=> {
-    console.log("likes of message id="+messages[i].id+" destroyed")
-                                })
-                                .catch(error => { return res.status(500).json({ error }); }); 
+                                .then(()=> { console.log("message-likes destroy");  })
+                                .catch(error => {console.log('erreur destroy like-message'); return res.status(500).json({ error }); }); 
                             }
                         })
                         .catch(error => { return res.status(500).json({ error }); }); 
                         models.Comment.findAll({ where: { messageId: messages[i].id }, attributes: ['id']})
                         .then(comments => {
+                            console.log(comments);
                             if (comments.length > 0) {
-    console.log(comments+' commenta -------');
                                 models.Comment.destroy({ where: { messageId: messages[i].id }})
-                                .then(()=> {
-    console.log("Comments of message id="+messages[i].id+" destroyed")
-                                })
-                                .catch(error => { return res.status(500).json({ error }); }); 
+                                .then(()=> {console.log("message-comments destroy");  })
+                                .catch(error => { console.log('erreur destroy comment-message'); return res.status(500).json({ error }); }); 
                             }
                         })
                         .catch(error => { return res.status(500).json({ error }); }); 
                     }
-                    console.log("sortie boucle message");
                     //supprime tous les messages de l'utilisateur
                     models.Message.destroy({ where: { UserId: userId }})
                     .then(result => { console.log("message of user id="+userId+" destroyed !")})
-                    .catch(error => { return res.status(500).json({ error }); });
+                    .catch(error => {console.log('erreur destroy message'); return res.status(500).json({ error }); });
                 }
     console.log('fin message -------');
                 var commentsListe = [];
-                var commentNeedDestroy = [];
                 // recherche les commentaire de l'utilisateur ainsi que les commentaires
                 // enfant de ces derniers et les supprimes
                 models.Comment.findAll({ where: { UserId: userId }, attributes: ['id', 'parent']})
@@ -171,24 +166,24 @@ exports.deleteUser = (req, res, then) => {
     console.log(comments.length+' --------------------------------' );
                     if (comments.length > 0) {
                         while (comments.length > 0) {
+    console.log("comment debut boucle");
                             commentsListe = comments;
                             for (let i = 0; i < commentsListe.length; i++ ) {
     console.log(commentsListe[i].id );
-                                models.Comment.findAll({ where: { parentId: commentsListe[i].id }, attributes: ['id', 'parent']})
+                                models.Comment.findAll({ where: { parent: commentsListe[i].id }, attributes: ['id', 'parent']})
                                 .then(response => {
                                     if (response.length > 0) {
                                         comments = comments.concat(response);
                                     }
                                 })
                                 
-                                commentNeedDestroy.push(commentsListe[i].id);
                                 comments.splice(comments.indexOf(commentsListe[i].id), 1);
+                                models.Comment.destroy({ where: { id: commentsListe[i].id } })
+                                .then(() => { console.log('comment destroyed '+commentsListe[i].id);})
+                                .catch(error => { console.log('erreur destroy comment'); return res.status(500).json({ error });  }); 
                             };
                         }
-    console.log(commentNeedDestroy );
-                        models.Comment.destroy({ where: { id: commentNeedDestroy } })
-                        .then(() => { console.log('comment destroyed');})
-                        .catch(error => { return res.status(500).json({ error }); }); 
+                        
                     }
     console.log('fin comment debut like -------------------- ------');
                     models.Like.findAll({ where: { UserId: userId }, attributes: ['id', 'messageId', 'likeType']})
@@ -222,7 +217,7 @@ exports.deleteUser = (req, res, then) => {
                             }
                             models.Like.destroy({ where: { UserId: userId } })
                             .then(() => { console.log('likes destroyed'); })
-                            .catch(error => { return res.status(501).json({ error }); })
+                            .catch(error => {console.log('erreur destroy like'); return res.status(501).json({ error }); })
                         }
                         console.log('fin destruction like, debut destruc user');
                         // supprime l'utilisateur
@@ -235,7 +230,7 @@ exports.deleteUser = (req, res, then) => {
                                 return res.status(404).json({ 'error': 'user not found !'});
                             }
                         })
-                        .catch(error => { return res.status(500).json({ error }); })
+                        .catch(error => {console.log('erreur destroy user'); return res.status(500).json({ error }); })
                     })
                     .catch(error => { return res.status(500).json({ error }); })
                 })

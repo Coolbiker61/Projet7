@@ -1,34 +1,154 @@
-Executing (default): SELECT `id`, `email`, `username`, `isAdmin` FROM `Users` AS `User` WHERE `User`.`id` = 3;
-Executing (default): SELECT `id`, `UserId` FROM `Messages` AS `Message` WHERE `Message`.`UserId` = 3;
+Executing (default): SELECT `id`, `email`, `username`, `isAdmin` FROM `Users` AS `User` WHERE `User`.`id` = 5;
+Executing (default): SELECT `id`, `UserId` FROM `Messages` AS `Message` WHERE `Message`.`UserId` = 5;
+[
+  Message {
+    dataValues: { id: 27, UserId: 5 },
+    _previousDataValues: { id: 27, UserId: 5 },
+    _changed: {},
+    _modelOptions: {
+      timestamps: true,
+      validate: {},
+      freezeTableName: false,
+      underscored: false,
+      paranoid: false,
+      rejectOnEmpty: false,
+      whereCollection: [Object],
+      schema: null,
+      schemaDelimiter: '',
+      defaultScope: {},
+      scopes: {},
+      indexes: [],
+      name: [Object],
+      omitNull: false,
+      sequelize: [Sequelize],
+      hooks: {}
+    },
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
 fin message -------
-Executing (default): DELETE FROM `Messages` WHERE `UserId` = 3
-Executing (default): SELECT `id` FROM `Likes` AS `Like` WHERE `Like`.`messageId` = 24;
-Executing (default): SELECT `id` FROM `Comments` AS `Comment` WHERE `Comment`.`messageId` = 24;
-Executing (default): SELECT `id`, `parent` FROM `Comments` AS `Comment` WHERE `Comment`.`UserId` = 3;
-[object SequelizeInstance:Like] like -------
-commet id = 41
-4
-41
-42
-2
-41
-1
-41
-[ 41, 42, 41, 41 ]
-fin comment debut like -------------------- ------
-Executing (default): DELETE FROM `Likes` WHERE `messageId` = 24
-Executing (default): DELETE FROM `Comments` WHERE `id` IN (41, 42, 41, 41)
-Executing (default): SELECT `id`, `parent` FROM `Comments` AS `Comment` WHERE `Comment`.`parentId` = 41;
-Executing (default): SELECT `id`, `parent` FROM `Comments` AS `Comment` WHERE `Comment`.`parentId` = 42;
-Executing (default): SELECT `id`, `parent` FROM `Comments` AS `Comment` WHERE `Comment`.`parentId` = 41;
-likes of message id=24 destroyed
-Executing (default): SELECT `id`, `parent` FROM `Comments` AS `Comment` WHERE `Comment`.`parentId` = 41;
+Executing (default): DELETE FROM `Messages` WHERE `UserId` = 5
+erreur destroy message
+Executing (default): SELECT `id` FROM `Likes` AS `Like` WHERE `Like`.`messageId` = 27;
+Executing (default): SELECT `id` FROM `Comments` AS `Comment` WHERE `Comment`.`messageId` = 27;
+Executing (default): SELECT `id`, `parent` FROM `Comments` AS `Comment` WHERE `Comment`.`UserId` = 5;
+[]
+[
+  Comment {
+    dataValues: { id: 63 },
+    _previousDataValues: { id: 63 },
+    _changed: {},
+    _modelOptions: {
+      timestamps: true,
+      validate: {},
+      freezeTableName: false,
+      underscored: false,
+      paranoid: false,
+      rejectOnEmpty: false,
+      whereCollection: [Object],
+      schema: null,
+      schemaDelimiter: '',
+      defaultScope: {},
+      scopes: {},
+      indexes: [],
+      name: [Object],
+      omitNull: false,
+      sequelize: [Sequelize],
+      hooks: {}
+    },
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  },
+  Comment {
+    dataValues: { id: 64 },
+    _previousDataValues: { id: 64 },
+    _changed: {},
+    _modelOptions: {
+      timestamps: true,
+      validate: {},
+      freezeTableName: false,
+      underscored: false,
+      paranoid: false,
+      rejectOnEmpty: false,
+      whereCollection: [Object],
+      schema: null,
+      schemaDelimiter: '',
+      defaultScope: {},
+      scopes: {},
+      indexes: [],
+      name: [Object],
+      omitNull: false,
+      sequelize: [Sequelize],
+      hooks: {}
+    },
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  },
+  Comment {
+    dataValues: { id: 65 },
+    _previousDataValues: { id: 65 },
+    _changed: {},
+    _modelOptions: {
+      timestamps: true,
+      validate: {},
+      freezeTableName: false,
+      underscored: false,
+      paranoid: false,
+      rejectOnEmpty: false,
+      whereCollection: [Object],
+      schema: null,
+      schemaDelimiter: '',
+      defaultScope: {},
+      scopes: {},
+      indexes: [],
+      name: [Object],
+      omitNull: false,
+      sequelize: [Sequelize],
+      hooks: {}
+    },
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+4 --------------------------------
+comment debut boucle
+62
+63
+comment debut boucle
+62
+comment debut boucle
+62
 Unhandled rejection Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
     at ServerResponse.setHeader (_http_outgoing.js:526:11)
     at ServerResponse.header (/home/jackolantern/Bureau/Projet7/backend/node_modules/express/lib/response.js:771:10)
     at ServerResponse.send (/home/jackolantern/Bureau/Projet7/backend/node_modules/express/lib/response.js:170:12)
     at ServerResponse.json (/home/jackolantern/Bureau/Projet7/backend/node_modules/express/lib/response.js:267:15)
-    at /home/jackolantern/Bureau/Projet7/backend/controllers/user.js:183:74
+    at /home/jackolantern/Bureau/Projet7/backend/controllers/user.js:237:58
     at tryCatcher (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/util.js:16:23)
     at Promise._settlePromiseFromHandler (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/promise.js:547:31)
     at Promise._settlePromise (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/promise.js:604:18)
@@ -40,14 +160,18 @@ Unhandled rejection Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they
     at Immediate.Async.drainQueues [as _onImmediate] (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/async.js:15:14)
     at processImmediate (internal/timers.js:456:21)
 
-Executing (default): SELECT `id`, `messageId`, `likeType` FROM `Likes` AS `Like` WHERE `Like`.`UserId` = 3;
-comment destroyed
+Executing (default): DELETE FROM `Comments` WHERE `messageId` = 27
+Executing (default): DELETE FROM `Comments` WHERE `id` = 62
+Executing (default): DELETE FROM `Comments` WHERE `id` = 63
+Executing (default): DELETE FROM `Comments` WHERE `id` = 62
+Executing (default): SELECT `id`, `parent` FROM `Comments` AS `Comment` WHERE `Comment`.`parent` = 62;
+erreur destroy comment
 Unhandled rejection Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
     at ServerResponse.setHeader (_http_outgoing.js:526:11)
     at ServerResponse.header (/home/jackolantern/Bureau/Projet7/backend/node_modules/express/lib/response.js:771:10)
     at ServerResponse.send (/home/jackolantern/Bureau/Projet7/backend/node_modules/express/lib/response.js:170:12)
     at ServerResponse.json (/home/jackolantern/Bureau/Projet7/backend/node_modules/express/lib/response.js:267:15)
-    at /home/jackolantern/Bureau/Projet7/backend/controllers/user.js:183:74
+    at /home/jackolantern/Bureau/Projet7/backend/controllers/user.js:183:113
     at tryCatcher (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/util.js:16:23)
     at Promise._settlePromiseFromHandler (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/promise.js:547:31)
     at Promise._settlePromise (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/promise.js:604:18)
@@ -59,12 +183,16 @@ Unhandled rejection Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they
     at Immediate.Async.drainQueues [as _onImmediate] (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/async.js:15:14)
     at processImmediate (internal/timers.js:456:21)
 
+Executing (default): SELECT `id`, `parent` FROM `Comments` AS `Comment` WHERE `Comment`.`parent` = 63;
+Executing (default): SELECT `id`, `parent` FROM `Comments` AS `Comment` WHERE `Comment`.`parent` = 62;
+message-comments destroy
+erreur destroy comment
 Unhandled rejection Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
     at ServerResponse.setHeader (_http_outgoing.js:526:11)
     at ServerResponse.header (/home/jackolantern/Bureau/Projet7/backend/node_modules/express/lib/response.js:771:10)
     at ServerResponse.send (/home/jackolantern/Bureau/Projet7/backend/node_modules/express/lib/response.js:170:12)
     at ServerResponse.json (/home/jackolantern/Bureau/Projet7/backend/node_modules/express/lib/response.js:267:15)
-    at /home/jackolantern/Bureau/Projet7/backend/controllers/user.js:183:74
+    at /home/jackolantern/Bureau/Projet7/backend/controllers/user.js:183:113
     at tryCatcher (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/util.js:16:23)
     at Promise._settlePromiseFromHandler (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/promise.js:547:31)
     at Promise._settlePromise (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/promise.js:604:18)
@@ -76,38 +204,14 @@ Unhandled rejection Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they
     at Immediate.Async.drainQueues [as _onImmediate] (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/async.js:15:14)
     at processImmediate (internal/timers.js:456:21)
 
+Executing (default): SELECT `id`, `parent` FROM `Comments` AS `Comment` WHERE `Comment`.`parent` = 62;
+erreur destroy comment
 Unhandled rejection Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
     at ServerResponse.setHeader (_http_outgoing.js:526:11)
     at ServerResponse.header (/home/jackolantern/Bureau/Projet7/backend/node_modules/express/lib/response.js:771:10)
     at ServerResponse.send (/home/jackolantern/Bureau/Projet7/backend/node_modules/express/lib/response.js:170:12)
     at ServerResponse.json (/home/jackolantern/Bureau/Projet7/backend/node_modules/express/lib/response.js:267:15)
-    at /home/jackolantern/Bureau/Projet7/backend/controllers/user.js:183:74
-    at tryCatcher (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/util.js:16:23)
-    at Promise._settlePromiseFromHandler (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/promise.js:547:31)
-    at Promise._settlePromise (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/promise.js:604:18)
-    at Promise._settlePromise0 (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/promise.js:649:10)
-    at Promise._settlePromises (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/promise.js:725:18)
-    at _drainQueueStep (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/async.js:93:12)
-    at _drainQueue (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/async.js:86:9)
-    at Async._drainQueues (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/async.js:102:5)
-    at Immediate.Async.drainQueues [as _onImmediate] (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/async.js:15:14)
-    at processImmediate (internal/timers.js:456:21)
-
-0
-1
-2
-3
-4
-fin destruction like, debut destruc user
-Executing (default): DELETE FROM `Likes` WHERE `UserId` = 3
-Executing (default): DELETE FROM `Users` WHERE `id` = 3
-likes destroyed
-Unhandled rejection Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
-    at ServerResponse.setHeader (_http_outgoing.js:526:11)
-    at ServerResponse.header (/home/jackolantern/Bureau/Projet7/backend/node_modules/express/lib/response.js:771:10)
-    at ServerResponse.send (/home/jackolantern/Bureau/Projet7/backend/node_modules/express/lib/response.js:170:12)
-    at ServerResponse.json (/home/jackolantern/Bureau/Projet7/backend/node_modules/express/lib/response.js:267:15)
-    at /home/jackolantern/Bureau/Projet7/backend/controllers/user.js:238:66
+    at /home/jackolantern/Bureau/Projet7/backend/controllers/user.js:183:113
     at tryCatcher (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/util.js:16:23)
     at Promise._settlePromiseFromHandler (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/promise.js:547:31)
     at Promise._settlePromise (/home/jackolantern/Bureau/Projet7/backend/node_modules/bluebird/js/release/promise.js:604:18)
