@@ -359,6 +359,9 @@ textarea {
 /* couleur de fond du menu utilisateur */
 /* couleur des pages du profil */
 /* couleurs des éléments de la page administration */
+/*  bouton back to top */
+/* tailles polices*/
+/* dimenssions */
 body {
   background-color: #dae0e6;
   height: 100vh;
@@ -405,9 +408,11 @@ h1 {
   display: flex;
   flex-direction: column;
   visibility: hidden;
+  font-size: 19px;
 }
 
-#btn_new_post, .btn {
+#btn_new_post,
+.btn {
   padding: 10px;
   border-radius: 20px;
   border: 2px solid rgba(55, 118, 255, 0.836);
@@ -416,9 +421,12 @@ h1 {
   text-align: center;
   margin: auto;
   color: black;
+  font-size: 19px;
 }
 
-#btn_new_post:hover, #btn_new_post:focus, .btn:hover, .btn:focus {
+#btn_new_post:hover, #btn_new_post:focus,
+.btn:hover,
+.btn:focus {
   padding: 10px;
   border-radius: 20px;
   border: 2px solid rgba(55, 118, 255, 0.836);
@@ -429,12 +437,41 @@ h1 {
   cursor: pointer;
 }
 
-#btn_new_post:disabled:hover, .btn:disabled:hover {
+#btn_new_post:disabled:hover,
+.btn:disabled:hover {
   background-color: red;
 }
 
 .bold {
   font-weight: 600;
+}
+
+.back_to_top {
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  text-align: center;
+  border: 2px solid #535151;
+  color: #535151;
+  background-color: white;
+  border-radius: 10px;
+  position: fixed;
+  right: 20px;
+  bottom: -100px;
+  z-index: 100;
+  transition: opacity .3s ease-in-out 0, bottom .3s ease-in-out .5s;
+}
+
+.back_to_top.show {
+  bottom: 20px;
+}
+
+.back_to_top.show:hover {
+  color: rgba(55, 118, 255, 0.836);
+  border-color: rgba(55, 118, 255, 0.836);
+  background-color: white;
+  box-shadow: 7px 7px 5px #535151;
+  cursor: pointer;
 }
 
 nav {
@@ -461,7 +498,7 @@ nav {
 }
 
 .logo-entreprise {
-  height: 20px;
+  height: 35px;
 }
 
 /* menu dynamique ----------------------------------------------------------------*/
@@ -956,8 +993,15 @@ nav {
 /* - admin ----*/
 .bloc-users-liste {
   justify-content: center;
-  margin-left: 50px;
+  margin: auto;
   display: flex;
+}
+
+@media screen and (min-width: 820px) {
+  .bloc-users-liste {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .users-liste {
@@ -995,11 +1039,19 @@ nav {
 
 #bloc-users-profile {
   margin: 15px;
+  max-inline-size: max-content;
 }
 
 .users-main {
   display: flex;
   margin-top: 25px;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 820px) {
+  .users-main {
+    flex-direction: row;
+  }
 }
 
 .users-details {
@@ -1009,6 +1061,7 @@ nav {
   font-size: 18px;
   margin: 20px;
   padding: 20px;
+  width: 500px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;

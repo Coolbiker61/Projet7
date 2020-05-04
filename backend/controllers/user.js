@@ -263,7 +263,7 @@ exports.getUserListe = (req, res, then) => {
         .then(user => {
             if (user) {
                 if (user.isAdmin) {
-                    models.User.findAll({attributes: [ 'id', 'email', 'username', 'isAdmin']})
+                    models.User.findAll({attributes: [ 'id', 'email', 'username', 'isAdmin'], order: [['username', 'ASC']]})
                     .then(users => {
                         res.status(200).json(users);
                     })

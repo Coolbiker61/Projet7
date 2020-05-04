@@ -2,8 +2,12 @@
 /* - admin ----*/
 .bloc-users-liste {
     justify-content: center;
-    margin-left: 50px;
+    margin: auto;
     display: flex;
+    @media screen and (min-width: 820px ) {
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 .users-liste {
     margin: 10px auto;
@@ -37,10 +41,16 @@
 }
 #bloc-users-profile {
     margin: 15px;
+    max-inline-size: max-content;
 }
 .users-main {
     display: flex;
     margin-top: 25px;
+    flex-direction: column;
+    @media screen and (min-width: 820px ) {
+        flex-direction: row;
+    }
+
 }
 .users-details{
     background-color: $users_details_bg_color;
@@ -49,6 +59,7 @@
     font-size: 18px;
     margin: 20px;
     padding: 20px;
+    width: $width_message;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     -ms-border-radius: 20px;

@@ -99,7 +99,25 @@ const addProfileUser = (response) => {
     }
     html += "</div>";
     document.getElementById("bloc-users-profile").innerHTML = html;
+    window.scrollTo({behavior: "smooth",top: (document.getElementById("bloc-users-profile").offsetTop - 90 ), right: 0 });
 
+}
+
+const importUsersDetail = (id) => {
+    var requete = new XMLHttpRequest();
+    requete.onreadystatechange = function () {
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+            // si la requête des messages n'a pas retourné d'erreur
+            var response = JSON.parse(this.responseText);
+            addProfileUser(response);
+        } else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
+            console.log(this.responseText);
+        }
+    };
+    requete.open("GET", "http://localhost:3000/api/v1/auth/users/"+id); 
+    requete.setRequestHeader("Content-Type", "application/json");
+    requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
+    requete.send();
 }
 
 const addUserListe = (usersListe) => {
@@ -128,23 +146,6 @@ const importUsers = () => {
         }
     };
     requete.open("GET", "http://localhost:3000/api/v1/auth/users"); 
-    requete.setRequestHeader("Content-Type", "application/json");
-    requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
-    requete.send();
-}
-
-const importUsersDetail = (id) => {
-    var requete = new XMLHttpRequest();
-    requete.onreadystatechange = function () {
-        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            // si la requête des messages n'a pas retourné d'erreur
-            var response = JSON.parse(this.responseText);
-            addProfileUser(response);
-        } else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
-            console.log(this.responseText);
-        }
-    };
-    requete.open("GET", "http://localhost:3000/api/v1/auth/users/"+id); 
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.send();

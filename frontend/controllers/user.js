@@ -93,8 +93,9 @@ exports.getProfile = (req, res, then) => {
     html += "<div id=\"mini_username\">username</div>";
     html +="<a href=\"/auth/profil/settings\" >";
     html += "<i id=\"profil_settings\" class=\"fas fa-cog icon_settings\"></i>Options avancés</a>";
-    html += "</section></div>";
-    html += "</div></body></html>"
+    html += "</section></div></div>";
+    html += "<footer><a class=\"back_to_top\" ><i class=\"fas fa-chevron-up\"></i></a></footer>";
+    html += "</body></html>"
     res.writeHeader(200 ,{'Content-Type': 'text/html'});
     res.write(html);
     res.end();
@@ -159,6 +160,7 @@ exports.deleteAccountConfirm = (req, res, then) => {
     
     html += "<div id=\"error\" class=\"error\"></div></div></section>";
 
+    html += "<footer><a class=\"back_to_top\" ><i class=\"fas fa-chevron-up\"></i></a></footer>";
     html += "</body></html>"
     res.writeHeader(200 ,{'Content-Type': 'text/html'});
     res.write(html);
