@@ -6,19 +6,26 @@ nav {
     right: 0;
     left: 0;
     z-index: 5;
-    height: $menu_height - 20px;
+    height: $menu_height_mobile - 20px;
     background-color: $background_menu;
     padding: 10px;
     border-bottom: 1px solid $menu_profil_ligne_border;
+    @media screen and (min-width: 570px ) {
+        height: $menu_height - 20px;
+    }
 }
 
 .menu {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
     li {
         padding: 10px;
         align-self: center;
+    }
+    @media screen and (min-width: 570px ) {
+        justify-content: space-between;
     }
 }
 .logo-entreprise {

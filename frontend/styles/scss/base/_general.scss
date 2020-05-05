@@ -15,7 +15,10 @@ label {
 }
 
 .offset-top {
-    height: $menu_height;
+    height: $menu_height_mobile;
+    @media screen and (min-width: 570px ) {
+        height: $menu_height;
+    }
 }
 
 

@@ -379,7 +379,13 @@ label {
 }
 
 .offset-top {
-  height: 80px;
+  height: 140px;
+}
+
+@media screen and (min-width: 570px) {
+  .offset-top {
+    height: 80px;
+  }
 }
 
 /* Loading ----------------------------------------------------------------------------------------------*/
@@ -480,21 +486,34 @@ nav {
   right: 0;
   left: 0;
   z-index: 5;
-  height: 60px;
+  height: 120px;
   background-color: white;
   padding: 10px;
   border-bottom: 1px solid rgba(55, 118, 255, 0.836);
 }
 
+@media screen and (min-width: 570px) {
+  nav {
+    height: 60px;
+  }
+}
+
 .menu {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .menu li {
   padding: 10px;
   align-self: center;
+}
+
+@media screen and (min-width: 570px) {
+  .menu {
+    justify-content: space-between;
+  }
 }
 
 .logo-entreprise {
@@ -1001,6 +1020,7 @@ nav {
   .bloc-users-liste {
     margin-left: auto;
     margin-right: auto;
+    margin-top: 15px;
   }
 }
 
@@ -1046,6 +1066,7 @@ nav {
   display: flex;
   margin-top: 25px;
   flex-direction: column;
+  align-items: center;
 }
 
 @media screen and (min-width: 820px) {
@@ -1059,9 +1080,9 @@ nav {
   border: 2px solid rgba(55, 118, 255, 0.836);
   border-radius: 20px;
   font-size: 18px;
-  margin: 20px;
-  padding: 20px;
-  width: 500px;
+  margin: 10px;
+  padding: 10px;
+  width: 85vw;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
@@ -1076,6 +1097,14 @@ nav {
 
 .users-details li {
   margin: 5px;
+}
+
+@media screen and (min-width: 600px) {
+  .users-details {
+    width: 500px;
+    margin: 20px;
+    padding: 20px;
+  }
 }
 
 .users-article, .users-reply {
