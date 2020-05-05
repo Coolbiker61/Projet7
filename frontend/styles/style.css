@@ -362,6 +362,13 @@ textarea {
 /*  bouton back to top */
 /* tailles polices*/
 /* dimenssions */
+@font-face {
+  font-family: 'nevisbold';
+  src: url("ufonts.com_nevis-bold-webfont.woff2") format("woff2"), url("ufonts.com_nevis-bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   background-color: #dae0e6;
   height: 100vh;
@@ -379,10 +386,16 @@ label {
 }
 
 .offset-top {
-  height: 140px;
+  height: 200px;
 }
 
-@media screen and (min-width: 570px) {
+@media screen and (min-width: 421px) {
+  .offset-top {
+    height: 140px;
+  }
+}
+
+@media screen and (min-width: 675px) {
   .offset-top {
     height: 80px;
   }
@@ -408,13 +421,25 @@ h1 {
   background-size: contain;
   margin: 0 auto;
   padding-top: 5px;
-  width: 100vh;
-  min-height: calc(100% - 80px);
+  width: 100vw;
+  min-height: calc(100% - 200px);
   position: relative;
   display: flex;
   flex-direction: column;
   visibility: hidden;
   font-size: 19px;
+}
+
+@media screen and (min-width: 421px) {
+  .back {
+    min-height: calc(100% - 140px);
+  }
+}
+
+@media screen and (min-width: 675px) {
+  .back {
+    min-height: calc(100% - 80px);
+  }
 }
 
 #btn_new_post,
@@ -486,13 +511,19 @@ nav {
   right: 0;
   left: 0;
   z-index: 5;
-  height: 120px;
+  height: auto;
   background-color: white;
   padding: 10px;
   border-bottom: 1px solid rgba(55, 118, 255, 0.836);
 }
 
-@media screen and (min-width: 570px) {
+@media screen and (min-width: 421px) {
+  nav {
+    height: 120px;
+  }
+}
+
+@media screen and (min-width: 675px) {
   nav {
     height: 60px;
   }
@@ -500,7 +531,7 @@ nav {
 
 .menu {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -508,9 +539,53 @@ nav {
 .menu li {
   padding: 10px;
   align-self: center;
+  display: block;
 }
 
-@media screen and (min-width: 570px) {
+@media screen and (max-width: 421px) {
+  .menu li:not(:first-child) {
+    display: none;
+  }
+  .menu li:last-child {
+    float: right;
+    display: block;
+  }
+}
+
+.menu li .icon {
+  float: right;
+  display: block;
+}
+
+.menu.menu_list li {
+  position: relative;
+  padding: 10px;
+  align-self: center;
+  display: block;
+}
+
+.menu.menu_list li .icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+@media screen and (min-width: 421px) {
+  .menu {
+    flex-direction: row;
+  }
+  .menu li {
+    position: relative;
+    padding: 10px;
+    align-self: center;
+    display: inline-block;
+  }
+  .menu li .icon {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 675px) {
   .menu {
     justify-content: space-between;
   }
@@ -568,16 +643,30 @@ nav {
 .back-inscription, .back-login {
   background-image: url("../images/icon.svg");
   background-repeat: no-repeat;
-  background-position: center top;
-  background-attachment: fixed;
+  background-position: center;
   background-size: contain;
   margin: 0 auto;
-  width: 100vh;
-  height: calc(100% - 80px);
+  width: 100vw;
+  height: calc(100% - 200px - 1px);
   position: relative;
   display: flex;
   flex-direction: column;
   visibility: hidden;
+}
+
+@media screen and (min-width: 421px) {
+  .back-inscription, .back-login {
+    height: calc(100% - 140px);
+    width: 100vw;
+  }
+}
+
+@media screen and (min-width: 675px) {
+  .back-inscription, .back-login {
+    height: calc(100% - 80px);
+    width: 100vh;
+    background-position: center top;
+  }
 }
 
 .form-register, .form-login {
@@ -585,8 +674,9 @@ nav {
   flex-direction: column;
   align-content: center;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 20px;
   width: 255px;
+  font-size: 19px;
 }
 
 .form-register input, .form-login input {
@@ -599,6 +689,18 @@ nav {
   background-color: slateblue;
   border-color: rgba(55, 118, 255, 0.836);
   color: white;
+}
+
+@media screen and (min-width: 421px) {
+  .form-register, .form-login {
+    margin-top: 50px;
+  }
+}
+
+@media screen and (min-width: 675px) {
+  .form-register, .form-login {
+    margin-top: 100px;
+  }
 }
 
 #email, #username, #password {
@@ -635,20 +737,48 @@ nav {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding-top: 150px;
+  padding-top: 50px;
+}
+
+.accueil h1 {
+  font-size: 50px;
+  font-family: 'nevisbold', 'Courier New', Courier, monospace;
+  margin-top: 0;
+}
+
+.accueil h2 {
+  font-size: 19px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+@media screen and (min-width: 675px) {
+  .accueil {
+    padding-top: 150px;
+  }
+  .accueil h1 {
+    font-size: 70px;
+    margin-top: 50px;
+  }
 }
 
 .accueil_logo {
-  width: 95vh;
+  width: 100px;
 }
 
 /* pour les messages ----------------------------------------------------------------------------------- */
 .message {
   background-color: white;
   border: 2px solid #BDBDBD;
-  width: 500px;
+  width: 85vw;
   margin: 20px auto;
   display: flex;
+}
+
+@media screen and (min-width: 421px) {
+  .message {
+    width: 500px;
+  }
 }
 
 .message-solo {

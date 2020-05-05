@@ -34,7 +34,12 @@ window.addEventListener("scroll",(event) => {
         }
     }
 })
-    /*
-    function scrollToTopView() {
-        $(window).scrollTop() > $(window).height() / 3 ? $(".scrollToTop").hasClass("showScrollTop") || $(".scrollToTop").addClass("showScrollTop") : $(".scrollToTop").removeClass("showScrollTop")
-    }*/
+ 
+function showMenu() {
+    var x = document.querySelector(".menu");
+    if (x.className === "menu") {
+      x.className += " menu_list";
+    } else {
+      x.className = "menu";
+    }
+}

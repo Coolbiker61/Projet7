@@ -3,16 +3,24 @@
 .back-inscription, .back-login {
     background-image: url('../images/icon.svg');
     background-repeat:no-repeat;
-    background-position: center top;
-    background-attachment: fixed;
+    background-position: center;
     background-size: contain;
     margin: 0 auto; 
-    width: 100vh;
-    height: calc(100% - #{$menu_height});
+    width: 100vw;
+    height: calc(100% - #{$menu_height_mobile} - 1px);
     position: relative;
     display: flex;
     flex-direction: column;
     visibility: hidden;
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        height: calc(100% - #{$menu_height_tablet});
+        width: 100vw;
+    }
+    @media screen and (min-width: $menu_breackpoint_pc ) {
+        height: calc(100% - #{$menu_height_pc});
+        width: 100vh;
+        background-position: center top;
+    }
 }
 
 .form-register, .form-login {
@@ -20,8 +28,9 @@
     flex-direction: column;
     align-content: center;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 20px;
     width: 255px;
+    font-size: $font_size_normal;
     input {
         border-radius: 20px;
         border: 2px solid $btn_border;
@@ -31,6 +40,12 @@
             border-color: $btn_hover_border;
             color: $btn_hover_text_color;
         }
+    }
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        margin-top: 50px;
+    }
+    @media screen and (min-width: $menu_breackpoint_pc ) {
+        margin-top: 100px;
     }
 }
 #email, #username, #password {

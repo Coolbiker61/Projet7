@@ -97,6 +97,7 @@ const contentChangeAction = (e) => {
     if (e.element) {
         if(e.element.tagName === "IMG"){          
             e.element.setAttribute("alt", "Posted image");
+            e.element.setAttribute("width", "100%");
         }
     }
 

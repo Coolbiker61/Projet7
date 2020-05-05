@@ -63,7 +63,7 @@ const addProfileUser = (response) => {
     var html = "<div class=\"users-details\" ><h2>Détails du compte</h2> ";
     html += "<ul><li><span class=\"bold\">Pseudo : </span>"+response.username+"</li>";
     html += "<li><span class=\"bold\">Email : </span>"+response.email+"</li>";
-    html += "<li><span class=\"bold\">Inscrit le : </span>"+response.createdAt+"</li>";
+    html += "<li><span class=\"bold\">Inscrit il y a : </span>"+editTime(response.createdAt)+"</li>";
     html += "<li><span class=\"bold\">Rôle : </span>";
     if (response.isAdmin) {
         html += "Administrateur";
@@ -99,7 +99,7 @@ const addProfileUser = (response) => {
     }
     html += "</div>";
     document.getElementById("bloc-users-profile").innerHTML = html;
-    window.scrollTo({behavior: "smooth",top: (document.getElementById("bloc-users-profile").offsetTop - 90 ), right: 0 });
+    window.scrollTo({behavior: "smooth",top: (document.getElementById("bloc-users-profile").offsetTop - (10 + document.querySelector('.offset-top').offsetHeight) ), right: 0 });
 
 }
 

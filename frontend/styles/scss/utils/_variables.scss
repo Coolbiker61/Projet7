@@ -94,7 +94,15 @@ $font_size_normal: 19px;
 
 /* dimenssions */
 
-$menu_height: 80px;
-$menu_height_mobile: 140px;
+$menu_height_pc: 80px;
+$menu_height_tablet: 140px;
+$menu_height_mobile: 200px;
+
+$menu_breackpoint_pc: 675px;
+$menu_breackpoint_tablet: 421px;
+$menu_breackpoint_mobile: 0px;
+
+$message_breackpoint_tablet: 540px;
+
 $width_message: 500px;
 $width_message_mobile: 85vw;

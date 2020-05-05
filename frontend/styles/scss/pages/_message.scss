@@ -3,9 +3,12 @@
 .message {
     background-color: $message_bg_color;
     border: 2px solid $message_border_color;
-    width: $width_message;
+    width: $width_message_mobile;
     margin: 20px auto;
     display: flex;
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+         width: $width_message;
+    }
 }
 .message-solo {
     display: flex;

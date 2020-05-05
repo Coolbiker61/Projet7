@@ -1,3 +1,5 @@
+//definition de la taille du offset par rapport a celle du menu
+document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
 
 // au chargement de la page
 document.onreadystatechange = function () {

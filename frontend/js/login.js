@@ -1,6 +1,7 @@
 //regex de l'email
 const REGEX_MAIL = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
+//definition de la taille du offset par rapport a celle du menu
+document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
    
 // au chargement de la page
 document.onreadystatechange = function () {

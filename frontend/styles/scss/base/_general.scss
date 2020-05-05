@@ -1,3 +1,14 @@
+
+@font-face {
+    font-family: 'nevisbold';
+    src: url('ufonts.com_nevis-bold-webfont.woff2') format('woff2'),
+         url('ufonts.com_nevis-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
 body {
     background-color: $background_main;
     height: 100vh;
@@ -16,8 +27,11 @@ label {
 
 .offset-top {
     height: $menu_height_mobile;
-    @media screen and (min-width: 570px ) {
-        height: $menu_height;
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        height: $menu_height_tablet;
+    }
+    @media screen and (min-width: $menu_breackpoint_pc ) {
+        height: $menu_height_pc;
     }
 }
 
@@ -43,13 +57,19 @@ h1 {
     background-size: contain;
     margin: 0 auto;
     padding-top: 5px;
-    width: 100vh;
-    min-height: calc(100% - #{$menu_height});
+    width: 100vw;
+    min-height: calc(100% - #{$menu_height_mobile});
     position: relative;
     display: flex;
     flex-direction: column;
     visibility: hidden;
     font-size: $font_size_normal;
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        min-height: calc(100% - #{$menu_height_tablet});
+    }
+    @media screen and (min-width: $menu_breackpoint_pc ) {
+        min-height: calc(100% - #{$menu_height_pc});
+    }
 }
 
 #btn_new_post,

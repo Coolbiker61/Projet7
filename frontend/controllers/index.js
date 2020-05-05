@@ -12,19 +12,22 @@ exports.getPageRoot = (req, res, then) => {
     html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" role=\"banner\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</li><li id=\"user_nav\"><a href=\"/socialNetwork\"><div class=\"btn\" tabindex=\"0\">Social Network</div></a></li>";
-    html += "<li id=\"link_profil\"><div class=\"btn\" tabindex=\"0\"><span id=\"username\"></span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "<li id=\"link_profil\"><div class=\"btn\" tabindex=\"0\"><span id=\"username\">&nbsp;</span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";
     html += "<div class=\"menu_profil_ligne\" tabindex=\"0\"><a href=\"/auth/profil\">Profil</a></div>";
     html += "<div id=\"logout\" class=\"menu_profil_ligne\" tabindex=\"0\"><a href=\"/auth/login\">Déconnexion</a></div>";
-    html += "</div></li>";
+    html += "</div></li><li><a href=\"javascript:void(0);\" class=\"icon\" onclick=\"showMenu()\"><i class=\"fas fa-bars\"></i></a></li>";
     html += "</ul></nav>";
     html += "<div class=\"offset-top\"></div>";
     html += "<div role=\"banner\" id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
     
     html += "<section class=\"back-login\">";
-    html += "<div class=\"accueil\"> <img class=\"accueil_logo\" src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\">";
-    html += "<h1>Bienvenue sur le réseau social interne de l'entreprise.</h1>";
+    html += "<div class=\"accueil\"><h1>";
+    html += "<img class=\"accueil_logo\" src=\"/images/icon-black.png\" alt=\"logo de l'entreprise\">";
+    html += " Groupomania</h1>";
+    html += "<h2>Bienvenue sur le réseau social interne de l'entreprise.</h2>";
     html += "</div></section>";
 
+    html += "<footer><a class=\"back_to_top\" ><i class=\"fas fa-chevron-up\"></i></a></footer>";
     html += "</body></html>"
     res.writeHeader(200 ,{'Content-Type': 'text/html'});
     res.write(html);

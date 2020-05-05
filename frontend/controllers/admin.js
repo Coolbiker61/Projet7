@@ -11,10 +11,10 @@ exports.getUserListe = (req, res ,then) => {
     html += "<title>Groupomania - Administration des utilisateurs</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li id=\"user_nav\"><a href=\"/socialNetwork\"><div class=\"btn\" tabindex=\"0\">Social Network</div></a></li>";
-    html += "<li id=\"link_profil\"><div class=\"btn\" tabindex=\"0\"><span id=\"username\"></span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "<li id=\"link_profil\"><div class=\"btn\" tabindex=\"0\"><span id=\"username\">&nbsp;</span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";
     html += "<div class=\"menu_profil_ligne\"><a href=\"/auth/profil\">Profil</a></div>";
     html += "<div id=\"logout\" class=\"menu_profil_ligne\"><a href=\"/auth/login\">Déconnexion</a></div>";
-    html += "</div></li>";
+    html += "</div></li><li><a href=\"javascript:void(0);\" class=\"icon\" onclick=\"showMenu()\"><i class=\"fas fa-bars\"></i></a></li>";
     html += "</ul></nav><div class=\"offset-top\"></div>";
     // le logo animé qui reste affiché le temps du chargement
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";

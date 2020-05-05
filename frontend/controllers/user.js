@@ -44,7 +44,7 @@ exports.login = (req, res, then) => {
     html += "<script src=\"/js/login.js\" defer></script>";
     html += "<title>Connexion - Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" role=\"banner\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
-    html += "</li><li><a href=\"/socialNetwork\"><div class=\"btn\" tabindex=\"0\">Social Network</div></a></li>";
+    html += "</li>";
     html += "<li><a href=\"/auth/login\"><div class=\"btn\" tabindex=\"0\">Connexion</div></a></li>";
     html += "<li><a href=\"/auth/register\"><div class=\"btn\" tabindex=\"0\">Inscription</div></a></li></ul></nav>";
     html += "<div class=\"offset-top\"></div>";
@@ -77,11 +77,11 @@ exports.getProfile = (req, res, then) => {
     html += "<title>Votre profile - Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
-    html += "<li id=\"link_profil\"><div class=\"btn\"><span id=\"username\"></span></div>";
+    html += "<li id=\"link_profil\"><div class=\"btn\"><span id=\"username\">&nbsp;</span></div>";
     html += "<div style=\"visibility: hidden;\" id=\"menu_profil\">";
     html += "<div class=\"menu_profil_ligne\"><a href=\"/auth/profil\">Profil</a></div>";
     html += "<div id=\"logout\" class=\"menu_profil_ligne\"><a href=\"/auth/login\">Déconnexion</a></div>";
-    html += "</div></li>";
+    html += "</div></li><li><a href=\"javascript:void(0);\" class=\"icon\" onclick=\"showMenu()\"><i class=\"fas fa-bars\"></i></a></li>";
     html += "</ul></nav><div class=\"offset-top\"></div>";
 
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
@@ -111,10 +111,10 @@ exports.getProfileSettings = (req, res, then) => {
     html += "<title>Paramètre de votre profile - Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
-    html += "<li id=\"link_profil\"><div class=\"btn\"><span id=\"username\"></span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "<li id=\"link_profil\"><div class=\"btn\"><span id=\"username\">&nbsp;</span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";
     html += "<div class=\"menu_profil_ligne\"><a href=\"/auth/profil\">Profil</a></div>";
     html += "<div id=\"logout\" class=\"menu_profil_ligne\"><a href=\"/auth/login\">Déconnexion</a></div>";
-    html += "</div></li>";
+    html += "</div></li><li><a href=\"javascript:void(0);\" class=\"icon\" onclick=\"showMenu()\"><i class=\"fas fa-bars\"></i></a></li>";
     html += "</ul></nav><div class=\"offset-top\"></div>";
 
     html += "<section  id=\"back\" class=\"back\"><div class=\"profile_details\">";
@@ -144,10 +144,10 @@ exports.deleteAccountConfirm = (req, res, then) => {
     html += "<title>Confirmation de suppression -Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
-    html += "<li id=\"link_profil\"><div class=\"btn\"><span id=\"username\"></span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "<li id=\"link_profil\"><div class=\"btn\"><span id=\"username\">&nbsp;</span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";
     html += "<div class=\"menu_profil_ligne\"><a href=\"/auth/profil\">Profil</a></div>";
     html += "<div id=\"logout\" class=\"menu_profil_ligne\"><a href=\"/auth/login\">Déconnexion</a></div>";
-    html += "</div></li>";
+    html += "</div></li><li><a href=\"javascript:void(0);\" class=\"icon\" onclick=\"showMenu()\"><i class=\"fas fa-bars\"></i></a></li>";
     html += "</ul></nav><div class=\"offset-top\"></div>";
 
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
