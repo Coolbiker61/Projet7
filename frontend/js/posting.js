@@ -120,7 +120,7 @@ tinymce.init({
     placeholder: PLACEHOLDERVALUE,
     autoresize: true,
     min_height: 100,
-    min_width: 400,
+    min_width: 310,
     statusbar: false,
 
     save_enablewhendirty: true,
@@ -131,7 +131,7 @@ tinymce.init({
     automatic_uploads: false,
     elementpath: false,
     image_description: false,
-    content_style: 'img {max-width: 100%;}',
+    content_style: 'img {width: 100%;}',
     //écoute les changement de contenu
     setup: function(editor) {
         editor.on('NodeChange', function(e){

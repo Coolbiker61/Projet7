@@ -10,12 +10,14 @@ exports.register = (req, res, then) => {
     html += "<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon.png\" />";
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
+    html += "<script src=\"/js/menu.js\" async></script>";
     html += "<script src=\"/js/register.js\" async></script>";
     html += "<title>Inscription - Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</li>";
     html += "<li><a href=\"/auth/login\"><div class=\"btn\" tabindex=\"0\">Connexion</div></a></li>";
-    html += "<li><a href=\"/auth/register\"><div class=\"btn\" tabindex=\"0\">Inscription</div></a></li></ul></nav>";
+    html += "<li><a href=\"/auth/register\"><div class=\"btn\" tabindex=\"0\">Inscription</div></a></li>";
+    html += "<li><a href=\"javascript:void(0);\" class=\"icon\" onclick=\"showMenu()\"><i class=\"fas fa-bars\"></i></a></li></ul></nav>";
     html += "<div class=\"offset-top\"></div>";
     html += "<div role=\"banner\" id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
     html += "<section id=\"back-inscription\" class=\"back-inscription\"><h1>Inscription</h1>";
@@ -41,12 +43,14 @@ exports.login = (req, res, then) => {
     html += "<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon.png\" />";
     html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
-    html += "<script src=\"/js/login.js\" defer></script>";
+    html += "<script src=\"/js/menu.js\" async></script>";
+    html += "<script src=\"/js/login.js\" async></script>";
     html += "<title>Connexion - Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" role=\"banner\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</li>";
     html += "<li><a href=\"/auth/login\"><div class=\"btn\" tabindex=\"0\">Connexion</div></a></li>";
-    html += "<li><a href=\"/auth/register\"><div class=\"btn\" tabindex=\"0\">Inscription</div></a></li></ul></nav>";
+    html += "<li><a href=\"/auth/register\"><div class=\"btn\" tabindex=\"0\">Inscription</div></a></li>";
+    html += "<li><a href=\"javascript:void(0);\" class=\"icon\" onclick=\"showMenu()\"><i class=\"fas fa-bars\"></i></a></li></ul></nav>";
     html += "<div class=\"offset-top\"></div>";
     // le logo animé qui reste affiché le temps du chargement
     html += "<div role=\"banner\" id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";

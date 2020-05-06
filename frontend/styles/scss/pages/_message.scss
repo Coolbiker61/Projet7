@@ -117,7 +117,7 @@
 
 #create_form {
     margin: auto;
-    width: 550px;
+    width: 95vw;
     #title {
         border-radius: 20px;
         border: 2px solid $btn_border;
@@ -128,15 +128,23 @@
             color: $btn_hover_text_color;
         }
     }
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        width: 550px;
+    }
 }
 
 .title_line {
     display: flex;
     justify-content: center;
-    align-items: baseline;
-}
-.title_line label{
-    margin-right: 10px;
+    flex-direction: column;
+    align-items: center;
+    label{
+        margin-right: 10px;
+    }
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        flex-direction: row;
+        align-items: baseline;
+    }
 }
 #editor {
     margin: 15px auto;

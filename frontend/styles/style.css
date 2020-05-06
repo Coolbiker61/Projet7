@@ -415,8 +415,7 @@ h1 {
 
 .back {
   background-image: url("../images/icon.svg");
-  background-repeat: no-repeat;
-  background-position: center top;
+  background-position: center;
   background-attachment: fixed;
   background-size: contain;
   margin: 0 auto;
@@ -433,6 +432,8 @@ h1 {
 @media screen and (min-width: 421px) {
   .back {
     min-height: calc(100% - 140px);
+    background-repeat: no-repeat;
+    background-position: center top;
   }
 }
 
@@ -904,7 +905,7 @@ nav {
 
 #create_form {
   margin: auto;
-  width: 550px;
+  width: 95vw;
 }
 
 #create_form #title {
@@ -919,14 +920,28 @@ nav {
   color: white;
 }
 
+@media screen and (min-width: 421px) {
+  #create_form {
+    width: 550px;
+  }
+}
+
 .title_line {
   display: flex;
   justify-content: center;
-  align-items: baseline;
+  flex-direction: column;
+  align-items: center;
 }
 
 .title_line label {
   margin-right: 10px;
+}
+
+@media screen and (min-width: 421px) {
+  .title_line {
+    flex-direction: row;
+    align-items: baseline;
+  }
 }
 
 #editor {
@@ -990,6 +1005,15 @@ nav {
 #profile {
   display: flex;
   justify-content: center;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+@media screen and (min-width: 421px) {
+  #profile {
+    flex-direction: row;
+    align-items: normal;
+  }
 }
 
 .liste_message {
@@ -1001,7 +1025,6 @@ nav {
 }
 
 #quick_profile {
-  width: 20vw;
   background-color: white;
   border: 2px solid rgba(55, 118, 255, 0.836);
   border-radius: 20px;
@@ -1021,6 +1044,12 @@ nav {
 #quick_profile a:hover .icon_settings {
   color: slateblue;
   transform: scale(1.75) rotate(180deg);
+}
+
+@media screen and (min-width: 421px) {
+  #quick_profile {
+    width: 20vw;
+  }
 }
 
 #mini_username {
