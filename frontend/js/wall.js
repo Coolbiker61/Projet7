@@ -45,6 +45,9 @@ document.onreadystatechange = function () {
                         var html = "<div class=\"menu_profil_ligne\"><a href=\"/admin/users\">Administration</a></div>";
                         document.getElementById('logout').insertAdjacentHTML("beforebegin", html);
                     }
+                    //definition de la taille du offset par rapport a celle du menu
+                    document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
+
                     importMessage();
                     document.getElementById("loading").hidden = true;
                     document.getElementById("back").style.setProperty('visibility', 'visible') ;

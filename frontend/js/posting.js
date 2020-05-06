@@ -17,6 +17,8 @@ document.onreadystatechange = function () {
                         var html = "<div class=\"menu_profil_ligne\"><a href=\"/admin/users\">Administration</a></div>";
                         document.getElementById('logout').insertAdjacentHTML("beforebegin", html);
                     }
+                    //definition de la taille du offset par rapport a celle du menu
+                    document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
                     listenerEvent();
                     document.getElementById("loading").hidden = true;
                     document.getElementById("create_form").hidden = false;
@@ -97,7 +99,6 @@ const contentChangeAction = (e) => {
     if (e.element) {
         if(e.element.tagName === "IMG"){          
             e.element.setAttribute("alt", "Posted image");
-            e.element.setAttribute("width", "100%");
         }
     }
 

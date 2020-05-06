@@ -404,13 +404,29 @@ label {
 /* Loading ----------------------------------------------------------------------------------------------*/
 #loading {
   text-align: center;
-  margin-top: 150px;
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 421px) {
+  #loading {
+    margin-top: 150px;
+  }
+}
+
+p {
+  font-size: 19px;
 }
 
 h1 {
   font-size: 40px;
-  margin-top: 50px;
+  margin-top: 0;
   text-align: center;
+}
+
+@media screen and (min-width: 421px) {
+  h1 {
+    margin-top: 50px;
+  }
 }
 
 .back {
@@ -665,7 +681,7 @@ nav {
 @media screen and (min-width: 675px) {
   .back-inscription, .back-login {
     height: calc(100% - 80px);
-    width: 100vh;
+    width: auto;
     background-position: center top;
   }
 }
@@ -772,11 +788,12 @@ nav {
   background-color: white;
   border: 2px solid #BDBDBD;
   width: 85vw;
+  max-width: 500px;
   margin: 20px auto;
   display: flex;
 }
 
-@media screen and (min-width: 421px) {
+@media screen and (min-width: 675px) {
   .message {
     width: 500px;
   }
@@ -834,6 +851,16 @@ nav {
 .corp h3 {
   margin-top: 5px;
   margin-bottom: 15px;
+}
+
+.corp img {
+  max-width: 100%;
+  height: auto;
+}
+
+.corp p {
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 .author {
@@ -1009,7 +1036,7 @@ nav {
   align-items: center;
 }
 
-@media screen and (min-width: 421px) {
+@media screen and (min-width: 800px) {
   #profile {
     flex-direction: row;
     align-items: normal;
@@ -1048,7 +1075,7 @@ nav {
 
 @media screen and (min-width: 421px) {
   #quick_profile {
-    width: 20vw;
+    width: 225px;
   }
 }
 
@@ -1066,11 +1093,18 @@ nav {
 .profile_details {
   border: 2px solid rgba(55, 118, 255, 0.836);
   width: 300px;
-  padding: 20px;
-  margin: 35vh auto 0;
+  padding: 5px;
+  margin: 10vh auto 0;
   background-color: white;
   border-radius: 10px;
   font-size: 19px;
+}
+
+@media screen and (min-width: 421px) {
+  .profile_details {
+    margin: 35vh auto 0;
+    padding: 20px;
+  }
 }
 
 .profile_details div {
@@ -1118,14 +1152,20 @@ nav {
 
 /* confirm delete account ------------------------------------------------------------------*/
 .confirm_delete {
-  width: 520px;
-  margin: auto;
+  margin: 20px 10px;
   justify-content: center;
   background-color: white;
   padding: 10px;
   border: 2px solid rgba(55, 118, 255, 0.836);
   border-radius: 10px;
   font-size: 19px;
+}
+
+@media screen and (min-width: 560px) {
+  .confirm_delete {
+    width: 518px;
+    margin: auto;
+  }
 }
 
 .choice {

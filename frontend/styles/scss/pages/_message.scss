@@ -4,9 +4,10 @@
     background-color: $message_bg_color;
     border: 2px solid $message_border_color;
     width: $width_message_mobile;
+    max-width: $width_message;
     margin: 20px auto;
     display: flex;
-    @media screen and (min-width: $menu_breackpoint_tablet ) {
+    @media screen and (min-width: $menu_breackpoint_pc ) {
          width: $width_message;
     }
 }
@@ -52,6 +53,14 @@
     h3 {
         margin-top: 5px;
         margin-bottom: 15px;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    p {
+        word-wrap: break-word;
+        overflow-wrap: anywhere;
     }
 }
 

@@ -9,7 +9,7 @@ document.onreadystatechange = function () {
 			requete.onreadystatechange = function () {
 				if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
 
-    alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
+                    alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
 					window.setTimeout(() => { window.location.href = '/auth/login';}, 2000);
 				} else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                     var response = JSON.parse(this.responseText);
@@ -17,7 +17,10 @@ document.onreadystatechange = function () {
                     if (response.isAdmin) {
                         var html = "<div class=\"menu_profil_ligne\"><a href=\"/admin/users\">Administration</a></div>";
                         document.getElementById('logout').insertAdjacentHTML("beforebegin", html);
-                    }                    
+                    }         
+                    //definition de la taille du offset par rapport a celle du menu
+                    document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
+           
                     ecoute();
                     document.getElementById("loading").hidden = true;
                     document.getElementById("back").style.setProperty('visibility', 'visible') ;

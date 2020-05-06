@@ -48,6 +48,8 @@ document.onreadystatechange = function () {
                         var html = "<div class=\"menu_profil_ligne\"><a href=\"/admin/users\">Administration</a></div>";
                         document.getElementById('logout').insertAdjacentHTML("beforebegin", html);
                     }
+                    //definition de la taille du offset par rapport a celle du menu
+                    document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
                     importMessage();
                     document.getElementById("loading").hidden = true;
                     document.getElementById("back").style.setProperty('visibility', 'visible');
@@ -339,7 +341,7 @@ const initEditorComment = (place, content) => {
         max_height: 500,
         max_width: 500,
         min_height: 100,
-        min_width: 400,
+        min_width: 300,
         statusbar: false,
 
         save_enablewhendirty: true,
@@ -358,7 +360,15 @@ const initEditorComment = (place, content) => {
                 contentChangeAction(e);
             });*/
             editor.on('init', function(e){
-                console.log('init detect '+e+ '  '+content);
+                console.log(e.target.id);
+                var target = String(document.getElementById(e.target.id));
+                if (target != "no_parent") {
+                    console.log(typeof(target) + " ----- "+(target !== "no_parent"));
+                    let targetId = target.split('parent')[1];
+                    console.log(targetId);
+                    document.getElementById(targetId).scrollIntoView({behavior: "smooth", block: "end" });
+                }
+                
             });
         }
     });

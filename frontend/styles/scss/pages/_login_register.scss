@@ -18,7 +18,7 @@
     }
     @media screen and (min-width: $menu_breackpoint_pc ) {
         height: calc(100% - #{$menu_height_pc});
-        width: 100vh;
+        width: auto;
         background-position: center top;
     }
 }

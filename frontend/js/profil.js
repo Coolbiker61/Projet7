@@ -88,6 +88,8 @@ document.onreadystatechange = function () {
                         document.getElementById('logout').insertAdjacentHTML("beforebegin", html);
                     }
                     document.getElementById("mini_username").innerHTML = response.username;
+                    //definition de la taille du offset par rapport a celle du menu
+                    document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
                     importeMessage(response.id);
                 }
 			};

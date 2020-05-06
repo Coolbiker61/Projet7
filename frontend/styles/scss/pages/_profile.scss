@@ -6,7 +6,7 @@
     justify-content: center;
     flex-direction: column-reverse;
     align-items: center;
-    @media screen and (min-width: $menu_breackpoint_tablet ) {
+    @media screen and (min-width: 800px ) {
         flex-direction: row;
         align-items: normal;
     }
@@ -40,7 +40,7 @@
         }
     }
     @media screen and (min-width: $menu_breackpoint_tablet ) {
-        width: 20vw;
+        width: 225px;
     }
 }
 #mini_username {
@@ -56,12 +56,16 @@
 .profile_details {
     border: 2px solid $profile_details_border_color;
     width: 300px;
-    padding: 20px;
-    margin: 35vh auto 0;
+    padding: 5px;
+    margin: 10vh auto 0;
     background-color: $profile_details_bg_color;
     border-radius: 10px;
 
     font-size: $font_size_normal;
+    @media screen and (min-width: $menu_breackpoint_tablet ){
+       margin: 35vh auto 0;
+       padding: 20px;
+    }
 }
 .profile_details div {
     margin: 10px;
@@ -106,14 +110,17 @@
 
 /* confirm delete account ------------------------------------------------------------------*/
 .confirm_delete {
-    width: 520px;
-    margin: auto;
+    margin: 20px 10px;
     justify-content: center;
     background-color: $confirm_delete_bg_color;
     padding: 10px;
     border: 2px solid $confirm_delete_border_color;
     border-radius: 10px;
     font-size: $font_size_normal;
+    @media screen and (min-width: 560px ){
+        width: 518px;
+        margin: auto;
+    }
 }
 
 .choice {

@@ -11,10 +11,10 @@ exports.getPageRoot = (req, res, then) => {
     html += "<script src=\"/js/menu.js\" async></script>";
     html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" role=\"banner\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
-    html += "</li><li id=\"user_nav\"><a href=\"/socialNetwork\"><div class=\"btn\" tabindex=\"0\">Social Network</div></a></li>";
-    html += "<li id=\"link_profil\"><div class=\"btn\" tabindex=\"0\"><span id=\"username\">&nbsp;</span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";
-    html += "<div class=\"menu_profil_ligne\" tabindex=\"0\"><a href=\"/auth/profil\">Profil</a></div>";
-    html += "<div id=\"logout\" class=\"menu_profil_ligne\" tabindex=\"0\"><a href=\"/auth/login\">Déconnexion</a></div>";
+    html += "</li><li id=\"user_nav\"><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
+    html += "<li id=\"link_profil\"><div class=\"btn\"><span id=\"username\">&nbsp;</span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";
+    html += "<a href=\"/auth/profil\"><div class=\"menu_profil_ligne\" >Profil</div></a>";
+    html += "<div id=\"logout\" class=\"menu_profil_ligne\" ><a href=\"/auth/login\">Déconnexion</a></div>";
     html += "</div></li><li><a href=\"javascript:void(0);\" class=\"icon\" onclick=\"showMenu()\"><i class=\"fas fa-bars\"></i></a></li>";
     html += "</ul></nav>";
     html += "<div class=\"offset-top\"></div>";

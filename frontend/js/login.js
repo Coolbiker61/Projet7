@@ -11,6 +11,8 @@ document.onreadystatechange = function () {
 				if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
 					window.setTimeout(() => { window.location.href = '/';}, 2000);
 				} else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
+					//definition de la taille du offset par rapport a celle du menu
+					document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
 					document.getElementById("loading").hidden = true;
 					document.getElementById("back-login").style.setProperty('visibility', 'visible') ;
 				}
