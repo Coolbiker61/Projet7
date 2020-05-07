@@ -4,7 +4,7 @@ const MINE_TYPES = {
     'image/jpg': 'jpg',
     'image/jpeg': 'jpg',
     'image/png': 'png',
-    //'image/gif': 'gif'
+    'image/gif': 'gif'
 }
 
 /* transforme le chemin physique du fichier en url valide */
@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, callback) => {
         var name = file.originalname.split(' ').join('_');
-        if (name.includes('.jpg') || name.includes('.png')) {
+        if (name.includes('.jpg') || name.includes('.png') || name.includes('.gif')) {
             name = name.slice(0,-4);
         } else if ( name.includes('.jpeg')) {
             name = name.slice(0,-5);
