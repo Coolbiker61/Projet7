@@ -256,7 +256,7 @@ const addComment = (comments) => {
             const comment = listeComment[index];
             if (comment.parent == 0) {
                 var html = "<div class=\"commentaire\" id=\""+comment.id+"\"><div class=\"com-likes\">";
-                html += "<div class=\"trait\"></div></div><div><div class=\"author\" >";
+                html += "<div class=\"trait\"></div></div><div class=\"corpse\"><div class=\"author\" >";
                 html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);//author nblike - date
                 html += "</div><div class=\"com-content\">";
                 html += comment.content;
@@ -267,7 +267,7 @@ const addComment = (comments) => {
             }
             if (comment.parent !=0 && document.getElementById(comment.parent)) {
                 var html = "<div class=\"commentaire\" id=\""+comment.id+"\"><div class=\"com-likes\">";
-                html += "<div class=\"trait\"></div></div><div><div class=\"author\">";
+                html += "<div class=\"trait\"></div></div><div class=\"corpse\"><div class=\"author\">";
                 html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);//author nblike - date
                 html += "</div><div class=\"com-content\">";
                 html += comment.content;
@@ -360,12 +360,8 @@ const initEditorComment = (place, content) => {
                 contentChangeAction(e);
             });*/
             editor.on('init', function(e){
-                console.log(e.target.id);
-                var target = String(document.getElementById(e.target.id));
-                if (target != "no_parent") {
-                    console.log(typeof(target) + " ----- "+(target !== "no_parent"));
-                    let targetId = target.split('parent')[1];
-                    console.log(targetId);
+                if (e.target.id != 'no_parent') {
+                    let targetId = e.target.id.split('parent')[1];
                     document.getElementById(targetId).scrollIntoView({behavior: "smooth", block: "end" });
                 }
                 

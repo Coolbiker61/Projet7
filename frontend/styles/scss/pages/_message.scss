@@ -82,10 +82,13 @@
     overflow: hidden;
 }
 .bloc-commentaire{
-    width: $width_message;
+    width: 95vw;
     background-color: $message_bg_color;
     margin: auto;
     padding-bottom: 50px;
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        width: 550px;
+    }
 }
 .commentaire {
     display: flex;
@@ -94,6 +97,9 @@
     .author {
         border-top: 1px solid;
         padding-top: 5px;
+    }
+    .corpse{
+        width: -webkit-fill-available;
     }
 }
 .like-com {
@@ -121,7 +127,14 @@
     flex-direction: column;
     padding-bottom: 15px;
     background-color: $message_bg_color;
-    width: $width_message;
+    width: 95vw;
+    #editor {
+        width: 100%;
+    }
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        width: $width_message;
+        
+    }
 }
 
 #create_form {
@@ -158,11 +171,16 @@
 #editor {
     margin: 15px auto;
     text-align: center;
+    position: relative;
+    width: 95%;
     .btn {
         margin-top: 10px;
     }
     [id^="cancelNew"] {
         margin-left: 15px;
+    }
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        width: auto;
     }
 }
 #length-title {
@@ -172,6 +190,8 @@
 .response_text {
     color: $response_text_text_color;
     font-weight: 600;
+    position: relative;
+    
 }
 .response_text:hover {
     cursor:pointer;

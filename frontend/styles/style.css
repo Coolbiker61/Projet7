@@ -883,10 +883,16 @@ nav {
 }
 
 .bloc-commentaire {
-  width: 500px;
+  width: 95vw;
   background-color: white;
   margin: auto;
   padding-bottom: 50px;
+}
+
+@media screen and (min-width: 421px) {
+  .bloc-commentaire {
+    width: 550px;
+  }
 }
 
 .commentaire {
@@ -898,6 +904,10 @@ nav {
 .commentaire .author {
   border-top: 1px solid;
   padding-top: 5px;
+}
+
+.commentaire .corpse {
+  width: -webkit-fill-available;
 }
 
 .like-com {
@@ -927,7 +937,17 @@ nav {
   flex-direction: column;
   padding-bottom: 15px;
   background-color: white;
-  width: 500px;
+  width: 95vw;
+}
+
+#comment_noParent #editor {
+  width: 100%;
+}
+
+@media screen and (min-width: 421px) {
+  #comment_noParent {
+    width: 500px;
+  }
 }
 
 #create_form {
@@ -974,6 +994,8 @@ nav {
 #editor {
   margin: 15px auto;
   text-align: center;
+  position: relative;
+  width: 95%;
 }
 
 #editor .btn {
@@ -984,6 +1006,12 @@ nav {
   margin-left: 15px;
 }
 
+@media screen and (min-width: 421px) {
+  #editor {
+    width: auto;
+  }
+}
+
 #length-title {
   margin-left: 10px;
 }
@@ -991,6 +1019,7 @@ nav {
 .response_text {
   color: slateblue;
   font-weight: 600;
+  position: relative;
 }
 
 .response_text:hover {
