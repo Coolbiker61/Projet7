@@ -323,9 +323,45 @@ const contentChangeAction = (e) => {
     }
 }
 
+//editeur message
+const initEditorMessage = () => {
+    //const PLACEHOLDERVALUE = 'Tapez votre message ici';
 
+    tinymce.init({
+        selector: '#message_editor',
+        plugins: ' autolink lists media table link image emoticons autoresize wordcount save',
+        toolbar: 'alignleft aligncenter alignright | bold italic underline fontsizeselect forecolor backcolor | emoticons image link spellchecker ',
+        menubar: '',
+        margin: 'auto',
+        language: 'fr_FR',
+        placeholder: 'Tapez votre message ici',
+        autoresize: true,
+        min_height: 100,
+        min_width: 310,
+        statusbar: false,
 
-//éditeur comment sans parent
+        save_enablewhendirty: true,
+        save_onsavecallback: function () { console.log('Saved'); },
+        //appeler quand une image est upload
+        images_upload_url: 'http://localhost:3000/api/v1/message/upload',
+        images_reuse_filename: true,
+        automatic_uploads: false,
+        elementpath: false,
+        image_description: false,
+        content_style: 'img {width: 100%;}',
+        //écoute les changement de contenu
+        setup: function(editor) {
+            editor.on('NodeChange', function(e){
+                contentChangeAction(e);
+            });
+            editor.on('KeyUp', function(e){
+                contentChangeAction(e);
+            })
+        }
+    });
+}
+
+//éditeur comment 
 const initEditorComment = (place, content) => {
     var content = content || null;
     tinymce.init({
