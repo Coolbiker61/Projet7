@@ -1,6 +1,6 @@
 
 const PLACEHOLDERVALUE = 'Tapez votre commentaire ici'; 
-var MESSAGE = "";
+var MESSAGE = [];
 const editTime = (param) => {
     // format de la base 2020-04-02T22:19:43.000Z
     const date = Date.parse(param);
@@ -78,6 +78,7 @@ const importMessage = (user) => {
             var arrayresponse = JSON.parse(this.responseText);
             MESSAGE = arrayresponse;
             addMessage(arrayresponse, user);
+            listenerUpdate();
             listenerLike(arrayresponse[0]);
             importLike(arrayresponse[0]);
             importComment(arrayresponse[0].id);
@@ -111,8 +112,8 @@ const addMessage = (message, user) => {
     html += "</h3></header><p class=\"content-article\">"+message[0].content;
     html += "</p></article>";
     if (user.id == message[1].id) {
-        html += "<div class=\"message_options\"><span class=\"message_editer\">Editer</span> ";
-        html += "<span class=\"message_supprimer\">Supprimer</span></div>";
+        html += "<div class=\"message_options\"><div class=\"message_editer\">Editer</div> ";
+        html += "<div class=\"message_supprimer\">Supprimer</div></div>";
     }
     html += "</section></div>";
 
@@ -311,6 +312,12 @@ const contentChangeAction = (e) => {
                 document.getElementById('submitNew'+id).setAttribute('disabled', true);
             }
         }
+    } else if (e.target.id == 'message_editor') {
+        if (tinymce.get('message_editor').getBody().innerHTML != '<p><br data-mce-bogus="1"></p>' && tinymce.get('message_editor').getBody().innerHTML != '<p><br></p>') {
+            document.getElementById('submitUpdate').removeAttribute('disabled');
+        } else {
+            document.getElementById('submitUpdate').setAttribute('disabled', true);
+        }
     } else if (e.currentTarget.dataset.id) {
         if (e.currentTarget.dataset.id == 'no_parent') {
             if (tinymce.get('no_parent').getBody().innerHTML != '<p><br data-mce-bogus="1"></p>' && tinymce.get('no_parent').getBody().innerHTML != '<p><br></p>') {
@@ -318,12 +325,18 @@ const contentChangeAction = (e) => {
             } else {
                 document.getElementById('submitNew').setAttribute('disabled', true);
             }
-        } else {
+        } else if (e.currentTarget.dataset.id.includes('parent')) {
             var id = e.currentTarget.dataset.id.split('parent')[1];
             if (tinymce.get('parent'+id).getBody().innerHTML != '<p><br data-mce-bogus="1"></p>' && tinymce.get('parent'+id).getBody().innerHTML != '<p><br></p>') {
                 document.getElementById('submitNew'+id).removeAttribute('disabled');
             } else {
                 document.getElementById('submitNew'+id).setAttribute('disabled', true);
+            }
+        } else if (e.currentTarget.dataset.id == 'message_editor') {
+            if (tinymce.get('message_editor').getBody().innerHTML != '<p><br data-mce-bogus="1"></p>' && tinymce.get('message_editor').getBody().innerHTML != '<p><br></p>') {
+                document.getElementById('submitUpdate').removeAttribute('disabled');
+            } else {
+                document.getElementById('submitUpdate').setAttribute('disabled', true);
             }
         }
     }
@@ -362,37 +375,131 @@ const initEditorMessage = () => {
             });
             editor.on('KeyUp', function(e){
                 contentChangeAction(e);
-            })
-        }
+            });
+            editor.on('init', function(e){
+                editor.setContent(MESSAGE[0].content);
+                document.getElementById('update_title').value = MESSAGE[0].title;
+                document.getElementById('length-title').innerHTML = document.getElementById('update_title').value.length;
+                document.getElementById(e.target.id).scrollIntoView({behavior: "smooth", block: "end" });
+            });
+        }       
     });
 
 }
 
 const listenerUpdate = () => {
     document.querySelector(".message_editer").addEventListener("click", function (event) {
-        
         var html = "<form id=\"update\"><div id=\"editor\" >";
+        html += "<div class=\"title_line update\"><label for=\"title\">Titre du message </label>";
+        html += "<input type=\"text\" id=\"update_title\" maxlength=\"50\" ><div><span id=\"length-title\">0</span>/50</div></div>";
         html += "<textarea id=\"message_editor\"></textarea>";
-        html += "<button class=\"btn\" name=\"submitbtn\" id=\"submitNew"+id+"\">Publier</button>";
-        html += "<button class=\"btn\" name=\"cancelbtn\" id=\"cancelNew"+id+"\">Annuler</button></div></form>";
+        html += "<button disabled=\"true\" class=\"btn\" name=\"submitupdatebtn\" id=\"submitUpdate\">Publier</button>";
+        html += "<button class=\"btn\" name=\"cancelupdatebtn\" id=\"cancelUpdate\">Annuler</button></div></form>";
         event.target.innerHTML = html;
-        initEditorComment("#message_editor");
-        document.getElementById("cancelNew"+id).addEventListener('click', function (event) {
-            tinymce.remove('#parent'+id);
-            document.getElementById(responseId).innerHTML = "Enregistrer";
+        initEditorMessage('#message_editor');
+        document.getElementById("cancelUpdate").addEventListener('click', function (event) {
             event.preventDefault();
             event.stopPropagation();
-            listenerComment(responseId);
+            tinymce.remove('#message_editor');
+            document.querySelector('.message_editer').innerHTML = "Editer";
+            listenerUpdate();
         }, {once: true});
-        document.getElementById("submitNew"+id).addEventListener("click", function (event) {
+        document.getElementById("submitUpdate").addEventListener("click", function (event) {
             event.preventDefault();
             event.stopPropagation();
             var idMessage = window.location.href.split('/message/')[1];
-            var content = tinymce.get('parent'+id).getBody().innerHTML;
-            sendcomment(idMessage, content, id);
-        }, {once: true})
+            var content = tinymce.get('message_editor').getContent();
+            console.log(content+'--'+idMessage);
+            //updateMessage(idMessage, content, id);
+        }, {once: true});
+        document.getElementById('update_title').addEventListener('input', function () {
+            document.getElementById('length-title').innerHTML = document.getElementById('update_title').value.length;
+        });
     }, {once: true});
+    
 }
+
+const updateMessage = (idMessage, content, title) => {
+    var data = {
+        title: title,
+        content: content
+    }
+    data = JSON.stringify(data);
+    //envoie la requête et modifie l'affichage en conséquence
+    var requete = new XMLHttpRequest();
+    var errorMessage = "";
+    /* écoute des changement d'état de l'envoie */
+    requete.onreadystatechange = function () {
+        if (this.readyState == XMLHttpRequest.DONE) {
+            switch (this.status) {
+                case 201:
+                    //document.querySelector('.bloc-commentaire').innerHTML = "";
+                    console.log("update ok");
+                    window.setTimeout(() => { window.location.reload(true);}, 200);
+                    break;
+                
+                case 401:
+                    //401 utilisateur non trouvé ou mail non conforme au regex
+                    switch (JSON.parse(this.responseText).error) {
+                        case "User not found !":
+                            console.log("Aucun compte n'existe pour cet adresse mail.");
+                            break;
+                        case "Action not allow !":
+                            alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
+					        window.setTimeout(() => { window.location.href = '/auth/login';}, 200);
+                            break;
+                        default:
+                            errorMessage = "Action non autorisé !";
+                            break;
+                    }
+                    document.getElementById("error").innerHTML = errorMessage;
+                    break;
+                case 500:
+                    // 500 erreur serveur
+                    errorMessage = "Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.";
+                    document.getElementById("error").innerHTML = errorMessage;
+                    break;
+                default:
+                    break;
+            }
+            return;
+        }
+    };
+    requete.open("UPDATE", "http://localhost:3000/api/v1/message/"+idMessage);
+    requete.setRequestHeader("Content-Type", "application/json");
+    requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
+    requete.responseType = 'text';
+    requete.send(data);
+}
+
+document.getElementById('create_form').addEventListener('submit', function (event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    var titleMessage = document.querySelector("update_title").value;
+    let imgStart = document.getElementById("message_editor").value.indexOf('<img');
+    var messageValue = "";
+    if (imgStart != -1) {
+        tinymce.activeEditor.uploadImages()
+        .then( url => {
+            let imgStop = document.getElementById("message_editor").value.indexOf(' />') + 3;
+            messageValue = document.getElementById("message_editor").value.slice(0, imgStart);
+            messageValue += url[0].element.outerHTML;
+            messageValue += document.getElementById("message_editor").value.slice(imgStop);
+            if (messageValue.length >= 11 && titleMessage.length >= 2) {
+                
+                sendMessage(messageValue, titleMessage);
+            }
+        })
+        .catch(error => { console.log(error) });
+    } else {
+        messageValue = document.getElementById("message_editor").value;
+        if (messageValue.length >= 11 && titleMessage.length >= 2) {
+            sendMessage(messageValue, titleMessage);
+        }
+    }    
+    
+})
 
 //éditeur comment 
 const initEditorComment = (place, content) => {
@@ -519,6 +626,7 @@ const sendcomment = (messageId, commentContent, parent) => {
     requete.responseType = 'text';
     requete.send(data);
 }
+
 
 
 // écoute le bouton nouveau message

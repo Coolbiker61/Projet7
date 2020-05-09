@@ -1066,6 +1066,12 @@ nav {
 
 .message_editer, .message_supprimer {
   color: slateblue;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.update label {
+  margin-right: 5px;
 }
 
 /* profile  ----------------------------------------------------------------------------------------*/

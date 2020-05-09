@@ -237,4 +237,9 @@
 }
 .message_editer, .message_supprimer {
     color: $author_text_color;
+    font-weight: 600;
+    cursor:pointer;
+}
+.update label{
+    margin-right: 5px;
 }
