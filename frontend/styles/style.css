@@ -1057,6 +1057,17 @@ nav {
   width: 3em !important;
 }
 
+.message_options {
+  padding-left: 10px;
+  padding-top: 5px;
+  margin-top: 10px;
+  border-top: 1px solid rgba(55, 118, 255, 0.836);
+}
+
+.message_editer, .message_supprimer {
+  color: slateblue;
+}
+
 /* profile  ----------------------------------------------------------------------------------------*/
 #profile {
   display: flex;

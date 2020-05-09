@@ -1,6 +1,6 @@
 
 const PLACEHOLDERVALUE = 'Tapez votre commentaire ici'; 
-
+var MESSAGE = "";
 const editTime = (param) => {
     // format de la base 2020-04-02T22:19:43.000Z
     const date = Date.parse(param);
@@ -50,7 +50,7 @@ document.onreadystatechange = function () {
                     }
                     //definition de la taille du offset par rapport a celle du menu
                     document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
-                    importMessage();
+                    importMessage(response);
                     document.getElementById("loading").hidden = true;
                     document.getElementById("back").style.setProperty('visibility', 'visible');
                 }
@@ -66,7 +66,7 @@ document.onreadystatechange = function () {
     };
 };
 
-const importMessage = () => {
+const importMessage = (user) => {
     var idMessage = window.location.href.split('/message/')[1];
     if (isNaN(idMessage) || idMessage < 0) {
         return;
@@ -76,7 +76,8 @@ const importMessage = () => {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             // si la requête des messages n'a pas retourné d'erreur
             var arrayresponse = JSON.parse(this.responseText);
-            addMessage(arrayresponse);
+            MESSAGE = arrayresponse;
+            addMessage(arrayresponse, user);
             listenerLike(arrayresponse[0]);
             importLike(arrayresponse[0]);
             importComment(arrayresponse[0].id);
@@ -97,7 +98,7 @@ const importMessage = () => {
     requete.send();
 }
 
-const addMessage = (message) => {
+const addMessage = (message, user) => {
     var html = "<div class=\"message-solo\"><div class=\"message\" id=\""+message[0].id+"\"><div class=\"col_likes\">";
     html += "<i class=\"fas fa-arrow-up like-up-not\"></i>";
     html += "<div class=\"nb-likes\">"+message[0].likes+"</div>";
@@ -108,7 +109,12 @@ const addMessage = (message) => {
     html += "</header><article><header><h3 class=\"title-article\">";
     html += message[0].title;
     html += "</h3></header><p class=\"content-article\">"+message[0].content;
-    html += "</p></article></section></div>";
+    html += "</p></article>";
+    if (user.id == message[1].id) {
+        html += "<div class=\"message_options\"><span class=\"message_editer\">Editer</span> ";
+        html += "<span class=\"message_supprimer\">Supprimer</span></div>";
+    }
+    html += "</section></div>";
 
     html += "<form id=\"comment_noParent\"><div id=\"editor\" >";
     html += "<textarea id=\"no_parent\"></textarea>";
@@ -359,6 +365,33 @@ const initEditorMessage = () => {
             })
         }
     });
+
+}
+
+const listenerUpdate = () => {
+    document.querySelector(".message_editer").addEventListener("click", function (event) {
+        
+        var html = "<form id=\"update\"><div id=\"editor\" >";
+        html += "<textarea id=\"message_editor\"></textarea>";
+        html += "<button class=\"btn\" name=\"submitbtn\" id=\"submitNew"+id+"\">Publier</button>";
+        html += "<button class=\"btn\" name=\"cancelbtn\" id=\"cancelNew"+id+"\">Annuler</button></div></form>";
+        event.target.innerHTML = html;
+        initEditorComment("#message_editor");
+        document.getElementById("cancelNew"+id).addEventListener('click', function (event) {
+            tinymce.remove('#parent'+id);
+            document.getElementById(responseId).innerHTML = "Enregistrer";
+            event.preventDefault();
+            event.stopPropagation();
+            listenerComment(responseId);
+        }, {once: true});
+        document.getElementById("submitNew"+id).addEventListener("click", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var idMessage = window.location.href.split('/message/')[1];
+            var content = tinymce.get('parent'+id).getBody().innerHTML;
+            sendcomment(idMessage, content, id);
+        }, {once: true})
+    }, {once: true});
 }
 
 //éditeur comment 

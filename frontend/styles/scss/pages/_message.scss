@@ -229,3 +229,12 @@
     }
 }
 
+.message_options {
+    padding-left: 10px;
+    padding-top: 5px;
+    margin-top: 10px;
+    border-top: 1px solid $menu_profil_ligne_border;
+}
+.message_editer, .message_supprimer {
+    color: $author_text_color;
+}
