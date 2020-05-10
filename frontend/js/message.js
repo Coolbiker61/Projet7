@@ -78,7 +78,9 @@ const importMessage = (user) => {
             var arrayresponse = JSON.parse(this.responseText);
             MESSAGE = arrayresponse;
             addMessage(arrayresponse, user);
-            listenerUpdate();
+            if (user.id == arrayresponse[0].UserId) {
+                listenerUpdate();
+            }
             listenerLike(arrayresponse[0]);
             importLike(arrayresponse[0]);
             importComment(arrayresponse[0].id);
@@ -409,8 +411,46 @@ const listenerUpdate = () => {
             event.stopPropagation();
             var idMessage = window.location.href.split('/message/')[1];
             var content = tinymce.get('message_editor').getContent();
-            console.log(content+'--'+idMessage);
             //updateMessage(idMessage, content, id);
+            var titleMessage = document.getElementById("update_title").value;
+            if (content == MESSAGE[0].content && titleMessage == MESSAGE[0].title && content.length >= 11 && titleMessage.length >= 2) {
+                
+                console.log('tout identique');
+
+
+            } else if (content != MESSAGE[0].content && titleMessage == MESSAGE[0].title && content.length >= 11 && titleMessage.length >= 2){
+                if (content.indexOf('<img') != -1) {
+                    if (content.indexOf('<img src="data:') != -1) {
+                        tinymce.activeEditor.uploadImages()
+                        .then( url => {
+                            console.log(url);
+                            updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
+                        })
+                        .catch(error => { console.log(error) });
+                    } 
+                    
+                } else {
+                    updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
+                }
+            } else if (content == MESSAGE[0].content && titleMessage != MESSAGE[0].title && content.length >= 11 && titleMessage.length >= 2) {
+                updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
+            } else {
+                if (content.indexOf('<img') != -1) {
+                    if (content.indexOf('<img src="data:') != -1) {
+                        tinymce.activeEditor.uploadImages()
+                        .then( url => {
+                            console.log(url);
+                            updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
+                        })
+                        .catch(error => { console.log(error) });
+                    } 
+                    
+                } else {
+                    updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
+                }
+            }
+               
+            
         }, {once: true});
         document.getElementById('update_title').addEventListener('input', function () {
             document.getElementById('length-title').innerHTML = document.getElementById('update_title').value.length;
@@ -435,7 +475,7 @@ const updateMessage = (idMessage, content, title) => {
                 case 201:
                     //document.querySelector('.bloc-commentaire').innerHTML = "";
                     console.log("update ok");
-                    window.setTimeout(() => { window.location.reload(true);}, 200);
+                    window.setTimeout(() => { window.location.reload(true);}, 20);
                     break;
                 
                 case 401:
@@ -465,41 +505,14 @@ const updateMessage = (idMessage, content, title) => {
             return;
         }
     };
-    requete.open("UPDATE", "http://localhost:3000/api/v1/message/"+idMessage);
+    requete.open("PUT", "http://localhost:3000/api/v1/message/"+idMessage);
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.responseType = 'text';
     requete.send(data);
 }
 
-document.getElementById('create_form').addEventListener('submit', function (event) {
-    event.stopPropagation();
-    event.preventDefault();
 
-    var titleMessage = document.querySelector("update_title").value;
-    let imgStart = document.getElementById("message_editor").value.indexOf('<img');
-    var messageValue = "";
-    if (imgStart != -1) {
-        tinymce.activeEditor.uploadImages()
-        .then( url => {
-            let imgStop = document.getElementById("message_editor").value.indexOf(' />') + 3;
-            messageValue = document.getElementById("message_editor").value.slice(0, imgStart);
-            messageValue += url[0].element.outerHTML;
-            messageValue += document.getElementById("message_editor").value.slice(imgStop);
-            if (messageValue.length >= 11 && titleMessage.length >= 2) {
-                
-                sendMessage(messageValue, titleMessage);
-            }
-        })
-        .catch(error => { console.log(error) });
-    } else {
-        messageValue = document.getElementById("message_editor").value;
-        if (messageValue.length >= 11 && titleMessage.length >= 2) {
-            sendMessage(messageValue, titleMessage);
-        }
-    }    
-    
-})
 
 //éditeur comment 
 const initEditorComment = (place, content) => {
