@@ -62,6 +62,12 @@
         word-wrap: break-word;
         overflow-wrap: anywhere;
     }
+    em {
+        font-style: italic;
+    }
+    strong {
+        font-weight: bold;
+    }
 }
 
 .author {
@@ -230,15 +236,18 @@
 }
 
 .message_options {
-    padding-left: 10px;
+    
     padding-top: 5px;
     margin-top: 10px;
     border-top: 1px solid $menu_profil_ligne_border;
+    display: flex;
+    flex-wrap: wrap;
 }
 .message_editer, .message_supprimer {
     color: $author_text_color;
     font-weight: 600;
     cursor:pointer;
+    margin: 0 5px;
 }
 .update label{
     margin-right: 5px;

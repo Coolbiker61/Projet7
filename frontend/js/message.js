@@ -298,7 +298,12 @@ const addComment = (comments) => {
 };
 
 // action changement contenu editeur
-const contentChangeAction = (e) => {    
+const contentChangeAction = (e) => { 
+    if (e.element) {
+        if(e.element.tagName === "IMG"){          
+            e.element.setAttribute("alt", "Posted image");
+        }
+    }
     if (e.target.id && e.target.id.includes('parent')) {
         if (e.target.id == 'no_parent') {
             if (tinymce.get('no_parent').getBody().innerHTML != '<p><br data-mce-bogus="1"></p>' && tinymce.get('no_parent').getBody().innerHTML != '<p><br></p>') {
@@ -315,7 +320,7 @@ const contentChangeAction = (e) => {
             }
         }
     } else if (e.target.id == 'message_editor') {
-        if (tinymce.get('message_editor').getBody().innerHTML != '<p><br data-mce-bogus="1"></p>' && tinymce.get('message_editor').getBody().innerHTML != '<p><br></p>') {
+        if (tinymce.get('message_editor').getContent() != '<p><br data-mce-bogus="1"></p>' && tinymce.get('message_editor').getContent() != '<p><br></p>') {
             document.getElementById('submitUpdate').removeAttribute('disabled');
         } else {
             document.getElementById('submitUpdate').setAttribute('disabled', true);
@@ -335,7 +340,7 @@ const contentChangeAction = (e) => {
                 document.getElementById('submitNew'+id).setAttribute('disabled', true);
             }
         } else if (e.currentTarget.dataset.id == 'message_editor') {
-            if (tinymce.get('message_editor').getBody().innerHTML != '<p><br data-mce-bogus="1"></p>' && tinymce.get('message_editor').getBody().innerHTML != '<p><br></p>') {
+            if (tinymce.get('message_editor').getContent() != '<p><br data-mce-bogus="1"></p>' && tinymce.get('message_editor').getContent() != '<p><br></p>') {
                 document.getElementById('submitUpdate').removeAttribute('disabled');
             } else {
                 document.getElementById('submitUpdate').setAttribute('disabled', true);
@@ -369,7 +374,7 @@ const initEditorMessage = () => {
         automatic_uploads: false,
         elementpath: false,
         image_description: false,
-        content_style: 'img {width: 100%;}',
+        content_style: 'img {max-width: 100%;}',
         //écoute les changement de contenu
         setup: function(editor) {
             editor.on('NodeChange', function(e){
@@ -427,7 +432,9 @@ const listenerUpdate = () => {
                             updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
                         })
                         .catch(error => { console.log(error) });
-                    } 
+                    } else {
+                        updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
+                    }
                     
                 } else {
                     updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
@@ -443,7 +450,9 @@ const listenerUpdate = () => {
                             updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
                         })
                         .catch(error => { console.log(error) });
-                    } 
+                    } else {
+                        updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
+                    }
                     
                 } else {
                     updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
@@ -454,9 +463,19 @@ const listenerUpdate = () => {
         }, {once: true});
         document.getElementById('update_title').addEventListener('input', function () {
             document.getElementById('length-title').innerHTML = document.getElementById('update_title').value.length;
+            if (tinymce.get('message_editor').getContent() != '<p><br data-mce-bogus="1"></p>' && tinymce.get('message_editor').getContent() != '<p><br></p>' && document.getElementById("update_title").value.length >= 2) {
+                document.getElementById('submitUpdate').removeAttribute('disabled');
+            } else {
+                document.getElementById('submitUpdate').setAttribute('disabled', true);
+            }
         });
     }, {once: true});
-    
+    document.querySelector(".message_supprimer").addEventListener("click", function (event) {
+        //
+        var idMessage = window.location.href.split('/message/')[1];
+        console.log('supprimer '+idMessage);
+        deleteMessage(idMessage);
+    }, {once: true});
 }
 
 const updateMessage = (idMessage, content, title) => {
@@ -497,7 +516,7 @@ const updateMessage = (idMessage, content, title) => {
                 case 500:
                     // 500 erreur serveur
                     errorMessage = "Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.";
-                    document.getElementById("error").innerHTML = errorMessage;
+                    console.log(errorMessage);
                     break;
                 default:
                     break;
@@ -512,7 +531,54 @@ const updateMessage = (idMessage, content, title) => {
     requete.send(data);
 }
 
+const deleteMessage = (idMessage) => {
+    //envoie la requête et modifie l'affichage en conséquence
+    var requete = new XMLHttpRequest();
+    var errorMessage = "";
+    /* écoute des changement d'état de l'envoie */
+    requete.onreadystatechange = function () {
+        if (this.readyState == XMLHttpRequest.DONE) {
+            switch (this.status) {
+                case 200:
+                    //document.querySelector('.bloc-commentaire').innerHTML = "";
+                    console.log("delete ok");
+                    window.setTimeout(() => { window.location.href = '/socialNetwork';}, 20);
+                    break;
+                
+                case 401:
+                    //401 utilisateur non trouvé ou mail non conforme au regex
+                    switch (JSON.parse(this.responseText).error) {
+                        case "User not found !":
+                            console.log("Aucun compte n'existe pour cet adresse mail.");
+                            break;
+                        case "Action not allow !":
+                            alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
+					        window.setTimeout(() => { window.location.href = '/auth/login';}, 200);
+                            break;
+                        default:
+                            errorMessage = "Action non autorisé !";
+                            break;
+                    }
+                    document.getElementById("error").innerHTML = errorMessage;
+                    break;
+                case 500:
+                    // 500 erreur serveur
+                    errorMessage = "Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.";
+                    console.log(errorMessage);
+                    break;
+                default:
+                    break;
+            }
+            return;
+        }
+    };
+    requete.open("DELETE", "http://localhost:3000/api/v1/message/"+idMessage);
+    requete.setRequestHeader("Content-Type", "application/json");
+    requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
+    requete.responseType = 'text';
+    requete.send();
 
+}
 
 //éditeur comment 
 const initEditorComment = (place, content) => {

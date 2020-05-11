@@ -132,7 +132,7 @@ tinymce.init({
     automatic_uploads: false,
     elementpath: false,
     image_description: false,
-    content_style: 'img {width: 100%;}',
+    content_style: 'img {max-width: 100%;}',
     //écoute les changement de contenu
     setup: function(editor) {
         editor.on('NodeChange', function(e){

@@ -863,6 +863,14 @@ nav {
   overflow-wrap: anywhere;
 }
 
+.corp em {
+  font-style: italic;
+}
+
+.corp strong {
+  font-weight: bold;
+}
+
 .author {
   color: slateblue;
   padding-bottom: 10px;
@@ -1058,16 +1066,18 @@ nav {
 }
 
 .message_options {
-  padding-left: 10px;
   padding-top: 5px;
   margin-top: 10px;
   border-top: 1px solid rgba(55, 118, 255, 0.836);
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .message_editer, .message_supprimer {
   color: slateblue;
   font-weight: 600;
   cursor: pointer;
+  margin: 0 5px;
 }
 
 .update label {

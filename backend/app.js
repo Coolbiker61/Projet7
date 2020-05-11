@@ -17,13 +17,10 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+app.use(bodyParser.json({limit: '50mb'}));
 
 
-app.get('/', function (req, res) {
-  res.status(200).json({ message: "hello" });
-});
 
 /* autorise l'accès aux fichier du dossier images */
 app.use('/userImg', express.static(path.join(__dirname, 'userImg')));
