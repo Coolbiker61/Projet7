@@ -163,21 +163,29 @@ exports.deleteMessage = (req, res, then) => {
     }
     
     var id = parseInt(req.params.id);
-    if (id != null && !isNaN(id) && id > 0) {
-        models.Message.destroy({ where: { id: id, UserId: userId } })
-        .then(message => {
-            if (message) {
-                res.status(200).json({ message: 'message deleted !'});
+    models.User.findOne({attributes: [ 'id', 'username', 'isAdmin']},{ where: { id: userId } })
+    .then(user => {
+        if(!user) {
+            return res.status(401).json({ error: 'User not found !'});
+        } else {
+            if (id != null && !isNaN(id) && id > 0) {
+                models.Message.destroy({ where: { id: id, UserId: userId } })
+                .then(message => {
+                    if (message) {
+                        res.status(200).json({ message: 'message deleted !'});
+                    } else {
+                        res.status(404).json({ 'error': 'nothing found !'});
+                    }
+                })
+                .catch(error => {
+                    res.status(500).json({ error });
+                })
             } else {
-                res.status(404).json({ 'error': 'nothing found !'});
+                return res.status(400).json({ 'error': 'id not valid !'})
             }
-        })
-        .catch(error => {
-            res.status(500).json({ error });
-        })
-    } else {
-        return res.status(400).json({ 'error': 'id not valid !'})
-    }
+        }
+    })
+    .catch(error => res.status(500).json({ error }));
 }
 
 exports.updateMessage = (req, res, then) => {
@@ -199,27 +207,40 @@ exports.updateMessage = (req, res, then) => {
     }
     
     var id = parseInt(req.params.id);
-    if (id != null && !isNaN(id) && id > 0) {
-        models.Message.findOne({ where: { id: id, UserId: userId } })
-        .then(message => {
-            if (message) {
-                models.Message.update({ 
-                    title: (title != message.title) ? title : message.title,
-                    content: (content != message.content) ? content : message.content
-                 }, { where: {id: id, UserId: userId}})
-                 .then(result => {
-                    res.status(200).json(result);
-                 })
-                 .catch(error => { res.status(500).json({ error }); })
+    models.User.findOne({attributes: [ 'id', 'username', 'isAdmin']},{ where: { id: userId } })
+    .then(user => {
+        if(!user) {
+            return res.status(401).json({ error: 'User not found !'});
+        } else {
+            if (id != null && !isNaN(id) && id > 0) {
+                models.Message.findOne({ where: { id: id} })
+                .then(message => {
+                    if (message) {
+                        if (user.isAdmin || user.id == message.userId) {
+                            models.Message.update({ 
+                                title: (title != message.title) ? title : message.title,
+                                content: (content != message.content) ? content : message.content
+                            }, { where: {id: id}})
+                            .then(result => {
+                                res.status(200).json(result);
+                            })
+                            .catch(error => { res.status(500).json({ error }); })
+                        } else {
+                            return res.status(401).json({ 'error': 'Insufficient rights  !'});
+                        }
+                        
+                    } else {
+                        res.status(404).json({ 'error': 'nothing found'});
+                    }
+                })
+                .catch(error => {
+                    res.status(500).json({ error });
+                })
             } else {
-                res.status(404).json({ 'error': 'nothing found'});
+                return res.status(400).json({ 'error': 'id not valid !'})
             }
-        })
-        .catch(error => {
-            res.status(500).json({ error });
-        })
-    } else {
-        return res.status(400).json({ 'error': 'id not valid !'})
-    }
+        }
+    })
+    .catch(error => res.status(500).json({ error }));
 
 }
