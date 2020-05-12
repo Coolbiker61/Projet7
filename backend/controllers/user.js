@@ -188,7 +188,7 @@ exports.deleteUser = (req, res, then) => {
                             })
                             .catch(error => { 
                                 console.log('erreur get comment '+error); 
-                                return res.status(501).json({ error });  
+                                return res.status(500).json({ error });  
                             });
                         };
                         done(null, commentsListComplet);
@@ -230,7 +230,7 @@ exports.deleteUser = (req, res, then) => {
                                             likes: message.likes + 1
                                         })
                                         .then(()=> {})
-                                        .catch(error => { return res.status(503).json({ error }); }); 
+                                        .catch(error => { return res.status(500).json({ error }); }); 
                                     }
                                 })
                             } else if (likes[i].likeType == 1) {
@@ -241,7 +241,7 @@ exports.deleteUser = (req, res, then) => {
                                             likes: message.likes - 1
                                         })
                                         .then(()=> {})
-                                        .catch(error => { return res.status(502).json({ error }); }); 
+                                        .catch(error => { return res.status(500).json({ error }); }); 
                                     }
                                 })
                             }
@@ -257,7 +257,7 @@ exports.deleteUser = (req, res, then) => {
                         })
                         .catch(error => {
                             console.log('erreur destroy like'); 
-                        return res.status(501).json({ error }); 
+                        return res.status(500).json({ error }); 
                     });
                     }
                 },

@@ -158,7 +158,6 @@ exports.getOneComment = (req, res, then) => {
     }
 };
 
-
 exports.deleteComment = (req, res, then) => {
     //idComment
     var headerAuth = req.headers['authorization'];
@@ -174,13 +173,28 @@ exports.deleteComment = (req, res, then) => {
             if(!user) {
                 return res.status(401).json({ error: 'User not found !'});
             } else {
-                models.Comment.findOne({ where: { id: idComment }})
+                models.Comment.findOne({ where: { id: idComment }, attributes: ['id', 'parent']})
                 .then(comment => {
                     if (comment) {
                         if (comment.userId == user.id || user.isAdmin) {
-                            models.Comment.destroy({where: { id: idComment }})
-                            .then(deleted => {
-                                return res.status(200).json(deleted);
+                            var commentsListComplet = [];
+                            var comments = [comment];
+                            for(commentActif of comments) {
+                                models.Comment.findAll({ where: { parent: commentActif.id }, attributes: ['id', 'parent']})
+                                .then(response => {
+                                    if (response.length > 0) {
+                                        comments = comments.concat(response);
+                                    }
+                                    commentsListComplet.push(commentActif);
+                                })
+                                .catch(error => { 
+                                    console.log('erreur get comment '+error); 
+                                    return res.status(500).json({ error });  
+                                });
+                            };
+                            models.Comment.destroy({where: { id: commentsListComplet[i].id }})
+                            .then(() => {
+                                return res.status(200).json({ message: 'Comment deleted'});
                             })
                             .catch(error => { res.status(500).json({ error }); });
                         } else {
@@ -193,7 +207,54 @@ exports.deleteComment = (req, res, then) => {
                 .catch(error => { res.status(500).json({ error }); });
             }
         })
-        .catch(error => res.status(500).json({ 'error': error }));
+        .catch(error => res.status(500).json({ error }));
+    } else {
+        return res.status(400).json({ 'error': 'id not valid !'})
+    }
+}
+
+exports.updateComment = (req, res, then) => {
+    //idComment
+    var headerAuth = req.headers['authorization'];
+    var userId = jwtUtils.getUserId(headerAuth);
+
+    if (userId < 0) {
+        return res.status(401).json({ 'error': 'Action not allow !'});
+    }
+    var idComment = parseInt(req.params.idComment);
+
+    var content = req.body.content;
+    if (content == null || content.length <= 4) {
+        return res.status(400).json({ 'error': 'bad request'});
+    }
+
+    if (!isNaN(idComment) && idComment > 0) {
+        models.User.findOne({ attributes: [ 'id', 'email', 'username', 'isAdmin'], where: { id: userId } })
+        .then(user => {
+            if(!user) {
+                return res.status(401).json({ error: 'User not found !'});
+            } else {
+                models.Comment.findOne({ where: { id: idComment }, attributes: ['id', 'parent']})
+                .then(comment => {
+                    if (comment) {
+                        if (comment.userId == user.id || user.isAdmin) {
+                            
+                            models.Comment.update({content: content}, {where: { id: idComment }})
+                            .then(() => {
+                                return res.status(201).json({ message: 'Comment updated'});
+                            })
+                            .catch(error => { res.status(500).json({ error }); });
+                        } else {
+                            return res.status(401).json({ 'error': 'Action not allow !'})
+                        }
+                    } else {
+                        return res.status(404).json({ 'message': 'Not found !'})
+                    }
+                })
+                .catch(error => { res.status(500).json({ error }); });
+            }
+        })
+        .catch(error => res.status(500).json({ error }));
     } else {
         return res.status(400).json({ 'error': 'id not valid !'})
     }

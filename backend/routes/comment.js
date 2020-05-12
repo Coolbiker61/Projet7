@@ -12,6 +12,7 @@ router.get('/:idMessage/:idComment', commentCtrl.getOneComment);
 router.post('/:idMessage', commentCtrl.addComment);
 // delete a comment
 router.delete('/:idComment', commentCtrl.deleteComment);
-
+// update a comment
+router.put('/:idComment', commentCtrl.updateComment);
 
 module.exports = router;
