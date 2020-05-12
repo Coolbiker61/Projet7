@@ -899,7 +899,7 @@ nav {
 
 @media screen and (min-width: 421px) {
   .bloc-commentaire {
-    width: 550px;
+    width: 500px;
   }
 }
 
@@ -1028,6 +1028,12 @@ nav {
   color: slateblue;
   font-weight: 600;
   position: relative;
+  display: flex;
+}
+
+.response_text p {
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .response_text:hover {
@@ -1080,7 +1086,26 @@ nav {
   margin: 0 5px;
 }
 
+#update .btn {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .update label {
+  margin-right: 5px;
+}
+
+.text_delete {
+  color: black;
+  margin: 10px;
+}
+
+.bloc_btn_delete {
+  margin: auto;
+}
+
+.bloc_btn_delete .btn {
+  margin-left: 5px;
   margin-right: 5px;
 }
 

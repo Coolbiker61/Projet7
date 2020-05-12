@@ -93,7 +93,7 @@
     margin: auto;
     padding-bottom: 50px;
     @media screen and (min-width: $menu_breackpoint_tablet ) {
-        width: 550px;
+        width: 500px;
     }
 }
 .commentaire {
@@ -197,7 +197,11 @@
     color: $response_text_text_color;
     font-weight: 600;
     position: relative;
-    
+    display: flex;
+    p {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
 }
 .response_text:hover {
     cursor:pointer;
@@ -233,6 +237,7 @@
     .tox-tbtn__select-label {
         width: 3em!important;
     }
+    
 }
 
 .message_options {
@@ -249,6 +254,24 @@
     cursor:pointer;
     margin: 0 5px;
 }
+#update {
+    .btn {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
+
 .update label{
     margin-right: 5px;
+}
+.text_delete {
+    color: $btn_font_color;
+    margin: 10px;
+}
+.bloc_btn_delete {
+    margin: auto;
+    .btn {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
 }

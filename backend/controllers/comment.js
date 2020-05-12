@@ -82,7 +82,7 @@ exports.getComment = (req, res, then) => {
                     if (message) {
                         models.Comment.findAll({ 
                             where: { messageId: idMessage },
-                            order: [(order != null) ? order.split(':') : ['id', 'DESC']],
+                            order: [(order != null) ? order.split(':') : ['createdAt', 'ASC']],
                             limit: (!isNaN(limit)) ? limit : null,
                             offset: (!isNaN(offset)) ? offset : null,
                             include: [{

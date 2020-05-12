@@ -1,6 +1,7 @@
 
 const PLACEHOLDERVALUE = 'Tapez votre commentaire ici'; 
-var MESSAGE = [];
+var USER = "";
+let MESSAGE = [];
 const editTime = (param) => {
     // format de la base 2020-04-02T22:19:43.000Z
     const date = Date.parse(param);
@@ -43,6 +44,7 @@ document.onreadystatechange = function () {
 				} else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                     // si la requête du profil n'a pas retourné d'erreur
                     var response = JSON.parse(this.responseText);
+                    USER = response;
                     document.getElementById("username").innerHTML = response.username;
                     if (response.isAdmin) {
                         var html = "<div class=\"menu_profil_ligne\"><a href=\"/admin/users\">Administration</a></div>";
@@ -67,7 +69,7 @@ document.onreadystatechange = function () {
 };
 
 const importMessage = (user) => {
-    var idMessage = window.location.href.split('/message/')[1];
+    let idMessage = window.location.href.split('/message/')[1];
     if (isNaN(idMessage) || idMessage < 0) {
         return;
     }
@@ -78,12 +80,12 @@ const importMessage = (user) => {
             var arrayresponse = JSON.parse(this.responseText);
             MESSAGE = arrayresponse;
             addMessage(arrayresponse, user);
-            if (user.id == arrayresponse[0].UserId) {
-                listenerUpdate();
+            if (user.id == arrayresponse[0].UserId || user.isAdmin) {
+                listenerUpdate('all');
             }
             listenerLike(arrayresponse[0]);
             importLike(arrayresponse[0]);
-            importComment(arrayresponse[0].id);
+            importComment(arrayresponse[0].id, user);
             initEditorComment('#no_parent');
             document.getElementById("comment_noParent").addEventListener("submit", function (event) {
                 event.stopPropagation();
@@ -113,7 +115,7 @@ const addMessage = (message, user) => {
     html += message[0].title;
     html += "</h3></header><p class=\"content-article\">"+message[0].content;
     html += "</p></article>";
-    if (user.id == message[1].id) {
+    if (user.id == message[1].id || user.isAdmin) {
         html += "<div class=\"message_options\"><div class=\"message_editer\">Editer</div> ";
         html += "<div class=\"message_supprimer\">Supprimer</div></div>";
     }
@@ -233,13 +235,13 @@ const importLike = (message) => {
 }
 
 // importe les commentaire
-const importComment = (messageid) => {
+const importComment = (messageid, user) => {
     var requete = new XMLHttpRequest();
     requete.onreadystatechange = function () {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             // si la requête des messages n'a pas retourné d'erreur
             var comments = JSON.parse(this.responseText);
-            addComment(comments);            
+            addComment(comments, user);            
         }
     };
     requete.open("GET", "http://localhost:3000/api/v1/comment/"+messageid);
@@ -249,7 +251,7 @@ const importComment = (messageid) => {
 }
 
 // Ajoute les commentaires a la page
-const addComment = (comments) => {
+const addComment = (comments, user) => {
     if (comments.length == 0 ) {
         var html = "Aucun commentaire n'à encore été fait, soyez le premier à réagir à ce message.";
         document.querySelector('.bloc-commentaire').innerHTML = html;
@@ -269,10 +271,19 @@ const addComment = (comments) => {
                 html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);//author nblike - date
                 html += "</div><div class=\"com-content\">";
                 html += comment.content;
-                html += "</div><div class=\"response_text\"  id=\"response"+comment.id+"\">Répondre</div></div></div>";
+                html += "</div>"; 
+                html += "<div class=\"response_text\"id=\"res"+comment.id+"\"><p id=\"response"+comment.id+"\">Répondre</p>";
+                if (user.id == comment.user.id || user.isAdmin) {
+                    html += "<p id=\"comment_editer"+comment.id+"\">Editer</p> ";
+                    html += "<p id=\"comment_supprimer"+comment.id+"\">Supprimer</p>";
+                }
+                html += "</div></div></div>";
                 document.querySelector('.bloc-commentaire').insertAdjacentHTML('beforeend', html);
                 position.unshift(index);
-                listenerComment("response"+comment.id);
+                listenerComment("response"+comment.id, comment.user.id);
+                if (user.id == comment.user.id || user.isAdmin) {
+                    listenerOptionsComment('all', comment.id);
+                }
             }
             if (comment.parent !=0 && document.getElementById(comment.parent)) {
                 var html = "<div class=\"commentaire\" id=\""+comment.id+"\"><div class=\"com-likes\">";
@@ -280,13 +291,21 @@ const addComment = (comments) => {
                 html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);//author nblike - date
                 html += "</div><div class=\"com-content\">";
                 html += comment.content;
-                html += "</div><div class=\"response_text\" id=\"response"+comment.id+"\">Répondre</div></div></div>";
-                if (document.getElementById(comment.parent)){
-                    if (document.getElementById(comment.parent).querySelector("#response"+comment.parent)) {
-                        document.getElementById(comment.parent).querySelector("#response"+comment.parent).insertAdjacentHTML('afterend', html); 
-                        position.unshift(index);
-                        listenerComment("response"+comment.id);
+                html += "</div>";
+                html += "<div class=\"response_text\"id=\"res"+comment.id+"\"><p id=\"response"+comment.id+"\">Répondre</p>";
+                if (user.id == comment.user.id || user.isAdmin) {
+                    html += "<p id=\"comment_editer"+comment.id+"\">Editer</p> ";
+                    html += "<p id=\"comment_supprimer"+comment.id+"\">Supprimer</p>";
+                }
+                html += "</div></div></div>";
+                if (document.getElementById(comment.parent).querySelector("#res"+comment.parent)) {
+                    document.getElementById(comment.parent).querySelector("#res"+comment.parent).insertAdjacentHTML('afterend', html); 
+                    position.unshift(index);
+                    listenerComment("response"+comment.id, comment.user.id);
+                    if (user.id == comment.user.id || user.isAdmin) {
+                        listenerOptionsComment('all', comment.id);
                     }
+                    
                 }
             }
         }
@@ -394,88 +413,116 @@ const initEditorMessage = () => {
 
 }
 
-const listenerUpdate = () => {
-    document.querySelector(".message_editer").addEventListener("click", function (event) {
-        var html = "<form id=\"update\"><div id=\"editor\" >";
-        html += "<div class=\"title_line update\"><label for=\"title\">Titre du message </label>";
-        html += "<input type=\"text\" id=\"update_title\" maxlength=\"50\" ><div><span id=\"length-title\">0</span>/50</div></div>";
-        html += "<textarea id=\"message_editor\"></textarea>";
-        html += "<button disabled=\"true\" class=\"btn\" name=\"submitupdatebtn\" id=\"submitUpdate\">Publier</button>";
-        html += "<button class=\"btn\" name=\"cancelupdatebtn\" id=\"cancelUpdate\">Annuler</button></div></form>";
-        event.target.innerHTML = html;
-        initEditorMessage('#message_editor');
-        document.getElementById("cancelUpdate").addEventListener('click', function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-            tinymce.remove('#message_editor');
-            document.querySelector('.message_editer').innerHTML = "Editer";
-            listenerUpdate();
-        }, {once: true});
-        document.getElementById("submitUpdate").addEventListener("click", function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-            var idMessage = window.location.href.split('/message/')[1];
-            var content = tinymce.get('message_editor').getContent();
-            //updateMessage(idMessage, content, id);
-            var titleMessage = document.getElementById("update_title").value;
-            if (content == MESSAGE[0].content && titleMessage == MESSAGE[0].title && content.length >= 11 && titleMessage.length >= 2) {
+const listenerUpdate = (param) => {
+    if (param == 'all' || param == 'update') {
+        document.querySelector(".message_editer").addEventListener("click", function (event) {
+            //masque le bouton supprimer
+            document.querySelector(".message_supprimer").setAttribute('hidden', true);
+
+            var html = "<form id=\"update\"><div id=\"editor\" >";
+            html += "<div class=\"title_line update\"><label for=\"title\">Titre du message </label>";
+            html += "<input type=\"text\" id=\"update_title\" maxlength=\"50\" ><div><span id=\"length-title\">0</span>/50</div></div>";
+            html += "<textarea id=\"message_editor\"></textarea>";
+            html += "<button disabled=\"true\" class=\"btn\" name=\"submitupdatebtn\" id=\"submitUpdate\">Publier</button>";
+            html += "<button class=\"btn\" name=\"cancelupdatebtn\" id=\"cancelUpdate\">Annuler</button></div></form>";
+            event.target.innerHTML = html;
+            initEditorMessage('#message_editor');
+            document.getElementById("cancelUpdate").addEventListener('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                tinymce.remove('#message_editor');
+                document.querySelector('.message_editer').innerHTML = "Editer";
+                listenerUpdate('update');
+                document.querySelector(".message_supprimer").removeAttribute('hidden');
+            }, {once: true});
+            document.getElementById("submitUpdate").addEventListener("click", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                var idMessage = window.location.href.split('/message/')[1];
+                var content = tinymce.get('message_editor').getContent();
+                //updateMessage(idMessage, content, id);
+                var titleMessage = document.getElementById("update_title").value;
+                if (content == MESSAGE[0].content && titleMessage == MESSAGE[0].title && content.length >= 11 && titleMessage.length >= 2) {
+                    
+                    console.log('tout identique');
+
+
+                } else if (content != MESSAGE[0].content && titleMessage == MESSAGE[0].title && content.length >= 11 && titleMessage.length >= 2){
+                    if (content.indexOf('<img') != -1) {
+                        if (content.indexOf('<img src="data:') != -1) {
+                            tinymce.activeEditor.uploadImages()
+                            .then( url => {
+                                console.log(url);
+                                updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
+                            })
+                            .catch(error => { console.log(error) });
+                        } else {
+                            updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
+                        }
+                        
+                    } else {
+                        updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
+                    }
+                } else if (content == MESSAGE[0].content && titleMessage != MESSAGE[0].title && content.length >= 11 && titleMessage.length >= 2) {
+                    updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
+                } else {
+                    if (content.indexOf('<img') != -1) {
+                        if (content.indexOf('<img src="data:') != -1) {
+                            tinymce.activeEditor.uploadImages()
+                            .then( url => {
+                                console.log(url);
+                                updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
+                            })
+                            .catch(error => { console.log(error) });
+                        } else {
+                            updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
+                        }
+                        
+                    } else {
+                        updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
+                    }
+                }
                 
-                console.log('tout identique');
-
-
-            } else if (content != MESSAGE[0].content && titleMessage == MESSAGE[0].title && content.length >= 11 && titleMessage.length >= 2){
-                if (content.indexOf('<img') != -1) {
-                    if (content.indexOf('<img src="data:') != -1) {
-                        tinymce.activeEditor.uploadImages()
-                        .then( url => {
-                            console.log(url);
-                            updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
-                        })
-                        .catch(error => { console.log(error) });
-                    } else {
-                        updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
-                    }
-                    
+                
+            }, {once: true});
+            document.getElementById('update_title').addEventListener('input', function () {
+                document.getElementById('length-title').innerHTML = document.getElementById('update_title').value.length;
+                if (tinymce.get('message_editor').getContent() != '<p><br data-mce-bogus="1"></p>' && tinymce.get('message_editor').getContent() != '<p><br></p>' && document.getElementById("update_title").value.length >= 2) {
+                    document.getElementById('submitUpdate').removeAttribute('disabled');
                 } else {
-                    updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
+                    document.getElementById('submitUpdate').setAttribute('disabled', true);
                 }
-            } else if (content == MESSAGE[0].content && titleMessage != MESSAGE[0].title && content.length >= 11 && titleMessage.length >= 2) {
-                updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
-            } else {
-                if (content.indexOf('<img') != -1) {
-                    if (content.indexOf('<img src="data:') != -1) {
-                        tinymce.activeEditor.uploadImages()
-                        .then( url => {
-                            console.log(url);
-                            updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
-                        })
-                        .catch(error => { console.log(error) });
-                    } else {
-                        updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
-                    }
-                    
-                } else {
-                    updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
-                }
-            }
-               
-            
+            });
         }, {once: true});
-        document.getElementById('update_title').addEventListener('input', function () {
-            document.getElementById('length-title').innerHTML = document.getElementById('update_title').value.length;
-            if (tinymce.get('message_editor').getContent() != '<p><br data-mce-bogus="1"></p>' && tinymce.get('message_editor').getContent() != '<p><br></p>' && document.getElementById("update_title").value.length >= 2) {
-                document.getElementById('submitUpdate').removeAttribute('disabled');
-            } else {
-                document.getElementById('submitUpdate').setAttribute('disabled', true);
-            }
-        });
-    }, {once: true});
-    document.querySelector(".message_supprimer").addEventListener("click", function (event) {
-        //
-        var idMessage = window.location.href.split('/message/')[1];
-        console.log('supprimer '+idMessage);
-        deleteMessage(idMessage);
-    }, {once: true});
+    }
+    if ( param == 'all' || param == 'delete') {
+        document.querySelector(".message_supprimer").addEventListener("click", function (event) {
+            //
+            document.querySelector(".message_editer").setAttribute('hidden', true);
+            var idMessage = window.location.href.split('/message/')[1];
+            var html = "<form id=\"delete\">";
+            html += "<p class=\"text_delete\">Etes vous sur de vouloir le supprimer ?<br /> ";
+            html += "Ceci supprimera également tous les commentaires associés.</p><div class=\"bloc_btn_delete\">";
+            html += "<button class=\"btn\" name=\"submitdeletebtn\" id=\"submitdelete\">Supprimer</button>";
+            html += "<button class=\"btn\" name=\"canceldeletebtn\" id=\"canceldelete\">Annuler</button></div></form>";
+            document.querySelector('.message_supprimer').innerHTML = html;
+            document.getElementById("canceldelete").addEventListener('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                document.querySelector('.message_supprimer').innerHTML = "Supprimer";
+                listenerUpdate('delete');
+                document.querySelector(".message_editer").removeAttribute('hidden');
+                
+            }, {once: true});
+            document.getElementById("submitdelete").addEventListener('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                deleteMessage(idMessage);
+            });
+
+
+        }, {once: true});
+    }
 }
 
 const updateMessage = (idMessage, content, title) => {
@@ -626,7 +673,7 @@ const initEditorComment = (place, content) => {
     
 }
 
-const listenerComment = (responseId) => {
+const listenerComment = (responseId, userId) => {
     document.getElementById(responseId).addEventListener("click", function (event) {
         let id = event.target.id.split('response')[1];
         var html = "<form id=\"comment_parent"+id+"\"><div id=\"editor\" >";
@@ -634,13 +681,22 @@ const listenerComment = (responseId) => {
         html += "<button class=\"btn\" name=\"submitbtn\" id=\"submitNew"+id+"\">Publier</button>";
         html += "<button class=\"btn\" name=\"cancelbtn\" id=\"cancelNew"+id+"\">Annuler</button></div></form>";
         event.target.innerHTML = html;
+        if (USER.id == userId || USER.isAdmin) {
+            console.log('proprio');
+            document.getElementById('comment_editer'+id).setAttribute('hidden', true);
+            document.getElementById('comment_supprimer'+id).setAttribute('hidden', true);
+        }
         initEditorComment("#parent"+id);
         document.getElementById("cancelNew"+id).addEventListener('click', function (event) {
             tinymce.remove('#parent'+id);
             document.getElementById(responseId).innerHTML = "Répondre";
             event.preventDefault();
             event.stopPropagation();
-            listenerComment(responseId);
+            listenerComment(responseId, userId);
+            if (USER.id == userId || USER.isAdmin) {
+                document.getElementById('comment_editer'+id).removeAttribute('hidden');
+                document.getElementById('comment_supprimer'+id).removeAttribute('hidden');
+            }
         }, {once: true});
         document.getElementById("submitNew"+id).addEventListener("click", function (event) {
             event.preventDefault();
@@ -652,6 +708,56 @@ const listenerComment = (responseId) => {
     }, {once: true});
 }
 
+const listenerOptionsComment = (type, id) => {
+    if (type == 'all' || type == 'edit') {
+        document.getElementById('comment_editer'+id).addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            let idComment = event.target.id.split('comment_editer')[1];
+            console.log(idComment);
+            var html = "<form id=\"Edit_comm"+idComment+"\"><div id=\"editor_comm"+idComment+"\" >";
+            html += "<textarea id=\"comment_editor"+idComment+"\"></textarea>";
+            html += "<button disabled=\"true\" class=\"btn\" name=\"submitEditBtn\" id=\"submitEdit"+idComment+"\">Publier</button>";
+            html += "<button class=\"btn\" name=\"cancelEditBtn\" id=\"cancelEdit"+idComment+"\">Annuler</button></div></form>";
+            event.target.innerHTML = html;
+            document.querySelector('#response'+idComment).setAttribute('hidden', true)
+            document.querySelector("#comment_supprimer"+idComment).setAttribute('hidden', true);
+            initEditorComment('#comment_editor'+idComment);
+            document.getElementById("cancelEdit"+idComment).addEventListener('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                tinymce.remove('#comment_editor'+idComment);
+                document.querySelector('.comment_editer'+idComment).innerHTML = "Editer";
+                listenerOptionsComment('edit', id);
+                document.querySelector('#response'+idComment).removeAttribute('hidden')
+                document.querySelector("#comment_supprimer"+idComment).removeAttribute('hidden');
+            }, {once: true});
+            document.getElementById("submitEdit"+idComment).addEventListener("click", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                
+                var content = tinymce.get('message_editor').getContent();
+
+                /*if (content == MESSAGE[0].content && content.length >= 11 ) {
+                    
+                    console.log('tout identique');
+                } else if (content != MESSAGE[0].content && content.length >= 11){
+                    //updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
+                   
+                }*/
+                
+            }, {once: true});
+        });
+    }
+    if (type == 'all' || type == 'delete') {
+        document.getElementById('comment_supprimer'+id).addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            let idComment = event.target.id.split('comment_supprimer')[1];
+            console.log(idComment);
+        });
+    }
+}
 
 const sendcomment = (messageId, commentContent, parent) => {
     var data = {
@@ -668,7 +774,7 @@ const sendcomment = (messageId, commentContent, parent) => {
             switch (this.status) {
                 case 201:
                     document.querySelector('.bloc-commentaire').innerHTML = "";
-                    importComment(messageId);
+                    importComment(messageId, USER);
                     tinymce.activeEditor.setContent('');
                     break;
                 
