@@ -753,16 +753,16 @@ const listenerOptionsComment = (type, id) => {
             document.getElementById("submitEdit"+idComment).addEventListener("click", function (event) {
                 event.preventDefault();
                 event.stopPropagation();
-                
-                var content = tinymce.get('#comment_editor'+idComment).getContent();
+                console.log(value);
+                var content = tinymce.get('comment_editor'+idComment).getContent();
 
-                /*if (content == MESSAGE[0].content && content.length >= 11 ) {
+                if (content == value && content.length >= 8 ) {
                     
                     console.log('tout identique');
-                } else if (content != MESSAGE[0].content && content.length >= 11){
-                    //updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
+                } else if (content != value && content.length >= 8){
+                    updateComment(idComment, content);
                    
-                }*/
+                }
                 
             }, {once: true});
         }, {once: true});
@@ -830,7 +830,59 @@ const sendcomment = (messageId, commentContent, parent) => {
     requete.send(data);
 }
 
-
+const updateComment = (commentId, content) => {
+    var data = {
+        content: content
+    }
+    data = JSON.stringify(data);
+    //envoie la requête et modifie l'affichage en conséquence
+    var requete = new XMLHttpRequest();
+    var errorMessage = "";
+    /* écoute des changement d'état de l'envoie */
+    requete.onreadystatechange = function () {
+        if (this.readyState == XMLHttpRequest.DONE) {
+            switch (this.status) {
+                case 201:
+                    document.querySelector('.bloc-commentaire').innerHTML = "";
+                    var idMessage = window.location.href.split('/message/')[1];
+                    importComment(idMessage, USER);
+                    tinymce.activeEditor.setContent('');
+                    break;
+                
+                case 401:
+                    //401 utilisateur non trouvé ou mail non conforme au regex
+                    switch (JSON.parse(this.responseText).error) {
+                        case "User not found !":
+                            errorMessage = "Aucun compte n'existe pour cet adresse mail.";
+                            break;
+                        case "Action not allow !":
+                            alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
+					        window.setTimeout(() => { window.location.href = '/auth/login';}, 200);
+                            break;
+                        default:
+                            errorMessage = "Action non autorisé !";
+                            break;
+                    }
+                    document.getElementById("error").innerHTML = errorMessage;
+                    break;
+                case 500:
+                    // 500 erreur serveur
+                    errorMessage = "Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.";
+                    document.getElementById("error").innerHTML = errorMessage;
+                    break;
+                default:
+                    break;
+            }
+            console.log(this);
+            return;
+        }
+    };
+    requete.open("PUT", "http://localhost:3000/api/v1/comment/"+commentId);
+    requete.setRequestHeader("Content-Type", "application/json");
+    requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
+    requete.responseType = 'text';
+    requete.send(data);
+}
 
 // écoute le bouton nouveau message
 document.getElementById("btn_new_post").addEventListener("click", function (event) {

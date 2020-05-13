@@ -17,7 +17,7 @@ exports.addComment = (req, res, then) => {
         parent = 0;
     }
 
-    if (content == null || content.length <= 4) {
+    if (content == null || content.length <= 7) {
         return res.status(400).json({ 'error': 'bad request'});
     }
     if (!isNaN(idMessage)) {
@@ -224,7 +224,7 @@ exports.updateComment = (req, res, then) => {
     var idComment = parseInt(req.params.idComment);
 
     var content = req.body.content;
-    if (content == null || content.length <= 4) {
+    if (content == null || content.length <= 7) {
         return res.status(400).json({ 'error': 'bad request'});
     }
 
@@ -234,7 +234,7 @@ exports.updateComment = (req, res, then) => {
             if(!user) {
                 return res.status(401).json({ error: 'User not found !'});
             } else {
-                models.Comment.findOne({ where: { id: idComment }, attributes: ['id', 'parent']})
+                models.Comment.findOne({ where: { id: idComment }, attributes: ['id', 'parent', 'userId']})
                 .then(comment => {
                     if (comment) {
                         if (comment.userId == user.id || user.isAdmin) {
