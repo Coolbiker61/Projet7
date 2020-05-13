@@ -268,7 +268,7 @@
     color: $btn_font_color;
     margin: 10px;
 }
-.bloc_btn_delete {
+.bloc_btn_delete, [id^="editor_comm"] {
     margin: auto;
     .btn {
         margin-left: 5px;

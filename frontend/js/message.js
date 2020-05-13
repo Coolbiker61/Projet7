@@ -753,7 +753,6 @@ const listenerOptionsComment = (type, id) => {
             document.getElementById("submitEdit"+idComment).addEventListener("click", function (event) {
                 event.preventDefault();
                 event.stopPropagation();
-                console.log(value);
                 var content = tinymce.get('comment_editor'+idComment).getContent();
 
                 if (content == value && content.length >= 8 ) {
@@ -772,8 +771,31 @@ const listenerOptionsComment = (type, id) => {
             event.preventDefault();
             event.stopPropagation();
             let idComment = event.target.id.split('comment_supprimer')[1];
-            console.log(idComment);
-        });
+            var html = "<form id=\"delete"+id+"\">";
+            html += "<p class=\"text_delete\">Etes vous sur de vouloir le supprimer ?<br /> ";
+            html += "Ceci supprimera également tous les commentaires associés.</p><div class=\"bloc_btn_delete\">";
+            html += "<button class=\"btn\" name=\"submitdeletebtn\" id=\"submitdelete"+id+"\">Supprimer</button>";
+            html += "<button class=\"btn\" name=\"canceldeletebtn\" id=\"canceldelete"+id+"\">Annuler</button></div></form>";
+            document.getElementById('comment_supprimer'+id).innerHTML = html;
+
+            document.getElementById('response'+idComment).setAttribute('hidden', true);
+            document.getElementById("comment_editer"+idComment).setAttribute('hidden', true);
+            document.getElementById("canceldelete"+id).addEventListener('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                document.getElementById('comment_supprimer'+id).innerHTML = "Supprimer";
+                listenerOptionsComment('delete', id);
+                document.getElementById("comment_editer"+id).removeAttribute('hidden');
+                
+            document.getElementById('response'+idComment).removeAttribute('hidden');
+            document.getElementById("comment_editer"+idComment).removeAttribute('hidden');
+            }, {once: true});
+            document.getElementById("submitdelete"+id).addEventListener('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                deleteComment(id);
+            }, {once: true});
+        }, {once: true});
     }
 }
 
@@ -873,7 +895,6 @@ const updateComment = (commentId, content) => {
                 default:
                     break;
             }
-            console.log(this);
             return;
         }
     };
@@ -882,6 +903,56 @@ const updateComment = (commentId, content) => {
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.responseType = 'text';
     requete.send(data);
+}
+
+const deleteComment = (commentId) => {
+    
+    //envoie la requête et modifie l'affichage en conséquence
+    var requete = new XMLHttpRequest();
+    var errorMessage = "";
+    /* écoute des changement d'état de l'envoie */
+    requete.onreadystatechange = function () {
+        if (this.readyState == XMLHttpRequest.DONE) {
+            switch (this.status) {
+                case 200:
+                    document.querySelector('.bloc-commentaire').innerHTML = "";
+                    var idMessage = window.location.href.split('/message/')[1];
+                    importComment(idMessage, USER);
+                    break;
+                
+                case 401:
+                    //401 utilisateur non trouvé ou mail non conforme au regex
+                    switch (JSON.parse(this.responseText).error) {
+                        case "User not found !":
+                            errorMessage = "Aucun compte n'existe pour cet adresse mail.";
+                            break;
+                        case "Action not allow !":
+                            alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
+					        window.setTimeout(() => { window.location.href = '/auth/login';}, 200);
+                            break;
+                        default:
+                            errorMessage = "Action non autorisé !";
+                            break;
+                    }
+                    //document.getElementById("error").innerHTML = errorMessage;
+                    break;
+                case 500:
+                    // 500 erreur serveur
+                    errorMessage = "Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.";
+                    //document.getElementById("error").innerHTML = errorMessage;
+                    break;
+                default:
+                    break;
+            }
+            console.log(this.responseText);
+            return;
+        }
+    };
+    requete.open("DELETE", "http://localhost:3000/api/v1/comment/"+commentId);
+    requete.setRequestHeader("Content-Type", "application/json");
+    requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
+    requete.responseType = 'text';
+    requete.send();
 }
 
 // écoute le bouton nouveau message

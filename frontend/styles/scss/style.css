@@ -1188,7 +1188,7 @@ nav {
   margin: 0 5px;
 }
 
-#update .btn {
+#update .btn, [id^="editor_comm"] .btn {
   margin-left: 5px;
   margin-right: 5px;
 }
@@ -1202,11 +1202,11 @@ nav {
   margin: 10px;
 }
 
-.bloc_btn_delete, [id^="editor_comm"] {
+.bloc_btn_delete {
   margin: auto;
 }
 
-.bloc_btn_delete .btn, [id^="editor_comm"] .btn {
+.bloc_btn_delete .btn {
   margin-left: 5px;
   margin-right: 5px;
 }

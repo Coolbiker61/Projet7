@@ -1,5 +1,6 @@
 const models = require('../models');
 const jwtUtils = require('../utils/jwt');
+const asyncLib = require('async');
 
 exports.addComment = (req, res, then) => {
     var headerAuth = req.headers['authorization'];
@@ -173,38 +174,50 @@ exports.deleteComment = (req, res, then) => {
             if(!user) {
                 return res.status(401).json({ error: 'User not found !'});
             } else {
-                models.Comment.findOne({ where: { id: idComment }, attributes: ['id', 'parent']})
-                .then(comment => {
-                    if (comment) {
-                        if (comment.userId == user.id || user.isAdmin) {
-                            var commentsListComplet = [];
-                            var comments = [comment];
-                            for(commentActif of comments) {
+                asyncLib.waterfall([
+                    function (done) {                
+                        models.Comment.findOne({ where: { id: idComment }, attributes: ['id', 'parent', 'userId']})
+                        .then(comment => {
+                        if (comment) {
+                            if (comment.userId == user.id || user.isAdmin) {
+                                done(null, comment);
+                                
+                            } else {
+                                return res.status(401).json({ 'error': 'Action not allow !'})
+                            }
+                        } else {
+                            return res.status(404).json({ 'message': 'Not found !'})
+                        }
+                    })
+                    .catch(error => { res.status(500).json({ error }); });
+                    }, function(comment, done) {
+                        var commentsListComplet = [];
+                        var comments = [comment];
+                        (async function() {
+                            for await (var commentActif of comments) {
                                 models.Comment.findAll({ where: { parent: commentActif.id }, attributes: ['id', 'parent']})
                                 .then(response => {
                                     if (response.length > 0) {
                                         comments = comments.concat(response);
                                     }
-                                    commentsListComplet.push(commentActif);
+                                    commentsListComplet.push(commentActif.id);
                                 })
                                 .catch(error => { 
                                     console.log('erreur get comment '+error); 
                                     return res.status(500).json({ error });  
                                 });
                             };
-                            models.Comment.destroy({where: { id: commentsListComplet[i].id }})
-                            .then(() => {
-                                return res.status(200).json({ message: 'Comment deleted'});
-                            })
-                            .catch(error => { res.status(500).json({ error }); });
-                        } else {
-                            return res.status(401).json({ 'error': 'Action not allow !'})
-                        }
-                    } else {
-                        return res.status(404).json({ 'message': 'Not found !'})
+                        })();
+                        console.log(commentsListComplet + '--------------------------');
+                        done(commentsListComplet);
                     }
-                })
-                .catch(error => { res.status(500).json({ error }); });
+                ], function (commentsListComplet) {
+                    models.Comment.destroy({where: { id: commentsListComplet }})
+                    .then(() => {
+                        return res.status(200).json({ message: 'Comment deleted'});
+                    })
+                    .catch(error => { res.status(500).json({ error }); });
+                });
             }
         })
         .catch(error => res.status(500).json({ error }));
