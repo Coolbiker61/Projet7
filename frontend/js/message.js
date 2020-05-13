@@ -344,6 +344,13 @@ const contentChangeAction = (e) => {
         } else {
             document.getElementById('submitUpdate').setAttribute('disabled', true);
         }
+    } else if (e.target.id && e.target.id.includes('comment_editor')) {
+        let targetId = e.target.id.split('comment_editor')[1];
+        if (tinymce.get('comment_editor'+targetId).getContent() != '<p><br data-mce-bogus="1"></p>' && tinymce.get('comment_editor'+targetId).getContent() != '<p><br></p>') {
+            document.getElementById('submitEdit'+targetId).removeAttribute('disabled');
+        } else {
+            document.getElementById('submitEdite'+targetId).setAttribute('disabled', true);
+        }
     } else if (e.currentTarget.dataset.id) {
         if (e.currentTarget.dataset.id == 'no_parent') {
             if (tinymce.get('no_parent').getBody().innerHTML != '<p><br data-mce-bogus="1"></p>' && tinymce.get('no_parent').getBody().innerHTML != '<p><br></p>') {
@@ -363,6 +370,13 @@ const contentChangeAction = (e) => {
                 document.getElementById('submitUpdate').removeAttribute('disabled');
             } else {
                 document.getElementById('submitUpdate').setAttribute('disabled', true);
+            }
+        } else if (e.currentTarget.dataset.id.includes('comment_editor')) {
+            let targetId = e.currentTarget.dataset.id.split('comment_editor')[1];
+            if (tinymce.get('comment_editor'+targetId).getContent() != '<p><br data-mce-bogus="1"></p>' && tinymce.get('comment_editor'+targetId).getContent() != '<p><br></p>') {
+                document.getElementById('submitEdit'+targetId).removeAttribute('disabled');
+            } else {
+                document.getElementById('submitEdite'+targetId).setAttribute('disabled', true);
             }
         }
     }
@@ -662,8 +676,12 @@ const initEditorComment = (place, content) => {
                 contentChangeAction(e);
             });*/
             editor.on('init', function(e){
-                if (e.target.id != 'no_parent') {
+                if (e.target.id.includes('parent') && e.target.id != 'no_parent') {
                     let targetId = e.target.id.split('parent')[1];
+                    document.getElementById(targetId).scrollIntoView({behavior: "smooth", block: "end" });
+                } else if (e.target.id.includes('comment_editor')) {
+                    editor.setContent(content);
+                    let targetId = e.target.id.split('comment_editor')[1];
                     document.getElementById(targetId).scrollIntoView({behavior: "smooth", block: "end" });
                 }
                 
@@ -714,29 +732,29 @@ const listenerOptionsComment = (type, id) => {
             event.preventDefault();
             event.stopPropagation();
             let idComment = event.target.id.split('comment_editer')[1];
-            console.log(idComment);
             var html = "<form id=\"Edit_comm"+idComment+"\"><div id=\"editor_comm"+idComment+"\" >";
             html += "<textarea id=\"comment_editor"+idComment+"\"></textarea>";
             html += "<button disabled=\"true\" class=\"btn\" name=\"submitEditBtn\" id=\"submitEdit"+idComment+"\">Publier</button>";
             html += "<button class=\"btn\" name=\"cancelEditBtn\" id=\"cancelEdit"+idComment+"\">Annuler</button></div></form>";
             event.target.innerHTML = html;
-            document.querySelector('#response'+idComment).setAttribute('hidden', true)
-            document.querySelector("#comment_supprimer"+idComment).setAttribute('hidden', true);
-            initEditorComment('#comment_editor'+idComment);
+            document.getElementById('response'+idComment).setAttribute('hidden', true)
+            document.getElementById("comment_supprimer"+idComment).setAttribute('hidden', true);
+            let value = document.getElementById(idComment).querySelector('.com-content').innerHTML;
+            initEditorComment('#comment_editor'+idComment, value);
             document.getElementById("cancelEdit"+idComment).addEventListener('click', function (event) {
                 event.preventDefault();
                 event.stopPropagation();
                 tinymce.remove('#comment_editor'+idComment);
-                document.querySelector('.comment_editer'+idComment).innerHTML = "Editer";
+                document.getElementById('comment_editer'+idComment).innerHTML = "Editer";
                 listenerOptionsComment('edit', id);
-                document.querySelector('#response'+idComment).removeAttribute('hidden')
-                document.querySelector("#comment_supprimer"+idComment).removeAttribute('hidden');
+                document.getElementById('response'+idComment).removeAttribute('hidden')
+                document.getElementById("comment_supprimer"+idComment).removeAttribute('hidden');
             }, {once: true});
             document.getElementById("submitEdit"+idComment).addEventListener("click", function (event) {
                 event.preventDefault();
                 event.stopPropagation();
                 
-                var content = tinymce.get('message_editor').getContent();
+                var content = tinymce.get('#comment_editor'+idComment).getContent();
 
                 /*if (content == MESSAGE[0].content && content.length >= 11 ) {
                     
@@ -747,7 +765,7 @@ const listenerOptionsComment = (type, id) => {
                 }*/
                 
             }, {once: true});
-        });
+        }, {once: true});
     }
     if (type == 'all' || type == 'delete') {
         document.getElementById('comment_supprimer'+id).addEventListener('click', (event) => {
