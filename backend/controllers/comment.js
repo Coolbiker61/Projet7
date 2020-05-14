@@ -174,53 +174,54 @@ exports.deleteComment = (req, res, then) => {
             if(!user) {
                 return res.status(401).json({ error: 'User not found !'});
             } else {
-                asyncLib.waterfall([
-                    function (done) {                
-                        models.Comment.findOne({ where: { id: idComment }, attributes: ['id', 'parent', 'userId']})
-                        .then(comment => {
-                        if (comment) {
-                            if (comment.userId == user.id || user.isAdmin) {
-                                done(null, comment);
-                                
-                            } else {
-                                return res.status(401).json({ 'error': 'Action not allow !'})
-                            }
+                console.log(idComment);
+                models.Comment.findOne({ where: { id: idComment }, attributes: ['id', 'parent', 'userId']})
+                .then(comment => {
+                    if (comment) {
+                        console.log(comment.id);
+                        if (comment.userId == user.id || user.isAdmin) {
+                            var comments = [comment];
+                            console.log(comments);
+                            (async function() {
+                                for await (var commentActif of comments) {
+                                    models.Comment.findAll({ where: { parent: commentActif.id }, attributes: ['id', 'parent']})
+                                    .then(response => {
+                                        if (response.length > 0) {
+                                            comments = comments.concat(response);
+                                            console.log(comments);
+                                        }
+                                        console.log(response);
+                                        models.Comment.destroy({where: { id: response.id }})
+                                        .then(() => {
+                                            console.log('com destroyed');
+                                        })
+                                        .catch(error => { res.status(500).json({ destroy: error }); });
+                                        console.log('comm +-+-+--+-+-+-+-+-+--+-+-+--+');
+                                    })
+                                    .catch(error => { 
+                                        console.log('erreur get comment '+error); 
+                                        return res.status(500).json({ getcomm: error });  
+                                    });
+                                }
+                                console.log('------++++--------------------');
+                                return res.status(200).json({ message: 'Comment deleted'});
+                            })();
+                            console.log( '--------------------------');
+                            
                         } else {
-                            return res.status(404).json({ 'message': 'Not found !'})
+                            return res.status(401).json({ 'error': 'Action not allow !'})
                         }
-                    })
-                    .catch(error => { res.status(500).json({ error }); });
-                    }, function(comment, done) {
-                        var commentsListComplet = [];
-                        var comments = [comment];
-                        (async function() {
-                            for await (var commentActif of comments) {
-                                models.Comment.findAll({ where: { parent: commentActif.id }, attributes: ['id', 'parent']})
-                                .then(response => {
-                                    if (response.length > 0) {
-                                        comments = comments.concat(response);
-                                    }
-                                    commentsListComplet.push(commentActif.id);
-                                })
-                                .catch(error => { 
-                                    console.log('erreur get comment '+error); 
-                                    return res.status(500).json({ error });  
-                                });
-                            };
-                        })();
-                        console.log(commentsListComplet + '--------------------------');
-                        done(commentsListComplet);
+                    } else {
+                        return res.status(404).json({ 'comment': 'Not found !'})
                     }
-                ], function (commentsListComplet) {
-                    models.Comment.destroy({where: { id: commentsListComplet }})
-                    .then(() => {
-                        return res.status(200).json({ message: 'Comment deleted'});
-                    })
-                    .catch(error => { res.status(500).json({ error }); });
+                })
+                .catch(error => { 
+                    console.log(error);
+                    res.status(500).json({ comment: error }); 
                 });
             }
         })
-        .catch(error => res.status(500).json({ error }));
+        .catch(error => res.status(500).json({ user: error }));
     } else {
         return res.status(400).json({ 'error': 'id not valid !'})
     }
