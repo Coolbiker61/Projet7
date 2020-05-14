@@ -1,4 +1,6 @@
 const PLACEHOLDERVALUE = 'Tapez votre message ici';
+const REGEXiNVALIDE = /['\|\/\\\*\+&#"\{\(\[\]\}\)$£€%=\^`]/;
+const REGEXvALIDE = /([a-zA-Z]{1}\'[a-z]{1})/gi;
 
 document.onreadystatechange = function () {
     if (document.readyState == 'complete') { 
@@ -186,6 +188,9 @@ const listenerEvent = () => {
             }
         } else {
             document.getElementById('submitbtn').setAttribute('disabled', true);
+        }
+        if (REGEXiNVALIDE.test(document.getElementById('title').value) && !(REGEXvALIDE.test(document.getElementById('title').value))) {
+            console.log('titre invalide');
         }
     });
 }

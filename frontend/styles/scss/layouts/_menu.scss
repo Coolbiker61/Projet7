@@ -27,20 +27,27 @@ nav {
         padding: 10px;
         align-self: center;
         display: block;
-        @media screen and (max-width: $menu_breackpoint_tablet ) {
-            &:not(:first-child) {
-                display: none;
-            }
-            &:last-child {
-                float: right;
-                display: block;
-            }
-        }
+        
         .icon {
             float: right;
             display: block;
         }
-        
+        &:not(:first-child) {
+            display: none;
+        }
+        &:last-child {
+            float: right;
+            display: block;
+        }
+        @media screen and (min-width: $menu_breackpoint_tablet ) {
+            &:not(:first-child) {
+                display: block;
+            }
+            &:last-child {
+                float: right;
+                display: none;
+            }
+        }
     }
     &.menu_list {
         li{

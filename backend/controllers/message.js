@@ -1,6 +1,9 @@
 const models = require('../models');
 const jwtUtils = require('../utils/jwt');
 const fs = require('fs');
+const security = require('../utils/security');
+
+
 
 exports.createMessage = (req, res, then) => {
     var headerAuth = req.headers['authorization'];
@@ -10,7 +13,7 @@ exports.createMessage = (req, res, then) => {
         return res.status(401).json({ 'error': 'Action not allow !'});
     }
 
-    var title = req.body.title;
+    var title = security.replaceCharacter(req.body.title);
     var content = req.body.content;
     if (title == null || content == null) {
         return res.status(400).json({ 'error': 'bad request'});
@@ -230,7 +233,7 @@ exports.updateMessage = (req, res, then) => {
         return res.status(401).json({ 'error': 'Action not allow !'});
     }
 
-    var title = req.body.title;
+    var title = security.replaceCharacter(req.body.title);
     var content = req.body.content;
     if (title == null || content == null) {
         return res.status(400).json({ 'error': 'bad request'});
