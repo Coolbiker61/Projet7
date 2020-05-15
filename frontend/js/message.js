@@ -466,7 +466,6 @@ const listenerUpdate = (param) => {
                         if (content.indexOf('<img src="data:') != -1) {
                             tinymce.activeEditor.uploadImages()
                             .then( url => {
-                                console.log(url);
                                 updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
                             })
                             .catch(error => { console.log(error) });
@@ -484,7 +483,6 @@ const listenerUpdate = (param) => {
                         if (content.indexOf('<img src="data:') != -1) {
                             tinymce.activeEditor.uploadImages()
                             .then( url => {
-                                console.log(url);
                                 updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
                             })
                             .catch(error => { console.log(error) });
@@ -553,8 +551,6 @@ const updateMessage = (idMessage, content, title) => {
         if (this.readyState == XMLHttpRequest.DONE) {
             switch (this.status) {
                 case 201:
-                    //document.querySelector('.bloc-commentaire').innerHTML = "";
-                    console.log("update ok");
                     window.setTimeout(() => { window.location.reload(true);}, 20);
                     break;
                 
@@ -700,7 +696,6 @@ const listenerComment = (responseId, userId) => {
         html += "<button class=\"btn\" name=\"cancelbtn\" id=\"cancelNew"+id+"\">Annuler</button></div></form>";
         event.target.innerHTML = html;
         if (USER.id == userId || USER.isAdmin) {
-            console.log('proprio');
             document.getElementById('comment_editer'+id).setAttribute('hidden', true);
             document.getElementById('comment_supprimer'+id).setAttribute('hidden', true);
         }
@@ -722,6 +717,7 @@ const listenerComment = (responseId, userId) => {
             var idMessage = window.location.href.split('/message/')[1];
             var content = tinymce.get('parent'+id).getBody().innerHTML;
             sendcomment(idMessage, content, id);
+            tinymce.remove('#parent'+id);
         }, {once: true})
     }, {once: true});
 }
@@ -760,7 +756,7 @@ const listenerOptionsComment = (type, id) => {
                     console.log('tout identique');
                 } else if (content != value && content.length >= 8){
                     updateComment(idComment, content);
-                   
+                    tinymce.remove('#comment_editor'+idComment);
                 }
                 
             }, {once: true});

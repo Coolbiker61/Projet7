@@ -159,6 +159,28 @@ exports.getOneComment = (req, res, then) => {
     }
 };
 
+function deleteAllComment(idComment, res) {
+    
+        models.Comment.findAll({ where: { parent: idComment.id }, attributes: ['id', 'parent']})
+        .then(response => {
+            if (response.length > 0) {
+                for (const idCom of response) { 
+                    models.Comment.destroy({where: { id: idCom.id }})
+                    .then(() => {
+                        console.log('comment id='+idcom.id+' destroyed');
+                    })
+                    .catch(error => { res.status(500).json({ error }); });
+                    deleteAllComment(idCom, res);
+                }
+            }
+        })
+        .catch(error => { 
+            return res.status(500).json({ error });  
+        });
+    
+}
+
+
 exports.deleteComment = (req, res, then) => {
     //idComment
     var headerAuth = req.headers['authorization'];
@@ -174,39 +196,19 @@ exports.deleteComment = (req, res, then) => {
             if(!user) {
                 return res.status(401).json({ error: 'User not found !'});
             } else {
-                console.log(idComment);
                 models.Comment.findOne({ where: { id: idComment }, attributes: ['id', 'parent', 'userId']})
                 .then(comment => {
                     if (comment) {
-                        console.log(comment.id);
                         if (comment.userId == user.id || user.isAdmin) {
-                            var comments = [comment];
-                            console.log(comments);
-                            (async function() {
-                                for await (var commentActif of comments) {
-                                    models.Comment.findAll({ where: { parent: commentActif.id }, attributes: ['id', 'parent']})
-                                    .then(response => {
-                                        if (response.length > 0) {
-                                            comments = comments.concat(response);
-                                            console.log(comments);
-                                        }
-                                        console.log(response);
-                                        models.Comment.destroy({where: { id: response.id }})
-                                        .then(() => {
-                                            console.log('com destroyed');
-                                        })
-                                        .catch(error => { res.status(500).json({ destroy: error }); });
-                                        console.log('comm +-+-+--+-+-+-+-+-+--+-+-+--+');
-                                    })
-                                    .catch(error => { 
-                                        console.log('erreur get comment '+error); 
-                                        return res.status(500).json({ getcomm: error });  
-                                    });
-                                }
-                                console.log('------++++--------------------');
-                                return res.status(200).json({ message: 'Comment deleted'});
-                            })();
+                            models.Comment.destroy({where: { id: comment.id }})
+                            .then(() => {
+                                console.log('com destroyed');
+                            })
+                            .catch(error => { res.status(500).json({ error }); });
+                            deleteAllComment(comment, res);
                             console.log( '--------------------------');
+                            res.status(200).json({ message: 'Comment deleted'});
+
                             
                         } else {
                             return res.status(401).json({ 'error': 'Action not allow !'})
