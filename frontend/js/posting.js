@@ -1,6 +1,6 @@
 const PLACEHOLDERVALUE = 'Tapez votre message ici';
-const REGEXiNVALIDE = /['\|\/\\\*\+&#"\{\(\[\]\}\)$£€%=\^`]/;
-const REGEXvALIDE = /([a-zA-Z]{1}\'[a-z]{1})/gi;
+const REGEXiNVALIDE = /['\|\/\\\*\+&#"\{\(\[\]\}\)$£€%=\^`]/g;
+const REGEXvALIDE = /([a-zA-Z]{1}\'{1}[a-z]{1})/g;
 
 document.onreadystatechange = function () {
     if (document.readyState == 'complete') { 
@@ -182,15 +182,27 @@ const listenerEvent = () => {
     // met a jour la longueur du titre sur la page
     document.getElementById('title').addEventListener('input', function () {
         document.getElementById('length-title').innerHTML = document.getElementById('title').value.length;
-        if (tinymce.get('message_editor').getBody().innerHTML.length >= 11 && document.getElementById("title").value.length >= 2) {
+        
+        let title = document.getElementById('title').value.split(' ');
+        let error = false;
+        
+        for (let part of title) {
+            if (/(['\|\/\\\*\+&#"\{\(\[\]\}\)$£€%=\^`])|('+\w+')/g.test(part) && !(/([a-zA-Z]{1}\'[a-z]{1})/gi.test(part))) {
+                error = true;
+            }
+        }
+        /*if (error) {
+            document.getElementById('submitbtn').setAttribute('disabled', true);
+        } else {
+            document.getElementById('submitbtn').removeAttribute('disabled');
+        }*/
+        if (tinymce.get('message_editor').getBody().innerHTML.length >= 11 && document.getElementById("title").value.length >= 2 && !error) {
             if (tinymce.get('message_editor').getBody().innerHTML != '<p><br data-mce-bogus="1"></p>') {
                 document.getElementById('submitbtn').removeAttribute('disabled');
             }
         } else {
             document.getElementById('submitbtn').setAttribute('disabled', true);
         }
-        if (REGEXiNVALIDE.test(document.getElementById('title').value) && !(REGEXvALIDE.test(document.getElementById('title').value))) {
-            console.log('titre invalide');
-        }
+        
     });
 }
