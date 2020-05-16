@@ -6,7 +6,7 @@
     display: flex;
     @media screen and (min-width: 820px ) {
         margin-left: auto;
-        margin-right: auto;
+        margin-right: 0;
         margin-top: 15px;
     }
 }
@@ -43,7 +43,9 @@
 #bloc-users-profile {
     margin: 15px;
     max-inline-size: max-content;
-    
+    @media screen and (min-width: 820px ) {
+        margin-right: auto;
+    }
 }
 .users-main {
     display: flex;

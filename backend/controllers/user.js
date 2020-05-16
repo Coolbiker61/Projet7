@@ -45,7 +45,7 @@ exports.signup = (req, res, then) => {
                 })
                 .catch(error => res.status(500).json({ error }));
             } else {
-                return res.status(401).json({ message: 'Action non autorisée !'});
+                return res.status(401).json({ message: 'Action not allow !'});
             }
             
         })
@@ -63,7 +63,9 @@ exports.login = (req, res, then) => {
     if (email == null || password == null) {
         return res.status(400).json({ 'error': 'missing parameters'});
     }
-    
+    if (!/^[a-zA-Z]\w{4,25}$/.test(password)) {
+        return res.status(400).json({ 'error': 'Wrong password content' });
+    }
     if (regex.test(String(email).toLowerCase())) {
         models.User.findOne({ where: { email: email } })
         .then(user => {
