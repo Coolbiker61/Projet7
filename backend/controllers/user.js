@@ -294,7 +294,7 @@ exports.getUserListe = (req, res, then) => {
         return res.status(401).json({ 'error': 'Action not allow !'});
     }
     models.User.findOne({
-        attributes: [ 'id', 'email', 'username', 'isAdmin'],
+        attributes: [ 'id', 'isAdmin'],
         where: { id: userId }
     })
         .then(user => {
@@ -331,7 +331,7 @@ exports.adminGetUserProfile = (req, res, then) => {
         return res.status(401).json({ 'error': 'Invalid argument !'});
     }
 
-    models.User.findOne({ attributes: [ 'id', 'email', 'username', 'isAdmin'], where: { id: userId } })
+    models.User.findOne({ attributes: [ 'id', 'isAdmin'], where: { id: userId } })
     .then(admin => {
         if (admin) {
             if (admin.isAdmin) {
@@ -345,7 +345,7 @@ exports.adminGetUserProfile = (req, res, then) => {
                 },
                 {
                     model: models.Comment,
-                    attributes: ['messageId', 'content', 'createdAt'],
+                    attributes: ['id', 'messageId', 'content', 'createdAt'],
                     order: [['id', 'DESC']],
                     limit: 5
                 }]})
@@ -359,8 +359,9 @@ exports.adminGetUserProfile = (req, res, then) => {
                 .catch(error => {
                     res.status(500).json({ error });
                 })
+            } else {
+                res.status(401).json({'error': 'User is not an admin !'});
             }
-
             
         } else {
             res.status(404).json({ 'error': 'User not found'});
@@ -384,23 +385,163 @@ exports.adminDeleteUserProfile = (req, res, then) => {
         return res.status(401).json({ 'error': 'Invalid argument !'});
     }
 
-    models.User.findOne({ attributes: [ 'id', 'email', 'username', 'isAdmin'], where: { id: userId } })
+    models.User.findOne({ attributes: [ 'id', 'isAdmin'], where: { id: userId } })
     .then(admin => {
         if (admin) {
             if (admin.isAdmin) {
                 models.User.findOne({ attributes: [ 'id', 'email', 'username', 'isAdmin', 'createdAt'], 
-                where: { id: userQuery },
-                include: [{
-                    model: models.Message,
-                    attributes: ['id', 'title', 'content', 'createdAt']
-                },
-                {
-                    model: models.Comment,
-                    attributes: ['messageId', 'content', 'createdAt']
-                }]})
+                where: { id: userQuery }})
                 .then(user => {
                     if (user) {
-                        res.status(200).json(user);
+                        asyncLib.waterfall([
+                            function (done) {
+                                models.Message.findAll({ where: { UserId: userQuery }, attributes: ['id', 'UserId'] })
+                                .then(messages => {
+                                    done(null, messages);
+                                })
+                                .catch(error => { return res.status(500).json({ error }); });
+                            },
+                            function (messages, done) {
+                                for (const message of messages) {
+                                    if (message.content.indexOf('<img src="') != -1) {
+                                        var imagesUrlOrigin = Array.from(message.content.matchAll(/(<img src=\")+.+(\" alt)/));
+                                        for(const img of imagesUrlOrigin) {
+                                            var urlCut = img[0].split('<img src="')[1].split('" alt')[0].split('/');
+                                            if (urlCut[2] == req.get('host')) {
+                                                fs.unlink(`userImg/${urlCut[(urlCut.length-1)]}`, (err) => {
+                                                    if (err) {
+                                                        //message d'erreur si la suppression n'a pu être faite
+                                                        console.log("failed to delete local image:"+err);
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    }
+                                }
+                                done(null, messages);
+                            },
+                            function (messages, done) {
+                                if (messages.length > 0) {
+                                    //supprime tous les messages de l'utilisateur
+                                    models.Message.destroy({ where: { UserId: userQuery }})
+                                    .then(result => { 
+                                        console.log("message of user id="+userQuery+" destroyed !");
+                                        done(null, true);
+                                    })
+                                    .catch(error => {console.log('erreur destroy message'); return res.status(500).json({ error }); });
+                                }
+                            },
+                            function (executed, done) {
+                                if (executed) {
+                                    models.Comment.findAll({ where: { UserId: userQuery }, attributes: ['id', 'parent']})
+                                    .then(comments => {
+                                        done(null, comments);
+                                    })
+                                    .catch(error => {
+                                        console.log("erreur get all comment : "+error); 
+                                        return res.status(500).json({ error }); 
+                                    });
+                                }
+                            },
+                            function (comments, done) {
+                                var commentsListComplet = [];
+                                if (comments.length > 0) {
+                                    for(commentActif of comments) {
+                                        models.Comment.findAll({ where: { parent: commentActif.id }, attributes: ['id', 'parent']})
+                                        .then(response => {
+                                            if (response.length > 0) {
+                                                comments = comments.concat(response);
+                                            }
+                                            commentsListComplet.push(commentActif);
+                                        })
+                                        .catch(error => { 
+                                            console.log('erreur get comment '+error); 
+                                            return res.status(500).json({ error });  
+                                        });
+                                    };
+                                    done(null, commentsListComplet);
+                                } else {
+                                    done(null, []);
+                                }
+                            },
+                            function (commentListe, done) {
+                                if (commentListe.length > 0) {
+                                    models.Comment.destroy({ where: { id: commentsListe[i].id } })
+                                    .then((result) => { 
+                                        console.log('comment destroyed '+commentsListe[i].id+' + '+result);
+                                        done(null, true);
+                                    })
+                                    .catch(error => { 
+                                        return res.status(500).json({ error });  
+                                    }); 
+                                } else {
+                                    done(null, true);
+                                }
+                            },
+                            function (destroyed, done) {
+                                if (destroyed) {
+                                    models.Like.findAll({ where: { UserId: userQuery }, attributes: ['id', 'messageId', 'likeType']})
+                                    .then(likes => {
+                                        done(null, likes);
+                                    })
+                                    .catch(error => { return res.status(500).json({ error }); })
+                                }
+                            },
+                            function (likes, done) {
+                                if (likes.length > 0) {
+                                    for (let i = 0; i < likes.length; i++) {
+                                        if (likes[i].likeType == -1) {
+                                            models.Message.findOne({ where: { id: likes[i].messageId}})
+                                            .then(message => {
+                                                if (message) {
+                                                    message.update({
+                                                        likes: message.likes + 1
+                                                    })
+                                                    .then(()=> {})
+                                                    .catch(error => { return res.status(500).json({ error }); }); 
+                                                }
+                                            })
+                                        } else if (likes[i].likeType == 1) {
+                                            models.Message.findOne({ where: { id: likes[i].messageId}})
+                                            .then(message => {
+                                                if (message) {
+                                                    message.update({
+                                                        likes: message.likes - 1
+                                                    })
+                                                    .then(()=> {})
+                                                    .catch(error => { return res.status(500).json({ error }); }); 
+                                                }
+                                            })
+                                        }
+                                    }
+                                    done(null, true);
+                                }
+                            },
+                            function (executed, done) {
+                                if (executed) {
+                                    models.Like.destroy({ where: { UserId: userQuery } })
+                                    .then(() => { 
+                                        done('all_destroyed');
+                                    })
+                                    .catch(error => {
+                                        console.log('erreur destroy like'); 
+                                    return res.status(500).json({ error }); 
+                                });
+                                }
+                            },
+                        ], function (params) {
+                            if (params == 'all_destroyed') {
+                                models.User.destroy({ where: { id: userQuery } })
+                                .then(oldUser => {
+                                    if (oldUser) {
+                                        return res.status(200).json({ message: 'user delete !'});
+                                    } else {
+                                        return res.status(404).json({ 'error': 'user not found !'});
+                                    }
+                                })
+                                .catch(error => {console.log('erreur destroy user'); return res.status(500).json({ error }); })
+                            }
+                        });
                     } else {
                         res.status(404).json({ 'error': 'User not found'});
                     }
@@ -408,9 +549,9 @@ exports.adminDeleteUserProfile = (req, res, then) => {
                 .catch(error => {
                     res.status(500).json({ error });
                 })
-            }
-// destroy({ cascade: true });
-            
+            } else {
+                res.status(401).json({'error': 'User is not an admin !'});
+            }            
         } else {
             res.status(404).json({ 'error': 'User not found'});
         }

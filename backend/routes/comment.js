@@ -6,7 +6,7 @@ const commentCtrl = require('../controllers/comment');
 //get all comment
 router.get('/:idMessage', commentCtrl.getComment);
 //get One comment
-router.get('/:idMessage/:idComment', commentCtrl.getOneComment);
+router.get('/one/:idComment', commentCtrl.getOneComment);
 
 // add a comment
 router.post('/:idMessage', commentCtrl.addComment);
