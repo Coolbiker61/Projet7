@@ -18,7 +18,7 @@ exports.createMessage = (req, res, then) => {
     if (title == null || content == null) {
         return res.status(400).json({ 'error': 'bad request'});
     }
-    if (title.length <= 2 || content.length <= 4) {
+    if (title.length <= 2 || content.length <= 7) {
         return res.status(400).json({ 'error': 'bad request'});
     }
     models.User.findOne({attributes: [ 'id', 'email', 'username', 'isAdmin'], where: { id: userId } })
@@ -48,7 +48,16 @@ exports.getAllMessages = (req, res, then ) => {
     var limit = parseInt(req.query.limit);
     var offset = parseInt(req.query.offset);
     var order = req.query.order;
-    models.User.findOne({attributes: [ 'id', 'username', 'isAdmin'], where: { id: userId } })
+    if (!isNaN(limit) || limit < 1) {
+        limit = null;
+    }
+    if (!isNaN(offset) || offset < 1) {
+        offset = null;
+    }
+    if (/['\|\/\\\*\+&#"\{\(\[\]\}\)$£€%=\^`]/g.test(order) ) {
+       order = null; 
+    }
+    models.User.findOne({attributes: [ 'id', 'isAdmin'], where: { id: userId } })
     .then(user => {
         if(!user) {
             return res.status(401).json({ error: 'User not found !'});
@@ -94,6 +103,15 @@ exports.getAllMessagesUser = (req, res, then ) => {
     var limit = parseInt(req.query.limit);
     var offset = parseInt(req.query.offset);
     var order = req.query.order;
+    if (!isNaN(limit) || limit < 1) {
+        limit = null;
+    }
+    if (!isNaN(offset) || offset < 1) {
+        offset = null;
+    }
+    if (/['\|\/\\\*\+&#"\{\(\[\]\}\)$£€%=\^`]/g.test(order) ) {
+       order = null; 
+    }
     models.User.findOne({attributes: [ 'id', 'username', 'isAdmin'], where: { id: userId } })
     .then(user => {
         if(!user) {
@@ -238,12 +256,12 @@ exports.updateMessage = (req, res, then) => {
     if (title == null || content == null) {
         return res.status(400).json({ 'error': 'bad request'});
     }
-    if (title.length <= 2 || content.length <= 4) {
+    if (title.length <= 2 || content.length <= 7) {
         return res.status(400).json({ 'error': 'bad request'});
     }
     
     var id = parseInt(req.params.id);
-    models.User.findOne({where: { id: userId }, attributes: [ 'id', 'username', 'isAdmin']})
+    models.User.findOne({where: { id: userId }, attributes: [ 'id', 'isAdmin']})
     .then(user => {
         if(!user) {
             return res.status(401).json({ error: 'User not found !'});

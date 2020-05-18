@@ -62,12 +62,12 @@ exports.likeMessage = (req, res, then ) => {
                                         .catch(error => { return res.status(500).json({ error })});
                                         break;
                                     default:
-                                        return res.status(500).json({ 'error': 'Error null like !' });
+                                        return res.status(400).json({ 'error': 'Invalid request !' });
                                         break;
                                 }
                                 
                             })
-                            .catch(error => { return res.status(500).json({ 'error': error })});
+                            .catch(error => { return res.status(500).json({ error })});
                         } else if (!like && likeValue == 0) {
                             return res.status(400).json({ 'error': 'Error null like !' });
                         } else {
@@ -88,9 +88,9 @@ exports.likeMessage = (req, res, then ) => {
                                                 message.update({
                                                     likes: message.likes - 2
                                                 })
-                                                .then(()=> {
+                                                .then((messageUpdated)=> {
                                                     //
-                                                    return res.status(201).json(message);
+                                                    return res.status(201).json(messageUpdated);
                                                 })
                                                 .catch(error => { return res.status(500).json({ error })});
                                             })
@@ -101,10 +101,10 @@ exports.likeMessage = (req, res, then ) => {
                                                 message.update({
                                                     likes: message.likes - 1
                                                 })
-                                                .then(()=> {
+                                                .then((messageUpdated)=> {
                                                     like.destroy()
                                                     .then(() => {
-                                                        return res.status(201).json({ 'message': 'like aborded !'});
+                                                        return res.status(201).json( messageUpdated );
                                                     })
                                                     .catch(error => { return res.status(500).json({ error })});
                                                 })
@@ -113,10 +113,10 @@ exports.likeMessage = (req, res, then ) => {
                                                 message.update({
                                                     likes: message.likes + 1
                                                 })
-                                                .then(()=> {
+                                                .then((messageUpdated)=> {
                                                     like.destroy()
                                                     .then(() => {
-                                                        return res.status(201).json({ 'message': 'like aborded !'});
+                                                        return res.status(201).json(messageUpdated);
                                                     })
                                                     .catch(error => { return res.status(500).json({ error })});
                                                 })
@@ -133,33 +133,33 @@ exports.likeMessage = (req, res, then ) => {
                                                 message.update({
                                                     likes: message.likes + 2
                                                 })
-                                                .then(()=> {
+                                                .then((messageUpdated)=> {
                                                     //
-                                                    return res.status(201).json(message);
+                                                    return res.status(201).json(messageUpdated);
                                                 })
                                                 .catch(error => { return res.status(500).json({ error })});
                                             })
                                             .catch(error => { return res.status(500).json({ error })});
                                         break;          
                                         default:
-                                            return res.status(500).json({ 'error': 'like error !'});
+                                            return res.status(400).json({ 'error': 'Invalid request !' });
                                             break;
                                     }
                                 })
                                 .catch(error => { return res.status(500).json({ error })});
                             } else {
-                                res.status(409).json({ 'error': 'already liked !'});
+                                res.status(403).json({ 'error': 'Already liked !'});
                             }
                         }
                     })
                     .catch(error => { return res.status(500).json({ error })});
                 } else {
-                    return res.status(401).json({ 'error': 'Not allow !'});
+                    return res.status(401).json({ 'error': 'Action not allow !'});
                 }
             })
             .catch(error => { return res.status(500).json({ error })});
         } else {
-            return res.status(404).json({ 'error': 'Not found !'});
+            return res.status(404).json({ 'error': 'Message not found !'});
         }
     })
     .catch(error => { return res.status(500).json({ error })});
