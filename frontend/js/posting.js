@@ -187,7 +187,7 @@ const listenerEvent = () => {
         let error = false;
         
         for (let part of title) {
-            if (/(['\|\/\\\*\+&#"\{\(\[\]\}\)$£€%=\^`])|('+\w+')/g.test(part) && !(/([a-zA-Z]{1}\'[a-z]{1})/gi.test(part))) {
+            if (/(['\|\/\\\*\+&#"\{\(\[\]\}\)$£€%=\^`])/g.test(part) && !(/(^[a-z]{1}\'[a-z]{1,}$)/gi.test(part))) {
                 error = true;
             }
         }
