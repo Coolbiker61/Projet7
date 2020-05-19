@@ -69,7 +69,7 @@ const actionClick = (event) => {
 									errorMessage = "Veuillez indiquer une adresse mail correct.";
 									break;
 								default:
-									errorMessage = "Action non autorisé !";
+									errorMessage = "Email ou mot de passe invalide !";
 									break;
 							}
 							document.getElementById("error").innerHTML = errorMessage;
@@ -113,6 +113,7 @@ const verifieValide = (elementForm) => {
 			elementForm.classList.remove("invalide");
 		}
 	}
+	console.log(elementForm.validity)
 }
 /* surveille la modification des champs du formulaire et déclenche la fonction verifieValide() */
 document.getElementById("password").addEventListener('input', function (event) {

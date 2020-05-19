@@ -534,6 +534,13 @@ h1 {
   cursor: pointer;
 }
 
+.error {
+  color: red;
+  font-size: 24px;
+  text-align: center;
+  margin: 10px;
+}
+
 nav {
   position: fixed;
   top: 0;
