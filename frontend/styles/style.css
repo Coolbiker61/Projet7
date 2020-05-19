@@ -375,6 +375,7 @@ textarea {
 body {
   background-color: #dae0e6;
   height: 100vh;
+  width: 100%;
 }
 
 label {
@@ -439,7 +440,7 @@ h1 {
   background-size: contain;
   margin: 0 auto;
   padding-top: 5px;
-  width: 100vw;
+  width: 100%;
   min-height: calc(100% - 200px);
   position: relative;
   display: -webkit-box;
