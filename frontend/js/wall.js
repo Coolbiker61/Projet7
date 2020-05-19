@@ -26,6 +26,8 @@ const editTime = (param) => {
         return seconde+" secondes";
     }
 }
+// contient le nombre de message afficher
+let nextOffset = 0;
 
 // au chargement de la page
 document.onreadystatechange = function () {
@@ -48,7 +50,7 @@ document.onreadystatechange = function () {
                     //definition de la taille du offset par rapport a celle du menu
                     document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
 
-                    importMessage();
+                    importMessage(0);
                     document.getElementById("loading").hidden = true;
                     document.getElementById("back").style.setProperty('visibility', 'visible') ;
                 }
@@ -64,7 +66,7 @@ document.onreadystatechange = function () {
     };
 };
 
-const importMessage = () => {
+const importMessage = (offset) => {
     var requete = new XMLHttpRequest();
     requete.onreadystatechange = function () {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
@@ -74,11 +76,12 @@ const importMessage = () => {
                 addMessage(message);
                 listener(message);
                 importLike(message);
+                nextOffset++;
             }
             
         }
     };
-    requete.open("GET", "http://localhost:3000/api/v1/message");
+    requete.open("GET", "http://localhost:3000/api/v1/message/?limit=5&offset="+offset);
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.send();
@@ -226,7 +229,12 @@ const importLike = (message) => {
     requete.send();
 }
 
-
+window.addEventListener("scroll",(event) => {
+    let size = window.innerHeight - '5px';
+    if (window.pageYOffset == size ) {
+        importMessage(nextOffset);
+    }
+});
 
 // ecoute le bouton nouveau message
 document.getElementById("btn_new_post").addEventListener("click", function (event) {

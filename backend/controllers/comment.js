@@ -71,10 +71,10 @@ exports.getComment = (req, res, then) => {
     var offset = parseInt(req.query.offset);
     var order = req.query.order;
 
-    if (!isNaN(limit) || limit < 1) {
+    if (isNaN(limit) || limit < 1) {
         limit = null;
     }
-    if (!isNaN(offset) || offset < 1) {
+    if (isNaN(offset) || offset < 1) {
         offset = null;
     }
     if (/['\|\/\\\*\+&#"\{\(\[\]\}\)$£€%=\^`]/g.test(order) ) {

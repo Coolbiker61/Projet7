@@ -386,7 +386,8 @@ label {
 }
 
 .invalide {
-  border-color: red;
+  border-color: red !important;
+  border-width: 5px !important;
 }
 
 .offset-top {
@@ -807,6 +808,10 @@ nav {
   border-color: rgba(55, 118, 255, 0.836);
   color: white;
   cursor: pointer;
+}
+
+#connexion:disabled:hover, #inscription:disabled:hover {
+  background-color: red;
 }
 
 .confirm-inscription {

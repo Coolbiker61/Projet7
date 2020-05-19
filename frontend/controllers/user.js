@@ -1,7 +1,7 @@
 
 const REGEX_EMAIL = "/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
-const REGEX_USERNAME = "[a-zA-Z\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{3,}";
-const REGEX_PASSWORD = "^[a-zA-Z]\w{4,25}$";
+const REGEX_USERNAME = "^[a-zA-Z]{1}[\\w\\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{2,25}$";
+const REGEX_PASSWORD = "^[a-zA-Z]{1}\\w{3,24}$";
 
 /* inscrit l'utilisateur si son email n'est pas déjà utilisé */
 exports.register = (req, res, then) => {

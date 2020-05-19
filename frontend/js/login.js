@@ -1,6 +1,9 @@
 //regex de l'email
 const REGEX_MAIL = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  
+// regex password
+const REGEX_PASSWORD = /^[a-zA-Z]{1}\w{3,24}$/;
+
+
 // au chargement de la page
 document.onreadystatechange = function () {
     if (document.readyState == 'complete') { 
@@ -104,16 +107,33 @@ document.getElementById('connexion').addEventListener("click", function (event) 
 
 /* vérifie si le champ du formulaire est valide et ajoute la class invalide le cas échéant sinon l'enlève */
 const verifieValide = (elementForm) => {
-	if (elementForm.validity.valid == false){
-		if(elementForm.classList.contains("invalide") == false) {
-			elementForm.classList.add("invalide");
-		}
-	} else {
-		if(elementForm.classList.contains("invalide") == true) {
-			elementForm.classList.remove("invalide");
+	if (elementForm.id == 'email') {
+		if (!REGEX_MAIL.test(elementForm.value)){
+			if(elementForm.classList.contains("invalide") == false) {
+				elementForm.classList.add("invalide");
+			}
+			document.getElementById('connexion').setAttribute('disabled', true);
+		} else {
+			if(elementForm.classList.contains("invalide") == true) {
+				elementForm.classList.remove("invalide");
+			}
+			document.getElementById('connexion').removeAttribute('disabled');
 		}
 	}
-	console.log(elementForm.validity)
+	if (elementForm.id == 'password' ) {
+		if (elementForm.validity.valid == false){
+			if(elementForm.classList.contains("invalide") == false) {
+				elementForm.classList.add("invalide");
+
+			}
+			document.getElementById('connexion').setAttribute('disabled', true);
+		} else {
+			if(elementForm.classList.contains("invalide") == true) {
+				elementForm.classList.remove("invalide");
+			}
+			document.getElementById('connexion').removeAttribute('disabled');
+		}
+	}
 }
 /* surveille la modification des champs du formulaire et déclenche la fonction verifieValide() */
 document.getElementById("password").addEventListener('input', function (event) {

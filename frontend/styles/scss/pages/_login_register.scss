@@ -68,6 +68,11 @@
         color: $btn_hover_text_color;
         cursor:pointer;
     }
+    &:disabled {
+        &:hover {
+            background-color: red;
+        }
+    }
 }
 .confirm-inscription {
     text-align: center;

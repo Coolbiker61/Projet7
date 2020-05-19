@@ -48,10 +48,10 @@ exports.getAllMessages = (req, res, then ) => {
     var limit = parseInt(req.query.limit);
     var offset = parseInt(req.query.offset);
     var order = req.query.order;
-    if (!isNaN(limit) || limit < 1) {
+    if (isNaN(limit) || limit < 1) {
         limit = null;
     }
-    if (!isNaN(offset) || offset < 1) {
+    if (isNaN(offset) || offset < 1) {
         offset = null;
     }
     if (/['\|\/\\\*\+&#"\{\(\[\]\}\)$£€%=\^`]/g.test(order) ) {
@@ -103,10 +103,10 @@ exports.getAllMessagesUser = (req, res, then ) => {
     var limit = parseInt(req.query.limit);
     var offset = parseInt(req.query.offset);
     var order = req.query.order;
-    if (!isNaN(limit) || limit < 1) {
+    if (isNaN(limit) || limit < 1) {
         limit = null;
     }
-    if (!isNaN(offset) || offset < 1) {
+    if (isNaN(offset) || offset < 1) {
         offset = null;
     }
     if (/['\|\/\\\*\+&#"\{\(\[\]\}\)$£€%=\^`]/g.test(order) ) {
