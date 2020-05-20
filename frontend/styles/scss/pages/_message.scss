@@ -11,6 +11,14 @@
          width: $width_message;
     }
 }
+.no_message {
+    margin: auto;
+    width: $width_message;
+    height: fit-content;
+    @media screen and (min-width: $menu_breackpoint_pc ) {
+        width: $width_message;
+   }
+}
 .message-solo {
     display: flex;
     flex-direction: column;

@@ -11,7 +11,11 @@ document.onreadystatechange = function () {
 		if (sessionStorage.getItem('token')) {
 			var requete = new XMLHttpRequest();
 			requete.onreadystatechange = function () {
-				if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+				if (this.readyState == XMLHttpRequest.DONE && this.status == 500) {
+                    var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
+                    html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
+                    document.querySelector('.back').insertAdjacentHTML('afterstart', html);
+                } else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
 					window.setTimeout(() => { window.location.href = '/';}, 2000);
 				} else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
 					//definition de la taille du offset par rapport a celle du menu

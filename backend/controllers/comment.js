@@ -168,7 +168,7 @@ function deleteAllComment(idComment) {
                 for (const idCom of response) { 
                     models.Comment.destroy({where: { id: idCom.id }})
                     .then(() => {
-                        console.log('comment id='+idcom.id+' destroyed');
+                        console.log('comment destroyed');
                     })
                     .catch(error => { console.log(error); });
                     deleteAllComment(idCom);

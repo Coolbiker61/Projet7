@@ -90,6 +90,13 @@ const importMessage = (offset) => {
                 nextOffset++;
             }
             
+        } else if (this.readyState == XMLHttpRequest.DONE && this.status == 404) {
+            var html = "<p class=\"no_message\">Aucun message n'a été poster, soyez le premier à vous exprimer.</p>";
+            document.getElementById("container").insertAdjacentHTML('beforeend', html);
+        } else if (this.readyState == XMLHttpRequest.DONE && this.status == 500) {
+            var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
+            html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
+            document.getElementById("container").insertAdjacentHTML('beforeend', html);
         }
     };
     requete.open("GET", "http://localhost:3000/api/v1/message/?limit=5&offset="+offset);

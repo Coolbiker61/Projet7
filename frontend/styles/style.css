@@ -879,6 +879,20 @@ nav {
   }
 }
 
+.no_message {
+  margin: auto;
+  width: 500px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+@media screen and (min-width: 675px) {
+  .no_message {
+    width: 500px;
+  }
+}
+
 .message-solo {
   display: -webkit-box;
   display: -ms-flexbox;
