@@ -53,6 +53,17 @@ document.onreadystatechange = function () {
                     importMessage(0);
                     document.getElementById("loading").hidden = true;
                     document.getElementById("back").style.setProperty('visibility', 'visible') ;
+                    // ecoute le scroll pour afficher les 5 message suivant quand l'utilisateur arrive en bas de page
+                    setTimeout(function(){
+                        window.addEventListener("scroll",(event) => {
+                            if (document.body.scrollHeight <= (window.innerHeight + window.pageYOffset )  ) {
+                                if((nextOffset % 5) == 0) {
+                                    importMessage(nextOffset);
+                                }
+                            }
+                        
+                        });
+                    }, 2000);
                 }
 			};
 			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
@@ -229,12 +240,6 @@ const importLike = (message) => {
     requete.send();
 }
 
-window.addEventListener("scroll",(event) => {
-    let size = window.innerHeight - '5px';
-    if (window.pageYOffset == size ) {
-        importMessage(nextOffset);
-    }
-});
 
 // ecoute le bouton nouveau message
 document.getElementById("btn_new_post").addEventListener("click", function (event) {
