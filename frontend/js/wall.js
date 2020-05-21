@@ -36,7 +36,11 @@ document.onreadystatechange = function () {
         if (sessionStorage.getItem('token')) {
             var requete = new XMLHttpRequest();
 			requete.onreadystatechange = function () {
-				if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
+				if (this.readyState == XMLHttpRequest.DONE && this.status == 500) {
+                    var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
+                    html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
+                    document.getElementById("container").insertAdjacentHTML('beforeend', html);
+                } else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
                     alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
 					window.setTimeout(() => { window.location.href = '/auth/login';}, 2000);
 				} else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
