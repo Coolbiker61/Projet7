@@ -1,6 +1,7 @@
 const models = require('../models');
 const jwtUtils = require('../utils/jwt');
 const asyncLib = require('async');
+//models.Comment.rebuildHierarchy();
 
 exports.addComment = (req, res, then) => {
     var headerAuth = req.headers['authorization'];
@@ -206,7 +207,7 @@ exports.deleteComment = (req, res, then) => {
                                 console.log('com destroyed');
                             })
                             .catch(error => { res.status(500).json({ error }); });
-                            deleteAllComment(comment);
+                            //deleteAllComment(comment);
                             res.status(200).json({ 'message': 'Comment deleted'});
 
                             
