@@ -202,14 +202,21 @@ exports.deleteComment = (req, res, then) => {
                 .then(comment => {
                     if (comment) {
                         if (comment.userId == user.id || user.isAdmin) {
-                            models.Comment.destroy({where: { id: comment.id }})
-                            .then(() => {
-                                console.log('com destroyed');
+                            comment.getDescendents( { order: [ [ 'hierarchyLevel', 'DESC'] ] } )
+                            .each(function(children) {
+                                return children.destroy({ onDelete: 'CASCADE'});
                             })
-                            .catch(error => { res.status(500).json({ error }); });
-                            //deleteAllComment(comment);
-                            res.status(200).json({ 'message': 'Comment deleted'});
-
+                            .then(() => {
+                                comment.destroy({ hierarchy: true})
+                                .then(() => {
+                                    res.status(200).json({ 'message': 'Comment deleted'});
+                                })
+                                .catch(error => { res.status(500).json({ error }); });
+                                
+                            })
+                            .catch(error => { 
+                                console.log(error);
+                                res.status(500).json({ error }); });
                             
                         } else {
                             return res.status(401).json({ 'error': 'Action not allow !'})

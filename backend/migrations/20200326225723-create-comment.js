@@ -35,6 +35,11 @@ module.exports = {
         defaultValue: 0,
         type: Sequelize.INTEGER
       },
+      hierarchyLevel: {
+        allowNull: false,
+        defaultValue:0,
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
