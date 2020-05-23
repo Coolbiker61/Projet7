@@ -3,10 +3,20 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Commentsancestors', {
       CommentId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Comments',
+          key: 'id'
+        },
+        onDelete: 'cascade'
       },
       ancestorId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Comments',
+          key: 'id'
+        },
+        onDelete: 'cascade'
       }
     });
   },
