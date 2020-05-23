@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwtUtils = require('../utils/jwt');
 const asyncLib = require('async');
-
+const jsdom = require('jsdom');
+const { JSDOM } = jsdom;
 const models = require('../models');
 
 const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -130,86 +131,64 @@ exports.deleteUser = (req, res, then) => {
             asyncLib.waterfall([
                 function (done) {
                     models.Message.findAll({ where: { UserId: userId }, attributes: ['id', 'UserId'] })
+                    .each(function(message){
+                        if (message.content.indexOf('<img src="') != -1) {
+                            var fictiveElement = new JSDOM(message.content).window.document;
+                                var imagesUrlOrigin = fictiveElement.getElementsByTagName('img');
+                                for(const img of imagesUrlOrigin) {
+                                    var urlCut = img.getAttribute('src').split('/');
+                                    if (urlCut[2] == req.get('host')) {
+                                        if (urlCut[(urlCut.length-1)].includes('?')) {
+                                            urlCut[(urlCut.length-1)] = urlCut[(urlCut.length-1)].split('?')[0];
+                                        }
+                                        fs.unlink(`userImg/${urlCut[(urlCut.length-1)]}`, (err) => {
+                                            if (err) {
+                                                //message d'erreur si la suppression n'a pu être faite
+                                                console.log("failed to delete local image:"+err);
+                                            }
+                                        });
+                                    }
+                                }
+                        }
+                    })
                     .then(messages => {
                         done(null, messages);
                     })
                     .catch(error => { return res.status(500).json({ error }); });
                 },
                 function (messages, done) {
-                    for (const message of messages) {
-                        if (message.content.indexOf('<img src="') != -1) {
-                            var imagesUrlOrigin = Array.from(message.content.matchAll(/(<img src=\")+.+(\" alt)/));
-                            for(const img of imagesUrlOrigin) {
-                                var urlCut = img[0].split('<img src="')[1].split('" alt')[0].split('/');
-                                if (urlCut[2] == req.get('host')) {
-                                    fs.unlink(`userImg/${urlCut[(urlCut.length-1)]}`, (err) => {
-                                        if (err) {
-                                            //message d'erreur si la suppression n'a pu être faite
-                                            console.log("failed to delete local image:"+err);
-                                        }
-                                    });
-                                }
-                            }
-                        }
-                    }
-                    done(null, messages);
-                },
-                function (messages, done) {
                     if (messages.length > 0) {
                         //supprime tous les messages de l'utilisateur
                         models.Message.destroy({ where: { UserId: userId }})
                         .then(result => { 
-                            console.log("message of user id="+userId+" destroyed !");
                             done(null, true);
                         })
-                        .catch(error => {console.log('erreur destroy message'); return res.status(500).json({ error }); });
+                        .catch(error => { return res.status(500).json({ error }); });
+                    }else {
+                        done(null, true);
                     }
+
                 },
                 function (executed, done) {
                     if (executed) {
                         models.Comment.findAll({ where: { UserId: userId }, attributes: ['id', 'parent']})
-                        .then(comments => {
-                            done(null, comments);
+                        .each(function(comment) {
+                            if (comment) {
+                                comment.getDescendents( { order: [ [ 'hierarchyLevel', 'DESC'] ] } )
+                                .each(function(children) {
+                                    children.destroy({ onDelete: 'CASCADE'});
+                                })
+                                .then(() => {
+                                    comment.destroy({ hierarchy: true});                               
+                                })
+                                .catch(error => { res.status(500).json({ error }); });
+                            }
+                            console.log(comment.id);
                         })
-                        .catch(error => {
-                            console.log("erreur get all comment : "+error); 
-                            return res.status(500).json({ error }); 
-                        });
-                    }
-                },
-                function (comments, done) {
-                    var commentsListComplet = [];
-                    if (comments.length > 0) {
-                        for(commentActif of comments) {
-                            models.Comment.findAll({ where: { parent: commentActif.id }, attributes: ['id', 'parent']})
-                            .then(response => {
-                                if (response.length > 0) {
-                                    comments = comments.concat(response);
-                                }
-                                commentsListComplet.push(commentActif);
-                            })
-                            .catch(error => { 
-                                console.log('erreur get comment '+error); 
-                                return res.status(500).json({ error });  
-                            });
-                        };
-                        done(null, commentsListComplet);
-                    } else {
-                        done(null, []);
-                    }
-                },
-                function (commentListe, done) {
-                    if (commentListe.length > 0) {
-                        models.Comment.destroy({ where: { id: commentsListe[i].id } })
-                        .then((result) => { 
-                            console.log('comment destroyed '+commentsListe[i].id+' + '+result);
+                        .then(() => {
                             done(null, true);
                         })
-                        .catch(error => { 
-                            return res.status(500).json({ error });  
-                        }); 
-                    } else {
-                        done(null, true);
+                        .catch(error => { return res.status(500).json({ error }); });
                     }
                 },
                 function (destroyed, done) {
@@ -249,6 +228,8 @@ exports.deleteUser = (req, res, then) => {
                             }
                         }
                         done(null, true);
+                    } else {
+                        done(null, false);
                     }
                 },
                 function (executed, done) {
@@ -257,10 +238,11 @@ exports.deleteUser = (req, res, then) => {
                         .then(() => { 
                             done('all_destroyed');
                         })
-                        .catch(error => {
-                            console.log('erreur destroy like'); 
-                        return res.status(500).json({ error }); 
-                    });
+                        .catch(error => { 
+                            return res.status(500).json({ error }); 
+                        });
+                    } else {
+                        done('all_destroyed');
                     }
                 },
             ], function (params) {

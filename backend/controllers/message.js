@@ -2,6 +2,8 @@ const models = require('../models');
 const jwtUtils = require('../utils/jwt');
 const fs = require('fs');
 const security = require('../utils/security');
+const jsdom = require('jsdom');
+const { JSDOM } = jsdom;
 
 
 
@@ -196,11 +198,12 @@ exports.deleteMessage = (req, res, then) => {
                     if (message) {
                         if (user.isAdmin || user.id == message.userId) {
                             if (message.content.indexOf('<img src="') != -1) {
-                                var imagesUrlOrigin = Array.from(message.content.matchAll(/(<img src=\")+.+(\" alt)/));
+                                var fictiveElement = new JSDOM(message.content).window.document;
+                                var imagesUrlOrigin = fictiveElement.getElementsByTagName('img');
                                 for(const img of imagesUrlOrigin) {
-                                    var urlCut = img[0].split('<img src="')[1].split('" alt')[0].split('/');
+                                    var urlCut = img.getAttribute('src').split('/');
                                     if (urlCut[2] == req.get('host')) {
-                                        if (urlCut[(urlCut.length-1)].include('?')) {
+                                        if (urlCut[(urlCut.length-1)].includes('?')) {
                                             urlCut[(urlCut.length-1)] = urlCut[(urlCut.length-1)].split('?')[0];
                                         }
                                         fs.unlink(`userImg/${urlCut[(urlCut.length-1)]}`, (err) => {

@@ -161,28 +161,7 @@ exports.getOneComment = (req, res, then) => {
     }
 };
 
-function deleteAllComment(idComment) {
-    
-        models.Comment.findAll({ where: { parent: idComment.id }, attributes: ['id', 'parent']})
-        .then(response => {
-            if (response.length > 0) {
-                for (const idCom of response) { 
-                    models.Comment.destroy({where: { id: idCom.id }})
-                    .then(() => {
-                        console.log('comment destroyed');
-                    })
-                    .catch(error => { console.log(error); });
-                    deleteAllComment(idCom);
-                }
-            }
-        })
-        .catch(error => { 
-            return console.log(error);  
-        });
-    
-}
-
-
+//supprime un commentaire ainsi que tout ces commentaires enfants
 exports.deleteComment = (req, res, then) => {
     //idComment
     var headerAuth = req.headers['authorization'];
@@ -214,9 +193,7 @@ exports.deleteComment = (req, res, then) => {
                                 .catch(error => { res.status(500).json({ error }); });
                                 
                             })
-                            .catch(error => { 
-                                console.log(error);
-                                res.status(500).json({ error }); });
+                            .catch(error => { res.status(500).json({ error }); });
                             
                         } else {
                             return res.status(401).json({ 'error': 'Action not allow !'})
