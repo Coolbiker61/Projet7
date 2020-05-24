@@ -35,7 +35,7 @@ document.onreadystatechange = function () {
 				if (this.readyState == XMLHttpRequest.DONE && this.status == 500) {
                     var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
                     html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
-                    document.querySelector('#container').insertAdjacentHTML('afterstart', html);
+                    document.querySelector('#container').insertAdjacentHTML('afterbegin', html);
                 } else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
                     alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
 					window.setTimeout(() => { window.location.href = '/auth/login';}, 2000);
@@ -116,7 +116,7 @@ const importUsersDetail = (id) => {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 500) {
             var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
             html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
-            document.querySelector('#container').insertAdjacentHTML('afterstart', html);
+            document.querySelector('#container').insertAdjacentHTML('afterbegin', html);
         } else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             // si la requête des messages n'a pas retourné d'erreur
             var response = JSON.parse(this.responseText);
@@ -153,7 +153,7 @@ const importUsers = () => {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 500) {
             var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
             html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
-            document.querySelector('#container').insertAdjacentHTML('afterstart', html);
+            document.querySelector('#container').insertAdjacentHTML('afterbegin', html);
         } else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             // si la requête des messages n'a pas retourné d'erreur
             var arrayresponse = JSON.parse(this.responseText);

@@ -41,7 +41,7 @@ document.onreadystatechange = function () {
 				if (this.readyState == XMLHttpRequest.DONE && this.status == 500) {
                     var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
                     html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
-                    document.querySelector('.back').insertAdjacentHTML('afterstart', html);
+                    document.querySelector('.back').insertAdjacentHTML('afterbegin', html);
                 } else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
                     alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
 					window.setTimeout(() => { window.location.href = '/auth/login';}, 2000);
@@ -82,7 +82,7 @@ const importMessage = (user) => {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 500) {
             var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
             html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
-            document.querySelector('.back').insertAdjacentHTML('afterstart', html);
+            document.querySelector('.back').insertAdjacentHTML('afterbegin', html);
         } else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             // si la requête des messages n'a pas retourné d'erreur
             var arrayresponse = JSON.parse(this.responseText);
@@ -151,7 +151,7 @@ const listenerLike = (message) => {
                 if (this.readyState == XMLHttpRequest.DONE && this.status == 500) {
                     var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
                     html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
-                    document.querySelector('.back').insertAdjacentHTML('afterstart', html);
+                    document.querySelector('.back').insertAdjacentHTML('afterbegin', html);
                 } else if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
                     doc.querySelector('.like-up-not').classList.remove("like-up-select");
                     doc.querySelector('.nb-likes').innerHTML--;
@@ -172,7 +172,7 @@ const listenerLike = (message) => {
             if (this.readyState == XMLHttpRequest.DONE && this.status == 500) {
                 var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
                 html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
-                document.querySelector('.back').insertAdjacentHTML('afterstart', html);
+                document.querySelector('.back').insertAdjacentHTML('afterbegin', html);
             } else if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
                 doc.querySelector('.like-up-not').classList.add("like-up-select");
                 if (doc.querySelector('.like-down-not').classList.contains("like-down-select")) {
@@ -198,7 +198,7 @@ const listenerLike = (message) => {
                 if (this.readyState == XMLHttpRequest.DONE && this.status == 500) {
                     var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
                     html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
-                    document.querySelector('.back').insertAdjacentHTML('afterstart', html);
+                    document.querySelector('.back').insertAdjacentHTML('afterbegin', html);
                 } else if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
                     //quand il a fini la requête avec le code http 201
                     doc.querySelector('.like-down-not').classList.remove("like-down-select");
@@ -219,7 +219,7 @@ const listenerLike = (message) => {
             if (this.readyState == XMLHttpRequest.DONE && this.status == 500) {
                 var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
                 html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
-                document.querySelector('.back').insertAdjacentHTML('afterstart', html);
+                document.querySelector('.back').insertAdjacentHTML('afterbegin', html);
             } else if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
                 //quand il a fini la requête avec le code http 201
                 doc.querySelector('.like-down-not').classList.add("like-down-select");
@@ -243,7 +243,7 @@ const importLike = (message) => {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 500) {
             var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
             html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
-            document.querySelector('.back').insertAdjacentHTML('afterstart', html);
+            document.querySelector('.back').insertAdjacentHTML('afterbegin', html);
         } else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             // si la requête des messages n'a pas retourné d'erreur
             var like = JSON.parse(this.responseText);
@@ -269,7 +269,7 @@ const importComment = (messageid, user) => {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 500) {
             var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
             html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
-            document.querySelector('.back').insertAdjacentHTML('afterstart', html);
+            document.querySelector('.back').insertAdjacentHTML('afterbegin', html);
         } else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             // si la requête des messages n'a pas retourné d'erreur
             var comments = JSON.parse(this.responseText);
@@ -968,7 +968,7 @@ const deleteComment = (commentId) => {
                     // 500 erreur serveur
                     var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
                     html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
-                    document.querySelector('.back').insertAdjacentHTML('afterstart', html);
+                    document.querySelector('.back').insertAdjacentHTML('afterbegin', html);
 
                     break;
                 default:

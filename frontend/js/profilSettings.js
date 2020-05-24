@@ -10,7 +10,7 @@ document.onreadystatechange = function () {
                 if (this.readyState == XMLHttpRequest.DONE && this.status == 500) {
                     var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
                     html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
-                    document.querySelector('.back').insertAdjacentHTML('afterstart', html);
+                    document.querySelector('.back').insertAdjacentHTML('afterbegin', html);
                 } else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
 
     alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
