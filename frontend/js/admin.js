@@ -36,7 +36,7 @@ document.onreadystatechange = function () {
                     var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
                     html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
                     document.querySelector('#container').insertAdjacentHTML('afterbegin', html);
-                } else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
+                } else if (this.readyState == XMLHttpRequest.DONE && this.status == 401 || this.status == 404) {
                     alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
 					window.setTimeout(() => { window.location.href = '/auth/login';}, 2000);
 				} else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
@@ -46,7 +46,9 @@ document.onreadystatechange = function () {
                     if (response.isAdmin) {
                         var html = "<div class=\"menu_profil_ligne\"><a href=\"/admin/users\">Administration</a></div>";
                         document.getElementById('logout').insertAdjacentHTML("beforebegin", html);
-                    }    
+                    } else {
+                        window.location.href = '/';
+                    }   
                     //définition de la taille du offset par rapport a celle du menu
                     document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
                 
@@ -77,8 +79,8 @@ const addProfileUser = (response) => {
     } else {
         html += "Utilisateur";
     }
-    html += "</li></ul></div>";
-    html += "";
+    html += "</li><li><button id=\"admin_delete_account\" class=\"btn\">Supprimer ce compte</button></li>";
+    html += "</ul></div>";
     html += "<div class=\"users-details\" ><h2>Les 5 derniers messages de cet utilisateur</h2>";
     if (response.Messages.length == 0) {
         html += "Cet utilisateur n'as poster aucun message.";
@@ -107,7 +109,10 @@ const addProfileUser = (response) => {
     html += "</div>";
     document.getElementById("bloc-users-profile").innerHTML = html;
     window.scrollTo({behavior: "smooth",top: (document.getElementById("bloc-users-profile").offsetTop - (10 + document.querySelector('.offset-top').offsetHeight) ), right: 0 });
-
+    document.getElementById('admin_delete_account').addEventListener('click', function (event){
+        console.log(event+' '+response.id);
+        window.location.href = '/admin/users/delete/'+response.id;
+    })
 }
 
 const importUsersDetail = (id) => {
@@ -154,6 +159,10 @@ const importUsers = () => {
             var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
             html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
             document.querySelector('#container').insertAdjacentHTML('afterbegin', html);
+        } else if (this.readyState == XMLHttpRequest.DONE && this.status == 401 || this.status == 404) {
+            if (this.responseText == 'User is not admin !') {
+                window.location.href = '/';
+            }
         } else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             // si la requête des messages n'a pas retourné d'erreur
             var arrayresponse = JSON.parse(this.responseText);

@@ -1,5 +1,4 @@
 
-
 // au chargement de la page
 document.onreadystatechange = function () {
     if (document.readyState == 'complete') { 
@@ -21,7 +20,9 @@ document.onreadystatechange = function () {
                     if (response.isAdmin) {
                         var html = "<div class=\"menu_profil_ligne\"><a href=\"/admin/users\">Administration</a></div>";
                         document.getElementById('logout').insertAdjacentHTML("beforebegin", html);
-                    }         
+                    } else {
+                        window.location.href = '/';
+                    }
                     //definition de la taille du offset par rapport a celle du menu
                     document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
            
@@ -43,7 +44,7 @@ document.onreadystatechange = function () {
 
 const ecoute = () => {
     document.getElementById("btn_oui").addEventListener("click", function (event) {
-        
+        var idAccount = 0;
         document.getElementById("loading").hidden = false;
         document.getElementById("back").setAttribute('hidden', true);
         var requete = new XMLHttpRequest();
@@ -51,20 +52,20 @@ const ecoute = () => {
             if (this.readyState == XMLHttpRequest.DONE && this.status == 500) {
                 var html = "<p class=\"error\">Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.<br />";
                 html += "Notre équipe fait de son mieux pour corriger le problème.</p>";
-                document.querySelector('.loading').insertAdjacentHTML('afterbegin', html);
+                document.querySelector('.back').insertAdjacentHTML('afterbegin', html);
             } else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                window.setTimeout(() => { window.location.href = '/auth/register';}, 2000);
+                window.setTimeout(() => { window.location.href = '/admin/users';}, 2000);
             } else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
                 console.log(this.responseText);
             }
         };
-        requete.open("DELETE", "http://localhost:3000/api/v1/auth/");
+        requete.open("DELETE", "http://localhost:3000/api/v1/auth/users/"+idAccount);
         requete.setRequestHeader("Content-Type", "application/json");
         requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
         requete.send();
         
     });
     document.getElementById("btn_non").addEventListener("click", function (event){
-            window.location.href = '/auth/profil/settings';
+            window.location.href = '/admin/users';
     })
 }
