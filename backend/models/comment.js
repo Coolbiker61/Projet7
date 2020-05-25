@@ -29,7 +29,6 @@ module.exports = (sequelize, DataTypes) => {
     hierarchyLevel: DataTypes.INTEGER
   }, {  });
   Comment.associate = function(models) {
-    // associations can be defined here
     Comment.belongsTo(models.User, {
       foreignKey: 'userId',
       as: 'user'

@@ -54,7 +54,7 @@ document.onreadystatechange = function () {
                         var html = "<div class=\"menu_profil_ligne\"><a href=\"/admin/users\">Administration</a></div>";
                         document.getElementById('logout').insertAdjacentHTML("beforebegin", html);
                     }
-                    //definition de la taille du offset par rapport a celle du menu
+                    //définition de la taille du offset par rapport a celle du menu
                     document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
                     importMessage(response);
                     document.getElementById("loading").hidden = true;
@@ -300,7 +300,7 @@ const addComment = (comments, user) => {
             if (comment.parent == 0) {
                 var html = "<div class=\"commentaire\" id=\""+comment.id+"\"><div class=\"com-likes\">";
                 html += "<div class=\"trait\"></div></div><div class=\"corpse\"><div class=\"author\" >";
-                html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);//author nblike - date
+                html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);
                 html += "</div><div class=\"com-content\">";
                 html += comment.content;
                 html += "</div>"; 
@@ -320,7 +320,7 @@ const addComment = (comments, user) => {
             if (comment.parent !=0 && document.getElementById(comment.parent)) {
                 var html = "<div class=\"commentaire\" id=\""+comment.id+"\"><div class=\"com-likes\">";
                 html += "<div class=\"trait\"></div></div><div class=\"corpse\"><div class=\"author\">";
-                html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);//author nblike - date
+                html += "crée par "+comment.user.username+" il y a "+editTime(comment.createdAt);
                 html += "</div><div class=\"com-content\">";
                 html += comment.content;
                 html += "</div>";
@@ -348,7 +348,7 @@ const addComment = (comments, user) => {
     }
 };
 
-// action changement contenu editeur
+// action changement contenu éditeur
 const contentChangeAction = (e) => { 
     if (e.element) {
         if(e.element.tagName === "IMG"){          
@@ -414,7 +414,7 @@ const contentChangeAction = (e) => {
     }
 }
 
-//editeur message
+//éditeur message
 const initEditorMessage = () => {
     //const PLACEHOLDERVALUE = 'Tapez votre message ici';
 
@@ -545,7 +545,7 @@ const listenerUpdate = (param) => {
             document.querySelector(".message_editer").setAttribute('hidden', true);
             var idMessage = window.location.href.split('/message/')[1];
             var html = "<form id=\"delete\">";
-            html += "<p class=\"text_delete\">Etes vous sur de vouloir le supprimer ?<br /> ";
+            html += "<p class=\"text_delete\">Êtes vous sur de vouloir le supprimer ?<br /> ";
             html += "Ceci supprimera également tous les commentaires associés.</p><div class=\"bloc_btn_delete\">";
             html += "<button class=\"btn\" name=\"submitdeletebtn\" id=\"submitdelete\">Supprimer</button>";
             html += "<button class=\"btn\" name=\"canceldeletebtn\" id=\"canceldelete\">Annuler</button></div></form>";
@@ -800,7 +800,7 @@ const listenerOptionsComment = (type, id) => {
             event.stopPropagation();
             let idComment = event.target.id.split('comment_supprimer')[1];
             var html = "<form id=\"delete"+id+"\">";
-            html += "<p class=\"text_delete\">Etes vous sur de vouloir le supprimer ?<br /> ";
+            html += "<p class=\"text_delete\">Êtes vous sur de vouloir le supprimer ?<br /> ";
             html += "Ceci supprimera également tous les commentaires associés.</p><div class=\"bloc_btn_delete\">";
             html += "<button class=\"btn\" name=\"submitdeletebtn\" id=\"submitdelete"+id+"\">Supprimer</button>";
             html += "<button class=\"btn\" name=\"canceldeletebtn\" id=\"canceldelete"+id+"\">Annuler</button></div></form>";

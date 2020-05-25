@@ -2,11 +2,11 @@
 // au chargement de la page
 document.onreadystatechange = function () {
 	if (document.readyState == 'loading') { 
-		// verifie si un token est present dans le sessionStorage
+		// vérifie si un token est présent dans le sessionStorage
 		if (sessionStorage.getItem('token')) {
 		var requete = new XMLHttpRequest();
 		requete.onreadystatechange = function () {
-	// verifie si un token est present dans le sessionStorage
+	// vérifie si un token est présent dans le sessionStorage
 			if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
 				console.log(this.responseText);
 				window.location.href = '/';
@@ -19,7 +19,7 @@ document.onreadystatechange = function () {
 		
 	} }
     if (document.readyState == 'complete') { 
-		//definition de la taille du offset par rapport a celle du menu
+		//définition de la taille du offset par rapport a celle du menu
 		document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
 
 		document.getElementById("loading").hidden = true;
@@ -85,7 +85,7 @@ const actionClick = (event) => {
 						document.getElementById("erreur").innerHTML = errorMessage;
 						break;
 					case 401:
-						//401 dejà enregistré ou mail non conforme au regex
+						//401 déjà enregistré ou mail non conforme au regex
 						errorMessage = "Email ou mot de passe invalide.";
 						document.getElementById("erreur").innerHTML = errorMessage;
 						break;

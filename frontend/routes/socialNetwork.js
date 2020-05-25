@@ -9,7 +9,6 @@ router.get('/', socialCtrl.getPageWall);
 router.get('/message/:id', socialCtrl.getPageMessage);
 // page pour créer un nouveau message
 router.get('/new', socialCtrl.createMessage);
-// page pour supprimer un message
-router.get('/delete:id', socialCtrl.deleteMessage );
+
 
 module.exports = router;

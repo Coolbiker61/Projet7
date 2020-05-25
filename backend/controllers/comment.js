@@ -1,7 +1,6 @@
 const models = require('../models');
 const jwtUtils = require('../utils/jwt');
 const asyncLib = require('async');
-//models.Comment.rebuildHierarchy();
 
 exports.addComment = (req, res, then) => {
     var headerAuth = req.headers['authorization'];

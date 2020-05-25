@@ -4,7 +4,7 @@ const REGEXvALIDE = /([a-zA-Z]{1}\'{1}[a-z]{1})/g;
 
 document.onreadystatechange = function () {
     if (document.readyState == 'complete') { 
-        // verifie si un token est present dans le sessionStorage
+        // verifie si un token est présent dans le sessionStorage
         if (sessionStorage.getItem('token')) {
             var requete = new XMLHttpRequest();
 			requete.onreadystatechange = function () {
@@ -23,7 +23,7 @@ document.onreadystatechange = function () {
                         var html = "<div class=\"menu_profil_ligne\"><a href=\"/admin/users\">Administration</a></div>";
                         document.getElementById('logout').insertAdjacentHTML("beforebegin", html);
                     }
-                    //definition de la taille du offset par rapport a celle du menu
+                    //définition de la taille du offset par rapport a celle du menu
                     document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
                     listenerEvent();
                     document.getElementById("loading").hidden = true;
@@ -100,7 +100,7 @@ const sendMessage = (message, title) => {
 }
 
 
-// action changement contenu editeur
+// action changement contenu éditeur
 const contentChangeAction = (e) => {    
     if (e.element) {
         if(e.element.tagName === "IMG"){          

@@ -31,7 +31,7 @@ app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use('/auth', userRoutes);
 // route de l'index
 app.use('/', indexRoutes);
-// route du reseau social
+// route du réseau social
 app.use('/socialNetwork', snRoutes);
 // route d'administration
 app.use('/admin', adminRoutes);

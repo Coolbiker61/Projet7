@@ -3,12 +3,12 @@ const jwt = require('jsonwebtoken');
 const jwt_secret = 'c19cf0ee354dee5163bf6b19f0a52cca1892ee15aa5acddd4df33d6a48d62075';
 
 exports.generateToken = (user) => {
-    //genere un token
+    //génère un token
     return jwt.sign(
         { userId: user.id, 
             isAdmin: user.isAdmin },
         jwt_secret,
-        { expiresIn: '8h' }
+        { expiresIn: '20min' }
     );
 }
 

@@ -32,7 +32,7 @@ let nextOffset = 0;
 // au chargement de la page
 document.onreadystatechange = function () {
     if (document.readyState == 'complete') { 
-        // verifie si un token est present dans le sessionStorage
+        // vérifie si un token est présent dans le sessionStorage
         if (sessionStorage.getItem('token')) {
             var requete = new XMLHttpRequest();
 			requete.onreadystatechange = function () {
@@ -51,13 +51,13 @@ document.onreadystatechange = function () {
                         var html = "<div class=\"menu_profil_ligne\"><a href=\"/admin/users\">Administration</a></div>";
                         document.getElementById('logout').insertAdjacentHTML("beforebegin", html);
                     }
-                    //definition de la taille du offset par rapport a celle du menu
+                    //définition de la taille du offset par rapport a celle du menu
                     document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
 
                     importMessage(0);
                     document.getElementById("loading").hidden = true;
                     document.getElementById("back").style.setProperty('visibility', 'visible') ;
-                    // ecoute le scroll pour afficher les 5 message suivant quand l'utilisateur arrive en bas de page
+                    // écoute le scroll pour afficher les 5 message suivant quand l'utilisateur arrive en bas de page
                     setTimeout(function(){
                         window.addEventListener("scroll",(event) => {
                             if (document.body.scrollHeight <= (window.innerHeight + window.pageYOffset )  ) {
@@ -108,14 +108,14 @@ const importMessage = (offset) => {
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.send();
 }
-// ajoute un message à la fin de ceux present
+// ajoute un message à la fin de ceux présent
 const addMessage = (message) => {
     var html = "<div class=\"message\" id=\""+message.id+"\"><div class=\"col_likes\">";
     html += "<i class=\"fas fa-arrow-up like-up-not\"></i>";
     html += "<div class=\"nb-likes\">"+message.likes+"</div>";
     html += "<i class=\"fas fa-arrow-down like-down-not\"></i></div>";
     html += "<section class=\"corp\"><header class=\"author\">";
-    html += "Posted by "+message.User.username+" il y a ";
+    html += "Publié par "+message.User.username+" il y a ";
 
     html += editTime(message.createdAt); 
     html += "</header><article><header><h3 class=\"title-article\">";
@@ -171,7 +171,7 @@ const listener = (message) => {
     // event dislike
     doc.querySelector('.like-down-not').addEventListener("click", function (event) {
         event.stopPropagation();
-        // si il a deja été dislike
+        // si il a déjà été dislike
         if (doc.querySelector('.like-down-not').classList.contains("like-down-select")) {
             var requete = new XMLHttpRequest();
             // écoute des changement d'état de l'envoie *
@@ -252,7 +252,7 @@ const importLike = (message) => {
 }
 
 
-// ecoute le bouton nouveau message
+// écoute le bouton nouveau message
 document.getElementById("btn_new_post").addEventListener("click", function (event) {
     window.location.href = "/socialNetwork/new";
 })

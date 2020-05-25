@@ -76,7 +76,7 @@ const addMessage = (message) => {
 // au chargement de la page
 document.onreadystatechange = function () {
     if (document.readyState == 'complete') { 
-        // verifie si un token est present dans le sessionStorage
+        // verifie si un token est présent dans le sessionStorage
         if (sessionStorage.getItem('token')) {
             var requete = new XMLHttpRequest();
 			requete.onreadystatechange = function () {
@@ -96,7 +96,7 @@ document.onreadystatechange = function () {
                         document.getElementById('logout').insertAdjacentHTML("beforebegin", html);
                     }
                     document.getElementById("mini_username").innerHTML = response.username;
-                    //definition de la taille du offset par rapport a celle du menu
+                    //définition de la taille du offset par rapport a celle du menu
                     document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
                     importeMessage(response.id);
                 }
@@ -165,7 +165,7 @@ const listener = (message) => {
     // event dislike
     doc.querySelector('.like-down-not').addEventListener("click", function (event) {
         event.stopPropagation();
-        // si il a deja été dislike
+        // si il a déjà été dislike
         if (doc.querySelector('.like-down-not').classList.contains("like-down-select")) {
             var requete = new XMLHttpRequest();
             // écoute des changement d'état de l'envoie *

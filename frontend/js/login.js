@@ -7,7 +7,7 @@ const REGEX_PASSWORD = /^[a-zA-Z]{1}\w{3,24}$/;
 // au chargement de la page
 document.onreadystatechange = function () {
     if (document.readyState == 'complete') { 
-		// verifie si un token est present dans le sessionStorage
+		// verifie si un token est présent dans le sessionStorage
 		if (sessionStorage.getItem('token')) {
 			var requete = new XMLHttpRequest();
 			requete.onreadystatechange = function () {
@@ -18,7 +18,7 @@ document.onreadystatechange = function () {
                 } else if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
 					window.setTimeout(() => { window.location.href = '/';}, 2000);
 				} else if (this.readyState == XMLHttpRequest.DONE && this.status != 200) {
-					//definition de la taille du offset par rapport a celle du menu
+					//définition de la taille du offset par rapport a celle du menu
 					document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
 					document.getElementById("loading").hidden = true;
 					document.getElementById("back-login").style.setProperty('visibility', 'visible') ;

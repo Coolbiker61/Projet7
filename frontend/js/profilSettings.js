@@ -3,7 +3,7 @@
 // au chargement de la page
 document.onreadystatechange = function () {
     if (document.readyState == 'complete') { 
-        // verifie si un token est present dans le sessionStorage
+        // verifie si un token est présent dans le sessionStorage
         if (sessionStorage.getItem('token')) {
             var requete = new XMLHttpRequest();
 			requete.onreadystatechange = function () {
@@ -24,7 +24,7 @@ document.onreadystatechange = function () {
                     }
                     document.getElementById("email").innerHTML = response.email;
                     document.getElementById("username_detail").innerHTML = response.username;
-                    //definition de la taille du offset par rapport a celle du menu
+                    //définition de la taille du offset par rapport a celle du menu
                     document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
                     document.getElementById("back").style.setProperty('visibility', 'visible') ;
                     ecoute();
@@ -56,5 +56,3 @@ const ecoute = () => {
         }
     })
 }
-
-// delete http://localhost:3000/api/v1/auth/

@@ -7,7 +7,7 @@ function showMenu() {
       x.className = "menu";
     }
 }
-//definition de la taille du offset par rapport a celle du menu
+//définition de la taille du offset par rapport a celle du menu
 //document.querySelector('.offset-top').style.height = document.querySelector('nav').offsetHeight+"px";
  
 if(!window.location.pathname.includes('/login') && !window.location.pathname.includes('/register')) {

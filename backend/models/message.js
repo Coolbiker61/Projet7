@@ -6,7 +6,6 @@ module.exports = (sequelize, DataTypes) => {
     likes: DataTypes.INTEGER
   });
   Message.associate = (models) => {
-    // associations can be defined here
     Message.belongsTo(models.User, {
       foreignKey: {
         allowNull: false
