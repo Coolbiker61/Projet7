@@ -76,7 +76,7 @@ const actionClick = (event) => {
 								break;
 						
 							case "Wrong email format":
-								errorMessage = "Veuillez indiquer une adresse mail correct.";
+								errorMessage = "Veuillez indiquer une adresse mail au format ****@***.*** .";
 							break;
 							default:
 								errorMessage = "Une erreur est survenue, nous sommes désolé pour la géne occasionné.";
@@ -86,7 +86,7 @@ const actionClick = (event) => {
 						break;
 					case 401:
 						//401 dejà enregistré ou mail non conforme au regex
-						errorMessage = "Cet adresse mail à déjà été utilisé.";
+						errorMessage = "Email ou mot de passe invalide.";
 						document.getElementById("erreur").innerHTML = errorMessage;
 						break;
 					case 500:

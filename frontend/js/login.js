@@ -69,11 +69,8 @@ const actionClick = (event) => {
 						case 401:
 							//401 utilisateur non trouvé ou mail non conforme au regex
 							switch (JSON.parse(this.responseText).error) {
-								case "User not found !":
-									errorMessage = "Aucun compte n'existe pour cet adresse mail.";
-									break;
 								case "Action not allow !":
-									errorMessage = "Veuillez indiquer une adresse mail correct.";
+									errorMessage = "Veuillez indiquer une adresse mail au format ****@***.** .";
 									break;
 								default:
 									errorMessage = "Email ou mot de passe invalide !";

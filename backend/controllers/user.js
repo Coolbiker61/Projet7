@@ -71,12 +71,12 @@ exports.login = (req, res, then) => {
         models.User.findOne({ where: { email: email } })
         .then(user => {
             if(!user) {
-                return res.status(401).json({ error: 'User not found !'});
+                return res.status(401).json({ error: 'Wrong request !'});
             } else {
                 bcrypt.compare(password, user.password)
                     .then(valid => {
                         if (!valid) {
-                            return res.status(401).json({ error: 'Wrong password !'});
+                            return res.status(401).json({ error: 'Wrong request !'});
                         }
                         res.status(200).json({
                             userId: user.id,
