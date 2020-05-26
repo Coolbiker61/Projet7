@@ -110,7 +110,6 @@ const addProfileUser = (response) => {
     document.getElementById("bloc-users-profile").innerHTML = html;
     window.scrollTo({behavior: "smooth",top: (document.getElementById("bloc-users-profile").offsetTop - (10 + document.querySelector('.offset-top').offsetHeight) ), right: 0 });
     document.getElementById('admin_delete_account').addEventListener('click', function (event){
-        console.log(event+' '+response.id);
         window.location.href = '/admin/users/delete/'+response.id;
     })
 }

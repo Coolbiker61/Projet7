@@ -6,9 +6,7 @@ document.onreadystatechange = function () {
 		if (sessionStorage.getItem('token')) {
 		var requete = new XMLHttpRequest();
 		requete.onreadystatechange = function () {
-	// vérifie si un token est présent dans le sessionStorage
 			if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-				console.log(this.responseText);
 				window.location.href = '/';
 			}
 		};

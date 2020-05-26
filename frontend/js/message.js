@@ -488,12 +488,7 @@ const listenerUpdate = (param) => {
                 var content = tinymce.get('message_editor').getContent();
                 //updateMessage(idMessage, content, id);
                 var titleMessage = document.getElementById("update_title").value;
-                if (content == MESSAGE[0].content && titleMessage == MESSAGE[0].title && content.length >= 11 && titleMessage.length >= 2) {
-                    
-                    console.log('tout identique');
-
-
-                } else if (content != MESSAGE[0].content && titleMessage == MESSAGE[0].title && content.length >= 11 && titleMessage.length >= 2){
+                if (content != MESSAGE[0].content && titleMessage == MESSAGE[0].title && content.length >= 11 && titleMessage.length >= 2){
                     if (content.indexOf('<img') != -1) {
                         if (content.indexOf('<img src="data:') != -1) {
                             tinymce.activeEditor.uploadImages()
@@ -589,9 +584,6 @@ const updateMessage = (idMessage, content, title) => {
                 case 401:
                     //401 utilisateur non trouvé ou mail non conforme au regex
                     switch (JSON.parse(this.responseText).error) {
-                        case "User not found !":
-                            console.log("Aucun compte n'existe pour cet adresse mail.");
-                            break;
                         case "Action not allow !":
                             alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
 					        window.setTimeout(() => { window.location.href = '/auth/login';}, 200);
@@ -605,7 +597,6 @@ const updateMessage = (idMessage, content, title) => {
                 case 500:
                     // 500 erreur serveur
                     errorMessage = "Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.";
-                    console.log(errorMessage);
                     break;
                 default:
                     break;
@@ -629,17 +620,12 @@ const deleteMessage = (idMessage) => {
         if (this.readyState == XMLHttpRequest.DONE) {
             switch (this.status) {
                 case 200:
-                    //document.querySelector('.bloc-commentaire').innerHTML = "";
-                    console.log("delete ok");
                     window.setTimeout(() => { window.location.href = '/socialNetwork';}, 20);
                     break;
                 
                 case 401:
                     //401 utilisateur non trouvé ou mail non conforme au regex
                     switch (JSON.parse(this.responseText).error) {
-                        case "User not found !":
-                            console.log("Aucun compte n'existe pour cet adresse mail.");
-                            break;
                         case "Action not allow !":
                             alert("Vous avez été déconnecté. Vous aller être rediriger vers la page de connexion.");
 					        window.setTimeout(() => { window.location.href = '/auth/login';}, 200);
@@ -653,7 +639,6 @@ const deleteMessage = (idMessage) => {
                 case 500:
                     // 500 erreur serveur
                     errorMessage = "Une erreur interne est survenue, veuillez nous excuser pour la géne occasionné.";
-                    console.log(errorMessage);
                     break;
                 default:
                     break;
@@ -783,10 +768,7 @@ const listenerOptionsComment = (type, id) => {
                 event.stopPropagation();
                 var content = tinymce.get('comment_editor'+idComment).getContent();
 
-                if (content == value && content.length >= 8 ) {
-                    
-                    console.log('tout identique');
-                } else if (content != value && content.length >= 8){
+                if (content != value && content.length >= 8){
                     updateComment(idComment, content);
                     tinymce.remove('#comment_editor'+idComment);
                 }
@@ -974,7 +956,6 @@ const deleteComment = (commentId) => {
                 default:
                     break;
             }
-            console.log(this.responseText);
             return;
         }
     };
