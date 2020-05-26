@@ -5,10 +5,10 @@ exports.getPageRoot = (req, res, then) => {
     let html = "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\">";
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
     html += "<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon.png\" />";
-    html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
+    html += "<link rel=\"stylesheet\" href=\"/styles/style.min.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
-    html += "<script src=\"/js/index.js\" async></script>";
-    html += "<script src=\"/js/menu.js\" async></script>";
+    html += "<script src=\"/js/index.min.js\" async></script>";
+    html += "<script src=\"/js/menu.min.js\" async></script>";
     html += "<title>Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" role=\"banner\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</li><li id=\"user_nav\"><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";

@@ -3,11 +3,11 @@ exports.getUserListe = (req, res ,then) => {
     let html = "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\">";
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
     html += "<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon.png\" />";
-    html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
+    html += "<link rel=\"stylesheet\" href=\"/styles/style.min.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"https://cdn.tiny.cloud/1/vjax5i6wra9mztw82qywx797zkifcqfemwbzfxjdzjockixy/tinymce/5/tinymce.min.js\" referrerpolicy=\"origin\"></script>";
-    html += "<script src=\"/js/admin.js\" async></script>";
-    html += "<script src=\"/js/menu.js\" async></script>";
+    html += "<script src=\"/js/admin.min.js\" async></script>";
+    html += "<script src=\"/js/menu.min.js\" async></script>";
     html += "<title>Groupomania - Administration des utilisateurs</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li id=\"user_nav\"><a href=\"/socialNetwork\"><div class=\"btn\" tabindex=\"0\">Social Network</div></a></li>";
@@ -35,10 +35,10 @@ exports.adminDeleteAccountConfirm = (req, res, then) => {
     let html = "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\">";
     html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
     html += "<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon.png\" />";
-    html += "<link rel=\"stylesheet\" href=\"/styles/style.css\" />";
+    html += "<link rel=\"stylesheet\" href=\"/styles/style.min.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
-    html += "<script src=\"/js/adminConfirmD.js\" async></script>";
-    html += "<script src=\"/js/menu.js\" async></script>";
+    html += "<script src=\"/js/adminConfirmD.min.js\" async></script>";
+    html += "<script src=\"/js/menu.min.js\" async></script>";
     html += "<title>Confirmation de suppression - Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
