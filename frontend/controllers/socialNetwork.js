@@ -85,14 +85,10 @@ exports.createMessage = (req, res, then) => {
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
     html += "<section id=\"back\" class=\"back\"><form hidden id=\"create_form\">";
     html += "<div class=\"title_line\"><label for=\"title\">Titre du message </label>";
-    html += "<input type=\"text\" id=\"title\" maxlength=\"50\" patern=([a-z]{1}\\'[a-z]{1,})|([a-z]{1,}) ><div><span id=\"length-title\">0</span>/50</div></div>";
+    html += "<input type=\"text\" id=\"title\" maxlength=\"50\" pattern=\"([a-z]{1}\\'[a-z]{1,})|([a-z]{1,})\" ><div><span id=\"length-title\">0</span>/50</div></div>";
     html += "<div id=\"editor\" ><textarea id=\"message_editor\"></textarea>";
-    html += "<button disabled=\"true\" class=\"btn\" name=\"submitbtn\" id=\"submitbtn\">Publier</button></div></form>";
-    //
-    html += " </div>";
-
-    html += "<div id=\"error\" class=\"error\"></div></div></section>";
-    html += "</section>";
+    html += "<button disabled class=\"btn\" name=\"submitbtn\" id=\"submitbtn\">Publier</button></div></form>";
+    html += "<div id=\"error\" class=\"error\"></div></section>";
     html += "</body></html>"
     res.writeHeader(200, { 'Content-Type': 'text/html' });
     res.write(html);

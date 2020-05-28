@@ -1,5 +1,5 @@
 
-const REGEX_EMAIL = "/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
+const REGEX_EMAIL = "^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";
 const REGEX_USERNAME = "^[a-zA-Z]{1}[\\w\\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{2,25}$";
 const REGEX_PASSWORD = "^[a-zA-Z]{1}\\w{3,24}$";
 
@@ -15,19 +15,19 @@ exports.register = (req, res, then) => {
     html += "<title>Inscription - Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</li>";
-    html += "<li><a href=\"/auth/login\"><div class=\"btn\" tabindex=\"0\">Connexion</div></a></li>";
-    html += "<li><a href=\"/auth/register\"><div class=\"btn\" tabindex=\"0\">Inscription</div></a></li>";
+    html += "<li><a href=\"/auth/login\"><div class=\"btn\" >Connexion</div></a></li>";
+    html += "<li><a href=\"/auth/register\"><div class=\"btn\" >Inscription</div></a></li>";
     html += "<li><a href=\"javascript:void(0);\" class=\"icon\" onclick=\"showMenu()\"><i class=\"fas fa-bars\"></i></a></li></ul></nav>";
     html += "<div class=\"offset-top\"></div>";
     html += "<div role=\"banner\" id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
     html += "<section id=\"back-inscription\" class=\"back-inscription\"><h1>Inscription</h1>";
     html += "<div class=\"form-register\">";
     html += "<label for=\"email\">Adresse mail</label>";
-    html += "<input type=\"email\" id=\"email\" name=\"email\" required patern=\""+REGEX_EMAIL+"\"/>";
+    html += "<input tabindex=\"0\" type=\"email\" id=\"email\" name=\"email\" required pattern=\""+REGEX_EMAIL+"\"/>";
     html += "<label for=\"username\">Pseudo</label>";
-    html += "<input type=\"text\" name=\"username\" id=\"username\" required patern=\""+REGEX_USERNAME+"\" />";
+    html += "<input tabindex=\"0\" type=\"text\" name=\"username\" id=\"username\" required pattern=\""+REGEX_USERNAME+"\" />";
     html += "<label for=\"password\">Mot de passe</label>";
-    html += "<input type=\"password\" name=\"password\" id=\"password\" required patern=\""+REGEX_PASSWORD+"\"/>";
+    html += "<input tabindex=\"0\" type=\"password\" name=\"password\" id=\"password\" required pattern=\""+REGEX_PASSWORD+"\"/>";
     html += "<div id=\"inscription\" tabindex=\"0\">S'inscrire </div>";
     html += "</div><div id=\"erreur\"></div></section>";
 
@@ -46,10 +46,10 @@ exports.login = (req, res, then) => {
     html += "<script src=\"/js/menu.min.js\" async></script>";
     html += "<script src=\"/js/login.min.js\" async></script>";
     html += "<title>Connexion - Groupomania</title></head><body><nav><ul class=\"menu\"><li>";
-    html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" role=\"banner\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
+    html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</li>";
-    html += "<li><a href=\"/auth/login\"><div class=\"btn\" tabindex=\"0\">Connexion</div></a></li>";
-    html += "<li><a href=\"/auth/register\"><div class=\"btn\" tabindex=\"0\">Inscription</div></a></li>";
+    html += "<li><a href=\"/auth/login\"><div class=\"btn\" >Connexion</div></a></li>";
+    html += "<li><a href=\"/auth/register\"><div class=\"btn\" >Inscription</div></a></li>";
     html += "<li><a href=\"javascript:void(0);\" class=\"icon\" onclick=\"showMenu()\"><i class=\"fas fa-bars\"></i></a></li></ul></nav>";
     html += "<div class=\"offset-top\"></div>";
     // le logo animé qui reste affiché le temps du chargement
@@ -57,9 +57,9 @@ exports.login = (req, res, then) => {
     html += "<section id=\"back-login\" class=\"back-login\">";
     html += "<h1>Connexion</h1><div class=\"form-login\">";
     html += "<label for=\"email\">Adresse mail</label>";
-    html += "<input type=\"email\" id=\"email\" name=\"email\" required partern=\""+REGEX_EMAIL+"\" />";
+    html += "<input tabindex=\"0\" type=\"email\" id=\"email\" name=\"email\" required pattern=\""+REGEX_EMAIL+"\" />";
     html += "<label for=\"password\">Mot de passe</label>";
-    html += "<input type=\"password\" name=\"password\" id=\"password\" required partern=\""+REGEX_PASSWORD+"\"/>";
+    html += "<input tabindex=\"0\" type=\"password\" name=\"password\" id=\"password\" required pattern=\""+REGEX_PASSWORD+"\"/>";
     html += "<input tabindex=\"0\" id=\"connexion\" type=\"submit\" value=\"Connexion\" />";
     html += "<div id=\"error\" class=\"error\"></div></div></section>";
 
@@ -125,9 +125,9 @@ exports.getProfileSettings = (req, res, then) => {
     html += "<div>Email : <span id=\"email\"></span></div>";
     html += "<div>Pseudo : <span id=\"username_detail\"></span></div>";
     html += "<div class=\"delete_box\"><div class=\"verif_del\">";
-    html += "<label for=\"supprimer\">Voulez vous supprimer votre compte ? ";
+    html += "<label for=\"supprimer\">Voulez vous supprimer votre compte ? </label>";
     html += "<input type=\"checkbox\" id=\"supprimer\" name=\"supprimer\">";
-    html += "</div><div id=\"delete\" class=\"btn_delete\" >Supprimer le compte</div></div>";
+    html += "</div><div id=\"delete\" class=\"btn_delete\" >Supprimer le compte</div>";
     
     html += "</div></section>";
 
