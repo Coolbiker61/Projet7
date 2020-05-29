@@ -57,7 +57,7 @@ document.onreadystatechange = function () {
                     document.getElementById("container").hidden = false;
                 }
 			};
-			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
+			requete.open("GET", "http://"+HOST_ADDRESS+"/api/v1/auth/profil");
 			requete.setRequestHeader("Content-Type", "application/json");
 			requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
 			requete.send();
@@ -129,7 +129,7 @@ const importUsersDetail = (id) => {
             console.log(this.responseText);
         }
     };
-    requete.open("GET", "http://localhost:3000/api/v1/auth/users/"+id); 
+    requete.open("GET", "http://"+HOST_ADDRESS+"/api/v1/auth/users/"+id); 
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.send();
@@ -168,7 +168,7 @@ const importUsers = () => {
             addUserListe(arrayresponse);
         }
     };
-    requete.open("GET", "http://localhost:3000/api/v1/auth/users"); 
+    requete.open("GET", "http://"+HOST_ADDRESS+"/api/v1/auth/users"); 
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.send();

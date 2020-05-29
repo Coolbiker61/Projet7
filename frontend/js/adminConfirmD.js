@@ -31,7 +31,7 @@ document.onreadystatechange = function () {
                     document.getElementById("back").style.setProperty('visibility', 'visible') ;
                 }
 			};
-			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
+			requete.open("GET", "http://"+HOST_ADDRESS+"/api/v1/auth/profil");
 			requete.setRequestHeader("Content-Type", "application/json");
 			requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
 			requete.send();
@@ -59,7 +59,7 @@ const ecoute = () => {
                 console.log(this.responseText);
             }
         };
-        requete.open("DELETE", "http://localhost:3000/api/v1/auth/users/"+idAccount);
+        requete.open("DELETE", "http://"+HOST_ADDRESS+"/api/v1/auth/users/"+idAccount);
         requete.setRequestHeader("Content-Type", "application/json");
         requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
         requete.send();

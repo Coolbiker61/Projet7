@@ -10,7 +10,7 @@ document.onreadystatechange = function () {
 				window.location.href = '/';
 			}
 		};
-		requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
+		requete.open("GET", "http://"+HOST_ADDRESS+"/api/v1/auth/profil");
 		requete.setRequestHeader("Content-Type", "application/json");
 		requete.setRequestHeader("Authorization", "Bearer "+this.sessionStorage.getItem('token'));
 		requete.send();
@@ -99,7 +99,7 @@ const actionClick = (event) => {
 				return;
 			}
 		};
-		requete.open("POST", "http://localhost:3000/api/v1/auth/register");
+		requete.open("POST", "http://"+HOST_ADDRESS+"/api/v1/auth/register");
 		requete.setRequestHeader("Content-Type", "application/json");
 		requete.responseType = 'text';
 		requete.send(data); 

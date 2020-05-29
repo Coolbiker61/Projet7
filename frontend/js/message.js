@@ -61,7 +61,7 @@ document.onreadystatechange = function () {
                     document.getElementById("back").style.setProperty('visibility', 'visible');
                 }
 			};
-			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
+			requete.open("GET", "http://"+HOST_ADDRESS+"/api/v1/auth/profil");
 			requete.setRequestHeader("Content-Type", "application/json");
 			requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
 			requete.send();
@@ -105,7 +105,7 @@ const importMessage = (user) => {
             })
         }
     };
-    requete.open("GET", "http://localhost:3000/api/v1/message/"+idMessage); 
+    requete.open("GET", "http://"+HOST_ADDRESS+"/api/v1/message/"+idMessage); 
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.send();
@@ -157,7 +157,7 @@ const listenerLike = (message) => {
                     doc.querySelector('.nb-likes').innerHTML--;
                 }
             };
-            requete.open("POST", "http://localhost:3000/api/v1/message/"+message.id+"/like/0");
+            requete.open("POST", "http://"+HOST_ADDRESS+"/api/v1/message/"+message.id+"/like/0");
             requete.setRequestHeader("Content-Type", "application/json");
             requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
             requete.responseType = 'text';
@@ -181,7 +181,7 @@ const listenerLike = (message) => {
                 doc.querySelector('.nb-likes').innerHTML = JSON.parse(this.responseText).likes;
             }
         };
-        requete.open("POST", "http://localhost:3000/api/v1/message/"+message.id+"/like/1");
+        requete.open("POST", "http://"+HOST_ADDRESS+"/api/v1/message/"+message.id+"/like/1");
         requete.setRequestHeader("Content-Type", "application/json");
         requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
         requete.responseType = 'text';
@@ -205,7 +205,7 @@ const listenerLike = (message) => {
                     doc.querySelector('.nb-likes').innerHTML++;
                 }
             };
-            requete.open("POST", "http://localhost:3000/api/v1/message/"+message.id+"/like/0");
+            requete.open("POST", "http://"+HOST_ADDRESS+"/api/v1/message/"+message.id+"/like/0");
             requete.setRequestHeader("Content-Type", "application/json");
             requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
             requete.responseType = 'text';
@@ -229,7 +229,7 @@ const listenerLike = (message) => {
                 doc.querySelector('.nb-likes').innerHTML = JSON.parse(this.responseText).likes;
             }
         };
-        requete.open("POST", "http://localhost:3000/api/v1/message/"+message.id+"/like/-1");
+        requete.open("POST", "http://"+HOST_ADDRESS+"/api/v1/message/"+message.id+"/like/-1");
         requete.setRequestHeader("Content-Type", "application/json");
         requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
         requete.responseType = 'text';
@@ -256,7 +256,7 @@ const importLike = (message) => {
             
         }
     };
-    requete.open("GET", "http://localhost:3000/api/v1/message/"+message.id+"/like/");
+    requete.open("GET", "http://"+HOST_ADDRESS+"/api/v1/message/"+message.id+"/like/");
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.send();
@@ -276,7 +276,7 @@ const importComment = (messageid, user) => {
             addComment(comments, user);            
         }
     };
-    requete.open("GET", "http://localhost:3000/api/v1/comment/"+messageid);
+    requete.open("GET", "http://"+HOST_ADDRESS+"/api/v1/comment/"+messageid);
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.send();
@@ -434,7 +434,7 @@ const initEditorMessage = () => {
         save_enablewhendirty: true,
         save_onsavecallback: function () { console.log('Saved'); },
         //appeler quand une image est upload
-        images_upload_url: 'http://localhost:3000/api/v1/message/upload',
+        images_upload_url: 'http://'+HOST_ADDRESS+'/api/v1/message/upload',
         images_reuse_filename: true,
         automatic_uploads: false,
         elementpath: false,
@@ -604,7 +604,7 @@ const updateMessage = (idMessage, content, title) => {
             return;
         }
     };
-    requete.open("PUT", "http://localhost:3000/api/v1/message/"+idMessage);
+    requete.open("PUT", "http://"+HOST_ADDRESS+"/api/v1/message/"+idMessage);
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.responseType = 'text';
@@ -646,7 +646,7 @@ const deleteMessage = (idMessage) => {
             return;
         }
     };
-    requete.open("DELETE", "http://localhost:3000/api/v1/message/"+idMessage);
+    requete.open("DELETE", "http://"+HOST_ADDRESS+"/api/v1/message/"+idMessage);
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.responseType = 'text';
@@ -855,7 +855,7 @@ const sendcomment = (messageId, commentContent, parent) => {
             return;
         }
     };
-    requete.open("POST", "http://localhost:3000/api/v1/comment/"+messageId);
+    requete.open("POST", "http://"+HOST_ADDRESS+"/api/v1/comment/"+messageId);
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.responseType = 'text';
@@ -908,7 +908,7 @@ const updateComment = (commentId, content) => {
             return;
         }
     };
-    requete.open("PUT", "http://localhost:3000/api/v1/comment/"+commentId);
+    requete.open("PUT", "http://"+HOST_ADDRESS+"/api/v1/comment/"+commentId);
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.responseType = 'text';
@@ -959,7 +959,7 @@ const deleteComment = (commentId) => {
             return;
         }
     };
-    requete.open("DELETE", "http://localhost:3000/api/v1/comment/"+commentId);
+    requete.open("DELETE", "http://"+HOST_ADDRESS+"/api/v1/comment/"+commentId);
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.responseType = 'text';

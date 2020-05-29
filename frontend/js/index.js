@@ -24,7 +24,7 @@ document.onreadystatechange = function () {
                     document.querySelector(".back-login").style.setProperty('visibility', 'visible') ;
                 }
 			};
-			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
+			requete.open("GET", "http://"+HOST_ADDRESS+"/api/v1/auth/profil");
 			requete.setRequestHeader("Content-Type", "application/json");
 			requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
 			requete.send();

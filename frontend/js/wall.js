@@ -70,7 +70,7 @@ document.onreadystatechange = function () {
                     }, 2000);
                 }
 			};
-			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
+			requete.open("GET", "http://"+HOST_ADDRESS+"/api/v1/auth/profil");
 			requete.setRequestHeader("Content-Type", "application/json");
 			requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
 			requete.send();
@@ -103,7 +103,7 @@ const importMessage = (offset) => {
             document.getElementById("container").insertAdjacentHTML('beforeend', html);
         }
     };
-    requete.open("GET", "http://localhost:3000/api/v1/message/?limit=5&offset="+offset);
+    requete.open("GET", "http://"+HOST_ADDRESS+"/api/v1/message/?limit=5&offset="+offset);
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.send();
@@ -142,7 +142,7 @@ const listener = (message) => {
                     doc.querySelector('.nb-likes').innerHTML--;
                 }
             };
-            requete.open("POST", "http://localhost:3000/api/v1/message/"+message.id+"/like/0");
+            requete.open("POST", "http://"+HOST_ADDRESS+"/api/v1/message/"+message.id+"/like/0");
             requete.setRequestHeader("Content-Type", "application/json");
             requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
             requete.responseType = 'text';
@@ -162,7 +162,7 @@ const listener = (message) => {
                 doc.querySelector('.nb-likes').innerHTML = JSON.parse(this.responseText).likes;
             }
         };
-        requete.open("POST", "http://localhost:3000/api/v1/message/"+message.id+"/like/1");
+        requete.open("POST", "http://"+HOST_ADDRESS+"/api/v1/message/"+message.id+"/like/1");
         requete.setRequestHeader("Content-Type", "application/json");
         requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
         requete.responseType = 'text';
@@ -182,7 +182,7 @@ const listener = (message) => {
                     doc.querySelector('.nb-likes').innerHTML++;
                 }
             };
-            requete.open("POST", "http://localhost:3000/api/v1/message/"+message.id+"/like/0");
+            requete.open("POST", "http://"+HOST_ADDRESS+"/api/v1/message/"+message.id+"/like/0");
             requete.setRequestHeader("Content-Type", "application/json");
             requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
             requete.responseType = 'text';
@@ -202,7 +202,7 @@ const listener = (message) => {
                 doc.querySelector('.nb-likes').innerHTML = JSON.parse(this.responseText).likes;
             }
         };
-        requete.open("POST", "http://localhost:3000/api/v1/message/"+message.id+"/like/-1");
+        requete.open("POST", "http://"+HOST_ADDRESS+"/api/v1/message/"+message.id+"/like/-1");
         requete.setRequestHeader("Content-Type", "application/json");
         requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
         requete.responseType = 'text';
@@ -245,7 +245,7 @@ const importLike = (message) => {
             
         }
     };
-    requete.open("GET", "http://localhost:3000/api/v1/message/"+message.id+"/like/");
+    requete.open("GET", "http://"+HOST_ADDRESS+"/api/v1/message/"+message.id+"/like/");
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.send();

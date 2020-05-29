@@ -76,8 +76,8 @@ exports.getProfile = (req, res, then) => {
     html += "<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon.png\" />";
     html += "<link rel=\"stylesheet\" href=\"/styles/style.min.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
-    html += "<script src=\"/js/profil.min.js\" async></script>";
     html += "<script src=\"/js/menu.min.js\" async></script>";
+    html += "<script src=\"/js/profil.min.js\" async></script>";
     html += "<title>Votre profile - Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
@@ -110,8 +110,8 @@ exports.getProfileSettings = (req, res, then) => {
     html += "<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon.png\" />";
     html += "<link rel=\"stylesheet\" href=\"/styles/style.min.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
-    html += "<script src=\"/js/profilSettings.min.js\" async></script>";
     html += "<script src=\"/js/menu.min.js\" async></script>";
+    html += "<script src=\"/js/profilSettings.min.js\" async></script>";
     html += "<title>Paramètre de votre profile - Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
@@ -143,9 +143,9 @@ exports.deleteAccountConfirm = (req, res, then) => {
     html += "<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon.png\" />";
     html += "<link rel=\"stylesheet\" href=\"/styles/style.min.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
-    html += "<script src=\"/js/confirmD.min.js\" async></script>";
     html += "<script src=\"/js/menu.min.js\" async></script>";
-    html += "<title>Confirmation de suppression -Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
+    html += "<script src=\"/js/confirmD.min.js\" async></script>";
+    html += "<title>Confirmation de suppression - Groupomania</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
     html += "<li id=\"link_profil\"><div class=\"btn\"><span id=\"username\">&nbsp;</span></div><div style=\"visibility: hidden;\" id=\"menu_profil\">";

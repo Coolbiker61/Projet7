@@ -31,7 +31,7 @@ document.onreadystatechange = function () {
                     document.getElementById("back").style.setProperty('visibility', 'visible') ;
                 }
 			};
-			requete.open("GET", "http://localhost:3000/api/v1/auth/profil");
+			requete.open("GET", "http://"+HOST_ADDRESS+"/api/v1/auth/profil");
 			requete.setRequestHeader("Content-Type", "application/json");
 			requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
 			requete.send();
@@ -92,7 +92,7 @@ const sendMessage = (message, title) => {
             return;
         }
     };
-    requete.open("POST", "http://localhost:3000/api/v1/message");
+    requete.open("POST", "http://"+HOST_ADDRESS+"/api/v1/message");
     requete.setRequestHeader("Content-Type", "application/json");
     requete.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('token'));
     requete.responseType = 'text';
@@ -133,7 +133,7 @@ tinymce.init({
     save_enablewhendirty: true,
     save_onsavecallback: function () { console.log('Saved'); },
     //appeler quand une image est upload
-    images_upload_url: 'http://localhost:3000/api/v1/message/upload',
+    images_upload_url: 'http://'+HOST_ADDRESS+'/api/v1/message/upload',
     images_reuse_filename: true,
     automatic_uploads: false,
     elementpath: false,

@@ -48,5 +48,5 @@ if(!window.location.pathname.includes('/login') && !window.location.pathname.inc
         })
     }
 }
-
-
+// Adresse et port du serveur backend
+const HOST_ADDRESS = "localhost:3000";
