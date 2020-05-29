@@ -8,11 +8,12 @@
     "operatorsAliases": "0"
   },
   "production": {
-    "username": "donneurdebase",
-    "password": "ebT0MbXzNavzqP6o",
-    "database": "groupomania",
+    "username": "username",
+    "password": "",
+    "database": "database",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "operatorsAliases": "0"
+    "operatorsAliases": "0",
+    "logging": false
   }
 }

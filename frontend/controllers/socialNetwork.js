@@ -85,7 +85,7 @@ exports.createMessage = (req, res, then) => {
     html += "<div id=\"loading\"><img src=\"/images/loading1.gif\" alt=\"logo de chargement\"></div>";
     html += "<section id=\"back\" class=\"back\"><form hidden id=\"create_form\">";
     html += "<div class=\"title_line\"><label for=\"title\">Titre du message </label>";
-    html += "<input type=\"text\" id=\"title\" maxlength=\"50\" pattern=\"([a-z]{1}\\'[a-z]{1,})|([a-z]{1,})\" ><div><span id=\"length-title\">0</span>/50</div></div>";
+    html += "<input type=\"text\" id=\"title\" maxlength=\"50\" pattern=\"((?=\\S*['-])([a-zA-Z'-]+))|([a-zA-Z]{1,})\" ><div><span id=\"length-title\">0</span>/50</div></div>";
     html += "<div id=\"editor\" ><textarea id=\"message_editor\"></textarea>";
     html += "<button disabled class=\"btn\" name=\"submitbtn\" id=\"submitbtn\">Publier</button></div></form>";
     html += "<div id=\"error\" class=\"error\"></div></section>";

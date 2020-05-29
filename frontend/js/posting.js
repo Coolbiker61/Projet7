@@ -1,6 +1,6 @@
 const PLACEHOLDERVALUE = 'Tapez votre message ici';
 const REGEXiNVALIDE = /['\|\/\\\*\+&#"\{\(\[\]\}\)$£€%=\^`]/g;
-const REGEXvALIDE = /([a-zA-Z]{1}\'{1}[a-z]{1})/g;
+const REGEXvALIDE = /(?=\S*['-])([a-zA-Z'-]+)/g;
 
 document.onreadystatechange = function () {
     if (document.readyState == 'complete') { 
