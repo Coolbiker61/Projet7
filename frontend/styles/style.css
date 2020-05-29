@@ -518,8 +518,11 @@ h1 {
   right: 20px;
   bottom: -100px;
   z-index: 100;
-  -webkit-transition: opacity .3s ease-in-out 0, bottom .3s ease-in-out .5s;
-  transition: opacity .3s ease-in-out 0, bottom .3s ease-in-out .5s;
+  transition: opacity 0.3s ease-in-out 0.5s, bottom 0.3s ease-in-out 0.5s;
+  -webkit-transition: opacity 0.3s ease-in-out 0.5s, bottom 0.3s ease-in-out 0.5s;
+  -moz-transition: opacity 0.3s ease-in-out 0.5s, bottom 0.3s ease-in-out 0.5s;
+  -ms-transition: opacity 0.3s ease-in-out 0.5s, bottom 0.3s ease-in-out 0.5s;
+  -o-transition: opacity 0.3s ease-in-out 0.5s, bottom 0.3s ease-in-out 0.5s;
 }
 
 .back_to_top.show {
@@ -1517,9 +1520,6 @@ nav {
 
 #bloc-users-profile {
   margin: 15px;
-  max-inline-size: -webkit-max-content;
-  max-inline-size: -moz-max-content;
-  max-inline-size: max-content;
 }
 
 @media screen and (min-width: 820px) {
