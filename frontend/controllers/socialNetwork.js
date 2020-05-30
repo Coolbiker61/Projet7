@@ -39,8 +39,8 @@ exports.getPageMessage = (req, res, then) => {
     html += "<link rel=\"stylesheet\" href=\"/styles/style.min.css\" />";
     html += "<script src=\"https://kit.fontawesome.com/4fb3c3ed5b.js\" crossorigin=\"anonymous\"></script>";
     html += "<script src=\"https://cdn.tiny.cloud/1/vjax5i6wra9mztw82qywx797zkifcqfemwbzfxjdzjockixy/tinymce/5/tinymce.min.js\" referrerpolicy=\"origin\"></script>";
-    html += "<script src=\"/js/message.min.js\" async></script>";
     html += "<script src=\"/js/menu.min.js\" async></script>";
+    html += "<script src=\"/js/message.min.js\" async></script>";
     html += "<title>Groupomania - Social Network</title></head><body><nav><ul class=\"menu\"><li><a href=\"/\">";
     html += "<img src=\"/images/icon-left-font-monochrome-black.svg\" alt=\"logo de l'entreprise\" class=\"logo-entreprise\">";
     html += "</a></li><li><a href=\"/socialNetwork\"><div class=\"btn\">Social Network</div></a></li>";
