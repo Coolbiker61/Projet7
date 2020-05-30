@@ -94,7 +94,7 @@ const importMessage = (offset) => {
                 nextOffset++;
             }
             
-        } else if (this.readyState == XMLHttpRequest.DONE && this.status == 404) {
+        } else if (this.readyState == XMLHttpRequest.DONE && this.status == 404 && nextOffset == 0) {
             var html = "<p class=\"no_message\">Aucun message n'a été poster, soyez le premier à vous exprimer.</p>";
             document.getElementById("container").insertAdjacentHTML('beforeend', html);
         } else if (this.readyState == XMLHttpRequest.DONE && this.status == 500) {
