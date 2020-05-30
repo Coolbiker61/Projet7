@@ -1,5 +1,5 @@
 const PLACEHOLDERVALUE = 'Tapez votre commentaire ici'; 
-const REGEXvALIDE = /(([\w]{1})([\w'\s]{1,}))/g;
+const REGEXvALIDE = /(([\wáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{1})([\w'\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{1,}))/g;
 
 var USER = "";
 let MESSAGE = [];
