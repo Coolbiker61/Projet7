@@ -105,6 +105,7 @@ nav {
     margin: 5px 0;
     width: 110px;
     border-radius: 20px;
+    color: $btn_font_color;
     &:hover {
         background-color: $btn_hover_bg_color;
         color: $btn_hover_text_color;

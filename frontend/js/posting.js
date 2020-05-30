@@ -1,6 +1,5 @@
 const PLACEHOLDERVALUE = 'Tapez votre message ici';
 const REGEXiNVALIDE = /['\|\/\\\*\+&#"\{\(\[\]\}\)$£€%=\^`]/g;
-const REGEXvALIDE = /(?=\S*['-])([a-zA-Z'-]+)/g;
 
 document.onreadystatechange = function () {
     if (document.readyState == 'complete') { 
@@ -159,10 +158,12 @@ document.getElementById('create_form').addEventListener('submit', function (even
 
     var titleMessage = document.getElementById("title").value;
     let imgStart = document.getElementById("message_editor").value.indexOf('<img');
+    let imgsrc = document.getElementById("message_editor").value.indexOf('<img src="data:');
     var messageValue = "";
-    if (imgStart != -1) {
+    if (imgStart != -1 && imgsrc != -1) {
         tinymce.activeEditor.uploadImages()
         .then( url => {
+            console.log(messageValue);
             let imgStop = document.getElementById("message_editor").value.indexOf(' />') + 3;
             messageValue = document.getElementById("message_editor").value.slice(0, imgStart);
             messageValue += url[0].element.outerHTML;
@@ -195,11 +196,6 @@ const listenerEvent = () => {
                 error = true;
             }
         }
-        /*if (error) {
-            document.getElementById('submitbtn').setAttribute('disabled', true);
-        } else {
-            document.getElementById('submitbtn').removeAttribute('disabled');
-        }*/
         if (tinymce.get('message_editor').getBody().innerHTML.length >= 11 && document.getElementById("title").value.length >= 2 && !error) {
             if (tinymce.get('message_editor').getBody().innerHTML != '<p><br data-mce-bogus="1"></p>') {
                 document.getElementById('submitbtn').removeAttribute('disabled');

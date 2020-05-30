@@ -694,6 +694,7 @@ nav {
   margin: 5px 0;
   width: 110px;
   border-radius: 20px;
+  color: black;
 }
 
 .menu_profil_ligne:hover {

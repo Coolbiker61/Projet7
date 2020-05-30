@@ -1,7 +1,9 @@
-
 const PLACEHOLDERVALUE = 'Tapez votre commentaire ici'; 
+const REGEXvALIDE = /(([\w]{1})([\w'\s]{1,}))/g;
+
 var USER = "";
 let MESSAGE = [];
+
 const editTime = (param) => {
     // format de la base 2020-04-02T22:19:43.000Z
     const date = Date.parse(param);
@@ -488,7 +490,7 @@ const listenerUpdate = (param) => {
                 var content = tinymce.get('message_editor').getContent();
                 //updateMessage(idMessage, content, id);
                 var titleMessage = document.getElementById("update_title").value;
-                if (content != MESSAGE[0].content && titleMessage == MESSAGE[0].title && content.length >= 11 && titleMessage.length >= 2){
+                if (content != MESSAGE[0].content && titleMessage == MESSAGE[0].title && content.length >= 11 && titleMessage.length >= 2 && REGEXvALIDE.test(titleMessage)){
                     if (content.indexOf('<img') != -1) {
                         if (content.indexOf('<img src="data:') != -1) {
                             tinymce.activeEditor.uploadImages()
@@ -503,9 +505,9 @@ const listenerUpdate = (param) => {
                     } else {
                         updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
                     }
-                } else if (content == MESSAGE[0].content && titleMessage != MESSAGE[0].title && content.length >= 11 && titleMessage.length >= 2) {
+                } else if (content == MESSAGE[0].content && titleMessage != MESSAGE[0].title && content.length >= 11 && titleMessage.length >= 2 && REGEXvALIDE.test(titleMessage)) {
                     updateMessage(idMessage, tinymce.get('message_editor').getContent(), titleMessage);
-                } else {
+                } else if (content.length >= 11 && titleMessage.length >= 2 && REGEXvALIDE.test(titleMessage)) {
                     if (content.indexOf('<img') != -1) {
                         if (content.indexOf('<img src="data:') != -1) {
                             tinymce.activeEditor.uploadImages()
