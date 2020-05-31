@@ -1,0 +1,108 @@
+/* Toutes les couleurs de tous les éléments du site peuvent être personnalisé ici */
+
+
+/* couleur de fond des pages */
+
+$background_main: #dae0e6;
+
+/* couleurs des éléments des messages */
+
+$message_bg_color: white;
+$message_border_color: #BDBDBD;
+$col_likes_bg_color: rgb(212, 212, 212);
+$like_up_select_like_up_not_hover_text_color: lime;
+$like_down_select_like_down_not_hover_text_color: red;
+$nb_likes_text_color: black;
+$author_text_color: slateblue;
+$trait_border_right_color: #f38b8b;
+$submitbtn_bg_color: $author_text_color;
+$response_text_text_color: $author_text_color;
+
+/* couleur des boutons */
+
+$btn_border: rgba(55, 118, 255, 0.836);
+$btn_box_shadow: rgb(83, 81, 81);
+$btn_bg_color: white;
+$btn_font_color: black;
+$btn_hover_border: $btn_border;
+$btn_hover_bg_color: $author_text_color;
+$btn_hover_text_color: white;
+
+/* couleur de fond du menu utilisateur */
+
+$background_menu: $message_bg_color;
+$menu_profil_bg_color:$btn_bg_color;
+$menu_profil_ligne_border: $btn_border;
+
+/* couleur des pages du profil */
+
+$quick_profile_bg_color: $background_menu;
+$quick_profile_border: $btn_border;
+$icon_settings_text_color: $btn_border;
+$icon_settings_hover_text_color: $author_text_color;
+$profile_details_border_color: $btn_border;
+$profile_details_bg_color: $btn_bg_color;
+$btn_delete_border: red;
+$btn_delete_bg_color: $col_likes_bg_color;
+$btn_delete_active_border: $btn_border;
+$btn_delete_active_bg_color: $message_bg_color;
+$btn_delete_active_bg_color_hover: $btn_hover_bg_color;
+$btn_delete_active_box_shadow: $btn_box_shadow;
+$btn_delete_active_text_color: $btn_font_color;
+$btn_delete_active_text_color_hover: $btn_hover_text_color;
+$delete_box_border: red;
+$confirm_delete_bg_color: $profile_details_bg_color;
+$confirm_delete_border_color: $btn_border;
+$btn_oui_btn_non_border: $btn_border;
+$btn_oui_bg_color: rgb(25, 94, 26);
+$btn_oui_font_color: $btn_hover_text_color;
+$btn_oui_hover_bg_color: rgb(0, 201, 0);
+$btn_oui_hover_box_shadow: $btn_box_shadow;
+$btn_oui_hover_font_color: $btn_font_color;
+$btn_non_bg_color: rgb(163, 1, 33);
+$btn_non_font_color: $btn_hover_text_color;
+$btn_non_hover_bg_color: rgb(238, 4, 4);
+$btn_non_hover_box_shadow: $btn_oui_hover_box_shadow;
+$btn_non_hover_font_color: $btn_hover_text_color;
+
+/* couleurs des éléments de la page administration */
+
+$users_liste_bg_color: $btn_bg_color;
+$users_liste_border_color: $btn_border;
+$li_users_liste_shadow: $btn_box_shadow;
+$li_users_liste_bg_color: $btn_bg_color;
+$li_users_liste_text_color: $btn_font_color;
+$li_users_liste_border_color: $btn_border;
+$li_users_liste_hover_bg_color: $author_text_color;
+$li_users_liste_hover_text_color: $btn_bg_color;
+$users_details_border_color: $btn_border;
+$users_details_bg_color:$btn_bg_color;
+$users_article_users_reply_bg_color: $btn_bg_color;
+
+/*  bouton back to top */
+
+$back_to_top_color: $btn_box_shadow;
+$back_to_top_border_color: $btn_box_shadow;
+$back_to_top_bgcolor: $btn_bg_color;
+$back_to_top_hover_color: $btn_border;
+$back_to_top_hover_border_color: $btn_border;
+$back_to_top_hover_bgcolor: $btn_bg_color;
+
+/* tailles polices*/
+
+$font_size_normal: 19px;
+
+/* dimenssions */
+
+$menu_height_pc: 80px;
+$menu_height_tablet: 140px;
+$menu_height_mobile: 200px;
+
+$menu_breackpoint_pc: 675px;
+$menu_breackpoint_tablet: 421px;
+$menu_breackpoint_mobile: 0px;
+
+$message_breackpoint_tablet: 540px;
+
+$width_message: 500px;
+$width_message_mobile: 85vw;

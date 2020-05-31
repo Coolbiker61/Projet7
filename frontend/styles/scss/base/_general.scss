@@ -1,0 +1,155 @@
+
+@font-face {
+    font-family: 'nevisbold';
+    src: url('ufonts.com_nevis-bold-webfont.woff2') format('woff2'),
+         url('ufonts.com_nevis-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+body {
+    background-color: $background_main;
+    height: 100vh;
+    width: 100%;
+}
+
+label {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.invalide {
+    border-color: red!important;
+    border-width: 5px!important;
+}
+
+.offset-top {
+    height: $menu_height_mobile;
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        height: $menu_height_tablet;
+    }
+    @media screen and (min-width: $menu_breackpoint_pc ) {
+        height: $menu_height_pc;
+    }
+}
+
+
+/* Loading ----------------------------------------------------------------------------------------------*/
+
+#loading {
+    text-align: center;
+    margin-top: 20px;
+    @media screen and (min-width: $menu_breackpoint_tablet) {
+        margin-top: 150px;
+    }
+}
+p{
+    font-size: $font_size_normal;
+}
+
+h1 {
+    font-size: 40px;
+    margin-top: 0;
+    text-align: center;
+    @media screen and (min-width: $menu_breackpoint_tablet) {
+        margin-top: 50px;
+    }
+}
+
+.back {
+    background-image: url('../images/icon.svg');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: contain;
+    margin: 0 auto;
+    padding-top: 5px;
+    width: 100%;
+    min-height: calc(100% - #{$menu_height_mobile});
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+    font-size: $font_size_normal;
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        min-height: calc(100% - #{$menu_height_tablet});
+        background-repeat: no-repeat;
+        background-position: center top;
+    }
+    @media screen and (min-width: $menu_breackpoint_pc ) {
+        min-height: calc(100% - #{$menu_height_pc});
+    }
+}
+
+#btn_new_post,
+.btn {
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid $btn_border;
+    box-shadow: 7px 7px 5px $btn_box_shadow;
+    background-color: $btn_bg_color;
+    text-align: center;
+    margin: auto;
+    color: $btn_font_color;
+    font-size: $font_size_normal;
+    &:hover,
+    &:focus {
+        padding: 10px;
+        border-radius: 20px;
+        border: 2px solid $btn_hover_border;
+        background-color: $btn_hover_bg_color;
+        color: $btn_hover_text_color;
+        text-align: center;
+        margin: auto;
+        cursor: pointer;
+    }
+    &:disabled {
+        &:hover {
+            background-color: red;
+        }
+    }
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.back_to_top {
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    text-align: center;
+    border: 2px solid $back_to_top_border_color;
+    color: $back_to_top_color;
+    background-color: $back_to_top_bgcolor;
+    border-radius: 10px;
+    position: fixed;
+    right: 20px;
+    bottom: -100px;
+    z-index: 100;
+    transition: opacity 0.3s ease-in-out 0.5s, bottom 0.3s ease-in-out 0.5s;
+    -webkit-transition: opacity 0.3s ease-in-out 0.5s, bottom 0.3s ease-in-out 0.5s;
+    -moz-transition: opacity 0.3s ease-in-out 0.5s, bottom 0.3s ease-in-out 0.5s;
+    -ms-transition: opacity 0.3s ease-in-out 0.5s, bottom 0.3s ease-in-out 0.5s;
+    -o-transition: opacity 0.3s ease-in-out 0.5s, bottom 0.3s ease-in-out 0.5s;
+    &.show {
+        bottom: 20px;
+        &:hover {
+            color: $back_to_top_hover_color;
+            border-color: $back_to_top_hover_border_color;
+            background-color: $back_to_top_hover_bgcolor;
+            box-shadow: 7px 7px 5px $btn_box_shadow;
+            cursor: pointer;
+        }
+    }
+}
+
+.error {
+    color: $btn_delete_border;
+    font-size: 24px;
+    text-align: center;
+    margin: 10px;
+}

@@ -1,0 +1,19 @@
+{
+  "development": {
+    "username": "root",
+    "password": "",
+    "database": "database_dev",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": "0"
+  },
+  "production": {
+    "username": "username",
+    "password": "",
+    "database": "database",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": "0",
+    "logging": false
+  }
+}

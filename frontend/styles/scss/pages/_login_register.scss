@@ -1,0 +1,81 @@
+
+
+.back-inscription, .back-login {
+    background-image: url('../images/icon.svg');
+    background-repeat:no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin: 0 auto; 
+    width: 100vw;
+    height: calc(100% - #{$menu_height_mobile} - 1px);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        height: calc(100% - #{$menu_height_tablet});
+        width: 100vw;
+    }
+    @media screen and (min-width: $menu_breackpoint_pc ) {
+        height: calc(100% - #{$menu_height_pc});
+        width: auto;
+        background-position: center top;
+    }
+}
+
+.form-register, .form-login {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin: auto;
+    margin-top: 20px;
+    width: 255px;
+    font-size: $font_size_normal;
+    input {
+        border-radius: 20px;
+        border: 2px solid $btn_border;
+        padding: 5px;
+        &:focus {
+            background-color: $btn_hover_bg_color;
+            border-color: $btn_hover_border;
+            color: $btn_hover_text_color;
+        }
+    }
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        margin-top: 50px;
+    }
+    @media screen and (min-width: $menu_breackpoint_pc ) {
+        margin-top: 100px;
+    }
+}
+#email, #username, #password {
+    width: 250px;
+}
+
+#connexion, #inscription {
+    margin-top: 20px;
+    border-radius: 20px;
+    border: 2px solid $btn_border;
+    text-align: center;
+    background-color: $btn_bg_color;
+    padding: 5px;
+    box-shadow: 7px 7px 5px $btn_box_shadow;
+    font-size: $font_size_normal;
+    font-weight: 600;
+    &:hover, &:focus {
+        background-color: $btn_hover_bg_color;
+        border-color: $btn_hover_border;
+        color: $btn_hover_text_color;
+        cursor:pointer;
+    }
+    &:disabled {
+        &:hover {
+            background-color: red;
+        }
+    }
+}
+.confirm-inscription {
+    text-align: center;
+    margin-top: 115px;
+    font-size: 30px;
+}

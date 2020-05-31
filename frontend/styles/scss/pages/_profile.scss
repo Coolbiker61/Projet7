@@ -1,0 +1,161 @@
+
+
+/* profile  ----------------------------------------------------------------------------------------*/
+#profile {
+    display: flex;
+    justify-content: center;
+    flex-direction: column-reverse;
+    align-items: center;
+    @media screen and (min-width: 800px ) {
+        flex-direction: row;
+        align-items: normal;
+    }
+}
+.liste_message {
+    margin: 10px;
+    .corp {
+        cursor:pointer;
+    }
+}
+#quick_profile {
+    
+    background-color: $quick_profile_bg_color;
+    border: 2px solid $quick_profile_border;
+    border-radius: 20px;
+    height: fit-content;
+    margin-top: 50px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    font-size: 25px;
+    a {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        &:hover {
+            .icon_settings {
+                color: $icon_settings_hover_text_color;
+                transform: scale(1.75) rotate(180deg);
+            }
+            
+        }
+    }
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        width: 225px;
+    }
+}
+#mini_username {
+    text-align: left;
+}
+.icon_settings {
+    color: $icon_settings_text_color;
+    transition: transform 2s;
+    margin-right: 10px;
+}
+
+/* profile detaillé -------------------------------------------------------------------------------------*/
+.profile_details {
+    border: 2px solid $profile_details_border_color;
+    width: 300px;
+    padding: 5px;
+    margin: 10vh auto 0;
+    background-color: $profile_details_bg_color;
+    border-radius: 10px;
+
+    font-size: $font_size_normal;
+    @media screen and (min-width: $menu_breackpoint_tablet ){
+       margin: 35vh auto 0;
+       padding: 20px;
+    }
+}
+.profile_details div {
+    margin: 10px;
+}
+.btn_delete {
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid $btn_delete_border;
+    background-color: $btn_delete_bg_color;
+    text-align: center;
+    margin: auto;
+    &_active {
+        border: 2px solid $btn_delete_active_border;
+        background-color: $btn_delete_active_bg_color;
+        box-shadow: 7px 7px 5px $btn_delete_active_box_shadow;
+        color: $btn_delete_active_text_color;
+        cursor:pointer;
+        &:hover {
+            color: $btn_delete_active_text_color_hover;
+            background-color: $btn_delete_active_bg_color_hover;
+        }
+    }
+    
+}
+
+.delete_box {
+
+    border: 2px solid $delete_box_border;
+    border-radius: 10px;
+}
+#supprimer {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    cursor:pointer;
+}
+.verif_del {
+    display: flex;
+    align-content: center;
+}
+
+
+/* confirm delete account ------------------------------------------------------------------*/
+.confirm_delete {
+    margin: 20px 10px;
+    justify-content: center;
+    background-color: $confirm_delete_bg_color;
+    padding: 10px;
+    border: 2px solid $confirm_delete_border_color;
+    border-radius: 10px;
+    font-size: $font_size_normal;
+    @media screen and (min-width: 560px ){
+        width: 518px;
+        margin: auto;
+    }
+}
+
+.choice {
+    display: flex;
+    margin-top: 20px;
+}
+#btn_oui, #btn_non {
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid $btn_oui_btn_non_border;
+    width: 50px;
+    text-align: center;
+    margin: auto;
+    font-weight: 600;
+    &:hover{
+        box-shadow: 7px 7px 5px $btn_non_hover_box_shadow;
+        cursor:pointer;
+    }
+}
+#btn_oui {
+    background-color: $btn_oui_bg_color;
+    color: $btn_oui_font_color;
+    &:hover {
+        background-color: $btn_oui_hover_bg_color;
+        color: $btn_oui_hover_font_color;
+    }
+}
+#btn_non {
+    background-color: $btn_non_bg_color;
+    color: $btn_non_font_color;
+    &:hover {
+        background-color: $btn_non_hover_bg_color;
+        color: $btn_non_hover_font_color;
+    }
+}
+
+
+

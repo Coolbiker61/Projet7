@@ -1,0 +1,128 @@
+
+
+nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 5;
+    height: auto;
+    background-color: $background_menu;
+    padding: 10px;
+    border-bottom: 1px solid $menu_profil_ligne_border;
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        height: $menu_height_tablet - 20px;
+    }
+    @media screen and (min-width: $menu_breackpoint_pc ) {
+        height: $menu_height_pc - 20px;
+    }
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    li {
+        padding: 10px;
+        align-self: center;
+        display: block;
+        
+        .icon {
+            float: right;
+            display: block;
+        }
+        &:not(:first-child) {
+            display: none;
+        }
+        &:last-child {
+            float: right;
+            display: block;
+        }
+        @media screen and (min-width: $menu_breackpoint_tablet ) {
+            &:not(:first-child) {
+                display: block;
+            }
+            &:last-child {
+                float: right;
+                display: none;
+            }
+        }
+    }
+    &.menu_list {
+        li{
+            position: relative;
+            padding: 10px;
+            align-self: center;
+            display: block;
+            .icon {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+        }
+    }
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        flex-direction: row;
+        li {
+            position: relative;
+            padding: 10px;
+            align-self: center;
+            display: inline-block;
+            .icon {
+                display: none;
+            }
+        }
+    }
+    @media screen and (min-width: $menu_breackpoint_pc ) {
+        justify-content: space-between;
+    }
+}
+.logo-entreprise {
+    height: 35px;
+}
+
+/* menu dynamique ----------------------------------------------------------------*/
+#menu_profil {
+    display: flex;
+    flex-direction: column;
+    z-index: 6;
+    float: right;
+    background-color: $menu_profil_bg_color;
+    border: 2px solid  $menu_profil_ligne_border;
+    border-radius: 20px;
+    box-shadow: 7px 7px 5px $btn_box_shadow;
+    top: 60px;
+    right: 10px;
+    position: absolute;
+    padding: 5px;
+}
+.menu_profil_ligne {
+    padding: 10px;
+    border: 2px solid  $menu_profil_ligne_border;
+    box-shadow: 7px 7px 5px $btn_box_shadow;
+    text-align: center;
+    margin: 5px 0;
+    width: 110px;
+    border-radius: 20px;
+    color: $btn_font_color;
+    &:hover {
+        background-color: $btn_hover_bg_color;
+        color: $btn_hover_text_color;
+        a:visited {
+            color: $btn_hover_text_color;
+        }
+    }
+    a:visited {
+        color: $btn_font_color;
+    }
+}
+#link_profil {
+    padding: 10px;
+    text-align: center;
+    cursor:pointer;
+
+}
+
+
+

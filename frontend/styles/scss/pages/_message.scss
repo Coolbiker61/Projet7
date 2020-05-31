@@ -1,0 +1,285 @@
+
+/* pour les messages ----------------------------------------------------------------------------------- */
+.message {
+    background-color: $message_bg_color;
+    border: 2px solid $message_border_color;
+    width: $width_message_mobile;
+    max-width: $width_message;
+    margin: 20px auto;
+    display: flex;
+    @media screen and (min-width: $menu_breackpoint_pc ) {
+         width: $width_message;
+    }
+}
+.no_message {
+    margin: auto;
+    width: $width_message;
+    height: fit-content;
+    @media screen and (min-width: $menu_breackpoint_pc ) {
+        width: $width_message;
+   }
+}
+.message-solo {
+    display: flex;
+    flex-direction: column;
+    .message {
+        margin: 20px auto 0 auto;
+    }
+}
+.col_likes {
+    display: flex;
+    flex-direction: column;
+    width: 35px;
+    background-color: $col_likes_bg_color;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.like-up-not, .like-down-not {
+    font-size: 30px;
+    text-align: center;
+}
+.like-up-select, .like-up-not:hover {
+    color: $like_up_select_like_up_not_hover_text_color;
+    cursor:pointer;
+}
+.like-down-select, .like-down-not:hover {
+    color: $like_down_select_like_down_not_hover_text_color;
+    cursor:pointer;
+}
+.nb-likes {
+    color: $nb_likes_text_color;
+    width: 35px;
+    text-align: center;
+}
+.corp {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: inherit;
+    article {
+        padding-left: 5px;
+    }
+    h3 {
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    p {
+        word-wrap: break-word;
+        overflow-wrap: anywhere;
+    }
+    em {
+        font-style: italic;
+    }
+    strong {
+        font-weight: bold;
+    }
+}
+
+.author {
+    color: $author_text_color;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    font-weight: 600;
+
+    border-bottom: 1px solid $menu_profil_ligne_border;
+}
+.title-article {
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+.content-article {
+    font-size: 20px;
+    cursor:pointer;
+    overflow: hidden;
+}
+.bloc-commentaire{
+    width: 95vw;
+    background-color: $message_bg_color;
+    margin: auto;
+    padding-bottom: 50px;
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        width: 500px;
+    }
+}
+.commentaire {
+    display: flex;
+    flex-direction: row;
+    margin-top: 25px;
+    .author {
+        border-top: 1px solid;
+        padding-top: 5px;
+    }
+    .corpse{
+        width: -webkit-fill-available;
+    }
+}
+.like-com {
+    font-size: 15px;
+}
+.com-likes {
+    display: flex;
+    flex-direction: column;
+    width: 20px;
+}
+
+.com-content {
+    margin: 10px 10px;
+}
+.trait {
+    border-right: 2px solid $trait_border_right_color;
+    display: block;
+    height: 100%;
+    width: 50%;
+}
+
+#comment_noParent {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 15px;
+    background-color: $message_bg_color;
+    width: 95vw;
+    #editor {
+        width: 100%;
+    }
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        width: $width_message;
+        
+    }
+}
+
+#create_form {
+    margin: auto;
+    width: 95vw;
+    #title {
+        border-radius: 20px;
+        border: 2px solid $btn_border;
+        padding: 5px;
+        &:focus {
+            background-color: $btn_hover_bg_color;
+            border-color: $btn_hover_border;
+            color: $btn_hover_text_color;
+        }
+    }
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        width: 550px;
+    }
+}
+
+.title_line {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    label{
+        margin-right: 10px;
+    }
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        flex-direction: row;
+        align-items: baseline;
+    }
+}
+#editor {
+    margin: 15px auto;
+    text-align: center;
+    position: relative;
+    width: 95%;
+    .btn {
+        margin-top: 10px;
+    }
+    [id^="cancelNew"] {
+        margin-left: 15px;
+    }
+    @media screen and (min-width: $menu_breackpoint_tablet ) {
+        width: auto;
+    }
+}
+#length-title {
+    margin-left: 10px;
+}
+
+.response_text {
+    color: $response_text_text_color;
+    font-weight: 600;
+    position: relative;
+    display: flex;
+    p {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
+.response_text:hover {
+    cursor:pointer;
+}
+
+
+/* surcharge des couleurs de l'éditeur */
+.tox-tinymce {
+    border: 2px solid $btn_border!important;
+    /*box-shadow: 7px 7px 5px $btn_box_shadow!important;*/
+    border-radius: 20px!important;
+    -webkit-border-radius: 20px!important;
+    -moz-border-radius: 20px!important;
+    -ms-border-radius: 20px!important;
+    -o-border-radius: 20px!important;
+    padding: 5px;
+    background-color: white;
+    .tox-tbtn {
+        &:hover {
+            background-color: $btn_hover_bg_color!important;
+            color: $btn_hover_text_color!important;
+            svg{
+                fill: $btn_hover_text_color!important;
+            }
+        }
+    }
+}
+.tox {
+    .tox-collection__item--active {
+        background-color: $btn_hover_bg_color!important;
+        color: $btn_hover_text_color!important;
+    }
+    .tox-tbtn__select-label {
+        width: 3em!important;
+    }
+    
+}
+
+.message_options {
+    
+    padding-top: 5px;
+    margin-top: 10px;
+    border-top: 1px solid $menu_profil_ligne_border;
+    display: flex;
+    flex-wrap: wrap;
+}
+.message_editer, .message_supprimer {
+    color: $author_text_color;
+    font-weight: 600;
+    cursor:pointer;
+    margin: 0 5px;
+}
+#update {
+    .btn {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
+
+.update label{
+    margin-right: 5px;
+}
+.text_delete {
+    color: $btn_font_color;
+    margin: 10px;
+}
+.bloc_btn_delete, [id^="editor_comm"] {
+    margin: auto;
+    .btn {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
